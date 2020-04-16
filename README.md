@@ -1,16 +1,13 @@
-# consumer
+# LaCoro
 
 A new Flutter application.
 
-## Getting Started
+## Architecture diagram
 
-This project is a starting point for a Flutter application.
+This project uses the concept of [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) which will divide the project into theses layers.
 
-A few resources to get you started if this is your first Flutter project:
+- Presentation
+- Business
+- Data
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="https://raw.githubusercontent.com/LaCoro/ConsumerFlutterApp/master/docs/lacoro_consumer_arch.jpeg?token=ABOQU5WQG3QSIGYVIGOUUVK6TCTCG">
