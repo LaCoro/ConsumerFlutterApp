@@ -10,4 +10,4 @@ This project uses the concept of [Clean Architecture](https://blog.cleancoder.co
 - Business
 - Data
 
-![Image](https://github.com/LaCoro/ConsumerFlutterApp/blob/master/docs/lacoro_consumer_arch.png?raw=true)
+![Image](https://github.com/LaCoro/ConsumerFlutterApp/blob/master/docs/lacoro_consumer_arch.jpeg?raw=true)
