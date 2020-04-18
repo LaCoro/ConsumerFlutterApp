@@ -11,3 +11,7 @@ This project uses the concept of [Clean Architecture](https://blog.cleancoder.co
 - Data
 
 ![Image](https://github.com/LaCoro/ConsumerFlutterApp/blob/master/docs/lacoro_consumer_arch.jpeg?raw=true)
+
+---
+### Data flow & Dependency rule
+<img src="https://miro.medium.com/max/1400/1*jH0iI7-MSQYgLUrqTUm6mg.png" width="600" height="400" />
