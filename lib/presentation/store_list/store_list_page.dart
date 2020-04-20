@@ -35,7 +35,7 @@ class _StoreListPageState extends State<StoreListPage> {
   }
 
   void fetchStores() {
-    StoreApi().getAllStroes().then((value) => {setState(() => _data = value)});
+    StoreApi().getAllStores().then((value) => {setState(() => _data = value)});
   }
 
   @override

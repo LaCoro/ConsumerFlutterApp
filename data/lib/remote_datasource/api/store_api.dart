@@ -1,21 +1,17 @@
-import 'package:data/models/store.dart';
+import 'package:data/remote_datasource/parse/api_service_impl.dart';
+import 'package:data/remote_datasource/parse/api_service.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 
+/// Class to handle all related to the Store API request using the Parse SDK Manager
+/// Reference https://dashboard.back4app.com/apidocs/5IgxoMa1l6QoEJodtOXcQmXCmZF61S4yGbhhXLE5#Store-custom-class
 class StoreApi {
-  Future<List<String>> getAllStroes() async {
-    final baseUrl = "https://eladmin.back4app.io";
-    final parseApplicationId = "l1zArA6iMMkRJ2sfcn1GLn2SpiHwryyUVNEbOMyR";
-    final parseCliendtId = "63DQGTqsiewevm1jrg55eZ0Va4PsuwQPidJGTVXR";
 
-    await Parse().initialize(
-      parseApplicationId,
-      baseUrl,
-      clientKey: parseCliendtId,
-      debug: true,
-    );
+  final ApiService apiService = ApiServiceImpl();
 
-    final response = await ParseObject("Store").getAll();
+  Future<List<String>> getAllStores() async {
+    final response = await apiService.getAllStores();
 
     return response.results.map((e) => e.get("name") as String).toList();
   }
+
 }
