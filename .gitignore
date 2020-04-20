@@ -3,8 +3,6 @@
 *.log
 *.pyc
 *.swp
-*.env
-development.env*
 .DS_Store
 .atom/
 .buildlog/
@@ -31,6 +29,8 @@ development.env*
 .pub-cache/
 .pub/
 /build/
+
+development.env*
 
 # Web related
 lib/generated_plugin_registrant.dart
