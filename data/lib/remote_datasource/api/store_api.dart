@@ -1,4 +1,3 @@
-import 'package:data/remote_datasource/parse/api_service_impl.dart';
 import 'package:data/remote_datasource/parse/api_service.dart';
 
 /// Class to handle all related to the Store API request using the Parse SDK Manager
