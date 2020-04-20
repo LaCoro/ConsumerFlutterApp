@@ -1,23 +1,25 @@
 import 'package:data/remote_datasource/parse/api_service.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 
 ///Manager that defines all the API service requests.
 class ApiServiceImpl extends ApiService {
+  static const parseApplicationIdKey = "PARSE_APPLICATION_ID";
+  static const baseUrlKey = "BASE_URL";
+  static const parseClientIdKey = "PARSE_CLIENT_ID";
 
-  final baseUrl = "https://parseapi.back4app.com";
-  final parseApplicationId = "5IgxoMa1l6QoEJodtOXcQmXCmZF61S4yGbhhXLE5";
-  final parseClientKey = "WGk3ukWHINv5yrGAqizMSCyj6otKJskhP7COIpVz";
+  final DotEnv _dotEnv;
 
-  ApiServiceImpl() {
+  ApiServiceImpl(this._dotEnv) {
+    // Initialize Parse to establish communication with the server
     Parse().initialize(
-      parseApplicationId,
-      baseUrl,
-      clientKey: parseClientKey,
+      _dotEnv.env[parseApplicationIdKey],
+      _dotEnv.env[baseUrlKey],
+      clientKey: _dotEnv.env[parseClientIdKey],
       debug: true,
     );
   }
 
   @override
   Future<ParseResponse> getAllStores() => ParseObject("Store").getAll();
-
 }

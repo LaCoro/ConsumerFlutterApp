@@ -1,7 +1,14 @@
-import 'package:consumer/presentation/store_list/store_list_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:parse_server_sdk/parse_server_sdk.dart';
 
-void main() {
+import 'presentation/store_list/store_list_page.dart';
+
+Future main() async {
+  // TODO injected this
+  const bool isProduction = bool.fromEnvironment('dart.vm.product');
+  await DotEnv().load('${isProduction ? "production" : "development"}.env');
+
   runApp(MyApp());
 }
 
