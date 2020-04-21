@@ -2,7 +2,6 @@ name: domain
 description: A Flutter package to handle the domain (business) layer of the LaCoro app.
 version: 0.0.1
 author: Diego Alvis
-homepage:
 
 environment:
   sdk: ">=2.7.0 <3.0.0"

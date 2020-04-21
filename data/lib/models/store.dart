@@ -1,40 +1,19 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:domain/entities/store_entity.dart';
+import 'package:parse_server_sdk/parse_server_sdk.dart';
 
-part 'store.g.dart';
 
-@JsonSerializable(explicitToJson: true)
-class Store {
-  String name;
-  List<int> searchTags;
-  String address;
-  String city;
-  String country;
-  String mobile;
-  String openAt;
-  String closeAt;
-  List<int> daysOpen;
-  String logo;
-  bool hasDeliveryService;
-  bool active;
-  int deliveryCost;
-  String state;
-  int position;
+class Store extends ParseObject with StoreEntity implements ParseCloneable {
+  Store() : super(_keyTableName);
 
-  Store(
-      {this.name,
-      this.searchTags,
-      this.address,
-      this.city,
-      this.country,
-      this.mobile,
-      this.openAt,
-      this.closeAt,
-      this.daysOpen,
-//    this.location,
-      this.logo,
-      this.hasDeliveryService,
-      this.active,
-      this.deliveryCost,
-      this.state,
-      this.position});
+  Store.clone() : this();
+
+  @override
+  clone(Map map) => Store.clone()..fromJson(map);
+
+  static const String _keyTableName = 'Store';
+  static const String keyName = 'name';
+
+  String get name => get<String>(keyName);
+  set name(String name) => set<String>(keyName, name);
+
 }

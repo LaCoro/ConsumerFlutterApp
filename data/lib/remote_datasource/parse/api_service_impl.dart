@@ -1,3 +1,4 @@
+import 'package:data/models/store.dart';
 import 'package:data/remote_datasource/parse/api_service.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
@@ -21,5 +22,5 @@ class ApiServiceImpl extends ApiService {
   }
 
   @override
-  Future<ParseResponse> getAllStores() => ParseObject("Store").getAll();
+  Future<ParseResponse> getAllStores() => Store().getAll();
 }

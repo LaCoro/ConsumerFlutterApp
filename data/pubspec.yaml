@@ -2,7 +2,6 @@ name: data
 description: A Flutter package to handle the data layer of the LaCoro app.
 version: 0.0.1
 author: Diego Alvis
-homepage:
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -11,11 +10,15 @@ dependencies:
   flutter:
     sdk: flutter
 
+  domain:
+    path: ../domain
+
   parse_server_sdk: ^1.0.26
   flutter_dotenv: ^2.1.0
 
   json_serializable: ^3.3.0
   json_annotation: ^3.0.1
+
 
 dev_dependencies:
   flutter_test:
