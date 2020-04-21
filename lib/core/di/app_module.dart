@@ -7,7 +7,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 
-/// App module that defines all modules to be injected in the app
+/// App module that defines the generic modules to be injected in the app
 class AppModule {
   Future<Injector> initialise(Injector injector) async {
     // Environment settings

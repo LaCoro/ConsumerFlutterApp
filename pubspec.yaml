@@ -24,6 +24,8 @@ dependencies:
   flutter_dotenv: ^2.1.0
   parse_server_sdk: ^1.0.26
   flutter_simple_dependency_injection: ^1.0.2+1
+  flutter_bloc: ^4.0.0
+  bloc: ^4.0.0
 
 
   cupertino_icons: ^0.1.3
