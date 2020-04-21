@@ -148,6 +148,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.3"
+  domain:
+    dependency: "direct main"
+    description:
+      path: domain
+      relative: true
+    source: path
+    version: "0.0.1"
   flutter:
     dependency: "direct main"
     description: flutter
