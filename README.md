@@ -10,7 +10,7 @@ This project uses the concept of [Clean Architecture](https://blog.cleancoder.co
 - Domain
 - Data
 
-![Image](https://github.com/LaCoro/ConsumerFlutterApp/blob/master/docs/lacoro_consumer_arch.png?raw=true)
+![Image](https://github.com/LaCoro/ConsumerFlutterApp/blob/master/screens/lacoro_consumer_arch.png?raw=true)
 
 ---
 ### Data flow & Dependency rule
