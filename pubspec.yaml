@@ -16,6 +16,7 @@ dependencies:
 
   pull_to_refresh: ^1.4.5
   flutter_dotenv: ^2.1.0
+  flutter_simple_dependency_injection: ^1.0.2+1
 
   data:
     path: ./data
