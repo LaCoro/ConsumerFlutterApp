@@ -1,4 +1,4 @@
-import 'package:LaCoro/core/di/store_list_module.dart';
+import 'package:LaCoro/presentation/core/di/store_list_module.dart';
 import 'package:LaCoro/presentation/store_list/store_list_bloc.dart';
 import 'package:domain/entities/store_entity.dart';
 import 'package:flutter/material.dart';

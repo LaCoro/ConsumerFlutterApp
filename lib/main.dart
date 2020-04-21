@@ -1,4 +1,4 @@
-import 'package:LaCoro/core/di/app_module.dart';
+import 'package:LaCoro/presentation/core/di/app_module.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 
