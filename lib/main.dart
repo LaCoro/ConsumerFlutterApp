@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.grey,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: StoreListPage(),
+      home: SafeArea(child: StoreListPage()),
     );
   }
 }

@@ -5,22 +5,26 @@ import 'package:parse_server_sdk/parse_server_sdk.dart';
 
 ///Manager that defines all the API service requests.
 class ApiServiceImpl extends ApiService {
-  static const parseApplicationIdKey = "PARSE_APPLICATION_ID";
-  static const baseUrlKey = "BASE_URL";
-  static const parseClientIdKey = "PARSE_CLIENT_ID";
-
   final DotEnv _dotEnv;
 
   ApiServiceImpl(this._dotEnv) {
     // Initialize Parse to establish communication with the server
     Parse().initialize(
-      _dotEnv.env[parseApplicationIdKey],
-      _dotEnv.env[baseUrlKey],
-      clientKey: _dotEnv.env[parseClientIdKey],
+      _dotEnv.env["PARSE_APPLICATION_ID"],
+      _dotEnv.env["BASE_URL"],
+      clientKey: _dotEnv.env["PARSE_CLIENT_ID"],
       debug: true,
     );
   }
 
   @override
-  Future<ParseResponse> getAllStores() => Store().getAll();
+  Future<ParseResponse> getAllStores() async {
+    await Parse().initialize(
+      _dotEnv.env["PARSE_APPLICATION_ID"],
+      _dotEnv.env["BASE_URL"],
+      clientKey: _dotEnv.env["PARSE_CLIENT_ID"],
+      debug: true,
+    );
+    return Store().getAll();
+  }
 }
