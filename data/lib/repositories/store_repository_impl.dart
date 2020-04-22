@@ -9,8 +9,8 @@ class StoreRepositoryImpl extends StoreRepository {
   StoreRepositoryImpl(this._remoteDataSource);
 
   @override
-  Future<List<StoreEntity>> getAllStores() {
-    return _remoteDataSource.getAllStores();
+  Future<List<StoreEntity>> getAllStores(String city) {
+    return _remoteDataSource.getAllStores(city);
   }
 
 }

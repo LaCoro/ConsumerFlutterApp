@@ -1,7 +1,9 @@
+import 'package:LaCoro/presentation/core/bloc/base_bloc.dart';
 import 'package:LaCoro/presentation/core/di/store_list_module.dart';
 import 'package:LaCoro/presentation/store_list/store_list_bloc.dart';
 import 'package:domain/entities/store_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -28,23 +30,31 @@ class _StoreListPageState extends State<StoreListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[400],
-      body: SmartRefresher(
-        controller: _refreshController,
-        enablePullDown: true,
-        onRefresh: () async {
-          fetchStores();
-          _refreshController.refreshCompleted();
-        },
-        child: buildList(),
-      ),
+      body: BlocBuilder(
+          bloc: _bloc,
+          builder: (context, state) {
+            _refreshController.refreshCompleted();
+
+            if (state is LoadingState) {
+              // TODO show loader
+            }
+
+            if (state is SuccessState<List<StoreEntity>>) {
+              _data = state.data;
+            }
+
+            return SmartRefresher(
+              controller: _refreshController,
+              enablePullDown: true,
+              onRefresh: () async => fetchStores(),
+              child: buildList(),
+            );
+          }),
     );
   }
 
   void fetchStores() {
-    // TODO refactor this
-    _bloc.getAllStores().then((value) {
-      setState(() => _data = value);
-    });
+    _bloc.add(GetAllStoresEvent("test"));
   }
 
   Widget buildList() {

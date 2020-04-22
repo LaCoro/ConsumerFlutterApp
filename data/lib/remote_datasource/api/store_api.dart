@@ -9,7 +9,7 @@ class StoreApi {
 
   StoreApi(this.apiService);
 
-  Future<List<Store>> getAllStores() async {
+  Future<List<Store>> getAllStores(String city) async {
     final response = await apiService.getAllStores();
     if (response.success) {
       return response.results.map((e) => e as Store).toList();

@@ -6,7 +6,7 @@ class GetAllStores {
 
   GetAllStores(this._repository);
 
-  Future<List<StoreEntity>> call() async {
-    return await _repository.getAllStores();
+  Future<List<StoreEntity>> call(String city) async {
+    return await _repository.getAllStores(city);
   }
 }
