@@ -1,5 +1,5 @@
 //@JsonSerializable(explicitToJson: true)
-class StoreEntity {
+abstract class StoreEntity {
   String name;
   List<int> searchTags;
   String address;

@@ -12,13 +12,18 @@ class StoreListBloc extends Bloc<BaseEvent, BaseState> {
 
   @override
   Stream<BaseState> mapEventToState(BaseEvent event) async* {
-    if (event is GetAllStoresEvent) {
-      yield LoadingState();
-      final storeList = await _getAllStores.call(event.city)..shuffle();
-      yield SuccessState(data: storeList);
-    } else {
-      yield ErrorState();
-    }
+      try {
+        if (event is GetAllStoresEvent) {
+          yield LoadingState();
+          final storeList = await _getAllStores.call(event.city);
+          yield SuccessState(data: storeList..shuffle());
+        } else {
+          yield ErrorState();
+        }
+      } catch (error) {
+        yield ErrorState();
+      }
+
   }
 }
 

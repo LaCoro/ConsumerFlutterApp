@@ -34,15 +34,11 @@ class _StoreListPageState extends State<StoreListPage> {
           bloc: _bloc,
           builder: (context, state) {
             _refreshController.refreshCompleted();
-
-            if (state is LoadingState) {
-              // TODO show loader
-            }
+            if (state is LoadingState) return Center(child: CircularProgressIndicator());
 
             if (state is SuccessState<List<StoreEntity>>) {
               _data = state.data;
             }
-
             return SmartRefresher(
               controller: _refreshController,
               enablePullDown: true,
