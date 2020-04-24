@@ -1,3 +1,4 @@
+import 'package:LaCoro/presentation/test/TestPage.dart';
 import 'package:LaCoro/presentation/core/di/app_module.dart';
 import 'package:LaCoro/presentation/store_details/store_details_page.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: INITIAL_ROUTE,
         routes: {
-          INITIAL_ROUTE: (BuildContext context) => StoreListPage(), // TODO change
+          INITIAL_ROUTE: (BuildContext context) => TestPage(), // TODO change
           STORE_LIST_ROUTE: (BuildContext context) => StoreListPage(),
           STORE_DETAILS_ROUTE: (BuildContext context) => StoreDetailsPage(),
         });
