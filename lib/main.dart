@@ -1,4 +1,5 @@
 import 'package:LaCoro/presentation/core/di/app_module.dart';
+import 'package:LaCoro/presentation/store_details/store_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 
@@ -13,13 +14,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.grey,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: SafeArea(child: StoreListPage()),
-    );
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.grey,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        initialRoute: INITIAL_ROUTE,
+        routes: {
+          INITIAL_ROUTE: (BuildContext context) => StoreListPage(), // TODO change
+          STORE_LIST_ROUTE: (BuildContext context) => StoreListPage(),
+          STORE_DETAILS_ROUTE: (BuildContext context) => StoreDetailsPage(),
+        });
   }
 }
+
+// Route names
+const INITIAL_ROUTE = '/';
+const STORE_LIST_ROUTE = '/store_list';
+const STORE_DETAILS_ROUTE = '/store_details';
