@@ -1,4 +1,5 @@
-import 'package:LaCoro/presentation/test/TestPage.dart';
+import 'package:LaCoro/presentation/core/ui/app_theme.dart';
+import 'package:LaCoro/presentation/test/test_page.dart';
 import 'package:LaCoro/presentation/core/di/app_module.dart';
 import 'package:LaCoro/presentation/store_details/store_details_page.dart';
 import 'package:flutter/material.dart';
@@ -15,18 +16,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.grey,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        initialRoute: INITIAL_ROUTE,
-        routes: {
-          INITIAL_ROUTE: (BuildContext context) => TestPage(), // TODO change
-          STORE_LIST_ROUTE: (BuildContext context) => StoreListPage(),
-          STORE_DETAILS_ROUTE: (BuildContext context) => StoreDetailsPage(),
-        });
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      theme: AppTheme.build(),
+      initialRoute: INITIAL_ROUTE,
+      routes: {
+        INITIAL_ROUTE: (BuildContext context) => TestPage(), // TODO change
+        STORE_LIST_ROUTE: (BuildContext context) => StoreListPage(),
+        STORE_DETAILS_ROUTE: (BuildContext context) => StoreDetailsPage(),
+      },
+    );
   }
 }
 
