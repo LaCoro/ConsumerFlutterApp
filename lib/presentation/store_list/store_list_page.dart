@@ -1,3 +1,4 @@
+import 'package:LaCoro/main.dart';
 import 'package:LaCoro/presentation/core/bloc/base_bloc.dart';
 import 'package:LaCoro/presentation/core/di/store_list_module.dart';
 import 'package:LaCoro/presentation/store_list/store_list_bloc.dart';
@@ -56,16 +57,19 @@ class _StoreListPageState extends State<StoreListPage> {
   Widget buildList() {
     return ListView.builder(
         itemExtent: 100.0,
-        itemBuilder: (c, i) => Container(
-              height: 100,
-              child: Center(child: Text(_data[i].name)),
-              margin: const EdgeInsets.symmetric(
-                vertical: 10,
-                horizontal: 15,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(15),
+        itemBuilder: (c, i) => InkWell(
+              onTap: () => Navigator.pushNamed(context, STORE_DETAILS_ROUTE),
+              child: Container(
+                height: 100,
+                child: Center(child: Text(_data[i].name)),
+                margin: const EdgeInsets.symmetric(
+                  vertical: 10,
+                  horizontal: 15,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                ),
               ),
             ),
         itemCount: _data?.length ?? 0);
