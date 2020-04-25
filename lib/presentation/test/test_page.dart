@@ -1,4 +1,4 @@
-import 'package:LaCoro/presentation/core/ui/custom_widgets/CartTotalBottom.dart';
+import 'package:LaCoro/presentation/core/ui/custom_widgets/cart_total_bottom.dart';
 import 'package:flutter/material.dart';
 
 /// This page should be use to test widgets

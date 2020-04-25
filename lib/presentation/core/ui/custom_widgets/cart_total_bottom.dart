@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class CartTotalBottom extends StatelessWidget {
-
   String quantity = "9";
   String price = "\$111";
 
@@ -10,7 +9,7 @@ class CartTotalBottom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.blue,
+      color: Theme.of(context).accentColor,
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 16.0),
         child: Row(
@@ -19,8 +18,12 @@ class CartTotalBottom extends StatelessWidget {
               child: Container(
                   width: 35,
                   height: 35,
-                  decoration: BoxDecoration(shape: BoxShape.circle, color: Color(0xFFe0f2f1)),
-                  child: Center(child: Text(quantity, textAlign: TextAlign.center, style: TextStyle(color: Colors.blue, fontSize: 20, fontWeight: FontWeight.bold)))),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Theme.of(context).backgroundColor,
+                  ),
+                  child: Center(
+                      child: Text(quantity, textAlign: TextAlign.center, style: TextStyle(color: Theme.of(context).accentColor, fontSize: 20, fontWeight: FontWeight.bold)))),
             ),
             Expanded(
               flex: 2,
