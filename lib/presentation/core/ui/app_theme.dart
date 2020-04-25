@@ -21,3 +21,5 @@ class AppTheme {
         child: child,
       );
 }
+
+Color green = Color(0xfffffff);
