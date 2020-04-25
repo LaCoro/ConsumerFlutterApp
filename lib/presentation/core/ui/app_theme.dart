@@ -9,6 +9,7 @@ class AppTheme {
         backgroundColor: Color(0xFFF7F7F7),
         brightness: Brightness.light,
         dividerColor: Color(0xFFC7CBD3),
+
         //fontFamily: "Poppins", TODO
       );
 
@@ -21,3 +22,10 @@ class AppTheme {
         child: child,
       );
 }
+
+/// Colors
+
+Color greenLight = Color(0xFFBAF5CB);
+Color greenDark = Color(0xFF339773);
+Color graySubtitle = Color(0xFF868686);
+
