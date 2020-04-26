@@ -1,36 +1,24 @@
-//@JsonSerializable(explicitToJson: true)
+import 'package:domain/entities/ciity_configuration.dart';
+import 'package:domain/entities/item_entity.dart';
+import 'package:domain/entities/location.dart';
+
 abstract class StoreEntity {
   String name;
-  List<int> searchTags;
+  List<String> searchTags;
   String address;
   String city;
   String country;
   String mobile;
   String openAt;
   String closeAt;
-  List<int> daysOpen;
   String logo;
+  String state;
+  List<int> daysOpen;
   bool hasDeliveryService;
   bool active;
   int deliveryCost;
-  String state;
   int position;
-
-//  StoreEntity(
-//      {this.name,
-//      this.searchTags,
-//      this.address,
-//      this.city,
-//      this.country,
-//      this.mobile,
-//      this.openAt,
-//      this.closeAt,
-//      this.daysOpen,
-////    this.location,
-//      this.logo,
-//      this.hasDeliveryService,
-//      this.active,
-//      this.deliveryCost,
-//      this.state,
-//      this.position});
+  List<ItemEntity> products;
+  Location location;
+  CityConfiguration cityInfo;
 }
