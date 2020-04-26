@@ -1,3 +1,4 @@
+import 'package:LaCoro/presentation/core/ui/custom_widgets/box_comments_order.dart';
 import 'package:LaCoro/presentation/core/ui/custom_widgets/cart_total_bottom.dart';
 import 'package:flutter/material.dart';
 
@@ -8,8 +9,9 @@ class TestPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Align(
-            alignment: Alignment.bottomCenter,
-            child: BottomAppBar(child: CartTotalBottom("0", "123123")))
+          alignment: Alignment.center,
+            child: BottomAppBar(child: CartTotalBottom(11, "\$10.000"),),
+        ),
       ),
     );
   }
