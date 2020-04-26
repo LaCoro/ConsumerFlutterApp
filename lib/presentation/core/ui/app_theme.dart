@@ -28,4 +28,6 @@ class AppTheme {
 Color greenLight = Color(0xFFBAF5CB);
 Color greenDark = Color(0xFF339773);
 Color graySubtitle = Color(0xFF868686);
+Color accentColor = Color(0xff3D9FE6);
+
 
