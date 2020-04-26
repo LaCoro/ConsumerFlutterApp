@@ -1,3 +1,4 @@
+import 'package:domain/entities/item_entity.dart';
 import 'package:domain/entities/store_entity.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 
@@ -26,6 +27,7 @@ class Store extends ParseObject with StoreEntity implements ParseCloneable {
   static const String keyActive = 'active';
   static const String keyDeliveryCost = 'deliveryCost';
   static const String keyPosition = 'Position';
+  static const String keyItems = 'items';
 
   String get name => get<String>(keyName);
 

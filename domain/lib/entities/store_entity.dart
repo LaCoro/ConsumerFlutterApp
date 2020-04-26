@@ -1,4 +1,6 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:domain/entities/ciity_configuration.dart';
+import 'package:domain/entities/item_entity.dart';
+import 'package:domain/entities/location.dart';
 
 abstract class StoreEntity {
   String name;
@@ -16,4 +18,7 @@ abstract class StoreEntity {
   bool active;
   int deliveryCost;
   int position;
+  List<ItemEntity> products;
+  Location location;
+  CityConfiguration cityInfo;
 }
