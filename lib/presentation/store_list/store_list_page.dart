@@ -57,7 +57,7 @@ class _StoreListPageState extends State<StoreListPage> {
   Widget buildList() {
     return ListView.builder(
         itemExtent: 100.0,
-        itemBuilder: (c, i) => InkWell(
+        itemBuilder: (c, i) => GestureDetector(
               onTap: () => Navigator.pushNamed(context, STORE_DETAILS_ROUTE),
               child: Container(
                 height: 100,

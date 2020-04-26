@@ -18,7 +18,7 @@ abstract class StoreEntity {
   bool active;
   int deliveryCost;
   int position;
-  List<ItemEntity> products;
+  Future<List<ItemEntity>> items;
   Location location;
   CityConfiguration cityInfo;
 }
