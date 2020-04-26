@@ -4,7 +4,7 @@ import 'package:LaCoro/presentation/core/ui/custom_widgets/discount_chip.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ProductItem extends StatelessWidget{
+class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -2,25 +2,13 @@ import 'package:LaCoro/presentation/core/ui/app_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Counter extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() => CounterState();
-}
+class Counter extends StatelessWidget {
 
-class CounterState extends State<Counter> {
-  int n = 0;
+  int quantity = 0;
 
-  void add() {
-    setState(() {
-      n++;
-    });
-  }
+  Counter({Key key, this.quantity, this.onQuantityChange}) : super(key: key);
 
-  void minus() {
-    setState(() {
-      if (n != 0) n--;
-    });
-  }
+  final Function(int) onQuantityChange;
 
   @override
   Widget build(BuildContext context) {
@@ -38,19 +26,19 @@ class CounterState extends State<Counter> {
             GestureDetector(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                  child: n == 0 ? Icon(Icons.remove, color: graySubtitle, size: 20) : Icon(Icons.remove, color: accentColor, size: 20),
+                  child: quantity == 0 ? Icon(Icons.remove, color: graySubtitle, size: 20) : Icon(Icons.remove, color: accentColor, size: 20),
                 ),
-                onTap: minus),
+                onTap: () => onQuantityChange.call(quantity-1)),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4.0),
-              child: Text('$n', style: TextStyle(color: accentColor, fontSize: 16, fontWeight: FontWeight.bold)),
+              child: Text('$quantity', style: TextStyle(color: accentColor, fontSize: 16, fontWeight: FontWeight.bold)),
             ),
             GestureDetector(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 4.0),
                   child: Icon(Icons.add, color: accentColor, size: 20),
                 ),
-                onTap: add),
+                onTap: () => onQuantityChange.call(quantity+1)),
           ],
         ),
       ),
