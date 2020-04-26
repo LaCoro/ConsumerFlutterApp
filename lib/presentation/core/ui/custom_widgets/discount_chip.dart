@@ -2,6 +2,11 @@ import 'package:LaCoro/presentation/core/ui/app_theme.dart';
 import 'package:flutter/cupertino.dart';
 
 class DiscountChip extends StatelessWidget{
+
+  String discountPercentage = "";
+
+  DiscountChip({Key key, this.discountPercentage}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -15,7 +20,7 @@ class DiscountChip extends StatelessWidget{
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.all(Radius.circular(6.0)),
           ),
-          child: Text("-50%",
+          child: Text("-$discountPercentage%",
               textAlign: TextAlign.center,
               style: TextStyle(color: greenDark, fontSize: 16)),
         ),

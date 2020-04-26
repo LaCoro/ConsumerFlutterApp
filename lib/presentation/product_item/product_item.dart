@@ -18,19 +18,19 @@ class ProductItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text("Arepa sencilla",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black)),
+                    style: Theme.of(context).textTheme.headline5),
                   Text("Carne, pollo y queso",
-                      style: TextStyle(fontWeight: FontWeight.w300, fontSize: 16, color: graySubtitle)),
+                      style: Theme.of(context).textTheme.caption),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text("\$8.000",
-                        style: TextStyle(fontSize: 20, color: Colors.black)),
+                        style: Theme.of(context).textTheme.headline5),
                         Text("\$16.000",
-                            style: TextStyle(fontSize: 20, color: graySubtitle, decoration: TextDecoration.lineThrough)),
-                        DiscountChip(),
+                            style: Theme.of(context).textTheme.overline),
+                        DiscountChip(discountPercentage: "50"),
                       ],
                     ),
                   )
