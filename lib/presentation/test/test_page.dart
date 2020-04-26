@@ -10,7 +10,7 @@ class TestPage extends StatelessWidget {
       body: SafeArea(
         child: Align(
           alignment: Alignment.center,
-            child: BottomAppBar(child: BoxCommentOrder("Esto es una prueba de texto, para la caja de commentario de Lacoro, calle #45 carrera 78-bis-99 "),),
+            child: BottomAppBar(child: CartTotalBottom(11, "\$10.000"),),
         ),
       ),
     );

@@ -18,6 +18,7 @@ class BoxCommentOrder extends StatelessWidget {
             Text("Comentarios",),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 16.0),
+              child: new TextFormField(
               child: new TextFormField(initialValue: comment,
                 minLines: 1,
                 maxLines: 3,
