@@ -1,3 +1,4 @@
+import 'package:data/models/item.dart';
 import 'package:domain/entities/item_entity.dart';
 import 'package:domain/entities/store_entity.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
@@ -88,4 +89,10 @@ class Store extends ParseObject with StoreEntity implements ParseCloneable {
   int get position => get<int>(keyPosition);
 
   set position(int position) => set<int>(keyPosition, position);
+
+  Future<List<ItemEntity>> get items async {
+    final QueryBuilder query = QueryBuilder<Item>(Item())..whereEqualTo('store', this.toPointer());
+    final response = await query.query();
+    return response.results.map((e) => e as Item).toList();
+  }
 }
