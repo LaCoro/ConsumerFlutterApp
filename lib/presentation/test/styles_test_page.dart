@@ -17,7 +17,7 @@ class StylesTestPage extends StatelessWidget{
               Text("Headline 3", style: Theme.of(context).textTheme.headline3),
               Text("Headline 4", style: Theme.of(context).textTheme.headline4),
               Text("Headline 5", style: Theme.of(context).textTheme.headline5),
-              Text("Headline 6", style: Theme.of(context).textTheme.headline6),
+              FlatButton(child: Text("Headline 6", style: Theme.of(context).textTheme.headline6), onPressed: () {},),
               Text("Overline", style: Theme.of(context).textTheme.overline),
               Text("Body text 1", style: Theme.of(context).textTheme.bodyText1),
               Text("Caption", style: Theme.of(context).textTheme.caption),
