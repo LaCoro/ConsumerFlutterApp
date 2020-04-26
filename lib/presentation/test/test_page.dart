@@ -8,8 +8,8 @@ class TestPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Align(
-          alignment: Alignment.bottomCenter,
-            child: BottomAppBar(child: CartTotalBottom("0", "123123"))),
+            alignment: Alignment.bottomCenter,
+            child: BottomAppBar(child: CartTotalBottom("0", "123123")))
       ),
     );
   }
