@@ -76,7 +76,7 @@ class User extends ParseObject with UserEntity implements ParseCloneable {
 
   StoreEntity get managedStore => get<StoreEntity>(keyManagedStore);
 
-  set StoreEntity(StoreEntity managedStore) => set<StoreEntity>(keyManagedStore, managedStore);
+  set managedStore(StoreEntity managedStore) => set<StoreEntity>(keyManagedStore, managedStore);
 
 
 
