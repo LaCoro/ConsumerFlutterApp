@@ -11,7 +11,9 @@ class Order extends ParseObject with OrderEntity implements ParseCloneable {
   Order.clone() : this();
 
   @override
-  clone(Map map) => Order.clone()..fromJson(map);
+  clone(Map map) =>
+      Order.clone()
+        ..fromJson(map);
 
   static const String _keyTableName = 'Order';
 
@@ -44,11 +46,13 @@ class Order extends ParseObject with OrderEntity implements ParseCloneable {
 
   String get deliveryStartedAt => get<String>(keyDeliveryStartedAt);
 
-  set deliveryStartedAt(String deliveryStartedAt) => set<String>(keyDeliveryStartedAt, deliveryStartedAt);
+  set deliveryStartedAt(String deliveryStartedAt) =>
+      set<String>(keyDeliveryStartedAt, deliveryStartedAt);
 
   String get deliveryEndedAt => get<String>(keyDeliveryEndedAt);
 
-  set deliveryEndedAt(String deliveryEndedAt) => set<String>(keyDeliveryEndedAt, deliveryEndedAt);
+  set deliveryEndedAt(String deliveryEndedAt) =>
+      set<String>(keyDeliveryEndedAt, deliveryEndedAt);
 
   int get cashPayment => get<int>(keyCashPayment);
 
@@ -56,11 +60,13 @@ class Order extends ParseObject with OrderEntity implements ParseCloneable {
 
   String get additionalRequests => get<String>(keyAdditionalRequests);
 
-  set additionalRequests(String additionalRequests) => set<String>(keyAdditionalRequests, additionalRequests);
+  set additionalRequests(String additionalRequests) =>
+      set<String>(keyAdditionalRequests, additionalRequests);
 
   String get deliveryAddress => get<String>(keyDeliveryAddress);
 
-  set deliveryAddress(String deliveryAddress) => set<String>(keyDeliveryAddress, deliveryAddress);
+  set deliveryAddress(String deliveryAddress) =>
+      set<String>(keyDeliveryAddress, deliveryAddress);
 
   String get buyerName => get<String>(keyBuyerName);
 
@@ -72,7 +78,8 @@ class Order extends ParseObject with OrderEntity implements ParseCloneable {
 
   String get scheduledDeliveryDate => get<String>(keyScheduledDeliveryDate);
 
-  set scheduledDeliveryDate(String scheduledDeliveryDate) => set<String>(keyScheduledDeliveryDate, scheduledDeliveryDate);
+  set scheduledDeliveryDate(String scheduledDeliveryDate) =>
+      set<String>(keyScheduledDeliveryDate, scheduledDeliveryDate);
 
   String get state => get<String>(keyState);
 
@@ -84,4 +91,7 @@ class Order extends ParseObject with OrderEntity implements ParseCloneable {
 
   UserEntity get deliveryBoy => get<UserEntity>(keyDeliveryBoy);
 
-  set deliveryBoy(UserEntity deliveryBoy) => set<UserEntity>(keyDeliveryBoy, deliveryBoy);
+  set deliveryBoy(UserEntity deliveryBoy) =>
+      set<UserEntity>(keyDeliveryBoy, deliveryBoy);
+
+}

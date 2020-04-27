@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.build(),
       initialRoute: INITIAL_ROUTE,
       routes: {
-        INITIAL_ROUTE: (BuildContext context) => StylesTestPage(), // TODO change
+        INITIAL_ROUTE: (BuildContext context) => TestPage(), // TODO change
         STORE_LIST_ROUTE: (BuildContext context) => StoreListPage(),
         STORE_DETAILS_ROUTE: (BuildContext context) => StoreDetailsPage(),
       },
