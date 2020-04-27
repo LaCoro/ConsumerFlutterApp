@@ -41,6 +41,6 @@ class Item extends ParseObject with ItemEntity implements ParseCloneable {
 
   int get position => get<int>(keyPosition);
 
-  set poaition(int position) => set<int>(keyPosition, position);
+  set position(int position) => set<int>(keyPosition, position);
 
 }
