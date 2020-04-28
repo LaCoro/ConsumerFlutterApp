@@ -11,7 +11,7 @@ class TestPage extends StatelessWidget {
       body: SafeArea(
         child: Align(
           alignment: Alignment.center,
-            child: BottomAppBar(child: PinNumberOrder("+12345"),),
+            child: BottomAppBar(child: PinNumberOrder("+.333 333 3333"),),
         ),
       ),
     );
