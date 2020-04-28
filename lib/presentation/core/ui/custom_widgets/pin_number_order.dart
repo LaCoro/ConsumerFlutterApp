@@ -1,8 +1,44 @@
+import 'dart:async';
+
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-class PinNumberOrder extends StatelessWidget {
+class PinNumberOrder extends StatefulWidget {
+  final String phoneNumber;
+  PinNumberOrder(this.phoneNumber);
+  @override
+  _PinNumberOrderState createState() => _PinNumberOrderState();
+}
+
+class _PinNumberOrderState extends State<PinNumberOrder> {
+  var onTapRecognizer;
+
+  TextEditingController textEditingController = TextEditingController()
+    ..text = "123456";
+
+  StreamController<ErrorAnimationType> errorController;
+
+  bool hasError = false;
+  String currentText = "";
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  @override
+  void initState() {
+    onTapRecognizer = TapGestureRecognizer()
+      ..onTap = () {
+        Navigator.pop(context);
+      };
+    errorController = StreamController<ErrorAnimationType>();
+    super.initState();
+  }
+
+
+  @override
+  void dispose() {
+    errorController.close();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
