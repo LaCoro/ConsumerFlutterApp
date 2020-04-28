@@ -1,41 +1,217 @@
+import 'dart:async';
+
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-class PinNumberOrder extends StatelessWidget {
+class PinNumberOrder extends StatefulWidget {
+  final String phoneNumber;
+  PinNumberOrder(this.phoneNumber);
+  @override
+  _PinNumberOrderState createState() =>
+      _PinNumberOrderState();
+}
+
+class _PinNumberOrderState extends State<PinNumberOrder> {
+  var onTapRecognizer;
+
+  TextEditingController textEditingController = TextEditingController()
+    ..text = "12345";
+
+  StreamController<ErrorAnimationType> errorController;
+
+  bool hasError = false;
+  String currentText = "";
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  @override
+  void initState() {
+    onTapRecognizer = TapGestureRecognizer()
+      ..onTap = () {
+        Navigator.pop(context);
+      };
+    errorController = StreamController<ErrorAnimationType>();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    errorController.close();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.blue,
-      alignment: Alignment.centerLeft,
-      height: 300,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text("Código de autorizacion",style: Theme.of(context).textTheme.headline1,),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 16),
-              child: Text("Ingresa el código enviado al celular +333 333 3333",style: Theme.of(context).textTheme.headline5,
+    return Scaffold(
+      backgroundColor: Colors.blue.shade50,
+      key: scaffoldKey,
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: ListView(
+            children: <Widget>[
+              SizedBox(height: 30),
+              Container(
+                color: Colors.red,
+                height: MediaQuery.of(context).size.height / 3,
+                child: Text("Hola mundo")
               ),
-            ),
-            PinCodeTextField(
-              length: 6,
-              obsecureText: false,
-              animationType: AnimationType.fade,
-              shape: PinCodeFieldShape.box,
-              animationDuration: Duration(milliseconds: 300),
-              borderRadius: BorderRadius.circular(5),            fieldHeight: 50,
-              fieldWidth: 40,
-              onChanged: (value) {
-                setState(() {
-                  currentText = value;
-                });
-              },
-            )
-          ],
+              // Image.asset(
+              //   'assets/verify.png',
+              //   height: MediaQuery.of(context).size.height / 3,
+              //   fit: BoxFit.fitHeight,
+              // ),
+              SizedBox(height: 8),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Text(
+                  'Código de autorizacion',
+                  style: Theme.of(context).textTheme.headline1,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Padding(
+                padding:
+                const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                child: RichText(
+                  text: TextSpan(
+                      text: "Ingrese el código enviado al celular:  ",
+                      children: [
+                        TextSpan(
+                            text: widget.phoneNumber,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20)),
+                      ],
+                      style: Theme.of(context).textTheme.headline5),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+
+              Padding(
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 24),
+                  child: PinCodeTextField(
+                    length: 5,
+                    obsecureText: false,
+                    animationType: AnimationType.fade,
+                    shape: PinCodeFieldShape.box,
+                    animationDuration: Duration(milliseconds: 300),
+                    borderRadius: BorderRadius.circular(5),
+                    fieldHeight: 52,
+                    backgroundColor: Colors.blue.shade50,
+                    fieldWidth: 52,
+                    activeFillColor: Colors.white,
+                    enableActiveFill: true,
+                    errorAnimationController: errorController,
+                    controller: textEditingController,
+                    onCompleted: (v) {
+
+                      print("Procesado");
+                    },
+                    onChanged: (value) {
+                      print(value);
+                      setState(() {
+                        currentText = value;
+                      });
+                    },
+                  )),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                child: Text(
+                  hasError ? "* Codigo erroneo" : "",
+                  style: TextStyle(color: Colors.red.shade300, fontSize: 15),
+                ),
+              ),
+              
+              RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                    text: "No resiviste el mensaje? ",
+                    style: TextStyle(color: Colors.black54, fontSize: 15),
+                    children: [
+                      TextSpan(
+                          text: " REENVIAR",
+                          recognizer: onTapRecognizer,
+                          style: TextStyle(
+                              color: Color.fromRGBO(61, 158, 229, 1.0),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16))
+                    ]),
+              ),
+              SizedBox(
+                height: 14,
+              ),
+              Container(
+                margin:
+                const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24),
+                child: ButtonTheme(
+                  height: 50,
+                  child: FlatButton(
+                    onPressed: () {
+                      // conditions for validating
+                      if (currentText.length != 5 || currentText != "11111") {
+                        errorController.add(ErrorAnimationType.shake); // Triggering error shake animation
+                        setState(() {
+                          hasError = true;
+                        });
+                      } else {
+                        setState(() {
+                          hasError = false;
+                          scaffoldKey.currentState.showSnackBar(SnackBar(
+                            content: Text("Verificando..."),
+                            duration: Duration(seconds: 2),
+                          ));
+                        });
+                      }
+                    },
+                    child: Center(
+                        child: Text(
+                          "Continuar",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold),
+                        )),
+                  ),
+                ),
+                decoration: BoxDecoration(
+                    color: Color.fromRGBO(61, 158, 229, 1.0),
+                    borderRadius: BorderRadius.circular(5),
+                    ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  FlatButton(
+                    child: Text("Clear"),
+                    onPressed: () {
+                      textEditingController.clear();
+                    },
+                  ),
+                  FlatButton(
+                    child: Text("Set Text"),
+                    onPressed: () {
+                      textEditingController.text = "123456";
+                    },
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 16,
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
+
+
+
