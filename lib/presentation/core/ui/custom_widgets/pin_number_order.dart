@@ -152,7 +152,7 @@ class _PinNumberOrderState extends State<PinNumberOrder> {
                   child: FlatButton(
                     onPressed: () {
                       // conditions for validating
-                      if (currentText.length != 5 || currentText != "11111") {
+                      if (currentText.length != 5 || currentText != "11111") {  //cod pass
                         errorController.add(ErrorAnimationType
                             .shake); // Triggering error shake animation
                         setState(() {
@@ -163,7 +163,7 @@ class _PinNumberOrderState extends State<PinNumberOrder> {
                           hasError = false;
                           scaffoldKey.currentState.showSnackBar(SnackBar(
                             content: Text("Verificando..."),
-                            duration: Duration(seconds: 2),
+                            duration: Duration(seconds: 3),
                           ));
                         });
                       }
