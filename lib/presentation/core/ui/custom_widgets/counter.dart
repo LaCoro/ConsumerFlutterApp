@@ -26,7 +26,7 @@ class Counter extends StatelessWidget {
             GestureDetector(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                  child: quantity == 0 ? Icon(Icons.remove, color: graySubtitle, size: 20) : Icon(Icons.remove, color: accentColor, size: 20),
+                  child: quantity == 0 ? Icon(Icons.remove, color: grayMedium, size: 20) : Icon(Icons.remove, color: accentColor, size: 20),
                 ),
                 onTap: () => onQuantityChange.call(quantity-1)),
             Padding(
