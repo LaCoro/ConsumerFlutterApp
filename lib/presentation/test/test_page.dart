@@ -4,13 +4,17 @@ import 'package:flutter/material.dart';
 
 /// This page should be use to test widgets
 class TestPage extends StatelessWidget {
+  static const TEST_PAGE_ROUTE = '/test_page';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Align(
           alignment: Alignment.center,
-            child: BottomAppBar(child: CartTotalBottom(11, "\$10.000"),),
+          child: BottomAppBar(
+            child: CartTotalBottom(11, "\$10.000"),
+          ),
         ),
       ),
     );
