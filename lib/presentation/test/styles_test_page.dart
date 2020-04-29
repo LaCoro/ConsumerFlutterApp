@@ -1,3 +1,4 @@
+import 'package:LaCoro/presentation/core/ui/app_colors.dart';
 import 'package:LaCoro/presentation/core/ui/app_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class StylesTestPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Text("Headline 1", style: Theme.of(context).textTheme.headline1),
-              Container(color: accentColor, child: Text("Headline 2", style: Theme.of(context).textTheme.headline2)),
+              Container(color: AppColors.accentColor, child: Text("Headline 2", style: Theme.of(context).textTheme.headline2)),
               Text("Headline 3", style: Theme.of(context).textTheme.headline3),
               Text("Headline 4", style: Theme.of(context).textTheme.headline4),
               Text("Headline 5", style: Theme.of(context).textTheme.headline5),
@@ -40,7 +41,7 @@ class StylesTestPage extends StatelessWidget {
                           child: Text("Button", style: Theme.of(context).textTheme.button),
                         ),
                         onPressed: () {},
-                        color: accentColor),
+                        color: AppColors.accentColor),
                   )),
                 ],
               ),
