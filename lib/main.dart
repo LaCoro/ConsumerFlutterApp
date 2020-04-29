@@ -1,7 +1,9 @@
 import 'package:LaCoro/presentation/core/di/app_module.dart';
+import 'package:LaCoro/presentation/core/ui/adresses/addresses_page.dart';
 import 'package:LaCoro/presentation/core/ui/app_theme.dart';
 import 'package:LaCoro/presentation/store_details/store_details_page.dart';
 import 'package:LaCoro/presentation/test/styles_test_page.dart';
+import 'package:LaCoro/presentation/test/test_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 
@@ -30,10 +32,11 @@ class MyApp extends StatelessWidget {
         return MaterialPageRoute(builder: (context) => destinationRoute, settings: settings);
       },
       routes: {
-        '/': (BuildContext context) => StoreListPage(), // TODO change
+        '/': (BuildContext context) => AddressesPage(), // TODO change
         StoreListPage.STORE_LIST_ROUTE: (BuildContext context) => StoreListPage(),
         TestPage.TEST_PAGE_ROUTE: (BuildContext context) => TestPage(),
         StylesTestPage.STYLE_TEST_PAGE_ROUTE: (BuildContext context) => StylesTestPage(),
+        AddressesPage.ADDRESSES_LIST_ROUTE: (BuildContext context) => AddressesPage(),
       },
     );
   }
