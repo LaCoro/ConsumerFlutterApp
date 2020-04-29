@@ -14,7 +14,7 @@ class Item extends ParseObject with ItemEntity implements ParseCloneable {
   static const String _keyTableName = 'Item';
 
   static const String keyName = 'name';
-  static const String keyDescription = 'descriptio';
+  static const String keyDescription = 'description';
   static const String keyPrice = 'price';
   static const String keyStore = 'store'; //
   static const String keyParent = 'parent'; //
