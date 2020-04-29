@@ -1,5 +1,5 @@
 import 'package:LaCoro/presentation/core/ui/custom_widgets/cart_total_bottom.dart';
-import 'package:LaCoro/presentation/product_item/product_item.dart';
+import 'package:LaCoro/presentation/core/ui/custom_widgets/product_item.dart';
 import 'package:domain/entities/item_entity.dart';
 import 'package:domain/entities/store_entity.dart';
 import 'package:flutter/cupertino.dart';

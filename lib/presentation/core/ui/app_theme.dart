@@ -1,3 +1,4 @@
+import 'package:LaCoro/presentation/core/ui/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -19,11 +20,11 @@ class AppTheme {
           headline3: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 24, color: Colors.black),
           headline4: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 22, color: Colors.black),
           headline5: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
-          headline6: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 20, color: yellowAction),
+          headline6: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 20, color: AppColors.yellowAction),
           bodyText1: GoogleFonts.roboto(fontWeight: FontWeight.w300, fontSize: 16, color: Colors.black),
           bodyText2: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black),
-          overline: GoogleFonts.roboto(fontSize: 20, color: grayMedium, decoration: TextDecoration.lineThrough),
-          caption: GoogleFonts.roboto(fontWeight: FontWeight.w300, fontSize: 16, color: grayMedium),
+          overline: GoogleFonts.roboto(fontSize: 20, color: AppColors.greyMedium, decoration: TextDecoration.lineThrough),
+          caption: GoogleFonts.roboto(fontWeight: FontWeight.w300, fontSize: 16, color: AppColors.greyMedium),
           button: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),
 
         )
@@ -40,16 +41,3 @@ class AppTheme {
         child: child,
       );
 }
-
-/// Colors
-
-Color greenLight = Color(0xFFBAF5CB);
-Color greenDark = Color(0xFF339773);
-Color grayMedium = Color(0xFF868686);
-Color grayLight = Color(0xFFF7F7F7);
-Color accentColor = Color(0xFF3D9FE6);
-Color yellowAction = Color(0xFFFFAC0C);
-Color divider = Color(0xFFC7CBD3);
-
-
-

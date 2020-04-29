@@ -1,3 +1,4 @@
+import 'package:LaCoro/presentation/core/ui/app_colors.dart';
 import 'package:LaCoro/presentation/core/ui/app_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,7 @@ class AddressesPage extends StatelessWidget{
               padding: const EdgeInsets.symmetric(vertical: 20.0),
               child: Material(
                 borderRadius: BorderRadius.all(Radius.circular(6.0)),
-                shadowColor: grayMedium,
+                shadowColor: AppColors.greyMedium,
                 elevation: 2,
                 color: Colors.white,
                 child: Padding(
@@ -40,7 +41,7 @@ class AddressesPage extends StatelessWidget{
                       decoration: InputDecoration(
                           hintText: "Buscar tu dirección",
                           hintStyle: Theme.of(context).textTheme.caption,
-                          prefixIcon: Icon(Icons.search, color: grayMedium, size: 24),
+                          prefixIcon: Icon(Icons.search, color: AppColors.greyMedium, size: 24),
                           suffixIcon: Icon(Icons.cancel, color: Colors.black, size: 24),
                           focusedBorder: InputBorder.none,
                           enabledBorder: InputBorder.none,
@@ -54,7 +55,7 @@ class AddressesPage extends StatelessWidget{
             ),
             Padding(
               padding: const EdgeInsets.only(top: 15.0),
-              child: Divider(thickness: 1, color: divider),
+              child: Divider(thickness: 1, color: AppColors.divider),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 15.0),
@@ -77,7 +78,7 @@ class AddressesPage extends StatelessWidget{
             ),
             Padding(
               padding: const EdgeInsets.only(left: 0.0, right: 0.0, top: 15.0),
-              child: Divider(thickness: 8, color: grayLight),
+              child: Divider(thickness: 8, color: AppColors.greyLight),
             ),
             Padding(
               padding: const EdgeInsets. only(top: 15.0),
@@ -89,7 +90,7 @@ class AddressesPage extends StatelessWidget{
                 itemBuilder: (context, index) {
                   return ListTile(
                     onTap: () {},
-                    trailing: Icon(Icons.check_circle, color: accentColor, size: 24),
+                    trailing: Icon(Icons.check_circle, color: AppColors.accentColor, size: 24),
                     title: Text('${addresses[index]}', style: Theme.of(context).textTheme.bodyText1),
                   );
                 },
