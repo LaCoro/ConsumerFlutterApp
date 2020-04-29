@@ -11,6 +11,8 @@ class AppTheme {
         brightness: Brightness.light,
         dividerColor: Color(0xFFC7CBD3),
         fontFamily: GoogleFonts.roboto().fontFamily,
+        primaryIconTheme: IconThemeData(size: 24),
+        accentIconTheme: IconThemeData(size: 28),
         textTheme: TextTheme(
           headline1: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 30, color: Colors.black),
           headline2: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 30, color: Colors.white),
@@ -44,7 +46,7 @@ class AppTheme {
 Color greenLight = Color(0xFFBAF5CB);
 Color greenDark = Color(0xFF339773);
 Color grayMedium = Color(0xFF868686);
-Color grayLight = Color(0xFFE5E5E5);
+Color grayLight = Color(0xFFF7F7F7);
 Color accentColor = Color(0xFF3D9FE6);
 Color yellowAction = Color(0xFFFFAC0C);
 Color divider = Color(0xFFC7CBD3);
