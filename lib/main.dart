@@ -18,19 +18,24 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'LaCoro',
       theme: AppTheme.build(),
-      initialRoute: INITIAL_ROUTE,
+      initialRoute: '/',
+      onGenerateRoute: (settings) {
+        Widget destinationRoute = TestPage();
+        switch (settings.name) {
+          case StoreDetailsPage.STORE_DETAILS_ROUTE:
+            destinationRoute = StoreDetailsPage();
+            break;
+        }
+        return MaterialPageRoute(builder: (context) => destinationRoute, settings: settings);
+      },
       routes: {
-        INITIAL_ROUTE: (BuildContext context) => TestPage(), // TODO change
-        STORE_LIST_ROUTE: (BuildContext context) => StoreListPage(),
-        STORE_DETAILS_ROUTE: (BuildContext context) => StoreDetailsPage(),
+        '/': (BuildContext context) => StoreListPage(), // TODO change
+        StoreListPage.STORE_LIST_ROUTE: (BuildContext context) => StoreListPage(),
+        TestPage.TEST_PAGE_ROUTE: (BuildContext context) => TestPage(),
+        StylesTestPage.STYLE_TEST_PAGE_ROUTE: (BuildContext context) => StylesTestPage(),
       },
     );
   }
 }
-
-// Route names
-const INITIAL_ROUTE = '/';
-const STORE_LIST_ROUTE = '/store_list';
-const STORE_DETAILS_ROUTE = '/store_details';
