@@ -7,23 +7,25 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 
 class PinNumberOrder extends StatefulWidget {
   final String phoneNumber;
+
   PinNumberOrder(this.phoneNumber);
+
   @override
-  _PinNumberOrderState createState() =>
-      _PinNumberOrderState();
+  _PinNumberOrderState createState() => _PinNumberOrderState();
 }
 
 class _PinNumberOrderState extends State<PinNumberOrder> {
   var onTapRecognizer;
 
   TextEditingController textEditingController = TextEditingController()
-    ..text = "12345";
+    ..text = "";
 
   StreamController<ErrorAnimationType> errorController;
 
   bool hasError = false;
   String currentText = "";
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   void initState() {
     onTapRecognizer = TapGestureRecognizer()
@@ -74,7 +76,7 @@ class _PinNumberOrderState extends State<PinNumberOrder> {
               ),
               Padding(
                 padding:
-                const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                 child: RichText(
                   text: TextSpan(
                       text: "Ingrese el código enviado al celular:  ",
@@ -92,8 +94,7 @@ class _PinNumberOrderState extends State<PinNumberOrder> {
               ),
 
               Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 24),
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: PinCodeTextField(
                     length: 5,
                     obsecureText: false,
@@ -108,7 +109,6 @@ class _PinNumberOrderState extends State<PinNumberOrder> {
                     errorAnimationController: errorController,
                     controller: textEditingController,
                     onCompleted: (v) {
-
                       print("Procesado");
                     },
                     onChanged: (value) {
@@ -121,7 +121,6 @@ class _PinNumberOrderState extends State<PinNumberOrder> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30.0),
                 child: Text(
-
                   hasError ? "* Codigo erroneo" : "",
                   style: TextStyle(color: Colors.red.shade300, fontSize: 15),
                 ),
@@ -147,14 +146,15 @@ class _PinNumberOrderState extends State<PinNumberOrder> {
               ),
               Container(
                 margin:
-                const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24),
+                    const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24),
                 child: ButtonTheme(
                   height: 50,
                   child: FlatButton(
                     onPressed: () {
                       // conditions for validating
                       if (currentText.length != 5 || currentText != "11111") {
-                        errorController.add(ErrorAnimationType.shake); // Triggering error shake animation
+                        errorController.add(ErrorAnimationType
+                            .shake); // Triggering error shake animation
                         setState(() {
                           hasError = true;
                         });
@@ -170,35 +170,18 @@ class _PinNumberOrderState extends State<PinNumberOrder> {
                     },
                     child: Center(
                         child: Text(
-                          "Continuar",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold),
-                        )),
+                      "Continuar",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                    )),
                   ),
                 ),
                 decoration: BoxDecoration(
-                    color: Color.fromRGBO(61, 158, 229, 1.0),
-                    borderRadius: BorderRadius.circular(5),
-                    ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  FlatButton(
-                    child: Text("Clear"),
-                    onPressed: () {
-                      textEditingController.clear();
-                    },
-                  ),
-                  FlatButton(
-                    child: Text("Set Text"),
-                    onPressed: () {
-                      textEditingController.text = "123456";
-                    },
-                  ),
-                ],
+                  color: Color.fromRGBO(61, 158, 229, 1.0),
+                  borderRadius: BorderRadius.circular(5),
+                ),
               ),
             ],
           ),
@@ -207,6 +190,3 @@ class _PinNumberOrderState extends State<PinNumberOrder> {
     );
   }
 }
-
-
-
