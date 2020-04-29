@@ -73,9 +73,9 @@ class _StoreListPageState extends State<StoreListPage> {
               isDeliveryFree ? Color(0xFF3D9FE6) : Colors.black;
           var deliverFontWeight =
               isDeliveryFree ? FontWeight.bold : FontWeight.normal;
-          var hasAPromo = false;
+          var hasAPromo = true;
 
-          var storeClosed = true;
+          var storeClosed = !_data[index].active;
 
           var promoWidget = hasAPromo?    Align(
               alignment: Alignment.topLeft,
