@@ -1,5 +1,4 @@
 import 'package:LaCoro/presentation/core/di/app_module.dart';
-import 'package:LaCoro/presentation/core/ui/adresses/addresses_page.dart';
 import 'package:LaCoro/presentation/core/ui/app_theme.dart';
 import 'package:LaCoro/presentation/store_details/store_details_page.dart';
 import 'package:LaCoro/presentation/test/styles_test_page.dart';
@@ -18,21 +17,24 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'LaCoro',
       theme: AppTheme.build(),
-      initialRoute: INITIAL_ROUTE,
+      initialRoute: '/',
+      onGenerateRoute: (settings) {
+        Widget destinationRoute = TestPage();
+        switch (settings.name) {
+          case StoreDetailsPage.STORE_DETAILS_ROUTE:
+            destinationRoute = StoreDetailsPage();
+            break;
+        }
+        return MaterialPageRoute(builder: (context) => destinationRoute, settings: settings);
+      },
       routes: {
-        INITIAL_ROUTE: (BuildContext context) => AddressesPage(), // TODO change
-        STORE_LIST_ROUTE: (BuildContext context) => StoreListPage(),
-        STORE_DETAILS_ROUTE: (BuildContext context) => StoreDetailsPage(),
-        ADDRESSES_ROUTE: (BuildContext context) => AddressesPage(),
+        '/': (BuildContext context) => StoreListPage(), // TODO change
+        StoreListPage.STORE_LIST_ROUTE: (BuildContext context) => StoreListPage(),
+        TestPage.TEST_PAGE_ROUTE: (BuildContext context) => TestPage(),
+        StylesTestPage.STYLE_TEST_PAGE_ROUTE: (BuildContext context) => StylesTestPage(),
       },
     );
   }
 }
-
-// Route names
-const INITIAL_ROUTE = '/';
-const STORE_LIST_ROUTE = '/store_list';
-const STORE_DETAILS_ROUTE = '/store_details';
-const ADDRESSES_ROUTE = '/addresses';
