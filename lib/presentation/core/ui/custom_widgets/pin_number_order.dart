@@ -43,7 +43,7 @@ class _PinNumberOrderState extends State<PinNumberOrder> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue.shade50,
+      backgroundColor: Colors.white,
       key: scaffoldKey,
       body: GestureDetector(
         onTap: () {
@@ -56,9 +56,7 @@ class _PinNumberOrderState extends State<PinNumberOrder> {
             children: <Widget>[
               SizedBox(height: 30),
               Container(
-                color: Colors.red,
-                height: MediaQuery.of(context).size.height / 3,
-                child: Text("Hola mundo")
+                height: MediaQuery.of(context).size.height / 5,
               ),
               // Image.asset(
               //   'assets/verify.png',
@@ -76,7 +74,7 @@ class _PinNumberOrderState extends State<PinNumberOrder> {
               ),
               Padding(
                 padding:
-                const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                 child: RichText(
                   text: TextSpan(
                       text: "Ingrese el código enviado al celular:  ",
@@ -104,7 +102,6 @@ class _PinNumberOrderState extends State<PinNumberOrder> {
                     animationDuration: Duration(milliseconds: 300),
                     borderRadius: BorderRadius.circular(5),
                     fieldHeight: 52,
-                    backgroundColor: Colors.blue.shade50,
                     fieldWidth: 52,
                     activeFillColor: Colors.white,
                     enableActiveFill: true,
@@ -124,11 +121,12 @@ class _PinNumberOrderState extends State<PinNumberOrder> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30.0),
                 child: Text(
+
                   hasError ? "* Codigo erroneo" : "",
                   style: TextStyle(color: Colors.red.shade300, fontSize: 15),
                 ),
               ),
-              
+
               RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
@@ -201,9 +199,6 @@ class _PinNumberOrderState extends State<PinNumberOrder> {
                     },
                   ),
                 ],
-              ),
-              SizedBox(
-                height: 16,
               ),
             ],
           ),
