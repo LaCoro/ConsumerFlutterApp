@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.build(),
       initialRoute: '/',
       onGenerateRoute: (settings) {
-        Widget destinationRoute = TestPage();
+        Widget destinationRoute = StoreListPage();
         switch (settings.name) {
           case StoreDetailsPage.STORE_DETAILS_ROUTE:
             destinationRoute = StoreDetailsPage();

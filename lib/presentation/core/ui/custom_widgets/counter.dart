@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class Counter extends StatelessWidget {
 
-  int quantity = 0;
+  final int quantity;
 
   Counter({Key key, this.quantity, this.onQuantityChange}) : super(key: key);
 
