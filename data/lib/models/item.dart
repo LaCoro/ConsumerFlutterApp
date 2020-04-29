@@ -1,3 +1,4 @@
+import 'package:data/models/store.dart';
 import 'package:domain/entities/item_entity.dart';
 import 'package:domain/entities/store_entity.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
@@ -31,16 +32,16 @@ class Item extends ParseObject with ItemEntity implements ParseCloneable {
 
   set price(int price) => set<int>(keyPrice, price);
 
-  StoreEntity get store => get<StoreEntity>(keyStore);
-
-  set store(StoreEntity parent) => set<StoreEntity>(keyStore, store);
-
   ItemEntity get parent => get<ItemEntity>(keyParent);
 
   set parent(ItemEntity parent) => set<ItemEntity>(keyParent, parent);
 
   int get position => get<int>(keyPosition);
 
-  set poaition(int position) => set<int>(keyPosition, position);
+  set position(int position) => set<int>(keyPosition, position);
 
+  Future<StoreEntity> get store async {
+    final response = await getRelation(keyStore).getQuery().query();
+    return response.result as Store;
+  }
 }

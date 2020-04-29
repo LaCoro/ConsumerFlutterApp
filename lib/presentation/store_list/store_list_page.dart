@@ -1,6 +1,7 @@
 import 'package:LaCoro/main.dart';
 import 'package:LaCoro/presentation/core/bloc/base_bloc.dart';
 import 'package:LaCoro/presentation/core/di/store_list_module.dart';
+import 'package:LaCoro/presentation/store_details/store_details_page.dart';
 import 'package:LaCoro/presentation/store_list/store_list_bloc.dart';
 import 'package:domain/entities/store_entity.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,9 @@ import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class StoreListPage extends StatefulWidget {
+
+  static const STORE_LIST_ROUTE = '/store_list';
+
   @override
   _StoreListPageState createState() => _StoreListPageState(StoreListModule().initialise(Injector.getInjector()).get());
 }
@@ -58,7 +62,7 @@ class _StoreListPageState extends State<StoreListPage> {
     return ListView.builder(
         itemExtent: 100.0,
         itemBuilder: (c, i) => GestureDetector(
-              onTap: () => Navigator.pushNamed(context, STORE_DETAILS_ROUTE),
+              onTap: () => Navigator.pushNamed(context, StoreDetailsPage.STORE_DETAILS_ROUTE, arguments: _data[i]),
               child: Container(
                 height: 100,
                 child: Center(child: Text(_data[i].name)),

@@ -91,7 +91,6 @@ class Order extends ParseObject with OrderEntity implements ParseCloneable {
 
   UserEntity get deliveryBoy => get<UserEntity>(keyDeliveryBoy);
 
-  set deliveryBoy(UserEntity deliveryBoy) =>
-      set<UserEntity>(keyDeliveryBoy, deliveryBoy);
+  set deliveryBoy(UserEntity deliveryBoy) => set<UserEntity>(keyDeliveryBoy, deliveryBoy);
 
 }
