@@ -12,10 +12,10 @@ class Success<T> extends Equatable implements Result {
   List<Object> get props => [data];
 }
 
-class CustomError extends Equatable implements Result {
+class Failure extends Equatable implements Result {
   final Exception exception;
 
-  CustomError(this.exception);
+  Failure(this.exception);
 
   @override
   List<Object> get props => [exception];

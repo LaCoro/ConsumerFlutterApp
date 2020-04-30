@@ -14,7 +14,7 @@ class StoreRepositoryImpl extends StoreRepository {
       final stores = await _remoteDataSource.getAllStores(city);
       return Success(stores);
     } catch(e) {
-      return CustomError(e);
+      return Failure(e);
     }
   }
 
