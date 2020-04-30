@@ -60,11 +60,6 @@ class _PinNumberOrderState extends State<PinNumberOrder> {
               Container(
                 height: MediaQuery.of(context).size.height / 5,
               ),
-              // Image.asset(
-              //   'assets/verify.png',
-              //   height: MediaQuery.of(context).size.height / 3,
-              //   fit: BoxFit.fitHeight,
-              // ),
               SizedBox(height: 8),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -75,23 +70,20 @@ class _PinNumberOrderState extends State<PinNumberOrder> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                child: RichText(
-                  text: TextSpan(
-                      text: "Ingrese el código enviado al celular:  ",
-                      children: [
-                        TextSpan(
-                            text: widget.phoneNumber,
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20)),
-                      ],
-                      style: Theme.of(context).textTheme.headline5),
-                  textAlign: TextAlign.center,
-                ),
-              ),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                  child: Column(
+                    children: <Widget>[
+                      Text(
+                        "Ingrese el código enviado al celular:  ",
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
+                      Text(
+                        widget.phoneNumber,
+                        style: Theme.of(context).textTheme.bodyText2,
+                      )
+                    ],
+                  )),
 
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -152,7 +144,8 @@ class _PinNumberOrderState extends State<PinNumberOrder> {
                   child: FlatButton(
                     onPressed: () {
                       // conditions for validating
-                      if (currentText.length != 5 || currentText != "11111") {  //cod pass
+                      if (currentText.length != 5 || currentText != "11111") {
+                        //cod pass
                         errorController.add(ErrorAnimationType
                             .shake); // Triggering error shake animation
                         setState(() {
