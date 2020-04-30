@@ -20,6 +20,7 @@ dependencies:
   domain:
     path: ./domain
 
+  step_progress_indicator: ^0.2.2+5
   pull_to_refresh: ^1.4.5
   flutter_dotenv: ^2.1.0
   parse_server_sdk: ^1.0.26
