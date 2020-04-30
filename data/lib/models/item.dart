@@ -32,7 +32,9 @@ class Item extends ParseObject with ItemEntity implements ParseCloneable {
 
   set price(int price) => set<int>(keyPrice, price);
 
-  ParseObject get parent => get<ParseObject>(keyParent);
+  ItemEntity get parent => get<ItemEntity>(keyParent);
+
+  set parent(ItemEntity parent) => set<ItemEntity>(keyParent, parent);
 
   int get position => get<int>(keyPosition);
 

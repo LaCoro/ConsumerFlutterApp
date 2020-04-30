@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         return MaterialPageRoute(builder: (context) => destinationRoute, settings: settings);
       },
       routes: {
-        '/': (BuildContext context) => StoreListPage(), // TODO change
+        '/': (BuildContext context) => AddressesPage(), // TODO change
         StoreListPage.STORE_LIST_ROUTE: (BuildContext context) => StoreListPage(),
         TestPage.TEST_PAGE_ROUTE: (BuildContext context) => TestPage(),
         StylesTestPage.STYLE_TEST_PAGE_ROUTE: (BuildContext context) => StylesTestPage(),
