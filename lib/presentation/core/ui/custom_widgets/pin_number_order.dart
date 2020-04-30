@@ -45,7 +45,7 @@ class _PinNumberOrderState extends State<PinNumberOrder> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).backgroundColor,
       key: scaffoldKey,
       body: GestureDetector(
         onTap: () {
@@ -122,7 +122,7 @@ class _PinNumberOrderState extends State<PinNumberOrder> {
                 padding: const EdgeInsets.symmetric(horizontal: 30.0),
                 child: Text(
                   hasError ? "* Codigo erroneo" : "",
-                  style: TextStyle(color: Colors.red.shade300, fontSize: 15),
+                  style: Theme.of(context).textTheme.caption,
                 ),
               ),
 
@@ -130,13 +130,13 @@ class _PinNumberOrderState extends State<PinNumberOrder> {
                 textAlign: TextAlign.center,
                 text: TextSpan(
                     text: "No resiviste el mensaje? ",
-                    style: TextStyle(color: Colors.black54, fontSize: 15),
+                    style: Theme.of(context).textTheme.bodyText1,
                     children: [
                       TextSpan(
                           text: " REENVIAR",
                           recognizer: onTapRecognizer,
                           style: TextStyle(
-                              color: Color.fromRGBO(61, 158, 229, 1.0),
+                              color: Theme.of(context).accentColor,
                               fontWeight: FontWeight.bold,
                               fontSize: 16))
                     ]),
@@ -171,15 +171,12 @@ class _PinNumberOrderState extends State<PinNumberOrder> {
                     child: Center(
                         child: Text(
                       "Continuar",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
+                      style: Theme.of(context).textTheme.button,
                     )),
                   ),
                 ),
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(61, 158, 229, 1.0),
+                  color: Theme.of(context).accentColor,
                   borderRadius: BorderRadius.circular(5),
                 ),
               ),
