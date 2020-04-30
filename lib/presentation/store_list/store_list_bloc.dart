@@ -1,9 +1,11 @@
 import 'package:LaCoro/presentation/core/bloc/base_bloc.dart';
-import 'package:domain/use_cases/get_all_stores.dart';
+import 'package:domain/entities/store_entity.dart';
+import 'package:domain/result.dart';
+import 'package:domain/use_cases/store_use_cases.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class StoreListBloc extends Bloc<BaseEvent, BaseState> {
-  final GetAllStores _getAllStores;
+  final StoreUseCases _getAllStores;
 
   StoreListBloc(this._getAllStores);
 
@@ -15,10 +17,12 @@ class StoreListBloc extends Bloc<BaseEvent, BaseState> {
     try {
       if (event is GetAllStoresEvent) {
         yield LoadingState();
-        final storeList = await _getAllStores.call(event.city);
-        yield SuccessState(data: storeList..shuffle());
-      } else {
-        yield ErrorState();
+        final result = await _getAllStores.getAllStoresByCity(event.city);
+        if (result is Success<List<StoreEntity>>) {
+          yield SuccessState(data: result.data..shuffle());
+        } else {
+          yield ErrorState();
+        }
       }
     } catch (error) {
       yield ErrorState();

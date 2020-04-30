@@ -1,7 +1,6 @@
 import 'package:data/models/item.dart';
 import 'package:domain/entities/item_entity.dart';
 import 'package:domain/entities/store_entity.dart';
-import 'package:parse_server_sdk/generated/i18n.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 
 class Store extends ParseObject with StoreEntity implements ParseCloneable {
