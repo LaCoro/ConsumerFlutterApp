@@ -1,5 +1,6 @@
-import 'package:LaCoro/presentation/core/ui/app_theme.dart';
 import 'package:flutter/cupertino.dart';
+
+import '../app_colors.dart';
 
 class DiscountChip extends StatelessWidget{
 
@@ -16,13 +17,13 @@ class DiscountChip extends StatelessWidget{
         height: 23.0,
         child: Container(
           decoration: new BoxDecoration(
-            color: greenLight,
+            color: AppColors.greenLight,
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.all(Radius.circular(6.0)),
           ),
           child: Text("-$discountPercentage%",
               textAlign: TextAlign.center,
-              style: TextStyle(color: greenDark, fontSize: 16)),
+              style: TextStyle(color: AppColors.greenDark, fontSize: 16)),
         ),
       ),
     );

@@ -1,10 +1,21 @@
-import 'package:LaCoro/presentation/core/ui/app_theme.dart';
 import 'package:LaCoro/presentation/core/ui/custom_widgets/counter.dart';
 import 'package:LaCoro/presentation/core/ui/custom_widgets/discount_chip.dart';
+import 'package:domain/entities/item_entity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ProductItem extends StatelessWidget {
+class ProductItem extends StatefulWidget {
+  final ItemEntity itemEntity;
+
+  const ProductItem({Key key, @required this.itemEntity}) : super(key: key);
+
+  @override
+  _ProductItemState createState() => _ProductItemState();
+}
+
+class _ProductItemState extends State<ProductItem> {
+  int quantity = 0;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,19 +28,15 @@ class ProductItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text("Arepa sencilla",
-                    style: Theme.of(context).textTheme.headline5),
-                  Text("Carne, pollo y queso",
-                      style: Theme.of(context).textTheme.caption),
+                  Text(widget.itemEntity.name ?? "", style: Theme.of(context).textTheme.headline5),
+                  Text(widget.itemEntity.description ?? "", style: Theme.of(context).textTheme.caption),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Text("\$8.000",
-                        style: Theme.of(context).textTheme.headline5),
-                        Text("\$16.000",
-                            style: Theme.of(context).textTheme.overline),
+                        Text("\$${widget.itemEntity.price}", style: Theme.of(context).textTheme.headline5),
+                        Text("\$16.000", style: Theme.of(context).textTheme.overline),
                         DiscountChip(discountPercentage: "50"),
                       ],
                     ),
@@ -47,12 +54,11 @@ class ProductItem extends StatelessWidget {
                   child: Image.network("https://www.liberaldictionary.com/wp-content/uploads/2018/11/pizza.jpg", height: 100, width: 100, fit: BoxFit.fill),
                 ),
               ),
-              Counter(),
+              Counter(quantity: quantity, onQuantityChange: (value) => setState(() => quantity = value)),
             ],
           ),
         ],
       ),
     );
   }
-
 }
