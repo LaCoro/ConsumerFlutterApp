@@ -69,7 +69,7 @@ class _StoreListPageState extends State<StoreListPage> {
               : false;
 
 
-          var hasAPromo = true;
+          var hasAPromo = false;
 
           var storeClosed = !_data[index].active;
 
