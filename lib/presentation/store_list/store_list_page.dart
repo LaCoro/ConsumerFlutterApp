@@ -1,6 +1,6 @@
 import 'package:LaCoro/presentation/core/bloc/base_bloc.dart';
 import 'package:LaCoro/presentation/core/di/store_list_module.dart';
-import 'package:LaCoro/presentation/core/ui/custom_widgets/discount_chip.dart';
+import 'package:LaCoro/presentation/core/ui/custom_widgets/store_item.dart';
 import 'package:LaCoro/presentation/store_details/store_details_page.dart';
 import 'package:LaCoro/presentation/store_list/store_list_bloc.dart';
 import 'package:domain/entities/store_entity.dart';
@@ -67,29 +67,11 @@ class _StoreListPageState extends State<StoreListPage> {
                   _data[index].deliveryCost == 0
               ? true
               : false;
-          var deliveryMsg =
-              isDeliveryFree ? "gratis" : "\$${_data[index].deliveryCost}";
-          var deliveryCostColor =
-              isDeliveryFree ? Color(0xFF3D9FE6) : Colors.black;
-          var deliverFontWeight =
-              isDeliveryFree ? FontWeight.bold : FontWeight.normal;
+
+
           var hasAPromo = true;
 
           var storeClosed = !_data[index].active;
-
-          var promoWidget = hasAPromo?    Align(
-              alignment: Alignment.topLeft,
-              child: DiscountChip(discountPercentage: "15")): SizedBox(height : 10.0);
-          var storeClosedWidget = storeClosed? Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-          "Cerrado",
-          style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 13,
-          color: Color(0xFFFFAC0C)),
-          textAlign: TextAlign.start,
-          )): SizedBox(height : 10.0);
 
           var randomTag = "";
           if (_data[index].searchTags.isNotEmpty) {
@@ -101,87 +83,14 @@ class _StoreListPageState extends State<StoreListPage> {
             onTap: () => Navigator.pushNamed(
                 context, StoreDetailsPage.STORE_DETAILS_ROUTE,
                 arguments: _data[index]),
-            child: Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                      height: 100,
-                      width: 100,
-                      margin: const EdgeInsets.all(10),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: FadeInImage.assetNetwork(
-                          placeholder: 'assets/loading_resource.gif',
-                          image: _data[index].logo,
-                          width: 69.0,
-                          height: 69.0,
-                          fit: BoxFit.fill,
-                        ),
-                      )),
-                  Expanded(
-                    child: Container(
-                        height: 200,
-                        margin: const EdgeInsets.only(top: 10.0, left: 16),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  _data[index].name,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                      color: Colors.black),
-                                  textAlign: TextAlign.start,
-                                )),
-                            Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  randomTag,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 13,
-                                      color: Color(0xFF868686)),
-                                  textAlign: TextAlign.start,
-                                )),
-                            Align(
-                                alignment: Alignment.centerLeft,
-                                child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "${_data[index].openAt} - ${_data[index].closeAt}",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 13,
-                                            color: Colors.black),
-                                        textAlign: TextAlign.start,
-                                      ),
-                                      Text(
-                                        ". Envio ${deliveryMsg}",
-                                        style: TextStyle(
-                                            fontWeight: deliverFontWeight,
-                                            fontSize: 13,
-                                            color: deliveryCostColor),
-                                        textAlign: TextAlign.start,
-                                      )
-                                    ])),
-                            promoWidget,
-                            storeClosedWidget,
-                          ],
-                        )),
-                  ),
-                ],
-              ),
-              margin: const EdgeInsets.all(10),
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(15),
-              ),
-            ),
+            child: StoreItem(
+              isDeliveryFree: isDeliveryFree,
+              storeClosed: storeClosed,
+              hasAPromo: hasAPromo,
+              tag: randomTag,
+              placeHolderAsset: 'assets/loading_resource.gif',
+              storeItem: _data[index] ,
+            )
           );
         },
         itemCount: _data?.length ?? 0);
