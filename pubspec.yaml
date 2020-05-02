@@ -44,6 +44,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/loading_resource.gif
     - development.env
 
   # An image asset can refer to one or more resolution-specific "variants", see
