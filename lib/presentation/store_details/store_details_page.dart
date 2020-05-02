@@ -8,12 +8,13 @@ import 'package:domain/entities/store_entity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_simple_dependency_injection/injector.dart';
 
 class StoreDetailsPage extends StatefulWidget {
   static const STORE_DETAILS_ROUTE = '/store_details';
 
   @override
-  _StoreDetailsPageState createState() => _StoreDetailsPageState(StoreDetailsBloc());
+  _StoreDetailsPageState createState() => _StoreDetailsPageState(StoreDetailsBloc(Injector.getInjector().get()));
 }
 
 class _StoreDetailsPageState extends State<StoreDetailsPage> {
@@ -24,7 +25,7 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
   @override
   Widget build(BuildContext context) {
     final StoreEntity store = ModalRoute.of(context).settings.arguments;
-    _bloc.setStore(store);
+    _bloc.store = store;
     return Scaffold(
         appBar: AppBar(title: Text(store.name)),
         body: SafeArea(
