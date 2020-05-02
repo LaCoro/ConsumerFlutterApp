@@ -13,7 +13,7 @@ class TestPage extends StatelessWidget {
       body: SafeArea(
         child: Align(
           alignment: Alignment.center,
-          child: CurrentAdress()
+          child: CurrentAdress("Cl. 44 # 80 - 123, Medellín, Antioquia")
         ),
       ),
     );
