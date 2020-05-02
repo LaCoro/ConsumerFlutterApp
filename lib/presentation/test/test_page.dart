@@ -13,7 +13,7 @@ class TestPage extends StatelessWidget {
       body: SafeArea(
         child: Align(
           alignment: Alignment.center,
-          child: TeperBar(2,3)
+          child: TeperBar(2,3, "Pendiente de entrega")
         ),
       ),
     );
