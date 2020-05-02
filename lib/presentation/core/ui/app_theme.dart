@@ -9,6 +9,7 @@ class AppTheme {
         primaryColorLight: Color(0xffffffff),
         accentColor: Color(0xFF3D9FE6),
         backgroundColor: Color(0xFFF7F7F7),
+        disabledColor: AppColors.greyMedium,
         brightness: Brightness.light,
         dividerColor: Color(0xFFC7CBD3),
         fontFamily: GoogleFonts.roboto().fontFamily,

@@ -28,6 +28,7 @@ dependencies:
   flutter_bloc: ^4.0.0
   equatable: ^1.1.0
   google_fonts: ^1.0.0
+  pin_code_fields: ^2.5.1
 
   cupertino_icons: ^0.1.3
 
@@ -44,6 +45,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/loading_resource.gif
     - development.env
 
   # An image asset can refer to one or more resolution-specific "variants", see
