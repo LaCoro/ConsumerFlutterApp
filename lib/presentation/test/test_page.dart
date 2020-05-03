@@ -14,7 +14,7 @@ class TestPage extends StatelessWidget {
         child: Align(
           alignment: Alignment.center,
           child: Center(
-            child: PaymentMethod(PaymentType.credit),
+            child: CartTotalBottom(2, "2000"),
           ),
         ),
       ),

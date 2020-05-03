@@ -11,14 +11,14 @@ class AppLocalizations {
 
   static Map<String, Map<String, String>> _localizedValues = {
     'en': {
-      'title': 'Hello World',
+      'see_order': 'See order',
     },
     'es': {
-      'title': 'Hola Mundo',
+      'see_order': 'Ver pedido',
     },
   };
 
-  String get title {
-    return _localizedValues[locale.languageCode]['title'];
+  String get seeOrder {
+    return _localizedValues[locale.languageCode]['see_order'];
   }
 }
