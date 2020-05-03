@@ -17,6 +17,8 @@ class ProductItem extends StatefulWidget {
 class _ProductItemState extends State<ProductItem> {
   int quantity = 0;
 
+  bool animateQuantity = false;
+
   final Function(int) onQuantityChange;
 
   _ProductItemState(this.onQuantityChange);
@@ -41,7 +43,7 @@ class _ProductItemState extends State<ProductItem> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text("\$${widget.itemEntity.price}", style: Theme.of(context).textTheme.headline5),
+                          Text("\$${widget.itemEntity.price}", style: Theme.of(context).textTheme.bodyText1),
                           Text("\$16.000", style: Theme.of(context).textTheme.overline),
                           DiscountChip(discountPercentage: "50"),
                         ],
@@ -60,12 +62,21 @@ class _ProductItemState extends State<ProductItem> {
                     child: Image.network("https://www.liberaldictionary.com/wp-content/uploads/2018/11/pizza.jpg", height: 100, width: 100, fit: BoxFit.fill),
                   ),
                 ),
-                Counter(
-                    quantity: quantity,
-                    onQuantityChange: (value) {
-                      setState(() => quantity = value);
-                      onQuantityChange.call(value);
-                    }),
+                AnimatedOpacity(
+                  opacity: animateQuantity ? 0.75 : 1,
+                  duration: Duration(milliseconds: 200),
+                  curve: Curves.elasticInOut,
+                  onEnd: () => setState(() => animateQuantity = false),
+                  child: Counter(
+                      quantity: quantity,
+                      onQuantityChange: (value) {
+                        setState(() {
+                          quantity = value;
+                          animateQuantity = true;
+                        });
+                        onQuantityChange.call(value);
+                      }),
+                ),
               ],
             ),
           ],
