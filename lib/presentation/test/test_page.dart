@@ -1,5 +1,6 @@
 import 'package:LaCoro/presentation/core/ui/custom_widgets/box_comments_order.dart';
 import 'package:LaCoro/presentation/core/ui/custom_widgets/cart_total_bottom.dart';
+import 'package:LaCoro/presentation/core/ui/custom_widgets/category_tabs.dart';
 import 'package:LaCoro/presentation/core/ui/custom_widgets/teper_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -11,9 +12,14 @@ class TestPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Align(
-          alignment: Alignment.center,
-          child: TeperBar(2,3, "Pendiente de entrega")
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              Spacer(),
+              Expanded(child: CategoryTabs(List.generate(15, (index) => "Category $index"), (i, s) {})),
+              Spacer(),
+            ],
+          ),
         ),
       ),
     );
