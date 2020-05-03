@@ -63,7 +63,7 @@ class _ProductItemState extends State<ProductItem> {
                   ),
                 ),
                 AnimatedOpacity(
-                  opacity: animateQuantity ? 0.75 : 1,
+                  opacity: animateQuantity ? 0.7 : 1,
                   duration: Duration(milliseconds: 200),
                   curve: Curves.elasticInOut,
                   onEnd: () => setState(() => animateQuantity = false),

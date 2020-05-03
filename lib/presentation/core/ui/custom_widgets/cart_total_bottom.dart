@@ -23,14 +23,14 @@ class CartTotalBottom extends StatelessWidget {
                     color: Theme.of(context).backgroundColor,
                   ),
                   child: Center(
-                      child: Text( (quantity<10) ? quantity.toString() : "+9"  , textAlign: TextAlign.center, style: TextStyle(color: Theme.of(context).accentColor, fontSize: 20, fontWeight: FontWeight.bold)))),
+                      child: Text( (quantity<10) ? quantity.toString() : "+9"  , textAlign: TextAlign.center, style: TextStyle(color: Theme.of(context).accentColor, fontSize: 18, fontWeight: FontWeight.bold)))),
             ),
             Expanded(
               flex: 2,
-              child: Text("Ver pedido", textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
+              child: Text("Ver pedido", textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
             ),
             Expanded(
-              child:Text(price, textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)) ,
+              child:Text(price, textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)) ,
             ),
           ],
         ),

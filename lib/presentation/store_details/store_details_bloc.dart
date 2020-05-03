@@ -23,11 +23,12 @@ class StoreDetailsBloc extends Bloc<BaseEvent, BaseState> {
     try {
       if (event is GetSortedItemsEvent) {
         yield* loadStoreItems();
-      } else if (event is UpdateProduct) {
+      } else if (event is UpdateProductEvent) {
         products.update(event.product, (value) => event.quantity, ifAbsent: () => 1);
         if (products[event.product] < 1) {
           products.remove(event.product);
         }
+        yield OrderChangedSate(quantity: _getProductsQuantity(), cartTotal: _getCartTotal());
       }
     } catch (error) {
       yield ErrorState();
@@ -43,15 +44,30 @@ class StoreDetailsBloc extends Bloc<BaseEvent, BaseState> {
       yield ErrorState();
     }
   }
+
+  int _getProductsQuantity() {
+    return products.isEmpty ? 0 : products.values.reduce((a, b) => a + b);
+  }
+
+  double _getCartTotal() {
+    return products.isEmpty ? 0 : products.entries.map((entry) => (entry.key.price * entry.value.toDouble())).reduce((a, b) => a + b);
+  }
 }
 
-/// Store list events
+/// Events
 class GetSortedItemsEvent extends BaseEvent {}
 
-/// Add or remove item to order
-class UpdateProduct extends BaseEvent {
+class UpdateProductEvent extends BaseEvent {
   final ItemEntity product;
   final int quantity;
 
-  UpdateProduct(this.product, this.quantity);
+  UpdateProductEvent(this.product, this.quantity);
+}
+
+/// States
+class OrderChangedSate extends BaseState {
+  final int quantity;
+  final double cartTotal;
+
+  OrderChangedSate({this.quantity, this.cartTotal}) : super([quantity, cartTotal]);
 }
