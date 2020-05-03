@@ -1,6 +1,6 @@
-import 'package:domain/entities/store_entity.dart';
+import 'package:domain/result.dart';
 
 abstract class StoreRepository {
   /// Fetch All stores from the specific city
-  Future<List<StoreEntity>> getAllStores(String city);
+  Future<Result> getAllStores(String city);
 }

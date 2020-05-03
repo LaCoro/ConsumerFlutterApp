@@ -10,4 +10,7 @@ class AppColors {
   static Color accentColor = Color(0xFF3D9FE6);
   static Color yellowAction = Color(0xFFFFAC0C);
   static Color divider = Color(0xFFC7CBD3);
+  static Color itemBackgroundColor = Colors.white;
+  static Color boldTextColor =  Colors.black;
+
 }

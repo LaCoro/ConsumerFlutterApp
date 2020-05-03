@@ -2,6 +2,8 @@ import 'package:LaCoro/presentation/core/di/app_module.dart';
 import 'package:LaCoro/presentation/adresses/addresses_page.dart';
 import 'package:LaCoro/presentation/core/ui/app_theme.dart';
 import 'package:LaCoro/presentation/register/register_page.dart';
+import 'package:LaCoro/presentation/core/ui/custom_widgets/payment_method.dart';
+import 'package:LaCoro/presentation/pin_register/pin_page.dart';
 import 'package:LaCoro/presentation/store_details/store_details_page.dart';
 import 'package:LaCoro/presentation/test/styles_test_page.dart';
 import 'package:LaCoro/presentation/test/test_page.dart';

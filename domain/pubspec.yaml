@@ -10,6 +10,8 @@ dependencies:
   flutter:
     sdk: flutter
 
+  equatable: ^1.1.0
+  parse_server_sdk: ^1.0.26
   json_serializable: ^3.3.0
   json_annotation: ^3.0.1
 

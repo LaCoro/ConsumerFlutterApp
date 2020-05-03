@@ -17,8 +17,6 @@ class AppModule {
     injector.map<StoreApi>((injector) => StoreApi(injector.get()));
     // Repository
     injector.map<StoreRepository>((injector) => StoreRepositoryImpl(injector.get()));
-
-//    injector.mapWithParams<SomeOtherType>((i, p) => SomeOtherType(p['id']));
     return injector;
   }
 
