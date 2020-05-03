@@ -54,9 +54,9 @@ class PaymentMethod extends StatelessWidget {
       case PaymentType.cash:
         return "Efectivo";
       case PaymentType.credit:
-        return "Credito";
+        return "Tarjeta de Crédito";
       case PaymentType.debit:
-        return "Debito";
+        return "Tarjeta de Débito";
     }
     return "";
   }
