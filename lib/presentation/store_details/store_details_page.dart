@@ -60,7 +60,7 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
             separatorBuilder: (BuildContext context, int index) => Divider(
                   thickness: 10,
                   height: 50,
-                  color: AppColors.greyLight,
+                  color: Theme.of(context).backgroundColor,
                 ),
             itemCount: items?.length ?? 0,
             itemBuilder: (c, i) {
