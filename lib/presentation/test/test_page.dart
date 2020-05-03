@@ -14,6 +14,7 @@ class TestPage extends StatelessWidget {
         child: Align(
           alignment: Alignment.center,
           child: CurrentAdress("Cl. 44 # 80 - 123, Medellín, Antioquia")
+
         ),
       ),
     );
