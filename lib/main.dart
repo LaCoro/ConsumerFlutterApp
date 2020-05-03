@@ -1,6 +1,8 @@
 import 'package:LaCoro/presentation/core/di/app_module.dart';
 import 'package:LaCoro/presentation/core/ui/adresses/addresses_page.dart';
 import 'package:LaCoro/presentation/core/ui/app_theme.dart';
+import 'package:LaCoro/presentation/core/ui/custom_widgets/payment_method.dart';
+import 'package:LaCoro/presentation/pin_register/pin_page.dart';
 import 'package:LaCoro/presentation/store_details/store_details_page.dart';
 import 'package:LaCoro/presentation/test/styles_test_page.dart';
 import 'package:LaCoro/presentation/test/test_page.dart';
@@ -32,7 +34,7 @@ class MyApp extends StatelessWidget {
         return MaterialPageRoute(builder: (context) => destinationRoute, settings: settings);
       },
       routes: {
-        '/': (BuildContext context) => StoreListPage(), // TODO change
+        '/': (BuildContext context) => TestPage(), // TODO change
         StoreListPage.STORE_LIST_ROUTE: (BuildContext context) => StoreListPage(),
         TestPage.TEST_PAGE_ROUTE: (BuildContext context) => TestPage(),
         StylesTestPage.STYLE_TEST_PAGE_ROUTE: (BuildContext context) => StylesTestPage(),
