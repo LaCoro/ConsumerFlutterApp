@@ -65,14 +65,16 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
             itemCount: items?.length ?? 0,
             itemBuilder: (c, i) {
               final category = items.keys.elementAt(i);
-              return Wrap(
-                children: [
-                  Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text(category.name, style: Theme.of(context).textTheme.headline4)),
-                  Wrap(children: items[category].map((e) => ProductItem(itemEntity: e)).toList()),
-                ],
-              );
+              return Wrap(children: [
+                Padding(padding: const EdgeInsets.all(16.0), child: Text(category.name, style: Theme.of(context).textTheme.headline4)),
+                Wrap(
+                    children: items[category]
+                        .map((e) => ProductItem(
+                              itemEntity: e,
+                              onQuantityChange: (value) => _bloc.add(UpdateProduct(e, value)),
+                            ))
+                        .toList())
+              ]);
             });
   }
 }

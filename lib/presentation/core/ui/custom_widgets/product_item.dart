@@ -6,15 +6,20 @@ import 'package:flutter/material.dart';
 
 class ProductItem extends StatefulWidget {
   final ItemEntity itemEntity;
+  final Function(int) onQuantityChange;
 
-  const ProductItem({Key key, @required this.itemEntity}) : super(key: key);
+  const ProductItem({Key key, @required this.itemEntity, this.onQuantityChange}) : super(key: key);
 
   @override
-  _ProductItemState createState() => _ProductItemState();
+  _ProductItemState createState() => _ProductItemState(onQuantityChange);
 }
 
 class _ProductItemState extends State<ProductItem> {
   int quantity = 0;
+
+  final Function(int) onQuantityChange;
+
+  _ProductItemState(this.onQuantityChange);
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +60,12 @@ class _ProductItemState extends State<ProductItem> {
                     child: Image.network("https://www.liberaldictionary.com/wp-content/uploads/2018/11/pizza.jpg", height: 100, width: 100, fit: BoxFit.fill),
                   ),
                 ),
-                Counter(quantity: quantity, onQuantityChange: (value) => setState(() => quantity = value)),
+                Counter(
+                    quantity: quantity,
+                    onQuantityChange: (value) {
+                      setState(() => quantity = value);
+                      onQuantityChange.call(value);
+                    }),
               ],
             ),
           ],
