@@ -35,7 +35,7 @@ development.env*
 production.env*
 
 # Development files
-presentation/test/test_page.dart
+lib/presentation/test/test_page.dart
 
 # Web related
 lib/generated_plugin_registrant.dart
