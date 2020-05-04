@@ -1,3 +1,4 @@
+import 'package:LaCoro/presentation/core/localisation/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class CartTotalBottom extends StatelessWidget {
@@ -8,6 +9,9 @@ class CartTotalBottom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final strings = AppLocalizations.of(context);
+
     return Container(
       color: Theme.of(context).accentColor,
       child: Padding(
@@ -27,7 +31,7 @@ class CartTotalBottom extends StatelessWidget {
             ),
             Expanded(
               flex: 2,
-              child: Text("Ver pedido", textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
+              child: Text(strings.seeOrder, textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
             ),
             Expanded(
               child:Text(price, textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)) ,
