@@ -1,10 +1,14 @@
+import 'package:LaCoro/presentation/core/localisation/app_localizations.dart';
 import 'package:LaCoro/presentation/core/ui/app_colors.dart';
 import 'package:LaCoro/presentation/core/ui/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class SuccessfulOrderIcon extends StatelessWidget {
   @override
+
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context);
+
     return Container(
       height: 160,
       alignment: Alignment.center,
@@ -17,7 +21,7 @@ class SuccessfulOrderIcon extends StatelessWidget {
 
               Icon(Icons.sentiment_satisfied,size: 70, color: Colors.white,),
               Spacer(flex: 2,),
-              Text("Orden exitosa", style: Theme.of(context).textTheme.headline2,),
+              Text(strings.successfullOrder, style: Theme.of(context).textTheme.headline2,),
               Spacer(),
         ],
         ),
