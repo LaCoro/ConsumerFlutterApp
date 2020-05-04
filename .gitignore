@@ -30,8 +30,12 @@
 .pub/
 /build/
 
+# Env files
 development.env*
 production.env*
+
+# Development files
+lib/presentation/test/test_page.dart
 
 # Web related
 lib/generated_plugin_registrant.dart
