@@ -2,6 +2,7 @@ import 'package:LaCoro/presentation/core/ui/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:LaCoro/presentation/core/localization/app_localizations.dart';
 
 class RegisterPage extends StatefulWidget{
   static const REGISTER_ROUTE = '/register';
@@ -20,6 +21,7 @@ class _RegisterPageState extends State<RegisterPage> {
   var _phoneController = TextEditingController();
 
   final _registerFormKey = GlobalKey<FormState>();
+
 
   @override
   void initState() {
@@ -50,6 +52,9 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    final strings = AppLocalizations.of(context);
+
     return Material(
       child: Form(
         key: _registerFormKey,
@@ -61,15 +66,15 @@ class _RegisterPageState extends State<RegisterPage> {
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.only(top: 30.0),
-                      child: Text("Crea tu cuenta para completar el pedido", style: Theme.of(context).textTheme.headline1),
+                      child: Text(strings.createAccount, style: Theme.of(context).textTheme.headline1),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 15.0),
+                      padding: const EdgeInsets.only(top: 40.0, bottom: 15.0),
                       child: TextFormField(
                         controller: _nameController,
                         validator: (value) {
                           if (value.isEmpty) {
-                            return 'Por favor ingrese un nombre';
+                            return strings.nameRequired;
                           }
                           return null;
                         },
@@ -85,7 +90,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           textStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.normal, fontSize: 20)),
                         decoration: InputDecoration(
                           isDense: true,
-                          labelText: "Nombre",
+                          labelText: strings.name,
                           labelStyle: GoogleFonts.roboto(
                             textStyle: TextStyle(color: _nameFocus.hasFocus ? AppColors.accentColor : Colors.black, fontWeight: FontWeight.w300, fontSize: 16)
                           ),
@@ -100,7 +105,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       child: TextFormField(
                         controller: _emailController,
                         validator: (value) {
-                            return value.contains('@') ? null :'Ingrese un correo electrónico válido';
+                            return value.contains('@') ? null : strings.invalidEmail;
                         },
                         focusNode: _emailFocus,
                         onEditingComplete: () {
@@ -111,10 +116,10 @@ class _RegisterPageState extends State<RegisterPage> {
                         style: GoogleFonts.roboto(
                             textStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.normal, fontSize: 20)),
                         decoration: InputDecoration(
-                          suffixText: "(Opcional)",
+                          suffixText: strings.optionalField,
                           suffixStyle: Theme.of(context).textTheme.caption,
                           isDense: true,
-                          labelText: "Correo electrónico",
+                          labelText: strings.email,
                           labelStyle: GoogleFonts.roboto(
                               textStyle: TextStyle(color: _emailFocus.hasFocus ? AppColors.accentColor : Colors.black, fontWeight: FontWeight.w300, fontSize: 16)),
                           enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
@@ -129,7 +134,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         controller: _phoneController,
                         validator: (value) {
                           if (value.isEmpty) {
-                            return 'Por favor ingrese un teléfono';
+                            return strings.phoneRequired;
+                          } if(value.length < 10){
+                            return strings.invalidPhone;
                           }
                           return null;
                         },
@@ -137,13 +144,14 @@ class _RegisterPageState extends State<RegisterPage> {
                         onEditingComplete: (){
                           _phoneFocus.unfocus();
                         },
+                        maxLength: 10,
                         keyboardType: TextInputType.phone,
                         textInputAction: TextInputAction.done,
                         style: GoogleFonts.roboto(
                             textStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.normal, fontSize: 20)),
                         decoration: InputDecoration(
                           isDense: true,
-                          labelText: "Teléfono",
+                          labelText: strings.phone,
                           labelStyle: GoogleFonts.roboto(
                               textStyle: TextStyle(color: _phoneFocus.hasFocus ? AppColors.accentColor : Colors.black, fontWeight: FontWeight.w300, fontSize: 16)),
                           enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
@@ -163,12 +171,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(vertical: 16.0),
-                                    child: Text("Crear cuenta", style: Theme.of(context).textTheme.button),
+                                    child: Text(strings.createAccountAction, style: Theme.of(context).textTheme.button),
                                   ),
                                   onPressed: () {
                                     if (_registerFormKey.currentState.validate()) {
-
-                                      Scaffold.of(context).showSnackBar(SnackBar(content: Text('Datos guardaros')));
+                                      //TODO : Save the user info
                                     }
                                   },
                                   color: AppColors.accentColor)),
