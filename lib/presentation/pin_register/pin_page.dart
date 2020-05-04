@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:LaCoro/presentation/core/localisation/app_localizations.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -43,6 +44,8 @@ class _PinPageState extends State<PinPage> {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context);
+
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       key: scaffoldKey,
@@ -56,13 +59,13 @@ class _PinPageState extends State<PinPage> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 24),
               child: Text(
-                'Código de autorizacion',
+                strings.authorizationCode,
                 style: Theme.of(context).textTheme.headline1,
                 textAlign: TextAlign.center,
               ),
             ),
                 Text(
-                  "Ingrese el código enviado al celular:  ",
+                  strings.enterTheCodeSentToTheCellPhone,
                   style: Theme.of(context).textTheme.bodyText1,
                 ),
             Text(
@@ -87,7 +90,7 @@ class _PinPageState extends State<PinPage> {
                   errorAnimationController: errorController,
                   controller: textEditingController,
                   onCompleted: (v) {
-                    print("Procesado");
+                    print(strings.processing);
                   },
                   onChanged: (value) {
                     print(value);
@@ -100,14 +103,13 @@ class _PinPageState extends State<PinPage> {
             Padding(
               padding: const EdgeInsets.only(bottom: 12.0),
               child: Text(
-                hasError ? "* Codigo erroneo" : "",
+                hasError ? strings.wrongCode : "",
                 style: Theme.of(context).textTheme.caption,
               ),
             ),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 24),
               child: ButtonTheme(
-                //Bajar teclado al darle al continuar
                 height: 50,
                 child: FlatButton(
                   onPressed: () {
@@ -123,7 +125,7 @@ class _PinPageState extends State<PinPage> {
                       setState(() {
                         hasError = false;
                         scaffoldKey.currentState.showSnackBar(SnackBar(
-                          content: Text("Verificando..."),
+                          content: Text(strings.verifying),
                           duration: Duration(seconds: 3),
                         ));
                       });
@@ -131,7 +133,7 @@ class _PinPageState extends State<PinPage> {
                   },
                   child: Center(
                       child: Text(
-                    "Continuar",
+                    strings.continu,
                     style: Theme.of(context).textTheme.button,
                   )),
                 ),
@@ -147,11 +149,11 @@ class _PinPageState extends State<PinPage> {
               child: RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
-                    text: "No resiviste el mensaje? ",
+                    text: strings.didntYouGetTheMessage,
                     style: Theme.of(context).textTheme.bodyText1,
                     children: [
                       TextSpan(
-                          text: " REENVIAR",
+                          text: strings.resend,
                           recognizer: onTapRecognizer,
                           style: TextStyle(
                               color: Theme.of(context).accentColor,
