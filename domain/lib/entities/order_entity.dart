@@ -1,7 +1,8 @@
+import 'package:domain/entities/item_entity.dart';
 import 'package:domain/entities/store_entity.dart';
 import 'package:domain/entities/user_entity.dart';
 
-abstract class OrderEntity {
+class OrderEntity {
   String code;
   StoreEntity store;
   int deliveryCost;
