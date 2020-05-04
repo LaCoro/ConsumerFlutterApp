@@ -48,7 +48,7 @@ class _StoreListPageState extends State<StoreListPage> {
             return SmartRefresher(
               controller: _refreshController,
               enablePullDown: true,
-              onRefresh: () async => fetchStores(),
+              onRefresh: () => fetchStores(),
               child: buildList(),
             );
           }),
@@ -67,7 +67,6 @@ class _StoreListPageState extends State<StoreListPage> {
                   _data[index].deliveryCost == 0
               ? true
               : false;
-
 
           var hasAPromo = false;
 
