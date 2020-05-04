@@ -12,6 +12,7 @@ class AppLocalizations {
   static Map<String, Map<String, String>> _localizedValues = {
     'en': {
       'see_order': 'See order',
+      'Your_order_is_in_progress' : 'Your order is in progress',
       'create_account': 'Create your account to complete the order',
       'name_required' : 'Please enter a name',
       'name' : 'Name',
@@ -25,6 +26,7 @@ class AppLocalizations {
     },
     'es': {
       'see_order': 'Ver pedido',
+      'Your_order_is_in_progress' : 'Tu pedido está en curso',
       'create_account' : 'Crea tu cuenta para completar el pedido',
       'name_required' : 'Por favor ingrese un nombre',
       'name' : 'Nombre',
@@ -40,6 +42,10 @@ class AppLocalizations {
 
   String get seeOrder {
     return _localizedValues[locale.languageCode]['see_order'];
+  }
+
+  String get yourOrderIsInProgress {
+    return _localizedValues[locale.languageCode]['Your_order_is_in_progress'];
   }
 
   String get createAccount {
