@@ -3,6 +3,7 @@ import 'package:LaCoro/presentation/core/ui/custom_widgets/cart_total_bottom.dar
 import 'package:LaCoro/presentation/core/ui/custom_widgets/current_order_status_banner.dart';
 import 'package:LaCoro/presentation/core/ui/custom_widgets/payment_method.dart';
 import 'package:LaCoro/presentation/core/ui/custom_widgets/category_tabs.dart';
+import 'package:LaCoro/presentation/core/ui/custom_widgets/successful_order_icon.dart';
 import 'package:LaCoro/presentation/core/ui/custom_widgets/teper_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,9 @@ class TestPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(),
+      body: SafeArea(
+        child: SuccessfulOrderIcon(),
+      ),
     );
   }
 }
