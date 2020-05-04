@@ -11,6 +11,10 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+
+  flutter_localizations:
+    sdk: flutter
+
   flutter:
     sdk: flutter
 

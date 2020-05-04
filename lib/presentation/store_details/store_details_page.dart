@@ -26,26 +26,40 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
   Widget build(BuildContext context) {
     final StoreEntity store = ModalRoute.of(context).settings.arguments;
     _bloc.store = store;
+
+    Map<ItemEntity, List<ItemEntity>> itemList;
+    int orderQuantity = 0;
+    double cartTotal = 0;
     return Scaffold(
         appBar: AppBar(title: Text(store.name)),
         body: SafeArea(
           child: BlocBuilder(
               bloc: _bloc,
               builder: (context, state) {
-                Widget itemListContent = Center();
                 // Handle states
                 if (state is InitialState) _bloc.add(GetSortedItemsEvent());
-                if (state is SuccessState<Map<ItemEntity, List<ItemEntity>>>) itemListContent = buildItemList(state.data);
-                if (state is ErrorState) itemListContent = Center(child: Text("Ocurrio un error obteniendo los productos..."));
+                if (state is ErrorState) {
+                  // todo show snack with error;
+                }
+                if (state is LoadingState) {
+                  return Center(child: CircularProgressIndicator());
+                }
+                if (state is SuccessState<Map<ItemEntity, List<ItemEntity>>>) {
+                  itemList = state.data;
+                }
 
-                if (state is LoadingState) return Center(child: CircularProgressIndicator());
+                if (state is OrderChangedSate) {
+                  orderQuantity = state.quantity;
+                  cartTotal = state.cartTotal;
+                }
+
                 // Build widget
                 return Column(
                   children: <Widget>[
                     Expanded(flex: 1, child: Text(store.name)),
                     Center(child: Text(store.searchTags.join('-'))),
-                    Expanded(flex: 5, child: itemListContent),
-                    CartTotalBottom(0, "\$0"),
+                    Expanded(flex: 5, child: buildItemList(itemList) ?? Center(/*todo agregar mensaje cuando no hay productos */)),
+                    CartTotalBottom(orderQuantity, "\$$cartTotal"),
                   ],
                 );
               }),
@@ -65,14 +79,16 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
             itemCount: items?.length ?? 0,
             itemBuilder: (c, i) {
               final category = items.keys.elementAt(i);
-              return Wrap(
-                children: [
-                  Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text(category.name, style: Theme.of(context).textTheme.headline4)),
-                  Wrap(children: items[category].map((e) => ProductItem(itemEntity: e)).toList()),
-                ],
-              );
+              return Wrap(children: [
+                Padding(padding: const EdgeInsets.all(16.0), child: Text(category.name, style: Theme.of(context).textTheme.headline4)),
+                Wrap(
+                    children: items[category]
+                        .map((e) => ProductItem(
+                              itemEntity: e,
+                              onQuantityChange: (value) => _bloc.add(UpdateProductEvent(e, value)),
+                            ))
+                        .toList())
+              ]);
             });
   }
 }

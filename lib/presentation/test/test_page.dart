@@ -1,6 +1,5 @@
 import 'package:LaCoro/presentation/core/ui/custom_widgets/box_comments_order.dart';
 import 'package:LaCoro/presentation/core/ui/custom_widgets/cart_total_bottom.dart';
-import 'package:LaCoro/presentation/core/ui/custom_widgets/order_sumary.dart';
 import 'package:LaCoro/presentation/core/ui/custom_widgets/payment_method.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +14,7 @@ class TestPage extends StatelessWidget {
         child: Align(
           alignment: Alignment.center,
           child: Center(
-            child: OrderSumary(orderCost: 20000,deliveryCost: 21000,),
+            child: CartTotalBottom(2, "2000"),
           ),
         ),
       ),
