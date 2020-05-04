@@ -1,8 +1,5 @@
-
-
 import 'dart:async';
 
-import 'package:LaCoro/presentation/core/ui/app_colors.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -60,9 +57,9 @@ class _PinPageState extends State<PinPage> {
             children: <Widget>[
               SizedBox(height: 30),
               Container(
+                color: Colors.red,
                 height: MediaQuery.of(context).size.height / 5,
               ),
-              SizedBox(height: 8),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Text(
@@ -73,7 +70,7 @@ class _PinPageState extends State<PinPage> {
               ),
               Padding(
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                      const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                   child: Column(
                     children: <Widget>[
                       Text(
@@ -86,9 +83,9 @@ class _PinPageState extends State<PinPage> {
                       )
                     ],
                   )),
-
               Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  padding:
+                      const EdgeInsets.only(left: 24, right: 24, bottom: 16),
                   child: PinCodeTextField(
                     length: 5,
                     obsecureText: false,
@@ -101,7 +98,6 @@ class _PinPageState extends State<PinPage> {
                     backgroundColor: Theme.of(context).backgroundColor,
                     inactiveColor: Theme.of(context).disabledColor,
                     activeColor: Theme.of(context).disabledColor,
-
                     errorAnimationController: errorController,
                     controller: textEditingController,
                     onCompleted: (v) {
@@ -114,15 +110,8 @@ class _PinPageState extends State<PinPage> {
                       });
                     },
                   )),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                child: Text(
-                  hasError ? "* Codigo erroneo" : "",
-                  style: Theme.of(context).textTheme.caption,
-                ),
-              ),
 
-              RichText(
+              /*RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
                     text: "No resiviste el mensaje? ",
@@ -136,14 +125,12 @@ class _PinPageState extends State<PinPage> {
                               fontWeight: FontWeight.bold,
                               fontSize: 16))
                     ]),
-              ),
-              SizedBox(
-                height: 14,
-              ),
+              ),*/
+
               Container(
-                margin:
-                const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24),
+                margin: const EdgeInsets.symmetric(horizontal: 24),
                 child: ButtonTheme(
+                  //Bajar teclado al darle al continuar
                   height: 50,
                   child: FlatButton(
                     onPressed: () {
@@ -167,9 +154,9 @@ class _PinPageState extends State<PinPage> {
                     },
                     child: Center(
                         child: Text(
-                          "Continuar",
-                          style: Theme.of(context).textTheme.button,
-                        )),
+                      "Continuar",
+                      style: Theme.of(context).textTheme.button,
+                    )),
                   ),
                 ),
                 decoration: BoxDecoration(
@@ -177,6 +164,43 @@ class _PinPageState extends State<PinPage> {
                   borderRadius: BorderRadius.circular(5),
                 ),
               ),
+              Container(
+                color: Colors.orange,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
+                  child: Text(
+                    hasError ? "* Codigo erroneo" : "",
+                    style: Theme.of(context).textTheme.caption,
+                  ),
+                ),
+              ),
+              Column(
+
+                verticalDirection: VerticalDirection.up,
+                children: <Widget>[
+                  Container(
+                    child : RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                          text: "No resiviste el mensaje? ",
+                          style: Theme.of(context).textTheme.bodyText1,
+                          children: [
+                            TextSpan(
+                                text: " REENVIAR",
+                                recognizer: onTapRecognizer,
+                                style: TextStyle(
+                                    color: Theme.of(context).accentColor,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16))
+                          ]),
+                    ),
+                  ),
+
+                ],
+
+              ),
+
             ],
           ),
         ),
