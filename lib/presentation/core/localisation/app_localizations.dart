@@ -23,6 +23,7 @@ class AppLocalizations {
       "resend":" RESEND",
 
 
+      'Your_order_is_in_progress' : 'Your order is in progress'
     },
     'es': {
       'see_order': 'Ver pedido',
@@ -35,6 +36,7 @@ class AppLocalizations {
       "continue": "Continuar",
       "didn't_you_get_the_message" : "No resiviste el mensaje? ",
       "resend":" REENVIAR",
+      'Your_order_is_in_progress' : 'Tu pedido está en curso'
     },
   };
 
@@ -70,5 +72,8 @@ class AppLocalizations {
   }
   String get resend {
     return _localizedValues[locale.languageCode]["resend"];
+  }
+  String get yourOrderIsInProgress {
+    return _localizedValues[locale.languageCode]['Your_order_is_in_progress'];
   }
 }
