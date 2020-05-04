@@ -15,6 +15,10 @@ class _RegisterPageState extends State<RegisterPage> {
   FocusNode _emailFocus;
   FocusNode _phoneFocus;
 
+  var _nameController = TextEditingController();
+  var _emailController = TextEditingController();
+  var _phoneController = TextEditingController();
+
   final _registerFormKey = GlobalKey<FormState>();
 
   @override
@@ -27,8 +31,20 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   void dispose() {
+    _nameFocus.dispose();
+    _emailFocus.dispose();
     _phoneFocus.dispose();
+
+    _nameController.dispose();
+    _emailController.dispose();
+    _phoneController.dispose();
+
     super.dispose();
+  }
+
+  _fieldFocusChange(BuildContext context, FocusNode currentFocus,FocusNode nextFocus) {
+    currentFocus.unfocus();
+    FocusScope.of(context).requestFocus(nextFocus);
   }
 
 
@@ -50,16 +66,17 @@ class _RegisterPageState extends State<RegisterPage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 15.0),
                       child: TextFormField(
+                        controller: _nameController,
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Por favor ingrese un nombre';
                           }
                           return null;
                         },
+                        autofocus: true,
                         focusNode: _nameFocus,
                         onEditingComplete: () {
-                          _nameFocus.unfocus();
-                          FocusScope.of(context).requestFocus(_emailFocus);
+                          _fieldFocusChange(context, _nameFocus, _emailFocus);
                           },
                         keyboardType: TextInputType.text,
                         textInputAction: TextInputAction.next,
@@ -70,10 +87,10 @@ class _RegisterPageState extends State<RegisterPage> {
                           isDense: true,
                           labelText: "Nombre",
                           labelStyle: GoogleFonts.roboto(
-                            textStyle: TextStyle(color: _nameFocus.hasFocus ? AppColors.accentColor : Colors.black, fontWeight: FontWeight.w300, fontSize: 16)),
+                            textStyle: TextStyle(color: _nameFocus.hasFocus ? AppColors.accentColor : Colors.black, fontWeight: FontWeight.w300, fontSize: 16)
+                          ),
                             enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
                             focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.accentColor)),
-                            focusColor: AppColors.accentColor,
                             errorBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
                         ),
                       ),
@@ -81,13 +98,13 @@ class _RegisterPageState extends State<RegisterPage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 15.0),
                       child: TextFormField(
+                        controller: _emailController,
                         validator: (value) {
                             return value.contains('@') ? null :'Ingrese un correo electrónico válido';
                         },
                         focusNode: _emailFocus,
                         onEditingComplete: () {
-                          _emailFocus.unfocus();
-                          FocusScope.of(context).requestFocus(_phoneFocus);
+                          _fieldFocusChange(context, _emailFocus, _phoneFocus);
                         },
                         keyboardType: TextInputType.emailAddress,
                         textInputAction: TextInputAction.next,
@@ -102,7 +119,6 @@ class _RegisterPageState extends State<RegisterPage> {
                               textStyle: TextStyle(color: _emailFocus.hasFocus ? AppColors.accentColor : Colors.black, fontWeight: FontWeight.w300, fontSize: 16)),
                           enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
                           focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.accentColor)),
-                          focusColor: AppColors.accentColor,
                           errorBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
                         ),
                       ),
@@ -110,6 +126,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 15.0),
                       child: TextFormField(
+                        controller: _phoneController,
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Por favor ingrese un teléfono';
@@ -117,6 +134,9 @@ class _RegisterPageState extends State<RegisterPage> {
                           return null;
                         },
                         focusNode: _phoneFocus,
+                        onEditingComplete: (){
+                          _phoneFocus.unfocus();
+                        },
                         keyboardType: TextInputType.phone,
                         textInputAction: TextInputAction.done,
                         style: GoogleFonts.roboto(
@@ -128,7 +148,6 @@ class _RegisterPageState extends State<RegisterPage> {
                               textStyle: TextStyle(color: _phoneFocus.hasFocus ? AppColors.accentColor : Colors.black, fontWeight: FontWeight.w300, fontSize: 16)),
                           enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
                           focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.accentColor)),
-                          focusColor: AppColors.accentColor,
                           errorBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
                         ),
                       ),
@@ -149,9 +168,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   onPressed: () {
                                     if (_registerFormKey.currentState.validate()) {
 
-                                      Scaffold
-                                          .of(context)
-                                          .showSnackBar(SnackBar(content: Text('Processing Data')));
+                                      Scaffold.of(context).showSnackBar(SnackBar(content: Text('Datos guardaros')));
                                     }
                                   },
                                   color: AppColors.accentColor)),
