@@ -35,13 +35,13 @@ class CheckoutPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 8, bottom: 10),
+                    padding: const EdgeInsets.only(top: 14, bottom: 16),
                     child: Row(
                       children: <Widget>[
                         Expanded(
-                            child: Text("Entrega estimada",
-                                style: Theme.of(context).textTheme.bodyText1)),
-                        Text("30 min", style: Theme.of(context).textTheme.bodyText1)
+                            child: Text(strings.estimatedDelivery,
+                                style: Theme.of(context).textTheme.bodyText2)),
+                        Text("30 min", style: Theme.of(context).textTheme.bodyText2)
                       ],
                     ),
                   ),
@@ -49,15 +49,13 @@ class CheckoutPage extends StatelessWidget {
                 Divider(
                   thickness: 10,
                   height: 10,
-                  //color: Theme.of(context).backgroundColor,
-                  color: Colors.grey,
+                  color: Theme.of(context).backgroundColor,
                 ),
                 PaymentMethod(PaymentType.cash),
                 Divider(
                   thickness: 10,
                   height: 10,
-                  //color: Theme.of(context).backgroundColor,
-                  color: Colors.grey,
+                  color: Theme.of(context).backgroundColor,
                 ),SingleChildScrollView(
                   child: OrderSumary(orderCost: 21000,deliveryCost: 3000,),
                 ),

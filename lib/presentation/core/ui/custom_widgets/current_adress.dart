@@ -1,3 +1,4 @@
+import 'package:LaCoro/presentation/core/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class CurrentAdress extends StatelessWidget {
@@ -7,14 +8,16 @@ class CurrentAdress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context);
+
     return Padding(
-      padding: const EdgeInsets.all(24.0),
+      padding: const EdgeInsets.only(top: 24.0, left: 24,right: 24, bottom: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text("Direccion de entrega",style: Theme.of(context).textTheme.headline5,),
+          Text(strings.deliveryAddress,style: Theme.of(context).textTheme.headline5,),
           Padding(
-            padding: const EdgeInsets.only(top: 24),
+            padding: const EdgeInsets.only(top: 20),
             child: Row(
               children: <Widget>[
                 Padding(
@@ -23,7 +26,7 @@ class CurrentAdress extends StatelessWidget {
                 ),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 12.0, right: 24),
+                    padding: const EdgeInsets.only(left: 12.0, right: 30),
                     child: Text(
                       adress,
                       maxLines: 2,
@@ -35,7 +38,7 @@ class CurrentAdress extends StatelessWidget {
                 ),
                 Align(
                     child: Text(
-                  "Editar",
+                  strings.edit,
                   style: Theme.of(context).textTheme.headline6,
                 )),
               ],

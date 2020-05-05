@@ -8,7 +8,7 @@ class AppTheme {
       primaryColorDark: Color(0xffffffff),
       primaryColorLight: Color(0xffffffff),
       accentColor: Color(0xFF3D9FE6),
-      backgroundColor: Color(0xFFF7F7F7),
+      backgroundColor: Color(0xFFD8D8D8),
       disabledColor: AppColors.greyMedium,
       brightness: Brightness.light,
       dividerColor: Color(0xFFC7CBD3),

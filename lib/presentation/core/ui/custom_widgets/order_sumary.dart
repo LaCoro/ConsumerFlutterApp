@@ -24,159 +24,45 @@ class OrderSumary extends StatelessWidget {
           Row(
             children: <Widget>[
               Text(
-                "Domicilio",
+                "Pedido",
                 style: Theme.of(context).textTheme.bodyText1,
               ),
               Spacer(),
               Text(
-                "\$ $deliveryCost",
+                "\$ $orderCost",
                 style: Theme.of(context).textTheme.bodyText1,
               ),
             ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 9,bottom: 15),
+            child: Row(
+              children: <Widget>[
+                Text(
+                  "Domicilio",
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+                Spacer(),
+                Text(
+                  "\$ $deliveryCost",
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+              ],
+            ),
           ),
           Row(
             children: <Widget>[
               Text(
-                "Domicilio",
-                style: Theme.of(context).textTheme.bodyText1,
+                "Total",
+                style: Theme.of(context).textTheme.headline5,
               ),
-              Spacer(),
-              Text(
-                "\$ $deliveryCost",
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              Text(
-                "Domicilio",
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-              Spacer(),
-              Text(
-                "\$ $deliveryCost",
-                style: Theme.of(context).textTheme.bodyText1,
+              Spacer(), Text(
+                "\$ ${orderCost+deliveryCost}",
+                style: Theme.of(context).textTheme.headline5,
               ),
             ],
           ),
-          Row(
-            children: <Widget>[
-              Text(
-                "Domicilio",
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-              Spacer(),
-              Text(
-                "\$ $deliveryCost",
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              Text(
-                "Domicilio",
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-              Spacer(),
-              Text(
-                "\$ $deliveryCost",
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              Text(
-                "Domicilio",
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-              Spacer(),
-              Text(
-                "\$ $deliveryCost",
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              Text(
-                "Domicilio",
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-              Spacer(),
-              Text(
-                "\$ $deliveryCost",
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              Text(
-                "Domicilio",
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-              Spacer(),
-              Text(
-                "\$ $deliveryCost",
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              Text(
-                "Domicilio",
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-              Spacer(),
-              Text(
-                "\$ $deliveryCost",
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              Text(
-                "Domicilio",
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-              Spacer(),
-              Text(
-                "\$ $deliveryCost",
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              Text(
-                "Domicilio",
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-              Spacer(),
-              Text(
-                "\$ $deliveryCost",
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              Text(
-                "Domicilio",
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-              Spacer(),
-              Text(
-                "\$ $deliveryCost",
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-            ],
-          ),
+
 
 
           /*Row(

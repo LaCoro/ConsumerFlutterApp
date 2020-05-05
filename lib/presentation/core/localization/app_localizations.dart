@@ -35,9 +35,21 @@ class AppLocalizations {
       'search_your_address': 'Search you address',
       'use_my_location': 'Use my current location',
       'my_addresses': 'My addresses',
-      'successful_order': 'Successful order'
+      'successful_order': 'Successful order',
+          "delivery_address" : "Delivery address",
+      'edit' : 'Edit',
+      'change' : 'Change',
+      "estimated_delivery":"Estimated delivery",
+      "payment_method": "Payment method",
+      "cash":"Cash",
     },
     'es': {
+      "cash" :"Efectivo",
+      "payment_method":"Método de pago",
+      "estimated_delivery":"Entrega estimada",
+      'change' : 'Cambiar',
+      'edit':"Editar",
+  "delivery_address": "Dirección de entrega",
       'successful_order': 'Orden exitosa',
       'see_order': 'Ver pedido',
       'authorization_code': 'Código de autorizacion',
@@ -65,6 +77,31 @@ class AppLocalizations {
       'my_addresses': 'Mis direcciones',
     },
   };
+
+
+  String get cash {
+    return _localizedValues[locale.languageCode]["cash"];
+  }
+
+  String get paymentMethod {
+    return _localizedValues[locale.languageCode]["payment_method"];
+  }
+
+  String get estimatedDelivery {
+    return _localizedValues[locale.languageCode]['estimated_delivery'];
+  }
+
+  String get change {
+    return _localizedValues[locale.languageCode]['change'];
+  }
+
+  String get edit {
+    return _localizedValues[locale.languageCode]['edit'];
+  }
+
+  String get deliveryAddress {
+    return _localizedValues[locale.languageCode]['delivery_address'];
+  }
 
   String get successfulOrder {
     return _localizedValues[locale.languageCode]['successful_order'];
