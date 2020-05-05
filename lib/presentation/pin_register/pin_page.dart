@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:LaCoro/presentation/core/localisation/app_localizations.dart';
+import 'package:LaCoro/presentation/core/localization/app_localizations.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -17,8 +17,7 @@ class PinPage extends StatefulWidget {
 class _PinPageState extends State<PinPage> {
   var onTapRecognizer;
 
-  TextEditingController textEditingController = TextEditingController()
-    ..text = "";
+  TextEditingController textEditingController = TextEditingController()..text = "";
 
   StreamController<ErrorAnimationType> errorController;
 
@@ -64,17 +63,16 @@ class _PinPageState extends State<PinPage> {
                 textAlign: TextAlign.center,
               ),
             ),
-                Text(
-                  strings.enterTheCodeSentToTheCellPhone,
-                  style: Theme.of(context).textTheme.bodyText1,
-                ),
+            Text(
+              strings.enterTheCodeSentToTheCellPhone,
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
             Text(
               widget.phoneNumber,
               style: Theme.of(context).textTheme.bodyText2,
             ),
             Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                 child: PinCodeTextField(
                   length: 5,
                   obsecureText: false,
@@ -99,7 +97,6 @@ class _PinPageState extends State<PinPage> {
                     });
                   },
                 )),
-
             Padding(
               padding: const EdgeInsets.only(bottom: 12.0),
               child: Text(
@@ -116,8 +113,7 @@ class _PinPageState extends State<PinPage> {
                     // conditions for validating
                     if (currentText.length != 5 || currentText != "11111") {
                       //cod pass
-                      errorController.add(ErrorAnimationType
-                          .shake); // Triggering error shake animation
+                      errorController.add(ErrorAnimationType.shake); // Triggering error shake animation
                       setState(() {
                         hasError = true;
                       });
@@ -148,18 +144,12 @@ class _PinPageState extends State<PinPage> {
               padding: const EdgeInsets.only(bottom: 45),
               child: RichText(
                 textAlign: TextAlign.center,
-                text: TextSpan(
-                    text: strings.didntYouGetTheMessage,
-                    style: Theme.of(context).textTheme.bodyText1,
-                    children: [
-                      TextSpan(
-                          text: strings.resend,
-                          recognizer: onTapRecognizer,
-                          style: TextStyle(
-                              color: Theme.of(context).accentColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16))
-                    ]),
+                text: TextSpan(text: strings.didntYouGetTheMessage, style: Theme.of(context).textTheme.bodyText1, children: [
+                  TextSpan(
+                      text: strings.resend,
+                      recognizer: onTapRecognizer,
+                      style: TextStyle(color: Theme.of(context).accentColor, fontWeight: FontWeight.bold, fontSize: 16))
+                ]),
               ),
             ),
           ],
