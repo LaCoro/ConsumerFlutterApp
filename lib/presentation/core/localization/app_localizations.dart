@@ -12,6 +12,14 @@ class AppLocalizations {
   static Map<String, Map<String, String>> _localizedValues = {
     'en': {
       'see_order': 'See order',
+      'authorization_code': 'Authorization code',
+      "enter_the_code_sent_to_the_cell_phone": "Enter the code sent to the cell phone: ",
+      "processing": "processing...",
+      "wrong_code": "* Wrong code",
+      "verifying": "Verifying ...",
+      "continue": "Continue",
+      "didn't_you_get_the_message": "Didn't you get the message?",
+      "resend": " RESEND",
       'Your_order_is_in_progress': 'Your order is in progress',
       'create_account': 'Create your account to complete the order',
       'name_required': 'Please enter a name',
@@ -32,6 +40,14 @@ class AppLocalizations {
     'es': {
       'successful_order': 'Orden exitosa',
       'see_order': 'Ver pedido',
+      'authorization_code': 'Código de autorizacion',
+      "enter_the_code_sent_to_the_cell_phone": "Ingrese el código enviado al celular: ",
+      "processing": "Procesado...",
+      "rong_code": "* Codigo erróneo",
+      "verifying": "Verificando ...",
+      "continue": "Continuar",
+      "didn't_you_get_the_message": "No resiviste el mensaje? ",
+      "resend": " REENVIAR",
       'Your_order_is_in_progress': 'Tu pedido está en curso',
       'create_account': 'Crea tu cuenta para completar el pedido',
       'name_required': 'Por favor ingrese un nombre',
@@ -116,5 +132,37 @@ class AppLocalizations {
 
   String get myAddresses {
     return _localizedValues[locale.languageCode]['my_addresses'];
+  }
+
+  String get authorizationCode {
+    return _localizedValues[locale.languageCode]['authorization_code'];
+  }
+
+  String get enterTheCodeSentToTheCellPhone {
+    return _localizedValues[locale.languageCode]["enter_the_code_sent_to_the_cell_phone"];
+  }
+
+  String get processing {
+    return _localizedValues[locale.languageCode]["processing"];
+  }
+
+  String get wrongCode {
+    return _localizedValues[locale.languageCode]["wrong_code"];
+  }
+
+  String get verifying {
+    return _localizedValues[locale.languageCode]['verifying'];
+  }
+
+  String get continu {
+    return _localizedValues[locale.languageCode]['continue'];
+  }
+
+  String get didntYouGetTheMessage {
+    return _localizedValues[locale.languageCode]["didn't_you_get_the_message"];
+  }
+
+  String get resend {
+    return _localizedValues[locale.languageCode]["resend"];
   }
 }
