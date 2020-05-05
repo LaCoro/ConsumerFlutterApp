@@ -1,3 +1,4 @@
+import 'package:LaCoro/presentation/core/localization/app_localizations.dart';
 import 'package:LaCoro/presentation/core/ui/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,9 @@ class AddressesPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+
+    final strings = AppLocalizations.of(context);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -26,7 +30,7 @@ class AddressesPage extends StatelessWidget{
         padding: const EdgeInsets.fromLTRB(24.0, 10.0, 24.0, 10.0),
         child: Column(
           children: <Widget>[
-            Text("Agrega o escoge una dirección", style: Theme.of(context).textTheme.headline1),
+            Text(strings.addOrChooseAnAddress, style: Theme.of(context).textTheme.headline1),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20.0),
               child: Material(
@@ -38,7 +42,7 @@ class AddressesPage extends StatelessWidget{
                   padding: const EdgeInsets.symmetric(vertical: 6.0),
                   child: TextField(
                       decoration: InputDecoration(
-                          hintText: "Buscar tu dirección",
+                          hintText: strings.searchYourAddress,
                           hintStyle: Theme.of(context).textTheme.caption,
                           prefixIcon: Icon(Icons.search, color: AppColors.greyMedium, size: 24),
                           suffixIcon: Icon(Icons.cancel, color: Colors.black, size: 24),
@@ -48,7 +52,6 @@ class AddressesPage extends StatelessWidget{
                           errorBorder: InputBorder.none,
                           disabledBorder: InputBorder.none,
                       ),
-                      autofocus: true,
                       keyboardType: TextInputType.text, style: Theme.of(context).textTheme.bodyText1),
                 ),
               ),
@@ -65,7 +68,7 @@ class AddressesPage extends StatelessWidget{
                     Icon(Icons.place, color: Colors.black, size: 24),
                     Padding(
                       padding: const EdgeInsets.only(left: 15.0),
-                      child: Text("Usar mi ubicación actual", style: Theme.of(context).textTheme.bodyText2,),
+                      child: Text(strings.useMyLocation, style: Theme.of(context).textTheme.bodyText2,),
                     ),
                     Expanded(
                       child: Align(
@@ -82,7 +85,7 @@ class AddressesPage extends StatelessWidget{
             ),
             Padding(
               padding: const EdgeInsets. only(top: 15.0),
-              child: Align(alignment: Alignment.centerLeft, child: Text("Mis direcciones", style: Theme.of(context).textTheme.headline5)),
+              child: Align(alignment: Alignment.centerLeft, child: Text(strings.myAddresses, style: Theme.of(context).textTheme.headline5)),
             ),
             Expanded(
               child: ListView.builder(
