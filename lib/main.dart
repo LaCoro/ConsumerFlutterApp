@@ -1,9 +1,8 @@
+import 'package:LaCoro/presentation/core/adresses/addresses_page.dart';
 import 'package:LaCoro/presentation/core/di/app_module.dart';
-import 'package:LaCoro/presentation/core/localisation/app_localizations_delegate.dart';
-import 'package:LaCoro/presentation/core/ui/adresses/addresses_page.dart';
+import 'package:LaCoro/presentation/core/localization/app_localizations_delegate.dart';
 import 'package:LaCoro/presentation/core/ui/app_theme.dart';
-import 'package:LaCoro/presentation/core/ui/custom_widgets/payment_method.dart';
-import 'package:LaCoro/presentation/pin_register/pin_page.dart';
+import 'package:LaCoro/presentation/register/register_page.dart';
 import 'package:LaCoro/presentation/store_details/store_details_page.dart';
 import 'package:LaCoro/presentation/test/styles_test_page.dart';
 import 'package:LaCoro/presentation/test/test_page.dart';
@@ -50,6 +49,7 @@ class MyApp extends StatelessWidget {
         TestPage.TEST_PAGE_ROUTE: (BuildContext context) => TestPage(),
         StylesTestPage.STYLE_TEST_PAGE_ROUTE: (BuildContext context) => StylesTestPage(),
         AddressesPage.ADDRESSES_LIST_ROUTE: (BuildContext context) => AddressesPage(),
+        RegisterPage.REGISTER_ROUTE: (BuildContext context) => RegisterPage(),
       },
     );
   }
