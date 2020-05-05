@@ -46,6 +46,7 @@ class AddressesPage extends StatelessWidget{
                           hintStyle: Theme.of(context).textTheme.caption,
                           prefixIcon: Icon(Icons.search, color: AppColors.greyMedium, size: 24),
                           suffixIcon: Icon(Icons.cancel, color: Colors.black, size: 24),
+                          border: OutlineInputBorder(),
                           focusedBorder: InputBorder.none,
                           enabledBorder: InputBorder.none,
                           errorBorder: InputBorder.none,

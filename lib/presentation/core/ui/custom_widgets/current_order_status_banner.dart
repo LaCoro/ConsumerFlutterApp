@@ -1,4 +1,4 @@
-import 'package:LaCoro/presentation/core/localisation/app_localizations.dart';
+import 'package:LaCoro/presentation/core/localization/app_localizations.dart';
 import 'package:LaCoro/presentation/core/ui/app_colors.dart';
 import 'package:flutter/material.dart';
 

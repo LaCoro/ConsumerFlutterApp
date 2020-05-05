@@ -1,10 +1,6 @@
 import 'dart:async';
-
-import 'package:LaCoro/presentation/core/ui/adresses/addresses_page.dart';
-import 'package:LaCoro/presentation/store_details/store_details_page.dart';
-import 'package:LaCoro/presentation/test/test_page.dart';
+import 'package:LaCoro/presentation/core/adresses/addresses_page.dart';
 import 'package:flutter/material.dart';
-
 import '../core/ui/app_colors.dart';
 
 class SplashPage extends StatefulWidget {
