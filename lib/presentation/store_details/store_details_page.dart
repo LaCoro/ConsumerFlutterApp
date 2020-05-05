@@ -1,5 +1,5 @@
 import 'package:LaCoro/presentation/core/bloc/base_bloc.dart';
-import 'package:LaCoro/presentation/core/localisation/app_localizations.dart';
+import 'package:LaCoro/presentation/core/localization/app_localizations.dart';
 import 'package:LaCoro/presentation/core/ui/app_colors.dart';
 import 'package:LaCoro/presentation/core/ui/custom_widgets/cart_total_bottom.dart';
 import 'package:LaCoro/presentation/core/ui/custom_widgets/category_tabs.dart';

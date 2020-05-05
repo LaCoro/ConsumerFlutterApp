@@ -51,6 +51,7 @@ flutter:
 
   assets:
     - assets/loading_resource.gif
+    - assets/app_logo.png
     - development.env
 
   # An image asset can refer to one or more resolution-specific "variants", see
