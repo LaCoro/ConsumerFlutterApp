@@ -4,7 +4,8 @@ class OrderSumary extends StatelessWidget {
   final double orderCost;
   final double deliveryCost;
 
-  const OrderSumary({Key key, this.orderCost, this.deliveryCost = 0}) : super(key: key);
+  const OrderSumary({Key key, this.orderCost, this.deliveryCost = 0})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +22,164 @@ class OrderSumary extends StatelessWidget {
             ),
           ),
           Row(
+            children: <Widget>[
+              Text(
+                "Domicilio",
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+              Spacer(),
+              Text(
+                "\$ $deliveryCost",
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              Text(
+                "Domicilio",
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+              Spacer(),
+              Text(
+                "\$ $deliveryCost",
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              Text(
+                "Domicilio",
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+              Spacer(),
+              Text(
+                "\$ $deliveryCost",
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              Text(
+                "Domicilio",
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+              Spacer(),
+              Text(
+                "\$ $deliveryCost",
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              Text(
+                "Domicilio",
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+              Spacer(),
+              Text(
+                "\$ $deliveryCost",
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              Text(
+                "Domicilio",
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+              Spacer(),
+              Text(
+                "\$ $deliveryCost",
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              Text(
+                "Domicilio",
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+              Spacer(),
+              Text(
+                "\$ $deliveryCost",
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              Text(
+                "Domicilio",
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+              Spacer(),
+              Text(
+                "\$ $deliveryCost",
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              Text(
+                "Domicilio",
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+              Spacer(),
+              Text(
+                "\$ $deliveryCost",
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              Text(
+                "Domicilio",
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+              Spacer(),
+              Text(
+                "\$ $deliveryCost",
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              Text(
+                "Domicilio",
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+              Spacer(),
+              Text(
+                "\$ $deliveryCost",
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              Text(
+                "Domicilio",
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+              Spacer(),
+              Text(
+                "\$ $deliveryCost",
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            ],
+          ),
+
+
+          /*Row(
             children: <Widget>[
               Expanded(
                 child: Column(
@@ -71,7 +230,7 @@ class OrderSumary extends StatelessWidget {
                 ],
               ),
             ],
-          ),
+          ),*/
         ],
       ),
     );

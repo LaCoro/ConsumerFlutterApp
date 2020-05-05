@@ -1,3 +1,4 @@
+import 'package:LaCoro/presentation/checkout_page/checkout_page.dart';
 import 'package:LaCoro/presentation/core/adresses/addresses_page.dart';
 import 'package:LaCoro/presentation/core/di/app_module.dart';
 import 'package:LaCoro/presentation/core/di/store_list_module.dart';
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
         return MaterialPageRoute(builder: (context) => destinationRoute, settings: settings);
       },
       routes: {
-        '/': (BuildContext context) => TestPage(), // TODO change
+        '/': (BuildContext context) => CheckoutPage(), // TODO change
         StoreListPage.STORE_LIST_ROUTE: (BuildContext context) => StoreListPage(),
         TestPage.TEST_PAGE_ROUTE: (BuildContext context) => TestPage(),
         StylesTestPage.STYLE_TEST_PAGE_ROUTE: (BuildContext context) => StylesTestPage(),
