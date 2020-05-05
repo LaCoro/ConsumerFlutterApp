@@ -15,7 +15,6 @@ class StoreItem  extends StatelessWidget{
   String discountPercentage ="";
   String tag="";
 
-
   StoreItem({Key key,
     this.isDeliveryFree,
     this.hasAPromo,
@@ -25,7 +24,6 @@ class StoreItem  extends StatelessWidget{
     this.storeItem,
     this.placeHolderAsset
   }) : super(key: key);
-
 
 
   @override
@@ -136,9 +134,6 @@ class StoreItem  extends StatelessWidget{
         borderRadius: BorderRadius.circular(15),
       ),
     );
-
   }
-
-
 
 }

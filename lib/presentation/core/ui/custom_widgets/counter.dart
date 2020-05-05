@@ -4,12 +4,10 @@ import 'package:flutter/material.dart';
 import '../app_colors.dart';
 
 class Counter extends StatelessWidget {
-
   final int quantity;
+  final Function(int) onQuantityChange;
 
   Counter({Key key, this.quantity, this.onQuantityChange}) : super(key: key);
-
-  final Function(int) onQuantityChange;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +27,7 @@ class Counter extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 4.0),
                   child: quantity == 0 ? Icon(Icons.remove, color: AppColors.greyMedium, size: 20) : Icon(Icons.remove, color: AppColors.accentColor, size: 20),
                 ),
-                onTap: () => onQuantityChange.call(quantity-1)),
+                onTap: quantity < 1 ? null : () => onQuantityChange.call(quantity - 1)),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4.0),
               child: Text('$quantity', style: TextStyle(color: AppColors.accentColor, fontSize: 16, fontWeight: FontWeight.bold)),
@@ -39,7 +37,7 @@ class Counter extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 4.0),
                   child: Icon(Icons.add, color: AppColors.accentColor, size: 20),
                 ),
-                onTap: () => onQuantityChange.call(quantity+1)),
+                onTap: () => onQuantityChange.call(quantity + 1)),
           ],
         ),
       ),

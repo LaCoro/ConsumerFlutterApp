@@ -13,8 +13,7 @@ class StoreListPage extends StatefulWidget {
   static const STORE_LIST_ROUTE = '/store_list';
 
   @override
-  _StoreListPageState createState() => _StoreListPageState(
-      StoreListModule().initialise(Injector.getInjector()).get());
+  _StoreListPageState createState() => _StoreListPageState((Injector.getInjector().get()));
 }
 
 class _StoreListPageState extends State<StoreListPage> {
@@ -39,8 +38,7 @@ class _StoreListPageState extends State<StoreListPage> {
           bloc: _bloc,
           builder: (context, state) {
             _refreshController.refreshCompleted();
-            if (state is LoadingState)
-              return Center(child: CircularProgressIndicator());
+            if (state is LoadingState) return Center(child: CircularProgressIndicator());
 
             if (state is SuccessState<List<StoreEntity>>) {
               _data = state.data;
@@ -48,7 +46,7 @@ class _StoreListPageState extends State<StoreListPage> {
             return SmartRefresher(
               controller: _refreshController,
               enablePullDown: true,
-              onRefresh: () async => fetchStores(),
+              onRefresh: () => fetchStores(),
               child: buildList(),
             );
           }),
@@ -63,11 +61,7 @@ class _StoreListPageState extends State<StoreListPage> {
     return ListView.builder(
         itemExtent: 150.0,
         itemBuilder: (c, index) {
-          var isDeliveryFree = _data[index].deliveryCost == null ||
-                  _data[index].deliveryCost == 0
-              ? true
-              : false;
-
+          var isDeliveryFree = _data[index].deliveryCost == null || _data[index].deliveryCost == 0 ? true : false;
 
           var hasAPromo = false;
 
@@ -80,18 +74,15 @@ class _StoreListPageState extends State<StoreListPage> {
           randomTag = _data[index].searchTags.last;
 
           return GestureDetector(
-            onTap: () => Navigator.pushNamed(
-                context, StoreDetailsPage.STORE_DETAILS_ROUTE,
-                arguments: _data[index]),
-            child: StoreItem(
-              isDeliveryFree: isDeliveryFree,
-              storeClosed: storeClosed,
-              hasAPromo: hasAPromo,
-              tag: randomTag,
-              placeHolderAsset: 'assets/loading_resource.gif',
-              storeItem: _data[index] ,
-            )
-          );
+              onTap: () => Navigator.pushNamed(context, StoreDetailsPage.STORE_DETAILS_ROUTE, arguments: _data[index]),
+              child: StoreItem(
+                isDeliveryFree: isDeliveryFree,
+                storeClosed: storeClosed,
+                hasAPromo: hasAPromo,
+                tag: randomTag,
+                placeHolderAsset: 'assets/loading_resource.gif',
+                storeItem: _data[index],
+              ));
         },
         itemCount: _data?.length ?? 0);
   }
