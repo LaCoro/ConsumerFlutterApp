@@ -12,7 +12,7 @@ class CurrentAdress extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text("Direccion de entrega"),
+          Text("Direccion de entrega",style: Theme.of(context).textTheme.headline5,),
           Padding(
             padding: const EdgeInsets.only(top: 24),
             child: Row(

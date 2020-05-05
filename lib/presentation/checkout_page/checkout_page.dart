@@ -1,4 +1,5 @@
 import 'package:LaCoro/presentation/core/ui/custom_widgets/current_adress.dart';
+import 'package:LaCoro/presentation/core/ui/custom_widgets/order_sumary.dart';
 import 'package:LaCoro/presentation/core/ui/custom_widgets/payment_method.dart';
 import 'package:flutter/material.dart';
 
@@ -8,20 +9,23 @@ class CheckoutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(          //
-        title: Text("data"),  //
+      appBar: AppBar(
+        //
+        title: Text("data"), //
       ),
       body: Column(
         children: <Widget>[
           CurrentAdress("Cr 56 # 13 - 168 Florida, Miami"),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Divider(),
+            child: Divider(
+              thickness: 1,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 24),
+              padding: const EdgeInsets.only(top: 8, bottom: 18),
               child: Row(
                 children: <Widget>[
                   Expanded(
@@ -37,7 +41,14 @@ class CheckoutPage extends StatelessWidget {
             height: 10,
             color: Theme.of(context).backgroundColor,
           ),
-          PaymentMethod(PaymentType.cash)
+          PaymentMethod(PaymentType.cash),
+          Divider(
+            thickness: 10,
+            height: 10,
+            color: Theme.of(context).backgroundColor,
+          ),SingleChildScrollView(
+            child: OrderSumary(orderCost: 21000,deliveryCost: 3000,),
+          )
         ],
       ),
     );

@@ -4,7 +4,7 @@ class OrderSumary extends StatelessWidget {
   final double orderCost;
   final double deliveryCost;
 
-  const OrderSumary({Key key, this.orderCost, this.deliveryCost}) : super(key: key);
+  const OrderSumary({Key key, this.orderCost, this.deliveryCost = 0}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
