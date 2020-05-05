@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'LaCoro',
       theme: AppTheme.build(),
-      initialRoute: '/',
+      initialRoute:  StoreListPage.STORE_LIST_ROUTE,
       onGenerateRoute: (settings) {
         Widget destinationRoute = StoreListPage();
         switch (settings.name) {

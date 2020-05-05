@@ -33,6 +33,7 @@ dependencies:
   equatable: ^1.1.0
   google_fonts: ^1.0.0
   pin_code_fields: ^2.5.1
+  scroll_to_index: ^1.0.6
 
   cupertino_icons: ^0.1.3
 

@@ -1,6 +1,8 @@
 import 'package:LaCoro/presentation/core/bloc/base_bloc.dart';
+import 'package:LaCoro/presentation/core/localisation/app_localizations.dart';
 import 'package:LaCoro/presentation/core/ui/app_colors.dart';
 import 'package:LaCoro/presentation/core/ui/custom_widgets/cart_total_bottom.dart';
+import 'package:LaCoro/presentation/core/ui/custom_widgets/category_tabs.dart';
 import 'package:LaCoro/presentation/core/ui/custom_widgets/product_item.dart';
 import 'package:LaCoro/presentation/store_details/store_details_bloc.dart';
 import 'package:domain/entities/item_entity.dart';
@@ -9,6 +11,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 
 class StoreDetailsPage extends StatefulWidget {
   static const STORE_DETAILS_ROUTE = '/store_details';
@@ -19,19 +22,21 @@ class StoreDetailsPage extends StatefulWidget {
 
 class _StoreDetailsPageState extends State<StoreDetailsPage> {
   final StoreDetailsBloc _bloc;
+  final AutoScrollController _controller = AutoScrollController();
 
   _StoreDetailsPageState(this._bloc);
 
   @override
   Widget build(BuildContext context) {
     final StoreEntity store = ModalRoute.of(context).settings.arguments;
+    final strings = AppLocalizations.of(context);
     _bloc.store = store;
 
     Map<ItemEntity, List<ItemEntity>> itemList;
     int orderQuantity = 0;
     double cartTotal = 0;
     return Scaffold(
-        appBar: AppBar(title: Text(store.name)),
+        appBar: AppBar(backgroundColor: Theme.of(context).backgroundColor, elevation: 0),
         body: SafeArea(
           child: BlocBuilder(
               bloc: _bloc,
@@ -56,9 +61,16 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
                 // Build widget
                 return Column(
                   children: <Widget>[
-                    Expanded(flex: 1, child: Text(store.name)),
-                    Center(child: Text(store.searchTags.join('-'))),
-                    Expanded(flex: 5, child: buildItemList(itemList) ?? Center(/*todo agregar mensaje cuando no hay productos */)),
+                    Expanded(flex: 2, child: Text(store.name)),
+                    Expanded(
+                        flex: 1,
+                        child: CategoryTabs(
+                          onCategorySelected: (category, position) {
+                            _controller.scrollToIndex(position, duration: Duration(milliseconds: 500), preferPosition: AutoScrollPosition.begin);
+                          },
+                          categories: itemList.keys.map((e) => e.name).toList(),
+                        )),
+                    Expanded(flex: 10, child: buildItemList(itemList) ?? Center(/*todo agregar mensaje cuando no hay productos */)),
                     CartTotalBottom(orderQuantity, "\$$cartTotal"),
                   ],
                 );
@@ -70,7 +82,7 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
     return items == null
         ? Center(child: CircularProgressIndicator())
         : ListView.separated(
-            shrinkWrap: true, //Added
+            controller: _controller,
             separatorBuilder: (BuildContext context, int index) => Divider(
                   thickness: 10,
                   height: 50,
@@ -79,16 +91,24 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
             itemCount: items?.length ?? 0,
             itemBuilder: (c, i) {
               final category = items.keys.elementAt(i);
-              return Wrap(children: [
-                Padding(padding: const EdgeInsets.all(16.0), child: Text(category.name, style: Theme.of(context).textTheme.headline4)),
-                Wrap(
-                    children: items[category]
-                        .map((e) => ProductItem(
-                              itemEntity: e,
-                              onQuantityChange: (value) => _bloc.add(UpdateProductEvent(e, value)),
-                            ))
-                        .toList())
-              ]);
+              return AutoScrollTag(
+                controller: _controller,
+                index: i,
+                key: ValueKey(i),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(padding: const EdgeInsets.all(12.0), child: Text(category.name, style: Theme.of(context).textTheme.headline4)),
+                    Column(
+                        children: items[category]
+                            .map((e) => ProductItem(
+                                  itemEntity: e,
+                                  onQuantityChange: (value) => _bloc.add(UpdateProductEvent(e, value)),
+                                ))
+                            .toList()),
+                  ],
+                ),
+              );
             });
   }
 }
