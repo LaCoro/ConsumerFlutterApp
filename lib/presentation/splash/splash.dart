@@ -1,10 +1,10 @@
 import 'dart:async';
-import 'package:LaCoro/presentation/core/adresses/addresses_page.dart';
+
+import 'package:LaCoro/presentation/core/ui/app_colors.dart';
+import 'package:LaCoro/presentation/store_list/store_list_page.dart';
 import 'package:flutter/material.dart';
-import '../core/ui/app_colors.dart';
 
 class SplashPage extends StatefulWidget {
-
   static const SPLASH_PAGE_ROUTE = '/splash_page';
 
   @override
@@ -13,32 +13,21 @@ class SplashPage extends StatefulWidget {
   }
 }
 
-class SplashPageState extends State<SplashPage> with TickerProviderStateMixin{
-
+class SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   AnimationController controller;
   Animation<double> animation;
-
-  List<Color> _colors = [AppColors.accentColor, AppColors.accentColor.withOpacity(0.8)];
-  List<double> _stops = [0.0, 0.8];
-
 
   @override
   void initState() {
     super.initState();
 
     controller = AnimationController(
-      duration: Duration(milliseconds: 2000),
+      duration: Duration(milliseconds: 1000),
       vsync: this,
     );
 
-    animation = Tween(begin: 0.5, end: 1.0).animate(controller)
-      ..addListener(() {
-        setState(() {});
-      });
-
+    animation = Tween(begin: 0.5, end: 1.5).animate(controller)..addListener(() => loadData());
     controller.forward();
-
-    loadData();
   }
 
   @override
@@ -52,27 +41,8 @@ class SplashPageState extends State<SplashPage> with TickerProviderStateMixin{
   }
 
   onDoneLoading() async {
-    Navigator.of(context).pushReplacement(_createRoute());
+    Navigator.of(context).popAndPushNamed(StoreListPage.STORE_LIST_ROUTE);
   }
-
-  Route _createRoute() {
-    return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => AddressesPage(),
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          var begin = Offset(0.0, 1.0);
-          var end = Offset.zero;
-          var curve = Curves.ease;
-
-          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-          return SlideTransition(
-            position: animation.drive(tween),
-            child: child,
-          );
-        }
-    );
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -83,14 +53,10 @@ class SplashPageState extends State<SplashPage> with TickerProviderStateMixin{
           gradient: LinearGradient(
             begin: Alignment.center,
             end: Alignment.bottomCenter,
-            colors: _colors,
-            stops: _stops,
+            colors: [AppColors.accentColor, AppColors.accentColor.withOpacity(0.9)],
           ),
           color: AppColors.accentColor,
-          image: DecorationImage(
-              image: AssetImage('assets/app_logo.png'),
-              fit: BoxFit.scaleDown
-          ) ,
+          image: DecorationImage(image: AssetImage('assets/app_logo.png'), fit: BoxFit.scaleDown),
         ),
         /*child: Center(
           child: CircularProgressIndicator(

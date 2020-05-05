@@ -13,7 +13,7 @@ class StoreListPage extends StatefulWidget {
   static const STORE_LIST_ROUTE = '/store_list';
 
   @override
-  _StoreListPageState createState() => _StoreListPageState(StoreListModule().initialise(Injector.getInjector()).get());
+  _StoreListPageState createState() => _StoreListPageState((Injector.getInjector().get()));
 }
 
 class _StoreListPageState extends State<StoreListPage> {

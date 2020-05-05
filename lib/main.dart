@@ -1,5 +1,6 @@
 import 'package:LaCoro/presentation/core/adresses/addresses_page.dart';
 import 'package:LaCoro/presentation/core/di/app_module.dart';
+import 'package:LaCoro/presentation/core/di/store_list_module.dart';
 import 'package:LaCoro/presentation/core/localization/app_localizations_delegate.dart';
 import 'package:LaCoro/presentation/core/ui/app_theme.dart';
 import 'package:LaCoro/presentation/splash/splash.dart';
@@ -14,6 +15,7 @@ import 'presentation/store_list/store_list_page.dart';
 
 Future main() async {
   await AppModule().initialise(Injector.getInjector());
+  StoreListModule().initialise(Injector.getInjector());
   runApp(MyApp());
 }
 
@@ -33,9 +35,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'LaCoro',
       theme: AppTheme.build(),
-      initialRoute:  StoreListPage.STORE_LIST_ROUTE,
+      initialRoute:  '/',
       onGenerateRoute: (settings) {
-        Widget destinationRoute = StoreListPage();
+        Widget destinationRoute = SplashPage();
         switch (settings.name) {
           case StoreDetailsPage.STORE_DETAILS_ROUTE:
             destinationRoute = StoreDetailsPage();
