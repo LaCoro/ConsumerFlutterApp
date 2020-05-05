@@ -20,7 +20,7 @@ class AppTheme {
         headline2: GoogleFonts.roboto(fontWeight: FontWeight.normal, fontSize: 28, color: Colors.white),
         headline3: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 24, color: Colors.black),
         headline4: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 22, color: Colors.black),
-        headline5: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.black),
+        headline5: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 15, color: Colors.black),
         headline6: GoogleFonts.roboto(fontWeight: FontWeight.normal, fontSize: 17, color: AppColors.yellowAction),
         bodyText1: GoogleFonts.roboto(fontWeight: FontWeight.normal, fontSize: 16, color: Colors.black),
         bodyText2: GoogleFonts.roboto(fontWeight: FontWeight.normal, fontSize: 15, color: Colors.black),

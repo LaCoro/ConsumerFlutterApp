@@ -42,8 +42,16 @@ class AppLocalizations {
       "estimated_delivery":"Estimated delivery",
       "payment_method": "Payment method",
       "cash":"Cash",
+      "summary":"Summary",
+      'order':'Order',
+      'delivery': 'Delivery',
+      'total':'Total',
     },
     'es': {
+      'total': 'Total',
+      'delivery':"Domicilio",
+      "order":"Pedido",
+      "summary":"Resumen",
       "cash" :"Efectivo",
       "payment_method":"Método de pago",
       "estimated_delivery":"Entrega estimada",
@@ -78,6 +86,21 @@ class AppLocalizations {
     },
   };
 
+  String get total {
+    return _localizedValues[locale.languageCode]["total"];
+  }
+
+  String get delivery {
+    return _localizedValues[locale.languageCode]["delivery"];
+  }
+
+  String get order {
+    return _localizedValues[locale.languageCode]["order"];
+  }
+
+  String get summary {
+    return _localizedValues[locale.languageCode]["summary"];
+  }
 
   String get cash {
     return _localizedValues[locale.languageCode]["cash"];

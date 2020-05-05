@@ -1,3 +1,4 @@
+import 'package:LaCoro/presentation/core/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class OrderSumary extends StatelessWidget {
@@ -9,6 +10,8 @@ class OrderSumary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context);
+
     return Padding(
       padding: const EdgeInsets.all(24),
       child: Column(
@@ -17,14 +20,14 @@ class OrderSumary extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 24),
             child: Text(
-              "Resumen",
+              strings.summary,
               style: Theme.of(context).textTheme.headline5,
             ),
           ),
           Row(
             children: <Widget>[
               Text(
-                "Pedido",
+                strings.order,
                 style: Theme.of(context).textTheme.bodyText1,
               ),
               Spacer(),
@@ -39,7 +42,7 @@ class OrderSumary extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Text(
-                  "Domicilio",
+                  strings.delivery,
                   style: Theme.of(context).textTheme.bodyText1,
                 ),
                 Spacer(),
@@ -53,7 +56,7 @@ class OrderSumary extends StatelessWidget {
           Row(
             children: <Widget>[
               Text(
-                "Total",
+                strings.total,
                 style: Theme.of(context).textTheme.headline5,
               ),
               Spacer(), Text(
