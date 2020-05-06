@@ -1,6 +1,5 @@
+import 'package:LaCoro/presentation/core/enums/payment_type.dart';
 import 'package:flutter/material.dart';
-
-enum PaymentType { cash, credit, debit }
 
 class PaymentMethod extends StatelessWidget {
   final PaymentType pay;
