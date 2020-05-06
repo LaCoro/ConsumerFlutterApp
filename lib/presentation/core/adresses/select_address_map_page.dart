@@ -1,17 +1,16 @@
 import 'dart:async';
 
 import 'package:LaCoro/presentation/core/localization/app_localizations.dart';
+import 'package:LaCoro/presentation/core/preferences/preferences.dart';
 import 'package:LaCoro/presentation/core/ui/app_colors.dart';
+import 'package:domain/entities/location.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class SelectAddressMapPage extends StatefulWidget {
   static const SELECT_ADDRESS_MAP_ROUTE = '/select_address_map';
-
-  static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-  );
 
   @override
   _SelectAddressMapPageState createState() => _SelectAddressMapPageState();
@@ -19,7 +18,13 @@ class SelectAddressMapPage extends StatefulWidget {
 
 class _SelectAddressMapPageState extends State<SelectAddressMapPage> {
   final Completer<GoogleMapController> _controller = Completer();
-  Position position;
+
+  // TODO  Move this inside the bloc
+  CameraPosition initialPos() {
+    final Preferences pref = Injector.getInjector().get();
+    final location = pref.getLocation();
+    return location != null ? CameraPosition(target: LatLng(location.latitude, location.latitude)) : null;
+  }
 
   @override
   void initState() {
@@ -29,14 +34,15 @@ class _SelectAddressMapPageState extends State<SelectAddressMapPage> {
 
   Future<void> loadCurrentLocation() async {
     await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high).then((value) async {
+      // TODO move this inside the bloc
+      final Preferences pref = Injector.getInjector().get();
+      pref.saveLocation(Location(value.latitude, value.longitude));
       final GoogleMapController controller = await _controller.future;
-      controller.animateCamera(CameraUpdate.newCameraPosition(
-        CameraPosition(
-          zoom: 18,
-          target: LatLng(value.latitude, value.longitude),
-        ),
-      ));
-      setState(() => position = value);
+      controller.animateCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(zoom: 18, target: LatLng(value.latitude, value.longitude)),
+        )
+      );
     });
   }
 
@@ -79,7 +85,7 @@ class _SelectAddressMapPageState extends State<SelectAddressMapPage> {
                 GoogleMap(
                   zoomControlsEnabled: false,
                   myLocationButtonEnabled: true,
-                  initialCameraPosition: SelectAddressMapPage._kGooglePlex,
+                  initialCameraPosition: initialPos(),
                   onMapCreated: (GoogleMapController controller) {
                     _controller.complete(controller);
                   },
@@ -90,8 +96,10 @@ class _SelectAddressMapPageState extends State<SelectAddressMapPage> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.my_location,  size: 24),
-          onPressed: () {loadCurrentLocation();},
+          child: Icon(Icons.my_location, size: 24),
+          onPressed: () {
+            loadCurrentLocation();
+          },
         ),
       ),
     );
