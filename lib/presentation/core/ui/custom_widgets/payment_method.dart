@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 
 enum PaymentType { cash, credit, debit }
 
-class PaymentMethod extends StatelessWidget {
+class PaymentMethod extends StatefulWidget {
   final PaymentType pay;
 
   PaymentMethod(this.pay);
 
+  @override
+  _PaymentMethodState createState() => _PaymentMethodState();
+}
+
+class _PaymentMethodState extends State<PaymentMethod> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -22,13 +27,13 @@ class PaymentMethod extends StatelessWidget {
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: buildPaymentIcon(pay),
+                  child: buildPaymentIcon(widget.pay),
                 ),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.only(left: 12.0, right: 24),
                     child: Text(
-                      "${getPaymentName(pay)}",
+                      "${getPaymentName(widget.pay)}",
                       maxLines: 2,
                       textAlign: TextAlign.left,
                       overflow: TextOverflow.ellipsis,

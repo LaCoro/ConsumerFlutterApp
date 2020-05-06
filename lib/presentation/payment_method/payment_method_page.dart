@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 
+enum PaymentType { cash, credit, debit }
 enum SingingCharacter { lafayette, jefferson }
-
 // ...
 
 SingingCharacter _character = SingingCharacter.lafayette;
 
 class PaymentMethodPage extends StatefulWidget {
+  PaymentType pay;
+
+  PaymentMethodPage(this.pay);
+
   @override
   _PaymentMethodPageState createState() => _PaymentMethodPageState();
 }
@@ -25,9 +29,14 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
             ListTile(
 //            title: Text('Thomas Jefferson'),
               leading: Text(
-                'Thomas Jefferson',
-                style: Theme.of(context).textTheme.headline5,
-              ),
+                "${getPaymentName(widget.pay)}",
+                maxLines: 2,
+                textAlign: TextAlign.left,
+                overflow: TextOverflow.ellipsis,
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .bodyText1,),
 
               trailing: Radio(
                 value: SingingCharacter.jefferson,
@@ -40,7 +49,7 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10,vertical:6),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
               child: Divider(
                 thickness: 1,
                 height: 20,
@@ -49,7 +58,10 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
             ListTile(
               leading: Text(
                 'Lafayette',
-                style: Theme.of(context).textTheme.bodyText1,
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .bodyText1,
               ),
               trailing: Radio(
                 value: SingingCharacter.lafayette,
@@ -71,7 +83,10 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
             ListTile(
               leading: Text(
                 'Lafayette',
-                style: Theme.of(context).textTheme.bodyText1,
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .bodyText1,
               ),
               trailing: Radio(
                 value: SingingCharacter.lafayette,
@@ -95,4 +110,16 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
       ),
     );
   }
+}
+
+String getPaymentName(PaymentType paymentType) {
+  switch (paymentType) {
+    case PaymentType.cash:
+      return "Efectivo";
+    case PaymentType.credit:
+      return "Tarjeta de Crédito";
+    case PaymentType.debit:
+      return "Tarjeta de Débito";
+  }
+  return "";
 }
