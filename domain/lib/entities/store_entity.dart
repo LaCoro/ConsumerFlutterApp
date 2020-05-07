@@ -1,4 +1,4 @@
-import 'package:domain/entities/ciity_configuration.dart';
+import 'package:domain/entities/ciity_entity.dart';
 import 'package:domain/entities/item_entity.dart';
 import 'package:domain/entities/location.dart';
 
@@ -20,7 +20,7 @@ abstract class StoreEntity {
   int position;
   Future<List<ItemEntity>> items;
   Location location;
-  CityConfiguration cityInfo;
+  CityEntity cityInfo;
 
   Future<Map<ItemEntity, List<ItemEntity>>> getSortedItems();
 }
