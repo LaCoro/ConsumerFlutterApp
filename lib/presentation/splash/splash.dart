@@ -1,6 +1,7 @@
 import 'dart:async';
 
-import 'package:LaCoro/presentation/core/ui/app_colors.dart';
+import 'package:LaCoro/core/ui_utils/app_colors.dart';
+import 'package:LaCoro/presentation/city_selection/city_selection_page.dart';
 import 'package:LaCoro/presentation/store_list/store_list_page.dart';
 import 'package:flutter/material.dart';
 
@@ -41,7 +42,7 @@ class SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   }
 
   onDoneLoading() async {
-    Navigator.of(context).popAndPushNamed(StoreListPage.STORE_LIST_ROUTE);
+    Navigator.of(context).popAndPushNamed(CitySelectionPage.CITY_SELECTION_ROUTE);
   }
 
   @override
@@ -50,9 +51,7 @@ class SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
       opacity: animation,
       child: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.center,
-            end: Alignment.bottomCenter,
+          gradient: RadialGradient(
             colors: [AppColors.accentColor, AppColors.accentColor.withOpacity(0.9)],
           ),
           color: AppColors.accentColor,

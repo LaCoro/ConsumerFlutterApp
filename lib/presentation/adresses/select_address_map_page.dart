@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:LaCoro/presentation/core/localization/app_localizations.dart';
-import 'package:LaCoro/presentation/core/preferences/preferences.dart';
-import 'package:LaCoro/presentation/core/ui/app_colors.dart';
+import 'package:LaCoro/core/localization/app_localizations.dart';
+import 'package:LaCoro/core/preferences/preferences.dart';
+import 'package:LaCoro/core/ui_utils/app_colors.dart';
 import 'package:domain/entities/location.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';

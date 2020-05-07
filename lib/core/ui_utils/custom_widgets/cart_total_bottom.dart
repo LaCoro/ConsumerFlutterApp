@@ -1,4 +1,4 @@
-import 'package:LaCoro/presentation/core/localization/app_localizations.dart';
+import 'package:LaCoro/core/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class CartTotalBottom extends StatelessWidget {

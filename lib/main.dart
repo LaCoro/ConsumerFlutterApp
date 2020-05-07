@@ -1,17 +1,19 @@
-import 'package:LaCoro/presentation/core/adresses/addresses_page.dart';
-import 'package:LaCoro/presentation/core/di/app_module.dart';
-import 'package:LaCoro/presentation/core/di/store_list_module.dart';
-import 'package:LaCoro/presentation/core/localization/app_localizations_delegate.dart';
-import 'package:LaCoro/presentation/core/ui/app_theme.dart';
-import 'package:LaCoro/presentation/splash/splash.dart';
+import 'package:LaCoro/core/di/app_module.dart';
+import 'package:LaCoro/core/di/store_list_module.dart';
+import 'package:LaCoro/core/localization/app_localizations_delegate.dart';
+import 'package:LaCoro/presentation/adresses/addresses_page.dart';
+import 'package:LaCoro/presentation/city_selection/city_selection_page.dart';
 import 'package:LaCoro/presentation/register/register_page.dart';
+import 'package:LaCoro/presentation/splash/splash.dart';
 import 'package:LaCoro/presentation/store_details/store_details_page.dart';
 import 'package:LaCoro/presentation/test/styles_test_page.dart';
 import 'package:LaCoro/presentation/test/test_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
-import 'presentation/core/adresses/select_address_map_page.dart';
+
+import 'core/ui_utils/app_theme.dart';
+import 'presentation/adresses/select_address_map_page.dart';
 import 'presentation/store_list/store_list_page.dart';
 
 Future main() async {
@@ -54,6 +56,7 @@ class MyApp extends StatelessWidget {
         AddressesPage.ADDRESSES_LIST_ROUTE: (BuildContext context) => AddressesPage(),
         SplashPage.SPLASH_PAGE_ROUTE: (BuildContext context) => SplashPage(),
         RegisterPage.REGISTER_ROUTE: (BuildContext context) => RegisterPage(),
+        CitySelectionPage.CITY_SELECTION_ROUTE: (BuildContext context) => CitySelectionPage(),
         TestPage.TEST_PAGE_ROUTE: (BuildContext context) => TestPage(),
       },
     );

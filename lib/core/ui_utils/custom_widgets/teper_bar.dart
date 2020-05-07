@@ -1,6 +1,7 @@
-import 'package:LaCoro/presentation/core/ui/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
+
+import '../app_colors.dart';
 
 class TeperBar extends StatelessWidget {
   final int progress;

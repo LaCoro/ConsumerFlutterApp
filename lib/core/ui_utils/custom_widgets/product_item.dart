@@ -1,5 +1,5 @@
-import 'package:LaCoro/presentation/core/ui/custom_widgets/counter.dart';
-import 'package:LaCoro/presentation/core/ui/custom_widgets/discount_chip.dart';
+import 'package:LaCoro/core/ui_utils/custom_widgets/counter.dart';
+import 'package:LaCoro/core/ui_utils/custom_widgets/discount_chip.dart';
 import 'package:domain/entities/item_entity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:LaCoro/presentation/core/localization/app_localizations.dart';
+import 'package:LaCoro/core/localization/app_localizations.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';

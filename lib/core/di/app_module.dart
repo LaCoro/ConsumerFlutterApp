@@ -1,4 +1,4 @@
-import 'package:LaCoro/presentation/core/preferences/preferences.dart';
+import 'package:LaCoro/core/preferences/preferences.dart';
 import 'package:data/remote_datasource/api/parse/api_service.dart';
 import 'package:data/remote_datasource/api/parse/api_service_impl.dart';
 import 'package:data/remote_datasource/api/store_api.dart';

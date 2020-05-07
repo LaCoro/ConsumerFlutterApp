@@ -1,6 +1,5 @@
-import 'package:LaCoro/presentation/core/bloc/base_bloc.dart';
-import 'package:LaCoro/presentation/core/di/store_list_module.dart';
-import 'package:LaCoro/presentation/core/ui/custom_widgets/store_item.dart';
+import 'package:LaCoro/core/bloc/base_bloc.dart';
+import 'package:LaCoro/core/ui_utils/custom_widgets/store_item.dart';
 import 'package:LaCoro/presentation/store_details/store_details_page.dart';
 import 'package:LaCoro/presentation/store_list/store_list_bloc.dart';
 import 'package:domain/entities/store_entity.dart';

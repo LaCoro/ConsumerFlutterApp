@@ -1,6 +1,7 @@
 
+import 'package:LaCoro/core/localization/app_localizations.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:LaCoro/app_icons.dart';
-import 'package:LaCoro/presentation/core/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 enum PaymentType { cash, credit, debit }

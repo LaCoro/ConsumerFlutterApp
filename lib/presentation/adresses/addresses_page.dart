@@ -1,6 +1,6 @@
-import 'package:LaCoro/presentation/core/adresses/select_address_map_page.dart';
-import 'package:LaCoro/presentation/core/localization/app_localizations.dart';
-import 'package:LaCoro/presentation/core/ui/app_colors.dart';
+import 'package:LaCoro/core/ui_utils/app_colors.dart';
+import 'package:LaCoro/presentation/adresses/select_address_map_page.dart';
+import 'package:LaCoro/core/localization/app_localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

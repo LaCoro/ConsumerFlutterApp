@@ -1,8 +1,11 @@
+import 'package:LaCoro/core/localization/app_localizations.dart';
 import 'package:LaCoro/app_icons.dart';
 import 'package:LaCoro/presentation/core/localization/app_localizations.dart';
 import 'package:LaCoro/presentation/core/ui/app_colors.dart';
 import 'package:LaCoro/presentation/core/ui/app_theme.dart';
 import 'package:flutter/material.dart';
+
+import '../app_colors.dart';
 
 class SuccessfulOrderIcon extends StatelessWidget {
   @override

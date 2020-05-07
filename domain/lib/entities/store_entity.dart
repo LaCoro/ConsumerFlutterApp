@@ -21,6 +21,5 @@ abstract class StoreEntity {
   Future<List<ItemEntity>> items;
   Location location;
   CityEntity cityInfo;
-
   Future<Map<ItemEntity, List<ItemEntity>>> getSortedItems();
 }

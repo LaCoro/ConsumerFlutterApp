@@ -1,7 +1,7 @@
+import 'package:LaCoro/core/ui_utils/custom_widgets/discount_chip.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:domain/entities/store_entity.dart';
-import 'package:LaCoro/presentation/core/ui/custom_widgets/discount_chip.dart';
 import '../app_colors.dart';
 
 

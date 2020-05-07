@@ -1,6 +1,6 @@
 import 'package:LaCoro/app_icons.dart';
-import 'package:LaCoro/presentation/core/enums/payment_type.dart';
-import 'package:LaCoro/presentation/core/localization/app_localizations.dart';
+import 'package:LaCoro/core/enums/payment_type.dart';
+import 'package:LaCoro/core/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class PaymentMethod extends StatelessWidget {

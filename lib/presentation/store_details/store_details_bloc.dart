@@ -1,4 +1,4 @@
-import 'package:LaCoro/presentation/core/bloc/base_bloc.dart';
+import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:domain/entities/item_entity.dart';
 import 'package:domain/entities/order_entity.dart';
 import 'package:domain/entities/store_entity.dart';
