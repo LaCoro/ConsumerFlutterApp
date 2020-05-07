@@ -1,4 +1,5 @@
 import 'package:LaCoro/presentation/core/enums/payment_type.dart';
+import 'package:LaCoro/presentation/core/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class PaymentMethodPage extends StatefulWidget {
@@ -9,12 +10,12 @@ class PaymentMethodPage extends StatefulWidget {
 class _PaymentMethodPageState extends State<PaymentMethodPage> {
   PaymentType _method = PaymentType.credit;
 
-
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Metodo de Pago"),
+        title: Text(strings.paymentMethod),
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 14, top: 20),
@@ -23,11 +24,13 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
             return Divider();
           },
           itemCount: PaymentType.values.length,
-          itemBuilder: (context, posicion) {
+          itemBuilder: (context, i) {
             return ListTile(
-              title: Text("${getPaymentName(PaymentType.values[posicion])}",),
+              title: Text(
+                "${getPaymentName(context,PaymentType.values[i])}",
+              ),
               trailing: Radio(
-                value: PaymentType.values[posicion],
+                value: PaymentType.values[i],
                 groupValue: _method,
                 onChanged: (PaymentType value) {
                   setState(() {
@@ -42,5 +45,3 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
     );
   }
 }
-
-

@@ -1,14 +1,32 @@
 
+import 'package:LaCoro/presentation/core/localization/app_localizations.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
 enum PaymentType { cash, credit, debit }
 
-String getPaymentName(PaymentType paymentType) {
+String getPaymentName(BuildContext context, PaymentType paymentType) {
+  final strings = AppLocalizations.of(context);
+
   switch (paymentType) {
     case PaymentType.cash:
-      return "Efectivo";
+      return strings.cash;
     case PaymentType.credit:
-      return "Tarjeta de Crédito";
+      return strings.creditCard;
     case PaymentType.debit:
-      return "Tarjeta de Débito";
+      return strings.debitCard;
   }
   return "";
+}
+
+
+Widget buildPaymentIcon(PaymentType paymentType) {
+  switch (paymentType) {
+    case PaymentType.cash:
+      return Icon(Icons.local_atm, color: Colors.black, size: 40);
+    case PaymentType.credit:
+      return Icon(Icons.credit_card, color: Colors.black, size: 40);
+    case PaymentType.debit:
+      return Icon(Icons.credit_card, color: Colors.black, size: 40);
+  }
 }
