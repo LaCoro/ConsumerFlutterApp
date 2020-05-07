@@ -46,6 +46,13 @@ class AppLocalizations {
       'order':'Order',
       'delivery': 'Delivery',
       'total':'Total',
+      'successful_order': 'Successful order',
+      "payment method": "Payment method",
+      'cash' : 'Cash',
+      'change':'Change',
+      'credit_card':'Credit Card',
+      'debit_card': 'Debit Card',
+
     },
     'es': {
       'total': 'Total',
@@ -58,6 +65,11 @@ class AppLocalizations {
       'change' : 'Cambiar',
       'edit':"Editar",
   "delivery_address": "Dirección de entrega",
+      'debit_card':'Tarjeta de Débito',
+      'credit_card':"Tarjeta de Crédito",
+      'change':'Cambiar',
+      "cash":"Efectivo",
+      "payment method":"Metodo de Pago",
       'successful_order': 'Orden exitosa',
       'see_order': 'Ver pedido',
       'authorization_code': 'Código de autorizacion',
@@ -85,6 +97,24 @@ class AppLocalizations {
       'my_addresses': 'Mis direcciones',
     },
   };
+  String get   debitCard{
+    return _localizedValues[locale.languageCode]["debit_card"];
+  }
+  String get   creditCard{
+    return _localizedValues[locale.languageCode]["credit_card"];
+  }
+
+  String get   change{
+    return _localizedValues[locale.languageCode]["change"];
+  }
+
+  String get   cash{
+    return _localizedValues[locale.languageCode]["cash"];
+  }
+
+  String get   paymentMethod{
+    return _localizedValues[locale.languageCode]["payment method"];
+  }
 
   String get total {
     return _localizedValues[locale.languageCode]["total"];

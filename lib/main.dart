@@ -12,11 +12,12 @@ import 'package:LaCoro/presentation/test/test_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
-
+import 'presentation/core/adresses/select_address_map_page.dart';
 import 'presentation/store_list/store_list_page.dart';
 
 Future main() async {
   await AppModule().initialise(Injector.getInjector());
+  StoreListModule().initialise(Injector.getInjector());
   runApp(MyApp());
 }
 
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'LaCoro',
       theme: AppTheme.build(),
-      initialRoute:  '/',
+      initialRoute: '/',
       onGenerateRoute: (settings) {
         Widget destinationRoute = SplashPage();
         switch (settings.name) {
@@ -47,13 +48,14 @@ class MyApp extends StatelessWidget {
         return MaterialPageRoute(builder: (context) => destinationRoute, settings: settings);
       },
       routes: {
-        '/': (BuildContext context) => CheckoutPage(), // TODO change
+        '/': (BuildContext context) => SplashPage(), // TODO change
         StoreListPage.STORE_LIST_ROUTE: (BuildContext context) => StoreListPage(),
-        TestPage.TEST_PAGE_ROUTE: (BuildContext context) => TestPage(),
+        SelectAddressMapPage.SELECT_ADDRESS_MAP_ROUTE: (BuildContext context) => SelectAddressMapPage(),
         StylesTestPage.STYLE_TEST_PAGE_ROUTE: (BuildContext context) => StylesTestPage(),
         AddressesPage.ADDRESSES_LIST_ROUTE: (BuildContext context) => AddressesPage(),
         SplashPage.SPLASH_PAGE_ROUTE: (BuildContext context) => SplashPage(),
         RegisterPage.REGISTER_ROUTE: (BuildContext context) => RegisterPage(),
+        TestPage.TEST_PAGE_ROUTE: (BuildContext context) => TestPage(),
       },
     );
   }

@@ -1,3 +1,4 @@
+import 'package:LaCoro/presentation/core/preferences/preferences.dart';
 import 'package:data/remote_datasource/api/parse/api_service.dart';
 import 'package:data/remote_datasource/api/parse/api_service_impl.dart';
 import 'package:data/remote_datasource/api/store_api.dart';
@@ -10,8 +11,10 @@ import 'package:parse_server_sdk/parse_server_sdk.dart';
 /// App module that defines the generic modules to be injected in the app
 class AppModule {
   Future<Injector> initialise(Injector injector) async {
-    // Environment settings
     await _setCurrentEnvironment();
+
+    final preferences = await Preferences().init();
+    injector.map<Preferences>((injector) => preferences, isSingleton: true);
     // Api
     injector.map<ApiService>((injector) => ApiServiceImpl(), isSingleton: true);
     injector.map<StoreApi>((injector) => StoreApi(injector.get()));
