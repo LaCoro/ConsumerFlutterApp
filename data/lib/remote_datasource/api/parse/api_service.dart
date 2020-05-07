@@ -9,4 +9,6 @@ abstract class ApiService {
   Future<ParseResponse> createOrder(Order order);
 
   Future<ParseResponse> createOrderDetail(OrderDetail orderDetail);
+
+  Future<ParseResponse> getAllCities();
 }

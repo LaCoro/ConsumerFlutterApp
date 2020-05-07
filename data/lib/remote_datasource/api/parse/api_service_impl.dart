@@ -1,3 +1,4 @@
+import 'package:data/models/city.dart';
 import 'package:data/models/order.dart';
 import 'package:data/models/order_detail.dart';
 import 'package:data/models/store.dart';
@@ -13,11 +14,16 @@ class ApiServiceImpl extends ApiService {
 
   @override
   Future<ParseResponse> createOrder(Order order) {
-    return order.save() ;
+    return order.save();
   }
 
   @override
   Future<ParseResponse> createOrderDetail(OrderDetail orderDetail) {
-    return orderDetail.save() ;
+    return orderDetail.save();
+  }
+
+  @override
+  Future<ParseResponse> getAllCities() {
+    return City().getAll();
   }
 }

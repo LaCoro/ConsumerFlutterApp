@@ -11,11 +11,11 @@ class City extends ParseObject with CityEntity implements ParseCloneable {
 
   static const String _keyTableName = 'CityConfiguration';
 
-  static const String keyCountryCode = 'countryCode';
+  static const String keyCountryCode = 'country_code';
   static const String keyName = 'name';
-  static const String keyCityCode = 'cityCode';
-  static const String keyStateCode = 'stateCode';
-  static const String keyDeliveryCost = 'deliveryCost';
+  static const String keyCityCode = 'city_code';
+  static const String keyStateCode = 'state_code';
+  static const String keyDeliveryCost = 'delivery_cost';
 
   String get name => get<String>(keyName);
 
