@@ -60,6 +60,7 @@ class _PinPageState extends State<PinPage> {
               child: Text(
                 strings.authorizationCode,
                 style: Theme.of(context).textTheme.headline1,
+
                 textAlign: TextAlign.center,
               ),
             ),
