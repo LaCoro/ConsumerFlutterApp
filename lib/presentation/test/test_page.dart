@@ -1,4 +1,3 @@
-import 'package:LaCoro/presentation/core/enums/payment_type.dart';
 import 'package:LaCoro/presentation/core/ui/custom_widgets/box_comments_order.dart';
 import 'package:LaCoro/presentation/core/ui/custom_widgets/cart_total_bottom.dart';
 import 'package:LaCoro/presentation/core/ui/custom_widgets/current_order_status_banner.dart';
@@ -16,7 +15,7 @@ class TestPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: PaymentMethod(PaymentType.cash),
+        child: SuccessfulOrderIcon(),
       ),
     );
   }
