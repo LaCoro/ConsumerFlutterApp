@@ -1,3 +1,4 @@
+import 'package:LaCoro/presentation/core/ui/model/store_ui.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:domain/entities/store_entity.dart';
@@ -7,20 +8,11 @@ import '../app_colors.dart';
 
 class StoreItem  extends StatelessWidget{
 
-  String placeHolderAsset = "";
-  StoreEntity storeItem = null;
-  bool isDeliveryFree = false;
-  bool hasAPromo = false;
-  bool storeClosed = false;
-  String discountPercentage ="";
-  String tag="";
+  String placeHolderAsset;
+  StoreUI storeItem;
+
 
   StoreItem({Key key,
-    this.isDeliveryFree,
-    this.hasAPromo,
-    this.storeClosed,
-    this.discountPercentage,
-    this.tag,
     this.storeItem,
     this.placeHolderAsset
   }) : super(key: key);
@@ -29,20 +21,17 @@ class StoreItem  extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
 
-    var deliveryCostColor =
-    isDeliveryFree ? AppColors.accentColor : AppColors.boldTextColor;
+    var deliveryCostColor = storeItem.isDeliveryFree ? AppColors.accentColor : AppColors.boldTextColor;
 
-    var deliverFontWeight =
-    isDeliveryFree ? FontWeight.bold : FontWeight.normal;
+    var deliverFontWeight = storeItem.isDeliveryFree ? FontWeight.bold : FontWeight.normal;
 
-    var deliveryServiceMsg =
-    isDeliveryFree ? "gratis" : "\$${storeItem.deliveryCost}";
+    var deliveryServiceMsg = storeItem.isDeliveryFree ? "gratis" : "\$${storeItem.deliveryCost}";
 
-    var promoWidget = hasAPromo?    Align(
+    var promoWidget = storeItem.hasAPromo?    Align(
         alignment: Alignment.topLeft,
-        child: DiscountChip(discountPercentage: discountPercentage)): SizedBox(height : 10.0);
+        child: DiscountChip(discountPercentage: storeItem.discountPercentage)): SizedBox(height : 10.0);
 
-    var storeClosedWidget = storeClosed? Align(
+    var storeClosedWidget = storeItem.isStoreClosed? Align(
         alignment: Alignment.centerLeft,
         child: Text(
           "Cerrado",
@@ -91,7 +80,7 @@ class StoreItem  extends StatelessWidget{
                     Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          tag,
+                          storeItem.tag,
                           style: TextStyle(
                               fontWeight: FontWeight.normal,
                               fontSize: 13,
