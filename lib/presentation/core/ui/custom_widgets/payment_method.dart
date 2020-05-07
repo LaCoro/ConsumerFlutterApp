@@ -1,3 +1,4 @@
+import 'package:LaCoro/my_flutter_app_icons.dart';
 import 'package:flutter/material.dart';
 
 enum PaymentType { cash, credit, debit }
@@ -64,7 +65,7 @@ class PaymentMethod extends StatelessWidget {
   Widget buildPaymentIcon(PaymentType paymentType) {
     switch (paymentType) {
       case PaymentType.cash:
-        return Icon(Icons.local_atm, color: Colors.black, size: 40);
+        return Icon(MyFlutterApp.dolar, color: Colors.black, size: 18);
       case PaymentType.credit:
         return Icon(Icons.credit_card, color: Colors.black, size: 40);
       case PaymentType.debit:

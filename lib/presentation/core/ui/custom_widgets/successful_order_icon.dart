@@ -1,3 +1,4 @@
+import 'package:LaCoro/my_flutter_app_icons.dart';
 import 'package:LaCoro/presentation/core/localisation/app_localizations.dart';
 import 'package:LaCoro/presentation/core/ui/app_colors.dart';
 import 'package:LaCoro/presentation/core/ui/app_theme.dart';
@@ -19,8 +20,8 @@ class SuccessfulOrderIcon extends StatelessWidget {
             children: <Widget>[
               Spacer(),
 
-              Icon(Icons.sentiment_satisfied,size: 70, color: Colors.white,),
-              Spacer(flex: 2,),
+              Icon(MyFlutterApp.happy, size: 60, color: Colors.white,),
+              Spacer(flex: 3,),
               Text(strings.successfullOrder, style: Theme.of(context).textTheme.headline2,),
               Spacer(),
         ],
