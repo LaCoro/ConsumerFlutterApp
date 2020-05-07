@@ -3,6 +3,7 @@ import 'package:LaCoro/presentation/core/di/app_module.dart';
 import 'package:LaCoro/presentation/core/di/store_list_module.dart';
 import 'package:LaCoro/presentation/core/localization/app_localizations_delegate.dart';
 import 'package:LaCoro/presentation/core/ui/app_theme.dart';
+import 'package:LaCoro/presentation/core/ui/custom_widgets/successful_order_icon.dart';
 import 'package:LaCoro/presentation/register/register_page.dart';
 import 'package:LaCoro/presentation/splash/splash.dart';
 import 'package:LaCoro/presentation/store_details/store_details_page.dart';
@@ -48,7 +49,7 @@ class MyApp extends StatelessWidget {
         return MaterialPageRoute(builder: (context) => destinationRoute, settings: settings);
       },
       routes: {
-        '/': (BuildContext context) => AddressesPage(), // TODO change
+        '/': (BuildContext context) => TestPage(), // TODO change
         StoreListPage.STORE_LIST_ROUTE: (BuildContext context) => StoreListPage(),
         SelectAddressMapPage.SELECT_ADDRESS_MAP_ROUTE: (BuildContext context) => SelectAddressMapPage(),
         StylesTestPage.STYLE_TEST_PAGE_ROUTE: (BuildContext context) => StylesTestPage(),
