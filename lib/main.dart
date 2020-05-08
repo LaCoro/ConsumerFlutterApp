@@ -1,4 +1,5 @@
 import 'package:LaCoro/core/di/app_module.dart';
+import 'package:LaCoro/core/di/city_selection_module.dart';
 import 'package:LaCoro/core/di/store_list_module.dart';
 import 'package:LaCoro/core/localization/app_localizations_delegate.dart';
 import 'package:LaCoro/presentation/adresses/addresses_page.dart';
@@ -17,8 +18,12 @@ import 'presentation/adresses/select_address_map_page.dart';
 import 'presentation/store_list/store_list_page.dart';
 
 Future main() async {
+  // Inject modules
   await AppModule().initialise(Injector.getInjector());
   StoreListModule().initialise(Injector.getInjector());
+  CitySelectionModule().initialise(Injector.getInjector());
+
+  // start app
   runApp(MyApp());
 }
 

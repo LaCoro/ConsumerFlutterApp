@@ -1,7 +1,6 @@
 import 'package:data/models/city.dart';
 import 'package:data/remote_datasource/api/parse/api_service.dart';
 import 'package:data/remote_datasource/errors/service_error.dart';
-import 'package:domain/entities/ciity_entity.dart';
 
 /// Class to handle all related to the CityConfiguration API request using the Parse SDK Manager
 class CityApi {
@@ -12,7 +11,7 @@ class CityApi {
   Future<List<City>> getAllCities() async {
     final response = await apiService.getAllCities();
     if (response.success) {
-      return response.results.map((e) => e as CityEntity).toList();
+      return response.results.map((e) => e as City).toList();
     } else {
       throw ServiceError();
     }

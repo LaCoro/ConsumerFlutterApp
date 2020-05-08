@@ -5,7 +5,7 @@ import 'package:domain/result.dart';
 import 'package:domain/use_cases/city_use_cases.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CitySelectionBloc extends Bloc<CitySelectionEvents, BaseState> {
+class CitySelectionBloc extends Bloc<BaseEvent, BaseState> {
   final CityUseCases _cityUseCases;
   final Preferences _preferences;
 
@@ -15,18 +15,21 @@ class CitySelectionBloc extends Bloc<CitySelectionEvents, BaseState> {
   BaseState get initialState => InitialState();
 
   @override
-  Stream<BaseState> mapEventToState(CitySelectionEvents event) async* {
-    switch (event) {
-      case CitySelectionEvents.getAllCities:
+  Stream<BaseState> mapEventToState(BaseEvent event) async* {
+    try {
+      if (event is GetAllCitiesEvent) {
         yield* _loadCityList();
-        break;
-      case CitySelectionEvents.loadCurrentCity:
+      } else if (event is LoadSavedCityEvent) {
         yield* _loadSavedSelectedCity();
-        break;
+      } else if (event is SelectCityEvent) {
+        yield SuccessState(data: event.cityEntity);
+      }
+    } catch (e) {
+      yield ErrorState();
     }
   }
 
-  Stream _loadCityList() async* {
+  Stream<BaseState> _loadCityList() async* {
     yield LoadingState();
     final result = await _cityUseCases.getAllCities();
     if (result is Success<List<CityEntity>>) {
@@ -36,7 +39,7 @@ class CitySelectionBloc extends Bloc<CitySelectionEvents, BaseState> {
     }
   }
 
-  Stream _loadSavedSelectedCity() async* {
+  Stream<BaseState> _loadSavedSelectedCity() async* {
     final city = _preferences.getCity();
     if (city != null) {
       yield SuccessState(data: city);
@@ -45,4 +48,12 @@ class CitySelectionBloc extends Bloc<CitySelectionEvents, BaseState> {
 }
 
 /// Events
-enum CitySelectionEvents { getAllCities, loadCurrentCity }
+class GetAllCitiesEvent extends BaseEvent {}
+
+class LoadSavedCityEvent extends BaseEvent {}
+
+class SelectCityEvent extends BaseEvent {
+  final CityEntity cityEntity;
+
+  SelectCityEvent(this.cityEntity);
+}
