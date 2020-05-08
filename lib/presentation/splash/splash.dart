@@ -41,8 +41,8 @@ class SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     return new Timer(Duration(seconds: 3), onDoneLoading);
   }
 
-  onDoneLoading() async {
-    Navigator.of(context).pushReplacementNamed(CitySelectionPage.CITY_SELECTION_ROUTE);
+  onDoneLoading() async { // TODO arreglar esto
+    Navigator.popAndPushNamed(context, CitySelectionPage.CITY_SELECTION_ROUTE);
   }
 
   @override

@@ -63,7 +63,7 @@ class _CitySelectionPageState extends State<CitySelectionPage> {
                     },
                   ),
                   Spacer(),
-                  Container(
+                  Container(  //todo sacar esto como un custom widget (PrimaryButton)
                     height: 40,
                     margin: EdgeInsets.symmetric(vertical: 21, horizontal: 24),
                     child: RaisedButton(
@@ -73,7 +73,7 @@ class _CitySelectionPageState extends State<CitySelectionPage> {
                           ? null
                           : () async {
                               await _bloc.submitCitySelected(currentCity);
-                              Navigator.pushNamed(context, StoreListPage.STORE_LIST_ROUTE);
+                              Navigator.pushReplacementNamed(context, StoreListPage.STORE_LIST_ROUTE);
                             },
                       child: Center(
                           child: Text(

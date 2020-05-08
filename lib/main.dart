@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'LaCoro',
       theme: AppTheme.build(),
-      initialRoute: CitySelectionPage.CITY_SELECTION_ROUTE,
+      initialRoute: '/',
       onGenerateRoute: (settings) {
         Widget destinationRoute = SplashPage();
         switch (settings.name) {
