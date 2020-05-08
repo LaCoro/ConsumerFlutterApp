@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:LaCoro/core/ui_utils/app_colors.dart';
+import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/presentation/city_selection/city_selection_page.dart';
 import 'package:LaCoro/presentation/store_list/store_list_page.dart';
 import 'package:flutter/material.dart';

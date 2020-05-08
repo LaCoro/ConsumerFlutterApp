@@ -2,7 +2,7 @@ import 'package:LaCoro/core/ui_utils/custom_widgets/discount_chip.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:domain/entities/store_entity.dart';
-import '../app_colors.dart';
+import '../../appearance/app_colors.dart';
 
 
 class StoreItem  extends StatelessWidget{

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../app_colors.dart';
+import '../../appearance/app_colors.dart';
 
 class Counter extends StatelessWidget {
   final int quantity;

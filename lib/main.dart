@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 
-import 'core/ui_utils/app_theme.dart';
+import 'core/appearance/app_theme.dart';
 import 'presentation/adresses/select_address_map_page.dart';
 import 'presentation/store_list/store_list_page.dart';
 

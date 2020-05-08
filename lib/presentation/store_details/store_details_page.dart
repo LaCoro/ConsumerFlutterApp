@@ -1,6 +1,6 @@
 import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
-import 'package:LaCoro/core/ui_utils/app_colors.dart';
+import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/cart_total_bottom.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/category_tabs.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/product_item.dart';

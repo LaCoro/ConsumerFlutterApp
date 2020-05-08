@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../app_colors.dart';
+import '../../appearance/app_colors.dart';
 
 class DiscountChip extends StatelessWidget{
 
