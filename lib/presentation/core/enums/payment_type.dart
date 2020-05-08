@@ -1,4 +1,5 @@
 
+import 'package:LaCoro/app_icons.dart';
 import 'package:LaCoro/presentation/core/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,7 @@ String getPaymentName(BuildContext context, PaymentType paymentType) {
 Widget buildPaymentIcon(PaymentType paymentType) {
   switch (paymentType) {
     case PaymentType.cash:
-      return Icon(Icons.local_atm, color: Colors.black, size: 40);
+      return Icon(AppIcons.dolar , color: Colors.black, size: 18);
     case PaymentType.credit:
       return Icon(Icons.credit_card, color: Colors.black, size: 40);
     case PaymentType.debit:

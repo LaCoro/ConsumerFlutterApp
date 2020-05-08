@@ -18,7 +18,7 @@ class TestPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: OrderSumary(orderCost: 1,deliveryCost: 10,),
+        child: PaymentMethod(PaymentType.cash),
       ),
     );
   }
