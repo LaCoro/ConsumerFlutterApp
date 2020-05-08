@@ -1,4 +1,3 @@
-import 'package:domain/entities/store_entity.dart';
 import 'package:domain/repositories/store_repository.dart';
 
 import '../result.dart';
