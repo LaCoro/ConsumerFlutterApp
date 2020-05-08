@@ -9,9 +9,9 @@ class StoreRepositoryImpl extends StoreRepository {
   StoreRepositoryImpl(this._remoteDataSource);
 
   @override
-  Future<Result> getAllStores(CityEntity city) async {
+  Future<Result> getAllStoresByCity(String cityId) async {
     try {
-      final stores = await _remoteDataSource.getAllStores(city);
+      final stores = await _remoteDataSource.getAllStores(cityId);
       return Success(stores);
     } catch (e) {
       return Failure(e);

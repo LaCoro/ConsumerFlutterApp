@@ -2,7 +2,6 @@ import 'package:data/models/item.dart';
 import 'package:data/models/store.dart';
 import 'package:data/remote_datasource/api/parse/api_service.dart';
 import 'package:data/remote_datasource/errors/service_error.dart';
-import 'package:domain/entities/ciity_entity.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 
 /// Class to handle all related to the Store API request using the Parse SDK Manager
@@ -11,8 +10,8 @@ class StoreApi {
 
   StoreApi(this.apiService);
 
-  Future<List<Store>> getAllStores(CityEntity city) async {
-    final response = await apiService.getAllStoresByCity(city);
+  Future<List<Store>> getAllStores(String cityId) async {
+    final response = await apiService.getAllStoresByCity(cityId);
     if (response.success) {
       return response.results.map((e) => e as Store).toList();
     } else {

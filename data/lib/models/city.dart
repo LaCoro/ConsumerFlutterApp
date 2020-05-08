@@ -17,6 +17,8 @@ class City extends ParseObject with CityEntity implements ParseCloneable {
   static const String keyStateCode = 'state_code';
   static const String keyDeliveryCost = 'delivery_cost';
 
+  String get id => this.objectId;
+
   String get name => get<String>(keyName);
 
   String get countryCode => get<String>(keyCountryCode);

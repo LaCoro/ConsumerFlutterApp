@@ -1,6 +1,7 @@
 
 /// Class that represents the generic info for a city
 class CityEntity {
+  String id;
   String name;
   String countryCode;
   String cityCode;
@@ -9,6 +10,7 @@ class CityEntity {
 
   static CityEntity fromJson(Map<String, dynamic> json) {
     return CityEntity()
+      ..id = json['id']
       ..countryCode = json['country_code']
       ..name = json['name']
       ..cityCode = json['city_code']
@@ -18,6 +20,7 @@ class CityEntity {
 
   static Map<String, dynamic> toJson(CityEntity cityEntity) {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = cityEntity.id;
     data['country_code'] = cityEntity.countryCode;
     data['name'] = cityEntity.name;
     data['city_code'] = cityEntity.cityCode;

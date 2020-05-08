@@ -10,7 +10,7 @@ class StoreUseCases {
   StoreUseCases(this._repository);
 
   Future<Result> getAllStoresByCity(CityEntity city) async {
-    return _repository.getAllStores(city);
+    return _repository.getAllStoresByCity(city.id);
   }
 
   Future<Result> getStoreItems(StoreEntity storeEntity) async {
