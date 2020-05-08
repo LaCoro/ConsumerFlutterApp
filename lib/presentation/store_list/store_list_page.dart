@@ -1,6 +1,6 @@
-import 'package:LaCoro/presentation/core/bloc/base_bloc.dart';
-import 'package:LaCoro/presentation/core/ui/custom_widgets/store_item.dart';
-import 'package:LaCoro/presentation/core/ui/model/store_ui.dart';
+import 'package:LaCoro/core/bloc/base_bloc.dart';
+import 'package:LaCoro/core/ui_utils/custom_widgets/store_item.dart';
+import 'package:LaCoro/core/ui_utils/model/store_ui.dart';
 import 'package:LaCoro/presentation/store_details/store_details_page.dart';
 import 'package:LaCoro/presentation/store_list/store_list_bloc.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +53,7 @@ class _StoreListPageState extends State<StoreListPage> {
   }
 
   void fetchStores() {
-    _bloc.add(GetAllStoresEvent("test"));
+    _bloc.add(GetAllStoresEvent());
   }
 
   Widget buildList() {

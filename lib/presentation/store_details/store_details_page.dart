@@ -4,6 +4,7 @@ import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/cart_total_bottom.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/category_tabs.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/product_item.dart';
+import 'package:LaCoro/core/ui_utils/model/store_ui.dart';
 import 'package:LaCoro/presentation/store_details/store_details_bloc.dart';
 import 'package:domain/entities/item_entity.dart';
 import 'package:domain/entities/store_entity.dart';
@@ -28,7 +29,7 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final StoreEntity store = ModalRoute.of(context).settings.arguments;
+    final StoreUI store = ModalRoute.of(context).settings.arguments;
     final strings = AppLocalizations.of(context);
     _bloc.store = store;
 

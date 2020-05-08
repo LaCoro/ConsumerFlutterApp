@@ -1,5 +1,4 @@
 import 'package:domain/entities/ciity_entity.dart';
-import 'package:domain/entities/store_entity.dart';
 import 'package:domain/repositories/store_repository.dart';
 
 import '../result.dart';
@@ -13,8 +12,8 @@ class StoreUseCases {
     return _repository.getAllStoresByCity(city.id);
   }
 
-  Future<Result> getStoreItems(StoreEntity storeEntity) async {
-    return _repository.getStoreItems(storeEntity.id);
+  Future<Result> getStoreItems(String storeId) async {
+    return _repository.getStoreItems(storeId);
   }
 
 }
