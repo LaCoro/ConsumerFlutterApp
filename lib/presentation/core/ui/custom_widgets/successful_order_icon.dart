@@ -22,7 +22,7 @@ class SuccessfulOrderIcon extends StatelessWidget {
 
               Icon(AppIcons.happy, size: 60, color: Colors.white,),
               Spacer(flex: 3,),
-              Text(strings.successfullOrder, style: Theme.of(context).textTheme.headline2,),
+              Text(strings.successfulOrder, style: Theme.of(context).textTheme.headline2,),
               Spacer(),
         ],
         ),
