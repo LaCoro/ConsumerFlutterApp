@@ -9,7 +9,7 @@ class CityApi {
 
   CityApi(this.apiService);
 
-  Future<List<City>> getAllCities(String city) async {
+  Future<List<City>> getAllCities() async {
     final response = await apiService.getAllCities();
     if (response.success) {
       return response.results.map((e) => e as CityEntity).toList();
