@@ -15,7 +15,7 @@ class CurrentAdress extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(strings.deliveryAddress,style: Theme.of(context).textTheme.headline5,),
+          Text(strings.deliveryAddress,style: Theme.of(context).textTheme.bodyText3,),
           Padding(
             padding: const EdgeInsets.only(top: 20),
             child: Row(
@@ -32,7 +32,7 @@ class CurrentAdress extends StatelessWidget {
                       maxLines: 2,
                       textAlign: TextAlign.left,
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.headline4,
                     ),
                   ),
                 ),

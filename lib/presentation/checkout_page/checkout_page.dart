@@ -1,3 +1,4 @@
+import 'package:LaCoro/presentation/core/enums/payment_type.dart';
 import 'package:LaCoro/presentation/core/localization/app_localizations.dart';
 import 'package:LaCoro/presentation/core/ui/custom_widgets/current_adress.dart';
 import 'package:LaCoro/presentation/core/ui/custom_widgets/order_sumary.dart';
@@ -40,8 +41,8 @@ class CheckoutPage extends StatelessWidget {
                       children: <Widget>[
                         Expanded(
                             child: Text(strings.estimatedDelivery,
-                                style: Theme.of(context).textTheme.bodyText2)),
-                        Text("30 min", style: Theme.of(context).textTheme.bodyText2)
+                                style: Theme.of(context).textTheme.headline5)),
+                        Text("30 min", style: Theme.of(context).textTheme.headline5)
                       ],
                     ),
                   ),
@@ -49,13 +50,13 @@ class CheckoutPage extends StatelessWidget {
                 Divider(
                   thickness: 10,
                   height: 10,
-                  color: Theme.of(context).backgroundColor,
+                  color: Theme.of(context).dividerColor,
                 ),
                 PaymentMethod(PaymentType.cash),
                 Divider(
                   thickness: 10,
                   height: 10,
-                  color: Theme.of(context).backgroundColor,
+                  color: Theme.of(context).dividerColor,
                 ),SingleChildScrollView(
                   child: OrderSumary(orderCost: 21000,deliveryCost: 3000,),
                 ),
@@ -70,7 +71,7 @@ class CheckoutPage extends StatelessWidget {
               child: Center(
                   child: Text(
                     strings.continu,
-                    style: Theme.of(context).textTheme.button,
+                    style: Theme.of(context).textTheme.headline1.copyWith(color: Colors.white),
                   )),
             ),
             decoration: BoxDecoration(

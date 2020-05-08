@@ -21,19 +21,19 @@ class OrderSumary extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 24),
             child: Text(
               strings.summary,
-              style: Theme.of(context).textTheme.headline5,
+              style: Theme.of(context).textTheme.bodyText3,
             ),
           ),
           Row(
             children: <Widget>[
               Text(
                 strings.order,
-                style: Theme.of(context).textTheme.bodyText1,
+                style: Theme.of(context).textTheme.headline5,
               ),
               Spacer(),
               Text(
                 "\$ $orderCost",
-                style: Theme.of(context).textTheme.bodyText1,
+                style: Theme.of(context).textTheme.headline5,
               ),
             ],
           ),
@@ -43,12 +43,12 @@ class OrderSumary extends StatelessWidget {
               children: <Widget>[
                 Text(
                   strings.delivery,
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.headline5,
                 ),
                 Spacer(),
                 Text(
                   "\$ $deliveryCost",
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.headline5,
                 ),
               ],
             ),
@@ -57,69 +57,14 @@ class OrderSumary extends StatelessWidget {
             children: <Widget>[
               Text(
                 strings.total,
-                style: Theme.of(context).textTheme.headline5,
+                style: Theme.of(context).textTheme.headline1,
               ),
               Spacer(), Text(
                 "\$ ${orderCost+deliveryCost}",
-                style: Theme.of(context).textTheme.headline5,
+                style: Theme.of(context).textTheme.headline1,
               ),
             ],
           ),
-
-
-
-          /*Row(
-            children: <Widget>[
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 9),
-                      child: Text(
-                        "Pedido",
-                        style: Theme.of(context).textTheme.bodyText1,
-                      ),
-                    ),
-                    Text(
-                      "Domicilio",
-                      style: Theme.of(context).textTheme.bodyText1,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 16),
-                      child: Text(
-                        "Total",
-                        style: Theme.of(context).textTheme.bodyText2,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 9),
-                    child: Text(
-                      "\$ $orderCost",
-                      style: Theme.of(context).textTheme.bodyText1,
-                    ),
-                  ),
-                  Text(
-                    "\$ $deliveryCost",
-                    style: Theme.of(context).textTheme.bodyText1,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 16),
-                    child: Text(
-                      "\$ ${orderCost+deliveryCost}",
-                      style: Theme.of(context).textTheme.bodyText2,
-                    ),
-                  )
-                ],
-              ),
-            ],
-          ),*/
         ],
       ),
     );
