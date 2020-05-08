@@ -37,7 +37,7 @@ class StoreDetailsBloc extends Bloc<BaseEvent, BaseState> {
 
   Stream<BaseState> loadStoreItems() async* {
     yield LoadingState();
-    final sortedItems = await store.getSortedItems();
+    final sortedItems = await _storeUseCases.getStoreItems(store);
     if (sortedItems != null) {
       yield SuccessState(data: sortedItems);
     } else {

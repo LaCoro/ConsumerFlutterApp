@@ -9,7 +9,7 @@ class StoreListModule {
     // Use cases
     injector.map<StoreUseCases>((injector) => StoreUseCases(injector.get()));
     // BLoC
-    injector.map<StoreListBloc>((injector) => StoreListBloc(injector.get()));
+    injector.map<StoreListBloc>((injector) => StoreListBloc(injector.get(), injector.get()));
     return injector;
   }
 }

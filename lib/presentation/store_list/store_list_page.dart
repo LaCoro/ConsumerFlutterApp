@@ -53,7 +53,7 @@ class _StoreListPageState extends State<StoreListPage> {
   }
 
   void fetchStores() {
-    _bloc.add(GetAllStoresEvent("test"));
+    _bloc.add(GetAllStoresEvent());
   }
 
   Widget buildList() {

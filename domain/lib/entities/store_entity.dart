@@ -3,6 +3,7 @@ import 'package:domain/entities/item_entity.dart';
 import 'package:domain/entities/location.dart';
 
 abstract class StoreEntity {
+  String id;
   String name;
   List<String> searchTags;
   String address;
@@ -18,8 +19,8 @@ abstract class StoreEntity {
   bool active;
   int deliveryCost;
   int position;
-  Future<List<ItemEntity>> items;
   Location location;
   CityEntity cityInfo;
-  Future<Map<ItemEntity, List<ItemEntity>>> getSortedItems();
+  Future<List<ItemEntity>> items;
+//  Future<Map<ItemEntity, List<ItemEntity>>> getSortedItems();
 }
