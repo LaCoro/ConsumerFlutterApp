@@ -1,8 +1,8 @@
-import 'package:LaCoro/core/bloc/base_bloc.dart';
-import 'package:LaCoro/core/ui_utils/custom_widgets/store_item.dart';
+import 'package:LaCoro/presentation/core/bloc/base_bloc.dart';
+import 'package:LaCoro/presentation/core/ui/custom_widgets/store_item.dart';
+import 'package:LaCoro/presentation/core/ui/model/store_ui.dart';
 import 'package:LaCoro/presentation/store_details/store_details_page.dart';
 import 'package:LaCoro/presentation/store_list/store_list_bloc.dart';
-import 'package:domain/entities/store_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
@@ -19,7 +19,7 @@ class _StoreListPageState extends State<StoreListPage> {
   final RefreshController _refreshController = RefreshController();
 
   final StoreListBloc _bloc;
-  List<StoreEntity> _data;
+  List<StoreUI> _stores;
 
   _StoreListPageState(this._bloc);
 
@@ -39,8 +39,8 @@ class _StoreListPageState extends State<StoreListPage> {
             _refreshController.refreshCompleted();
             if (state is LoadingState) return Center(child: CircularProgressIndicator());
 
-            if (state is SuccessState<List<StoreEntity>>) {
-              _data = state.data;
+            if (state is SuccessState<List<StoreUI>>) {
+              _stores = state.data;
             }
             return SmartRefresher(
               controller: _refreshController,
@@ -53,36 +53,20 @@ class _StoreListPageState extends State<StoreListPage> {
   }
 
   void fetchStores() {
-    _bloc.add(GetAllStoresEvent());
+    _bloc.add(GetAllStoresEvent("test"));
   }
 
   Widget buildList() {
     return ListView.builder(
         itemExtent: 150.0,
         itemBuilder: (c, index) {
-          var isDeliveryFree = _data[index].deliveryCost == null || _data[index].deliveryCost == 0 ? true : false;
-
-          var hasAPromo = false;
-
-          var storeClosed = !_data[index].active;
-
-          var randomTag = "";
-          if (_data[index].searchTags.isNotEmpty) {
-            _data[index].searchTags.shuffle();
-          }
-          randomTag = _data[index].searchTags.last;
-
           return GestureDetector(
-              onTap: () => Navigator.pushNamed(context, StoreDetailsPage.STORE_DETAILS_ROUTE, arguments: _data[index]),
+              onTap: () => Navigator.pushNamed(context, StoreDetailsPage.STORE_DETAILS_ROUTE, arguments: _stores[index]),
               child: StoreItem(
-                isDeliveryFree: isDeliveryFree,
-                storeClosed: storeClosed,
-                hasAPromo: hasAPromo,
-                tag: randomTag,
                 placeHolderAsset: 'assets/loading_resource.gif',
-                storeItem: _data[index],
+                storeItem: _stores[index],
               ));
         },
-        itemCount: _data?.length ?? 0);
+        itemCount: _stores?.length ?? 0);
   }
 }
