@@ -17,21 +17,22 @@ class CitySelectionPage extends StatefulWidget {
 class _CitySelectionPageState extends State<CitySelectionPage> {
   final CitySelectionBloc _bloc;
 
+  CityEntity currentCity;
+
   _CitySelectionPageState(this._bloc);
 
   @override
   void initState() {
-    _bloc.add(LoadSavedCityEvent());
+    setState(() {
+      currentCity = _bloc.loadSavedCity();
+    });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context);
-
-    CityEntity currentCity;
     List<CityEntity> cityList;
-
     return SafeArea(
       child: Scaffold(
         body: BlocBuilder(
@@ -39,43 +40,52 @@ class _CitySelectionPageState extends State<CitySelectionPage> {
             builder: (context, state) {
               if (state is InitialState) _bloc.add(GetAllCitiesEvent());
 
-              if (state is SuccessState<CityEntity>) currentCity = state.data;
-
               if (state is SuccessState<List<CityEntity>>) cityList = state.data;
 
-              if (state is NavigateState) Navigator.pushNamed(context, StoreListPage.STORE_LIST_ROUTE);
+              if (state is NavigateState) {
+                Navigator.popAndPushNamed(context, StoreListPage.STORE_LIST_ROUTE);
+              }
 
               if (cityList?.isNotEmpty != true) return Center(child: CircularProgressIndicator());
 
-              return Center(
-                child: Column(
-                  children: <Widget>[
-                    Spacer(),
-                    Text("Selecciona ciudad"), //todo usar localizations
-                    SizedBox(height: 12),
-                    DropdownButton(
-                      value: currentCity,
-                      items: cityList.map((e) => DropdownMenuItem(value: e, child: Text(e.name))).toList(),
-                      onChanged: (value) => _bloc.add(SelectCityEvent(value)),
+              return Column(
+                children: <Widget>[
+                  Spacer(),
+                  Text("Selecciona ciudad"), //todo usar localizations
+                  SizedBox(height: 12),
+                  DropdownButton(
+                    value: currentCity?.name,
+                    items: cityList.map((e) => DropdownMenuItem(value: e.name, child: Text(e.name))).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        currentCity = cityList.firstWhere((element) => element.name == value);
+                      });
+                    },
+                  ),
+                  Spacer(),
+                  Container(
+                    height: 40,
+                    margin: EdgeInsets.symmetric(vertical: 21, horizontal: 24),
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                      color: Theme.of(context).accentColor,
+                      onPressed: currentCity == null
+                          ? null
+                          : () async {
+                              await _bloc.submitCitySelected(currentCity);
+                              Navigator.pushNamed(context, StoreListPage.STORE_LIST_ROUTE);
+                            },
+                      child: Center(
+                          child: Text(
+                        strings.continu,
+                        style: Theme.of(context).textTheme.headline1.copyWith(color: Colors.white),
+                      )),
                     ),
-                    Spacer(),
-                    Container(
-                      margin: EdgeInsets.symmetric(vertical: 21, horizontal: 24),
-                      child: FlatButton(
-                        onPressed: () {},
-                        child: Center(
-                            child: Text(
-                          strings.continu,
-                          style: Theme.of(context).textTheme.headline1.copyWith(color: Colors.white),
-                        )),
-                      ),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).accentColor,
-                        borderRadius: BorderRadius.circular(5),
-                      ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               );
             }),
       ),

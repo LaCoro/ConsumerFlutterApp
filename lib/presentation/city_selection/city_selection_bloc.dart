@@ -18,52 +18,35 @@ class CitySelectionBloc extends Bloc<BaseEvent, BaseState> {
   Stream<BaseState> mapEventToState(BaseEvent event) async* {
     try {
       if (event is GetAllCitiesEvent) {
-        yield* _loadCityList();
-      } else if (event is LoadSavedCityEvent) {
-        yield* _loadSavedSelectedCity();
-      } else if (event is SelectCityEvent) {
-        yield SuccessState(data: event.cityEntity);
+        yield LoadingState();
+        final result = await _cityUseCases.getAllCities();
+        if (result is Success<List<CityEntity>>) {
+          yield SuccessState(data: result.data);
+        } else {
+          yield ErrorState();
+        }
       } else if (event is SubmitCitySelected) {
         await _preferences.saveCity(event.cityEntity);
-        yield NavigateState();
       }
     } catch (e) {
       yield ErrorState();
     }
   }
 
-  Stream<BaseState> _loadCityList() async* {
-    yield LoadingState();
-    final result = await _cityUseCases.getAllCities();
-    if (result is Success<List<CityEntity>>) {
-      yield SuccessState(data: result.data);
-    } else {
-      yield ErrorState();
-    }
+  CityEntity loadSavedCity() {
+    return _preferences.getCity();
   }
 
-  Stream<BaseState> _loadSavedSelectedCity() async* {
-    final city = _preferences.getCity();
-    if (city != null) {
-      yield SuccessState(data: city);
-    }
+  Future<void> submitCitySelected(CityEntity cityEntity) async {
+    await _preferences.saveCity(cityEntity);
   }
 }
 
 /// Events
 class GetAllCitiesEvent extends BaseEvent {}
 
-class LoadSavedCityEvent extends BaseEvent {}
-
-class SelectCityEvent extends BaseEvent {
-  final CityEntity cityEntity;
-
-  SelectCityEvent(this.cityEntity);
-}
-
 class SubmitCitySelected extends BaseEvent {
   final CityEntity cityEntity;
 
   SubmitCitySelected(this.cityEntity);
-
 }
