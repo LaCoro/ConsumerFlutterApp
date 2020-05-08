@@ -1,6 +1,9 @@
+import 'package:LaCoro/presentation/core/enums/payment_type.dart';
 import 'package:LaCoro/presentation/core/ui/custom_widgets/box_comments_order.dart';
 import 'package:LaCoro/presentation/core/ui/custom_widgets/cart_total_bottom.dart';
+import 'package:LaCoro/presentation/core/ui/custom_widgets/current_adress.dart';
 import 'package:LaCoro/presentation/core/ui/custom_widgets/current_order_status_banner.dart';
+import 'package:LaCoro/presentation/core/ui/custom_widgets/order_sumary.dart';
 import 'package:LaCoro/presentation/core/ui/custom_widgets/payment_method.dart';
 import 'package:LaCoro/presentation/core/ui/custom_widgets/category_tabs.dart';
 import 'package:LaCoro/presentation/core/ui/custom_widgets/successful_order_icon.dart';
@@ -15,7 +18,7 @@ class TestPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SuccessfulOrderIcon(),
+        child: OrderSumary(orderCost: 1,deliveryCost: 10,),
       ),
     );
   }

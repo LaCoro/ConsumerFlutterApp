@@ -13,7 +13,8 @@ class AppLocalizations {
     'en': {
       'see_order': 'See order',
       'authorization_code': 'Authorization code',
-      "enter_the_code_sent_to_the_cell_phone": "Enter the code sent to the cell phone: ",
+      "enter_the_code_sent_to_the_cell_phone":
+          "Enter the code sent to the cell phone: ",
       "processing": "processing...",
       "wrong_code": "* Wrong code",
       "verifying": "Verifying ...",
@@ -36,23 +37,37 @@ class AppLocalizations {
       'use_my_location': 'Use my current location',
       'my_addresses': 'My addresses',
       'successful_order': 'Successful order',
-      "payment method": "Payment method",
-      'cash' : 'Cash',
-      'change':'Change',
-      'credit_card':'Credit Card',
+      "delivery_address": "Delivery address",
+      'edit': 'Edit',
+      'change': 'Change',
+      "estimated_delivery": "Estimated delivery",
+      "payment_method": "Payment method",
+      "summary": "Summary",
+      'order': 'Order',
+      'delivery': 'Delivery',
+      'total': 'Total',
+      'cash': 'Cash',
+      'credit_card': 'Credit Card',
       'debit_card': 'Debit Card',
-
     },
     'es': {
-      'debit_card':'Tarjeta de Débito',
-      'credit_card':"Tarjeta de Crédito",
-      'change':'Cambiar',
-      "cash":"Efectivo",
-      "payment method":"Metodo de Pago",
+      'total': 'Total',
+      'delivery': "Domicilio",
+      "order": "Pedido",
+      "summary": "Resumen",
+      "cash": "Efectivo",
+      "payment_method": "Método de pago",
+      "estimated_delivery": "Entrega estimada",
+      'change': 'Cambiar',
+      'edit': "Editar",
+      "delivery_address": "Dirección de entrega",
+      'debit_card': 'Tarjeta de Débito',
+      'credit_card': "Tarjeta de Crédito",
       'successful_order': 'Orden exitosa',
       'see_order': 'Ver pedido',
       'authorization_code': 'Código de autorizacion',
-      "enter_the_code_sent_to_the_cell_phone": "Ingrese el código enviado al celular: ",
+      "enter_the_code_sent_to_the_cell_phone":
+          "Ingrese el código enviado al celular: ",
       "processing": "Procesado...",
       "rong_code": "* Codigo erróneo",
       "verifying": "Verificando ...",
@@ -76,23 +91,53 @@ class AppLocalizations {
       'my_addresses': 'Mis direcciones',
     },
   };
-  String get   debitCard{
+
+  String get debitCard {
     return _localizedValues[locale.languageCode]["debit_card"];
   }
-  String get   creditCard{
+
+  String get creditCard {
     return _localizedValues[locale.languageCode]["credit_card"];
   }
 
-  String get   change{
+  String get change {
     return _localizedValues[locale.languageCode]["change"];
   }
 
-  String get   cash{
+  String get cash {
     return _localizedValues[locale.languageCode]["cash"];
   }
 
-  String get   paymentMethod{
-    return _localizedValues[locale.languageCode]["payment method"];
+  String get paymentMethod {
+    return _localizedValues[locale.languageCode]["payment_method"];
+  }
+
+  String get total {
+    return _localizedValues[locale.languageCode]["total"];
+  }
+
+  String get delivery {
+    return _localizedValues[locale.languageCode]["delivery"];
+  }
+
+  String get order {
+    return _localizedValues[locale.languageCode]["order"];
+  }
+
+  String get summary {
+    return _localizedValues[locale.languageCode]["summary"];
+  }
+
+  String get estimatedDelivery {
+    return _localizedValues[locale.languageCode]['estimated_delivery'];
+  }
+
+  String get edit {
+    return _localizedValues[locale.languageCode]['edit'];
+  }
+
+  String get deliveryAddress {
+    return _localizedValues[locale.languageCode]['delivery_address'];
   }
 
   String get successfulOrder {
@@ -168,7 +213,8 @@ class AppLocalizations {
   }
 
   String get enterTheCodeSentToTheCellPhone {
-    return _localizedValues[locale.languageCode]["enter_the_code_sent_to_the_cell_phone"];
+    return _localizedValues[locale.languageCode]
+        ["enter_the_code_sent_to_the_cell_phone"];
   }
 
   String get processing {

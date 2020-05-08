@@ -4,14 +4,14 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   static ThemeData build() => ThemeData(
-      primaryColor: Color(0xff383838),
+      primaryColor: Color(0xffffffff),
       primaryColorDark: Color(0xffffffff),
       primaryColorLight: Color(0xffffffff),
       accentColor: Color(0xFF3D9FE6),
-      backgroundColor: Color(0xFFF7F7F7),
+      backgroundColor: Color(0xFFD8D8D8),
       disabledColor: AppColors.greyMedium,
       brightness: Brightness.light,
-      dividerColor: Color(0xFFC7CBD3),
+      dividerColor: Color(0xffE5E5E5),
       fontFamily: GoogleFonts.roboto().fontFamily,
       primaryIconTheme: IconThemeData(size: 24),
       accentIconTheme: IconThemeData(size: 28),
