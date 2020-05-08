@@ -1,4 +1,3 @@
-import 'package:LaCoro/presentation/store_details/store_details_bloc.dart';
 import 'package:LaCoro/presentation/store_list/store_list_page.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 
