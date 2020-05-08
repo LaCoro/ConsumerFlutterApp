@@ -10,6 +10,7 @@ class PaymentMethod extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     final strings = AppLocalizations.of(context);
     return Padding(
       padding: const EdgeInsets.all(24.0),
@@ -17,9 +18,9 @@ class PaymentMethod extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(strings.paymentMethod,
-          style: Theme.of(context).textTheme.headline5,),
+          style: Theme.of(context).textTheme.bodyText3,),
           Padding(
-            padding: const EdgeInsets.only(top: 24),
+            padding: const EdgeInsets.only(top: 20),
             child: Row(
               children: <Widget>[
                 Padding(
@@ -34,15 +35,21 @@ class PaymentMethod extends StatelessWidget {
                       maxLines: 2,
                       textAlign: TextAlign.left,
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .headline4,
                     ),
                   ),
                 ),
                 Align(
                     child: Text(
-                  strings.change,
-                  style: Theme.of(context).textTheme.headline6,
-                )),
+                      strings.change,
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .headline6,
+                    )),
               ],
             ),
           )
