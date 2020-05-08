@@ -1,4 +1,4 @@
-import 'package:LaCoro/presentation/core/localization/app_localizations.dart';
+import 'package:LaCoro/core/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class CurrentAdress extends StatelessWidget {
@@ -15,7 +15,7 @@ class CurrentAdress extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(strings.deliveryAddress,style: Theme.of(context).textTheme.bodyText3,),
+          Text(strings.deliveryAddress,style: Theme.of(context).textTheme.bodyText2,),
           Padding(
             padding: const EdgeInsets.only(top: 20),
             child: Row(

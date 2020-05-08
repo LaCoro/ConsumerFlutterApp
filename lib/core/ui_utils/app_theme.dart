@@ -19,7 +19,6 @@ class AppTheme {
       textTheme: TextTheme(
         bodyText1: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 28, color: Color(0xff383838)), //titulos
         bodyText2: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 20, color: Color(0xff383838)),//Appbar
-        bodyText3: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 18, color: Color(0xff383838)),//subsecciones
 
         headline1: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 16, color: Color(0xff383838)),//title store en ListStore
         headline2: GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xff383838)),//title popUp

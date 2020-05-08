@@ -23,6 +23,9 @@ class CitySelectionBloc extends Bloc<BaseEvent, BaseState> {
         yield* _loadSavedSelectedCity();
       } else if (event is SelectCityEvent) {
         yield SuccessState(data: event.cityEntity);
+      } else if (event is SubmitCitySelected) {
+        await _preferences.saveCity(event.cityEntity);
+        yield NavigateState();
       }
     } catch (e) {
       yield ErrorState();
@@ -56,4 +59,11 @@ class SelectCityEvent extends BaseEvent {
   final CityEntity cityEntity;
 
   SelectCityEvent(this.cityEntity);
+}
+
+class SubmitCitySelected extends BaseEvent {
+  final CityEntity cityEntity;
+
+  SubmitCitySelected(this.cityEntity);
+
 }

@@ -25,12 +25,17 @@ class SuccessState<T> extends BaseState {
   SuccessState({this.data}) : super([data]);
 }
 
+class NavigateState<T> extends BaseState {
+  final T data;
+
+  NavigateState({this.data}) : super([data]);
+}
+
 class ErrorState extends BaseState {
   final String message;
 
   ErrorState({this.message}) : super([message]);
 }
-
 
 /// Base class represent the events in the BLoC pattern
 abstract class BaseEvent extends Equatable {

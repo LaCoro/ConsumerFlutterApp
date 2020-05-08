@@ -1,8 +1,8 @@
-import 'package:LaCoro/presentation/core/enums/payment_type.dart';
-import 'package:LaCoro/presentation/core/localization/app_localizations.dart';
-import 'package:LaCoro/presentation/core/ui/custom_widgets/current_adress.dart';
-import 'package:LaCoro/presentation/core/ui/custom_widgets/order_sumary.dart';
-import 'package:LaCoro/presentation/core/ui/custom_widgets/payment_method.dart';
+import 'package:LaCoro/core/enums/payment_type.dart';
+import 'package:LaCoro/core/localization/app_localizations.dart';
+import 'package:LaCoro/core/ui_utils/custom_widgets/current_adress.dart';
+import 'package:LaCoro/core/ui_utils/custom_widgets/order_sumary.dart';
+import 'package:LaCoro/core/ui_utils/custom_widgets/payment_method.dart';
 import 'package:flutter/material.dart';
 
 class CheckoutPage extends StatelessWidget {

@@ -1,4 +1,4 @@
-import 'package:LaCoro/presentation/core/localization/app_localizations.dart';
+import 'package:LaCoro/core/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class OrderSumary extends StatelessWidget {
@@ -21,7 +21,7 @@ class OrderSumary extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 24),
             child: Text(
               strings.summary,
-              style: Theme.of(context).textTheme.bodyText3,
+              style: Theme.of(context).textTheme.bodyText2,
             ),
           ),
           Row(
