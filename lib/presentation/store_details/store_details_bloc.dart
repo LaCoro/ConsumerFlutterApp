@@ -6,14 +6,14 @@ import 'package:domain/use_cases/store_use_cases.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class StoreDetailsBloc extends Bloc<BaseEvent, BaseState> {
-  final StoreUseCases _storeInteractor;
+  final StoreUseCases _storeUseCases;
 
   StoreEntity store;
 
   OrderEntity orderEntity = OrderEntity();
   Map<ItemEntity, int> products = Map();
 
-  StoreDetailsBloc(this._storeInteractor);
+  StoreDetailsBloc(this._storeUseCases);
 
   @override
   BaseState get initialState => InitialState();
