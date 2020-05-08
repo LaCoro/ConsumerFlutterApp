@@ -59,7 +59,7 @@ class StylesTestPage extends StatelessWidget {
                         Text("w500Black16",
                             style: AppTextStyle.w500Black16),
                         Text("blue16",
-                            style: AppTextStyle.black16),
+                            style: AppTextStyle.blue16),
                         Text("black16",
                             style: AppTextStyle.black16),
                         Text("grey16",
