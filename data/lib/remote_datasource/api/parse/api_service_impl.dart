@@ -18,7 +18,7 @@ class ApiServiceImpl extends ApiService {
   @override
   Future<ParseResponse> getStoreItems(String storeId) async {
     final store = await Store().getObject(storeId);
-    final QueryBuilder query = QueryBuilder<Item>(Item())..whereEqualTo(Item.keyStore, store.result.toPointer());
+    final QueryBuilder query = QueryBuilder<Item>(Item())..whereEqualTo(Item.keyStore, (store.result as Store).toPointer());
     return await query.query();
   }
 
