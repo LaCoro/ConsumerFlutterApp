@@ -19,15 +19,15 @@ class StoreUI {
   bool active;
   String logo;
 
+  StoreUI.fromEntity(StoreEntity store): name = store.name,
+        logo = store.logo,
+        openAt = store.openAt,
+        closeAt = store.closeAt ;
 
-
-  StoreUI(StoreEntity store){
-     this.name = store.name;
-     this.logo = store.logo;
-     this.openAt = store.openAt;
-     this.closeAt = store.closeAt;
-  }
-
-  
-  
+  StoreUI(
+     this.name,
+     this.logo,
+     this.openAt,
+     this.closeAt
+  );
 }

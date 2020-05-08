@@ -14,7 +14,7 @@ class StoreUIMapper extends UIModelMapper<StoreUI,StoreEntity> {
       List<StoreUI> storesUI = List();
       stores.forEach((store) {
 
-         var storeUI = StoreUI(store);
+         var storeUI = StoreUI.fromEntity(store);
          developer.log("$store");
 
          // var hasAPromo = false;
