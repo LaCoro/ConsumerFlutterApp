@@ -2,6 +2,7 @@ import 'package:domain/entities/store_entity.dart';
 
 class StoreUI {
 
+  String id;
   bool isDeliveryFree = false;
   bool isStoreClosed = false;
   bool hasAPromo = false;
@@ -26,6 +27,7 @@ class StoreUI {
      this.openAt = store.openAt;
      this.closeAt = store.closeAt;
   }
+
   
   
 }

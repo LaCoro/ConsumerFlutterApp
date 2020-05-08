@@ -1,5 +1,5 @@
 import 'package:LaCoro/presentation/core/bloc/base_bloc.dart';
-import 'package:LaCoro/presentation/core/ui/mappers/StoreItemMapper.dart';
+import 'package:LaCoro/presentation/core/ui/mappers/store_ui_mapper.dart';
 import 'package:domain/entities/store_entity.dart';
 import 'package:domain/result.dart';
 import 'package:domain/use_cases/store_use_cases.dart';
@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class StoreListBloc extends Bloc<BaseEvent, BaseState> {
   final StoreUseCases _getAllStores;
-  final StoreItemMapper mapper = StoreItemMapper();
+  final StoreUIMapper mapper = StoreUIMapper();
 
   StoreListBloc(this._getAllStores);
 

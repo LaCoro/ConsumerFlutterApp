@@ -2,7 +2,12 @@ import 'package:LaCoro/presentation/core/ui/model/store_ui.dart';
 import 'package:domain/entities/store_entity.dart';
 import 'dart:developer' as developer;
 
-class StoreItemMapper {
+abstract class UIModelMapper<T,J> {
+   List<T> process(List<J> items);
+}
+
+
+class StoreUIMapper extends UIModelMapper<StoreUI,StoreEntity> {
 
 
    List<StoreUI> process(List<StoreEntity> stores) {
