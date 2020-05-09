@@ -1,9 +1,11 @@
+import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
 import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/cart_total_bottom.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/category_tabs.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/product_item.dart';
+import 'package:LaCoro/core/ui_utils/custom_widgets/store_item.dart';
 import 'package:LaCoro/core/ui_utils/model/store_ui.dart';
 import 'package:LaCoro/presentation/store_details/store_details_bloc.dart';
 import 'package:domain/entities/item_entity.dart';
@@ -32,24 +34,19 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
     final StoreUI store = ModalRoute.of(context).settings.arguments;
     final strings = AppLocalizations.of(context);
     _bloc.store = store;
-
     Map<ItemEntity, List<ItemEntity>> itemList;
-    int orderQuantity = 0;
-    double cartTotal = 0;
     return Scaffold(
         appBar: AppBar(elevation: 0),
-
         body: SafeArea(
           child: BlocBuilder(
               bloc: _bloc,
               builder: (context, state) {
+                int orderQuantity = 0;
+                double cartTotal = 0;
                 // Handle states
                 if (state is InitialState) _bloc.add(GetSortedItemsEvent());
                 if (state is ErrorState) {
                   // todo show snack with error;
-                }
-                if (state is LoadingState) {
-                  return Center(child: CircularProgressIndicator());
                 }
                 if (state is SuccessState<Map<ItemEntity, List<ItemEntity>>>) {
                   itemList = state.data;
@@ -63,16 +60,19 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
                 // Build widget
                 return Column(
                   children: <Widget>[
-                    Expanded(flex: 2, child: Text(store.name)),
+                    Container(child: StoreItem(storeItem: store)),
                     Expanded(
                         flex: 1,
                         child: CategoryTabs(
                           onCategorySelected: (category, position) {
                             _controller.scrollToIndex(position, duration: Duration(milliseconds: 500), preferPosition: AutoScrollPosition.begin);
                           },
-                          categories: itemList.keys.map((e) => e.name).toList(),
+                          categories: itemList?.keys?.map((e) => e.name)?.toList(),
                         )),
-                    Expanded(flex: 10, child: buildItemList(itemList) ?? Center(/*todo agregar mensaje cuando no hay productos */)),
+                    Expanded(
+                      flex: 10,
+                      child: state is LoadingState ? Center(child: CircularProgressIndicator()) : buildItemList(itemList),
+                    ),
                     CartTotalBottom(orderQuantity, "\$$cartTotal"),
                   ],
                 );
@@ -82,7 +82,7 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
 
   Widget buildItemList(Map<ItemEntity, List<ItemEntity>> items) {
     return items == null
-        ? Center(child: CircularProgressIndicator())
+        ? Center(child: Text("No hay productos disponibles..."))
         : ListView.separated(
             controller: _controller,
             separatorBuilder: (BuildContext context, int index) => Divider(
@@ -100,7 +100,7 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Padding(padding: const EdgeInsets.all(12.0), child: Text(category.name, style: Theme.of(context).textTheme.headline4)),
+                    Padding(padding: const EdgeInsets.all(16.0), child: Text(category.name, style:AppTextStyle.section)),
                     Column(
                         children: items[category]
                             .map((e) => ProductItem(

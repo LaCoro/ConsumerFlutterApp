@@ -14,7 +14,7 @@ class CartTotalBottom extends StatelessWidget {
     return Container(
       color: Theme.of(context).accentColor,
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 12.0),
+        padding: EdgeInsets.symmetric(vertical: 8.0),
         child: Row(
           children: <Widget>[
             Expanded(

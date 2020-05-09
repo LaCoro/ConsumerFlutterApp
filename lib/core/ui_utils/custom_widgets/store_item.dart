@@ -29,13 +29,13 @@ class StoreItem extends StatelessWidget {
         : SizedBox(height: 8.0);
 
     return Container(
+      height: 90,
       padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-              height: 100,
-              width: 100,
+              width: 90,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
                 child: FadeInImage.assetNetwork(
@@ -46,7 +46,7 @@ class StoreItem extends StatelessWidget {
               )),
           Expanded(
             child: Container(
-                margin: const EdgeInsets.all(16),
+                margin: const EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
