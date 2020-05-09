@@ -37,7 +37,8 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
     int orderQuantity = 0;
     double cartTotal = 0;
     return Scaffold(
-        appBar: AppBar(backgroundColor: Theme.of(context).backgroundColor, elevation: 0),
+        appBar: AppBar(elevation: 0),
+
         body: SafeArea(
           child: BlocBuilder(
               bloc: _bloc,
