@@ -1,8 +1,8 @@
-import 'package:LaCoro/presentation/core/ui/app_colors.dart';
+import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:LaCoro/presentation/core/localization/app_localizations.dart';
+import 'package:LaCoro/core/localization/app_localizations.dart';
 
 class RegisterPage extends StatefulWidget{
   static const REGISTER_ROUTE = '/register';

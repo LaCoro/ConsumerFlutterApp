@@ -1,5 +1,4 @@
-import 'package:LaCoro/presentation/core/ui/app_text_style.dart';
-import 'package:LaCoro/presentation/core/ui/app_text_style.dart';
+import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

@@ -1,5 +1,6 @@
-import 'package:LaCoro/presentation/core/bloc/base_bloc.dart';
-import 'package:LaCoro/presentation/core/ui/mappers/store_ui_mapper.dart';
+import 'package:LaCoro/core/bloc/base_bloc.dart';
+import 'package:LaCoro/core/preferences/preferences.dart';
+import 'package:LaCoro/core/ui_utils/mappers/store_ui_mapper.dart';
 import 'package:domain/entities/store_entity.dart';
 import 'package:domain/result.dart';
 import 'package:domain/use_cases/store_use_cases.dart';
@@ -8,8 +9,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class StoreListBloc extends Bloc<BaseEvent, BaseState> {
   final StoreUseCases _getAllStores;
   final StoreUIMapper mapper = StoreUIMapper();
+  final Preferences _preferences;
 
-  StoreListBloc(this._getAllStores);
+  StoreListBloc(this._getAllStores, this._preferences);
 
   @override
   BaseState get initialState => InitialState();
@@ -19,7 +21,7 @@ class StoreListBloc extends Bloc<BaseEvent, BaseState> {
     try {
       if (event is GetAllStoresEvent) {
         yield LoadingState();
-        final result = await _getAllStores.getAllStoresByCity(event.city);
+        final result = await _getAllStores.getAllStoresByCity(_preferences.getCity());
         if (result is Success<List<StoreEntity>>) {
           yield SuccessState(data: mapper.process(result.data));
         } else {
@@ -33,8 +35,4 @@ class StoreListBloc extends Bloc<BaseEvent, BaseState> {
 }
 
 /// Store list events
-class GetAllStoresEvent extends BaseEvent {
-  final String city;
-
-  GetAllStoresEvent(this.city);
-}
+class GetAllStoresEvent extends BaseEvent {}

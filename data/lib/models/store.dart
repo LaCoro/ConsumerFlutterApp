@@ -1,5 +1,4 @@
 import 'package:data/models/item.dart';
-import 'package:domain/entities/item_entity.dart';
 import 'package:domain/entities/store_entity.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 
@@ -29,6 +28,8 @@ class Store extends ParseObject with StoreEntity implements ParseCloneable {
   static const String keyDeliveryCost = 'deliveryCost';
   static const String keyPosition = 'Position';
   static const String keyItems = 'items';
+
+  String get id => this.objectId;
 
   String get name => get<String>(keyName);
 
@@ -90,34 +91,9 @@ class Store extends ParseObject with StoreEntity implements ParseCloneable {
 
   set position(int position) => set<int>(keyPosition, position);
 
-  Future<List<ItemEntity>> get items async {
+  Future<List<Item>> get items async {
     final QueryBuilder query = QueryBuilder<Item>(Item())..whereEqualTo('store', this.toPointer());
     final response = await query.query();
     return response.results.map((e) => e as Item).toList();
-  }
-
-  @override
-  Future<Map<ItemEntity, List<ItemEntity>>> getSortedItems() async {
-    Map<String, List<ItemEntity>> itemsMap = Map();
-    final itemList = await this.items;
-    for (ItemEntity element in itemList) {
-      final ParseObject itemParent = element.parent;
-      if (itemParent?.objectId != null) {
-        itemsMap.update(itemParent.objectId, (value) {
-          return value..add(element);
-        }, ifAbsent: () {
-          return [element];
-        });
-      }
-    }
-
-    Map<ItemEntity, List<ItemEntity>> sortedItems = Map();
-    if (itemsMap.length > 0) {
-      for (MapEntry<String, List<ItemEntity>> entry in itemsMap.entries) {
-        final newKey = await Item().getObject(entry.key);
-        sortedItems.putIfAbsent(newKey.result, () => entry.value);
-      }
-    }
-    return sortedItems;
   }
 }
