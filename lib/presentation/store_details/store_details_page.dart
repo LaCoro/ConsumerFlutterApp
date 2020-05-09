@@ -1,7 +1,6 @@
 import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
-import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/cart_total_bottom.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/category_tabs.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/product_item.dart';
@@ -9,7 +8,6 @@ import 'package:LaCoro/core/ui_utils/custom_widgets/store_item.dart';
 import 'package:LaCoro/core/ui_utils/model/store_ui.dart';
 import 'package:LaCoro/presentation/store_details/store_details_bloc.dart';
 import 'package:domain/entities/item_entity.dart';
-import 'package:domain/entities/store_entity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -60,7 +58,7 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
                 // Build widget
                 return Column(
                   children: <Widget>[
-                    Container(child: StoreItem(storeItem: store)),
+                    Hero(tag: store.name, child: StoreItem(storeItem: store)),
                     Expanded(
                         flex: 1,
                         child: CategoryTabs(
@@ -100,7 +98,7 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Padding(padding: const EdgeInsets.all(16.0), child: Text(category.name, style:AppTextStyle.section)),
+                    Padding(padding: const EdgeInsets.all(16.0), child: Text(category.name, style: AppTextStyle.section)),
                     Column(
                         children: items[category]
                             .map((e) => ProductItem(

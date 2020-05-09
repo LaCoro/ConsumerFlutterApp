@@ -58,11 +58,11 @@ class _StoreListPageState extends State<StoreListPage> {
 
   Widget buildList() {
     return ListView.separated(
-        separatorBuilder: (c,i) => SizedBox(height: 24.0),
+        separatorBuilder: (c, i) => SizedBox(height: 24.0),
         itemBuilder: (c, index) {
           return InkWell(
               onTap: () => Navigator.pushNamed(context, StoreDetailsPage.STORE_DETAILS_ROUTE, arguments: _stores[index]),
-              child: StoreItem(storeItem: _stores[index]));
+              child: Hero(tag: _stores[index].name, child: StoreItem(storeItem: _stores[index])));
         },
         itemCount: _stores?.length ?? 0);
   }
