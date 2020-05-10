@@ -62,6 +62,7 @@ class StoreItem extends StatelessWidget {
                       storeItem.name,
                       style: AppTextStyle.appBar,
                     ),
+                    Spacer(),
                     Text(storeItem.tag, style: AppTextStyle.grey13),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,

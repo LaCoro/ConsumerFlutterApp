@@ -40,8 +40,11 @@ class _ProductItemState extends State<ProductItem> {
                   children: <Widget>[
                     Text(widget.itemEntity.name ?? "",
                         style: AppTextStyle.boldBlack16),
-                    Text(widget.itemEntity.description ?? "",
-                        style: AppTextStyle.grey13),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8),
+                      child: Text(widget.itemEntity.description ?? "",
+                          style: AppTextStyle.grey13),
+                    ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10.0),
                       child: Row(
