@@ -13,12 +13,18 @@ class StoreItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var deliveryCostColor = storeItem.isDeliveryFree ? AppColors.accentColor : AppColors.boldTextColor;
+    var deliveryCostColor = storeItem.isDeliveryFree
+        ? AppColors.accentColor
+        : AppColors.boldTextColor;
 
-    var deliveryServiceMsg = storeItem.isDeliveryFree ? "gratis" : "\$${storeItem.deliveryCost}";
+    var deliveryServiceMsg =
+        storeItem.isDeliveryFree ? "gratis" : "\$${storeItem.deliveryCost}";
 
     var promoWidget = storeItem.hasAPromo
-        ? Align(alignment: Alignment.topLeft, child: DiscountChip(discountPercentage: storeItem.discountPercentage))
+        ? Align(
+            alignment: Alignment.topLeft,
+            child:
+                DiscountChip(discountPercentage: storeItem.discountPercentage))
         : SizedBox(height: 8.0);
 
     var storeClosedWidget = storeItem.isStoreClosed
@@ -39,7 +45,8 @@ class StoreItem extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
                 child: FadeInImage.assetNetwork(
-                  placeholder: placeHolderAsset ?? 'assets/loading_resource.gif',
+                  placeholder:
+                      placeHolderAsset ?? 'assets/loading_resource.gif',
                   image: storeItem.logo,
                   fit: BoxFit.fill,
                 ),
@@ -53,15 +60,18 @@ class StoreItem extends StatelessWidget {
                   children: [
                     Text(
                       storeItem.name,
-                      style: AppTextStyle.boldBlack16,
+                      style: AppTextStyle.appBar,
                     ),
                     Text(storeItem.tag, style: AppTextStyle.grey13),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text("${storeItem.openAt} - ${storeItem.closeAt}", style: AppTextStyle.black14),
+                        Text("${storeItem.openAt} - ${storeItem.closeAt}",
+                            style: AppTextStyle.black14),
                         SizedBox(width: 16.0),
-                        Text("Envio $deliveryServiceMsg", style: AppTextStyle.black14.copyWith(color: deliveryCostColor)),
+                        Text("Envio $deliveryServiceMsg",
+                            style: AppTextStyle.black14
+                                .copyWith(color: deliveryCostColor)),
                       ],
                     ),
                     promoWidget,
