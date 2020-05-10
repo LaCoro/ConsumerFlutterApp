@@ -9,13 +9,12 @@ class CartTotalBottom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final strings = AppLocalizations.of(context);
 
     return Container(
       color: Theme.of(context).accentColor,
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 12.0),
+        padding: EdgeInsets.symmetric(vertical: 8.0),
         child: Row(
           children: <Widget>[
             Expanded(
@@ -27,14 +26,15 @@ class CartTotalBottom extends StatelessWidget {
                     color: Theme.of(context).backgroundColor,
                   ),
                   child: Center(
-                      child: Text( (quantity<10) ? quantity.toString() : "+9"  , textAlign: TextAlign.center, style: TextStyle(color: Theme.of(context).accentColor, fontSize: 18, fontWeight: FontWeight.bold)))),
+                      child: Text((quantity < 10) ? quantity.toString() : "+9",
+                          textAlign: TextAlign.center, style: TextStyle(color: Theme.of(context).accentColor, fontSize: 18, fontWeight: FontWeight.bold)))),
             ),
             Expanded(
               flex: 2,
               child: Text(strings.seeOrder, textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
             ),
             Expanded(
-              child:Text(price, textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)) ,
+              child: Text(price, textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
             ),
           ],
         ),

@@ -35,7 +35,7 @@ class StoreUIMapper extends UIModelMapper<StoreUI, StoreEntity> {
       store.searchTags.shuffle();
     }
     randomTag = store.searchTags.last.toString();
-    storeUI.tag = randomTag.toUpperCase();
+    storeUI.tag = randomTag;
 
     storesUI.add(storeUI);
   }
