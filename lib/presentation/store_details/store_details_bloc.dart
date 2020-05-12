@@ -1,7 +1,6 @@
 import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/ui_utils/model/store_ui.dart';
 import 'package:domain/entities/item_entity.dart';
-import 'package:domain/entities/order_entity.dart';
 import 'package:domain/result.dart';
 import 'package:domain/use_cases/store_use_cases.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,7 +10,6 @@ class StoreDetailsBloc extends Bloc<BaseEvent, BaseState> {
 
   StoreUI store;
 
-  OrderEntity orderEntity = OrderEntity();
   Map<ItemEntity, int> products = Map();
 
   StoreDetailsBloc(this._storeUseCases);
@@ -29,7 +27,7 @@ class StoreDetailsBloc extends Bloc<BaseEvent, BaseState> {
         if (products[event.product] < 1) {
           products.remove(event.product);
         }
-        yield OrderChangedSate(quantity: _getProductsQuantity(), cartTotal: _getCartTotal());
+        yield CartChangedSate(quantity: _getProductsQuantity(), cartTotal: _getCartTotal(), products:  products);
       }
     } catch (error) {
       yield ErrorState();
@@ -58,6 +56,8 @@ class StoreDetailsBloc extends Bloc<BaseEvent, BaseState> {
 /// Events
 class GetSortedItemsEvent extends BaseEvent {}
 
+class NavigateToOrderDetails extends BaseEvent {}
+
 class UpdateProductEvent extends BaseEvent {
   final ItemEntity product;
   final int quantity;
@@ -66,9 +66,10 @@ class UpdateProductEvent extends BaseEvent {
 }
 
 /// States
-class OrderChangedSate extends BaseState {
+class CartChangedSate extends BaseState {
   final int quantity;
   final double cartTotal;
+  final Map<ItemEntity, int> products;
 
-  OrderChangedSate({this.quantity, this.cartTotal}) : super([quantity, cartTotal]);
+  CartChangedSate({this.quantity, this.cartTotal, this.products}) : super([quantity, cartTotal, products]);
 }

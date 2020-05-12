@@ -18,8 +18,7 @@ class StoreDetailsPage extends StatefulWidget {
   static const STORE_DETAILS_ROUTE = '/store_details';
 
   @override
-  _StoreDetailsPageState createState() =>
-      _StoreDetailsPageState(StoreDetailsBloc(Injector.getInjector().get()));
+  _StoreDetailsPageState createState() => _StoreDetailsPageState(StoreDetailsBloc(Injector.getInjector().get()));
 }
 
 class _StoreDetailsPageState extends State<StoreDetailsPage> {
@@ -42,6 +41,7 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
               builder: (context, state) {
                 int orderQuantity = 0;
                 double cartTotal = 0;
+                Map<ItemEntity, int> products;
                 // Handle states
                 if (state is InitialState) _bloc.add(GetSortedItemsEvent());
                 if (state is ErrorState) {
@@ -51,9 +51,10 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
                   itemList = state.data;
                 }
 
-                if (state is OrderChangedSate) {
+                if (state is CartChangedSate) {
                   orderQuantity = state.quantity;
                   cartTotal = state.cartTotal;
+                  products = state.products;
                 }
 
                 // Build widget
@@ -64,20 +65,20 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
                         flex: 1,
                         child: CategoryTabs(
                           onCategorySelected: (category, position) {
-                            _controller.scrollToIndex(position,
-                                duration: Duration(milliseconds: 500),
-                                preferPosition: AutoScrollPosition.begin);
+                            _controller.scrollToIndex(position, duration: Duration(milliseconds: 500), preferPosition: AutoScrollPosition.begin);
                           },
-                          categories:
-                              itemList?.keys?.map((e) => e.name)?.toList(),
+                          categories: itemList?.keys?.map((e) => e.name)?.toList(),
                         )),
                     Expanded(
                       flex: 10,
-                      child: state is LoadingState
-                          ? Center(child: CircularProgressIndicator())
-                          : buildItemList(itemList),
+                      child: state is LoadingState ? Center(child: CircularProgressIndicator()) : buildItemList(itemList),
                     ),
-                    CartTotalBottom(orderQuantity, "\$$cartTotal"),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushReplacementNamed(context, "routeName");
+                      },
+                      child: CartTotalBottom(orderQuantity, "\$$cartTotal"),
+                    ),
                   ],
                 );
               }),
@@ -104,16 +105,12 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child:
-                            Text(category.name, style: AppTextStyle.section)),
+                    Padding(padding: const EdgeInsets.all(16.0), child: Text(category.name, style: AppTextStyle.section)),
                     Column(
                         children: items[category]
                             .map((e) => ProductItem(
                                   itemEntity: e,
-                                  onQuantityChange: (value) =>
-                                      _bloc.add(UpdateProductEvent(e, value)),
+                                  onQuantityChange: (value) => _bloc.add(UpdateProductEvent(e, value)),
                                 ))
                             .toList()),
                   ],

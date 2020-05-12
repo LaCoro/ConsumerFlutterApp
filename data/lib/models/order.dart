@@ -1,6 +1,7 @@
 import 'dart:core';
-import 'package:domain/entities/user_entity.dart';
 
+import 'package:data/models/store.dart';
+import 'package:data/models/user.dart';
 import 'package:domain/entities/order_entity.dart';
 import 'package:domain/entities/store_entity.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
@@ -33,10 +34,6 @@ class Order extends ParseObject with OrderEntity implements ParseCloneable {
   String get code => get<String>(keyCode);
 
   set code(String code) => set<String>(keyCode, code);
-
-  StoreEntity get store => get<StoreEntity>(keyStore);
-
-  set store(StoreEntity store) => set<StoreEntity>(keyStore, store);
 
   int get deliveryCost => get<int>(keyDeliveryCost);
 
@@ -78,12 +75,20 @@ class Order extends ParseObject with OrderEntity implements ParseCloneable {
 
   set state(String state) => set<String>(keyState, state);
 
-  UserEntity get customer => get<UserEntity>(keyCustomer);
 
-  set customer(UserEntity state) => set<UserEntity>(keyCustomer, customer);
+  // TODO move these methods to the  API class
+  Future<User> getCustomer() async {
+    final response = await this.getObject(keyCustomer);
+    return response.result as User;
+  }
 
-  UserEntity get deliveryBoy => get<UserEntity>(keyDeliveryBoy);
+  Future<User> getDeliveryBoy() async {
+    final response = await this.getObject(keyDeliveryBoy);
+    return response.result as User;
+  }
 
-  set deliveryBoy(UserEntity deliveryBoy) => set<UserEntity>(keyDeliveryBoy, deliveryBoy);
-
+  Future<StoreEntity> getStore() async {
+    final response = await this.getObject(keyStore);
+    return response.result as Store;
+  }
 }

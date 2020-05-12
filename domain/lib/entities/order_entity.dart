@@ -1,10 +1,7 @@
-import 'package:domain/entities/item_entity.dart';
-import 'package:domain/entities/store_entity.dart';
-import 'package:domain/entities/user_entity.dart';
+
 
 class OrderEntity {
   String code;
-  StoreEntity store;
   int deliveryCost;
   String deliveryStartedAt;
   String deliveryEndedAt;
@@ -15,6 +12,8 @@ class OrderEntity {
   String buyerId;
   String scheduledDeliveryDate;
   String state;
-  UserEntity customer;
-  UserEntity deliveryBoy;
+//  StoreEntity store;
+//  UserEntity customer;
+//  UserEntity deliveryBoy;
+//  Map<int, ItemEntity> products;
 }

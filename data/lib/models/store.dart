@@ -91,9 +91,4 @@ class Store extends ParseObject with StoreEntity implements ParseCloneable {
 
   set position(int position) => set<int>(keyPosition, position);
 
-  Future<List<Item>> get items async {
-    final QueryBuilder query = QueryBuilder<Item>(Item())..whereEqualTo('store', this.toPointer());
-    final response = await query.query();
-    return response.results.map((e) => e as Item).toList();
-  }
 }
