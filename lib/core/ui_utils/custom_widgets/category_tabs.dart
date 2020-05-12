@@ -1,3 +1,5 @@
+import 'package:LaCoro/core/appearance/app_colors.dart';
+import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
@@ -24,6 +26,7 @@ class _CategoryTabsState extends State<CategoryTabs> {
 
     final theme = Theme.of(context);
     return Container(
+      color: AppColors.itemBackgroundColor,
       child: ListView.builder(
           controller: _controller,
           scrollDirection: Axis.horizontal,
@@ -34,7 +37,7 @@ class _CategoryTabsState extends State<CategoryTabs> {
               controller: _controller,
               index: index,
               key: ValueKey(index),
-              child: InkWell(
+              child: GestureDetector(
                 onTap: () {
                   _controller.scrollToIndex(index, duration: Duration(milliseconds: 500), preferPosition: AutoScrollPosition.middle);
                   setState(() => categorySelected = widget.categories[index]);
@@ -42,9 +45,11 @@ class _CategoryTabsState extends State<CategoryTabs> {
                 },
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 12.0),
-                  child: Text(
-                    widget.categories[index],
-                    style: theme.textTheme.bodyText2.copyWith(color: widget.categories[index] == categorySelected ? theme.accentColor : theme.disabledColor),
+                  child: Center(
+                    child: Text(
+                      widget.categories[index],
+                        style: AppTextStyle.grey13.copyWith(color: widget.categories[index] == categorySelected ? theme.accentColor : theme.disabledColor),
+                    ),
                   ),
                 ),
               ),

@@ -32,7 +32,7 @@ class _StoreListPageState extends State<StoreListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[400],
+      appBar: AppBar(elevation: 0),
       body: BlocBuilder(
           bloc: _bloc,
           builder: (context, state) {
@@ -57,15 +57,12 @@ class _StoreListPageState extends State<StoreListPage> {
   }
 
   Widget buildList() {
-    return ListView.builder(
-        itemExtent: 150.0,
+    return ListView.separated(
+        separatorBuilder: (c, i) => SizedBox(height: 24.0),
         itemBuilder: (c, index) {
-          return GestureDetector(
+          return InkWell(
               onTap: () => Navigator.pushNamed(context, StoreDetailsPage.STORE_DETAILS_ROUTE, arguments: _stores[index]),
-              child: StoreItem(
-                placeHolderAsset: 'assets/loading_resource.gif',
-                storeItem: _stores[index],
-              ));
+              child: Hero(tag: _stores[index].name, child: StoreItem(storeItem: _stores[index])));
         },
         itemCount: _stores?.length ?? 0);
   }

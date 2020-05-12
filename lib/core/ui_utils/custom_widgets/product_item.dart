@@ -1,3 +1,4 @@
+import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/counter.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/discount_chip.dart';
@@ -32,20 +33,23 @@ class _ProductItemState extends State<ProductItem> {
           children: <Widget>[
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(24.0),
+                padding: const EdgeInsets.only(left:24,top:16,right: 8),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(widget.itemUI.name ?? "", style: AppTextStyle.boldBlack16),
-                    Text(widget.itemUI.description ?? "", style: AppTextStyle.grey13, maxLines: 3),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Text(widget.itemUI.description ?? "", style: AppTextStyle.grey13, maxLines: 3),
+                    ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text("\$${widget.itemUI.price}", style: Theme.of(context).textTheme.bodyText1),
-                          Text("\$16.000", style: Theme.of(context).textTheme.overline),
+                          Text("\$16.000", style: AppTextStyle.grey14overline),
                           DiscountChip(discountPercentage: "50"),
                         ],
                       ),
@@ -82,7 +86,7 @@ class _ProductItemState extends State<ProductItem> {
             ),
           ],
         ),
-        Divider(),
+        Divider(color: AppColors.divider),
       ],
     );
   }

@@ -1,112 +1,80 @@
 import 'package:LaCoro/core/appearance/app_colors.dart';
+import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/discount_chip.dart';
 import 'package:LaCoro/core/ui_utils/model/store_ui.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class StoreItem  extends StatelessWidget{
-
+class StoreItem extends StatelessWidget {
   String placeHolderAsset;
   StoreUI storeItem;
 
-
-  StoreItem({Key key,
-    this.storeItem,
-    this.placeHolderAsset
-  }) : super(key: key);
-
+  StoreItem({Key key, this.storeItem, this.placeHolderAsset}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var deliveryCostColor = storeItem.isDeliveryFree
+        ? AppColors.accentColor
+        : AppColors.boldTextColor;
 
-    var deliveryCostColor = storeItem.isDeliveryFree ? AppColors.accentColor : AppColors.boldTextColor;
+    var deliveryServiceMsg =
+        storeItem.isDeliveryFree ? "gratis" : "\$${storeItem.deliveryCost}";
 
-    var deliverFontWeight = storeItem.isDeliveryFree ? FontWeight.bold : FontWeight.normal;
+    var promoWidget = storeItem.hasAPromo
+        ? Align(
+            alignment: Alignment.topLeft,
+            child:
+                DiscountChip(discountPercentage: storeItem.discountPercentage))
+        : SizedBox(height: 8.0);
 
-    var deliveryServiceMsg = storeItem.isDeliveryFree ? "gratis" : "\$${storeItem.deliveryCost}";
-
-    var promoWidget = storeItem.hasAPromo?    Align(
-        alignment: Alignment.topLeft,
-        child: DiscountChip(discountPercentage: storeItem.discountPercentage)): SizedBox(height : 10.0);
-
-    var storeClosedWidget = storeItem.isStoreClosed? Align(
-        alignment: Alignment.centerLeft,
-        child: Text(
-          "Cerrado",
-          style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 13,
-              color: AppColors.yellowAction),
-          textAlign: TextAlign.start,
-        )): SizedBox(height : 10.0);
+    var storeClosedWidget = storeItem.isStoreClosed
+        ? Align(
+            alignment: Alignment.centerLeft,
+            child: Text("Cerrado", style: AppTextStyle.yellow13),
+          )
+        : SizedBox(height: 8.0);
 
     return Container(
+      height: 90,
+      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-              height: 100,
-              width: 100,
-              margin: const EdgeInsets.all(10),
+              width: 90,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
                 child: FadeInImage.assetNetwork(
-                  placeholder: placeHolderAsset,
+                  placeholder:
+                      placeHolderAsset ?? 'assets/loading_resource.gif',
                   image: storeItem.logo,
-                  width: 69.0,
-                  height: 69.0,
                   fit: BoxFit.fill,
                 ),
               )),
           Expanded(
             child: Container(
-                height: 200,
-                margin: const EdgeInsets.only(top: 10.0, left: 16),
+                margin: const EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          storeItem.name,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: AppColors.boldTextColor),
-                          textAlign: TextAlign.start,
-                        )),
-                    Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          storeItem.tag,
-                          style: TextStyle(
-                              fontWeight: FontWeight.normal,
-                              fontSize: 13,
-                              color: AppColors.greyMedium),
-                          textAlign: TextAlign.start,
-                        )),
-                    Align(
-                        alignment: Alignment.centerLeft,
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(
-                                "${storeItem.openAt} - ${storeItem.closeAt}",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 13,
-                                    color: Colors.black),
-                                textAlign: TextAlign.start,
-                              ),
-                              Text(
-                                ". Envio ${deliveryServiceMsg}",
-                                style: TextStyle(
-                                    fontWeight: deliverFontWeight,
-                                    fontSize: 13,
-                                    color: deliveryCostColor),
-                                textAlign: TextAlign.start,
-                              )
-                            ])),
+                    Text(
+                      storeItem.name,
+                      style: AppTextStyle.appBar,
+                    ),
+                    Spacer(),
+                    Text(storeItem.tag, style: AppTextStyle.grey13),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text("${storeItem.openAt} - ${storeItem.closeAt}",
+                            style: AppTextStyle.black14),
+                        SizedBox(width: 16.0),
+                        Text("Envio $deliveryServiceMsg",
+                            style: AppTextStyle.black14
+                                .copyWith(color: deliveryCostColor)),
+                      ],
+                    ),
                     promoWidget,
                     storeClosedWidget,
                   ],
@@ -114,13 +82,6 @@ class StoreItem  extends StatelessWidget{
           ),
         ],
       ),
-      margin: const EdgeInsets.all(10),
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: AppColors.itemBackgroundColor,
-        borderRadius: BorderRadius.circular(15),
-      ),
     );
   }
-
 }
