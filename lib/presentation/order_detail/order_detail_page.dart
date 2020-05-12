@@ -31,23 +31,24 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
     final strings = AppLocalizations.of(context);
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        automaticallyImplyLeading: true,
-        leading: Icon(Icons.arrow_back_ios, color: Colors.black),
-      ),
-      body: SingleChildScrollView(
-        child: Container(
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              expandedHeight: 100.0,
+              floating: true,
+              pinned: true,
+              leading: Icon(Icons.arrow_back_ios, color: Colors.black),
+              flexibleSpace: FlexibleSpaceBar(
+                  title: Text(strings.yourOrder, style: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.black)),
+              ),
+            ),
+          ];
+        },
+        body: Container(
           color: Colors.white,
           child: Column(
             children: <Widget>[
-              Container(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 20.0, top: 12.0),
-                  child: Align(alignment: Alignment.centerLeft, child: Text(strings.yourOrder, style: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.black))),
-                ),
-              ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
                 child: RestaurantOrderDetails(),
