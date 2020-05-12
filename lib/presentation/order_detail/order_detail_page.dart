@@ -129,7 +129,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: TextFormField(
-                    //controller: _commentController,
+                    controller: _commentController,
                     keyboardType: TextInputType.multiline,
                     textInputAction: TextInputAction.next,
                     style: GoogleFonts.roboto(

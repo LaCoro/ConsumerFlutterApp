@@ -48,7 +48,7 @@ class _ProductItemState extends State<ProductItem> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text("\$${widget.itemUI.price}", style: Theme.of(context).textTheme.bodyText1),
+                          Text("\$${widget.itemUI.price}", style: AppTextStyle.black16),
                           Text("\$16.000", style: AppTextStyle.grey14overline),
                           DiscountChip(discountPercentage: "50"),
                         ],
