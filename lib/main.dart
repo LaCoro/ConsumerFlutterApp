@@ -2,6 +2,7 @@ import 'package:LaCoro/core/di/app_module.dart';
 import 'package:LaCoro/core/di/city_selection_module.dart';
 import 'package:LaCoro/core/di/store_list_module.dart';
 import 'package:LaCoro/core/localization/app_localizations_delegate.dart';
+import 'package:LaCoro/presentation/order_detail/order_detail_page.dart';
 import 'package:LaCoro/presentation/adresses/addresses_page.dart';
 import 'package:LaCoro/presentation/city_selection/city_selection_page.dart';
 import 'package:LaCoro/presentation/register/register_page.dart';
@@ -54,7 +55,7 @@ class MyApp extends StatelessWidget {
         return MaterialPageRoute(builder: (context) => destinationRoute, settings: settings);
       },
       routes: {
-        '/': (BuildContext context) => SplashPage(),
+        '/': (BuildContext context) => OrderDetailPage(),
         StoreListPage.STORE_LIST_ROUTE: (BuildContext context) => StoreListPage(),
         SelectAddressMapPage.SELECT_ADDRESS_MAP_ROUTE: (BuildContext context) => SelectAddressMapPage(),
         StylesTestPage.STYLE_TEST_PAGE_ROUTE: (BuildContext context) => StylesTestPage(),
@@ -62,6 +63,7 @@ class MyApp extends StatelessWidget {
         SplashPage.SPLASH_PAGE_ROUTE: (BuildContext context) => SplashPage(),
         RegisterPage.REGISTER_ROUTE: (BuildContext context) => RegisterPage(),
         CitySelectionPage.CITY_SELECTION_ROUTE: (BuildContext context) => CitySelectionPage(),
+        OrderDetailPage.ORDER_DETAIL_ROUTE: (BuildContext context) => OrderDetailPage(),
         TestPage.TEST_PAGE_ROUTE: (BuildContext context) => TestPage(),
       },
     );

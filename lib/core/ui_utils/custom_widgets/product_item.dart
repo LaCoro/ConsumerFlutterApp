@@ -1,14 +1,15 @@
+import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/counter.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/discount_chip.dart';
-import 'package:domain/entities/item_entity.dart';
+import 'package:LaCoro/core/ui_utils/model/item_ui.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ProductItem extends StatefulWidget {
-  final ItemEntity itemEntity;
+  final ItemUI itemUI;
   final Function(int) onQuantityChange;
 
-  const ProductItem({Key key, @required this.itemEntity, this.onQuantityChange}) : super(key: key);
+  const ProductItem({Key key, @required this.itemUI, this.onQuantityChange}) : super(key: key);
 
   @override
   _ProductItemState createState() => _ProductItemState(onQuantityChange);
@@ -36,14 +37,14 @@ class _ProductItemState extends State<ProductItem> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(widget.itemEntity.name ?? "", style: Theme.of(context).textTheme.headline5),
-                    Text(widget.itemEntity.description ?? "", style: Theme.of(context).textTheme.caption),
+                    Text(widget.itemUI.name ?? "", style: AppTextStyle.boldBlack16),
+                    Text(widget.itemUI.description ?? "", style: AppTextStyle.grey13, maxLines: 3),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text("\$${widget.itemEntity.price}", style: Theme.of(context).textTheme.bodyText1),
+                          Text("\$${widget.itemUI.price}", style: Theme.of(context).textTheme.bodyText1),
                           Text("\$16.000", style: Theme.of(context).textTheme.overline),
                           DiscountChip(discountPercentage: "50"),
                         ],
@@ -59,7 +60,7 @@ class _ProductItemState extends State<ProductItem> {
                   padding: const EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 8.0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
-                    child: Image.network("https://www.liberaldictionary.com/wp-content/uploads/2018/11/pizza.jpg", height: 100, width: 100, fit: BoxFit.fill),
+                    child: widget.itemUI.image == null ? SizedBox() : Image.network("https://www.liberaldictionary.com/wp-content/uploads/2018/11/pizza.jpg", height: 100, width: 100, fit: BoxFit.fill),
                   ),
                 ),
                 AnimatedOpacity(
