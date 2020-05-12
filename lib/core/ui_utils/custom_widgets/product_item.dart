@@ -54,7 +54,7 @@ class _ProductItemState extends State<ProductItem> {
                           Text("\$${widget.itemEntity.price}",
                               style: AppTextStyle.black16),
                           Text("\$16.000",
-                              style: AppTextStyle.grey16overline),
+                              style: AppTextStyle.grey14overline),
                           DiscountChip(discountPercentage: "50"),
                         ],
                       ),
