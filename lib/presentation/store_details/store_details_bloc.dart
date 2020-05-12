@@ -1,6 +1,6 @@
 import 'package:LaCoro/core/bloc/base_bloc.dart';
+import 'package:LaCoro/core/ui_utils/model/item_ui.dart';
 import 'package:LaCoro/core/ui_utils/model/store_ui.dart';
-import 'package:domain/entities/item_entity.dart';
 import 'package:domain/entities/order_entity.dart';
 import 'package:domain/result.dart';
 import 'package:domain/use_cases/store_use_cases.dart';
@@ -12,7 +12,7 @@ class StoreDetailsBloc extends Bloc<BaseEvent, BaseState> {
   StoreUI store;
 
   OrderEntity orderEntity = OrderEntity();
-  Map<ItemEntity, int> products = Map();
+  Map<ItemUI, int> products = Map();
 
   StoreDetailsBloc(this._storeUseCases);
 
@@ -39,7 +39,7 @@ class StoreDetailsBloc extends Bloc<BaseEvent, BaseState> {
   Stream<BaseState> loadStoreItems() async* {
     yield LoadingState();
     final result = await _storeUseCases.getStoreItems(store.id);
-    if (result is Success<Map<ItemEntity, List<ItemEntity>>>) {
+    if (result is Success<Map<ItemUI, List<ItemUI>>>) {
       yield SuccessState(data: result.data);
     } else {
       yield ErrorState();
@@ -59,7 +59,7 @@ class StoreDetailsBloc extends Bloc<BaseEvent, BaseState> {
 class GetSortedItemsEvent extends BaseEvent {}
 
 class UpdateProductEvent extends BaseEvent {
-  final ItemEntity product;
+  final ItemUI product;
   final int quantity;
 
   UpdateProductEvent(this.product, this.quantity);

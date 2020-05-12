@@ -5,6 +5,7 @@ import 'package:LaCoro/core/ui_utils/custom_widgets/cart_total_bottom.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/category_tabs.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/product_item.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/store_item.dart';
+import 'package:LaCoro/core/ui_utils/model/item_ui.dart';
 import 'package:LaCoro/core/ui_utils/model/store_ui.dart';
 import 'package:LaCoro/presentation/store_details/store_details_bloc.dart';
 import 'package:domain/entities/item_entity.dart';
@@ -18,8 +19,7 @@ class StoreDetailsPage extends StatefulWidget {
   static const STORE_DETAILS_ROUTE = '/store_details';
 
   @override
-  _StoreDetailsPageState createState() =>
-      _StoreDetailsPageState(StoreDetailsBloc(Injector.getInjector().get()));
+  _StoreDetailsPageState createState() => _StoreDetailsPageState(StoreDetailsBloc(Injector.getInjector().get()));
 }
 
 class _StoreDetailsPageState extends State<StoreDetailsPage> {
@@ -33,7 +33,10 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
     final StoreUI store = ModalRoute.of(context).settings.arguments;
     final strings = AppLocalizations.of(context);
     _bloc.store = store;
-    Map<ItemEntity, List<ItemEntity>> itemList;
+
+    Map<ItemUI, List<ItemUI>> itemList;
+    int orderQuantity = 0;
+    double cartTotal = 0;
     return Scaffold(
         appBar: AppBar(elevation: 0),
         body: SafeArea(
@@ -47,7 +50,7 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
                 if (state is ErrorState) {
                   // todo show snack with error;
                 }
-                if (state is SuccessState<Map<ItemEntity, List<ItemEntity>>>) {
+                if (state is SuccessState<Map<ItemUI, List<ItemUI>>>) {
                   itemList = state.data;
                 }
 
@@ -64,12 +67,9 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
                         flex: 1,
                         child: CategoryTabs(
                           onCategorySelected: (category, position) {
-                            _controller.scrollToIndex(position,
-                                duration: Duration(milliseconds: 500),
-                                preferPosition: AutoScrollPosition.begin);
+                            _controller.scrollToIndex(position, duration: Duration(milliseconds: 500), preferPosition: AutoScrollPosition.begin);
                           },
-                          categories:
-                              itemList?.keys?.map((e) => e.name)?.toList(),
+                          categories: itemList.keys.map((e) => e.name).toList(),
                         )),
                     Expanded(
                       flex: 10,
@@ -84,7 +84,7 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
         ));
   }
 
-  Widget buildItemList(Map<ItemEntity, List<ItemEntity>> items) {
+  Widget buildItemList(Map<ItemUI, List<ItemUI>> items) {
     return items == null
         ? Center(child: Text("No hay productos disponibles..."))
         : ListView.separated(
@@ -111,9 +111,8 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
                     Column(
                         children: items[category]
                             .map((e) => ProductItem(
-                                  itemEntity: e,
-                                  onQuantityChange: (value) =>
-                                      _bloc.add(UpdateProductEvent(e, value)),
+                                  itemUI: e,
+                                  onQuantityChange: (value) => _bloc.add(UpdateProductEvent(e, value)),
                                 ))
                             .toList()),
                   ],
