@@ -1,7 +1,7 @@
 import 'package:LaCoro/core/bloc/base_bloc.dart';
+import 'package:LaCoro/core/ui_utils/mappers/item_ui_mapper.dart';
 import 'package:LaCoro/core/ui_utils/model/item_ui.dart';
 import 'package:LaCoro/core/ui_utils/model/store_ui.dart';
-import 'package:domain/entities/order_entity.dart';
 import 'package:domain/entities/item_entity.dart';
 import 'package:domain/result.dart';
 import 'package:domain/use_cases/store_use_cases.dart';
@@ -29,7 +29,7 @@ class StoreDetailsBloc extends Bloc<BaseEvent, BaseState> {
         if (products[event.product] < 1) {
           products.remove(event.product);
         }
-        yield CartChangedSate(quantity: _getProductsQuantity(), cartTotal: _getCartTotal(), products:  products);
+        yield CartChangedSate(quantity: _getProductsQuantity(), cartTotal: _getCartTotal(), products: products);
       }
     } catch (error) {
       yield ErrorState();
@@ -39,8 +39,9 @@ class StoreDetailsBloc extends Bloc<BaseEvent, BaseState> {
   Stream<BaseState> loadStoreItems() async* {
     yield LoadingState();
     final result = await _storeUseCases.getStoreItems(store.id);
-    if (result is Success<Map<ItemUI, List<ItemUI>>>) {
-      yield SuccessState(data: result.data);
+    if (result is Success<Map<ItemEntity, List<ItemEntity>>>) {
+      final items = result.data.map((key, value) => MapEntry(ItemUIMapper().processSingleElement(key), ItemUIMapper().processList(value)));
+      yield SuccessState(data: items);
     } else {
       yield ErrorState();
     }
@@ -71,7 +72,7 @@ class UpdateProductEvent extends BaseEvent {
 class CartChangedSate extends BaseState {
   final int quantity;
   final double cartTotal;
-  final Map<ItemEntity, int> products;
+  final Map<ItemUI, int> products;
 
   CartChangedSate({this.quantity, this.cartTotal, this.products}) : super([quantity, cartTotal, products]);
 }

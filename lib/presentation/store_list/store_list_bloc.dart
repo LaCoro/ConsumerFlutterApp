@@ -8,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class StoreListBloc extends Bloc<BaseEvent, BaseState> {
   final StoreUseCases _getAllStores;
-  final StoreUIMapper mapper = StoreUIMapper();
   final Preferences _preferences;
 
   StoreListBloc(this._getAllStores, this._preferences);
@@ -23,7 +22,7 @@ class StoreListBloc extends Bloc<BaseEvent, BaseState> {
         yield LoadingState();
         final result = await _getAllStores.getAllStoresByCity(_preferences.getCity());
         if (result is Success<List<StoreEntity>>) {
-          yield SuccessState(data: mapper.process(result.data));
+          yield SuccessState(data: StoreUIMapper().processList(result.data));
         } else {
           yield ErrorState();
         }

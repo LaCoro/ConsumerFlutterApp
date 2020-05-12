@@ -7,8 +7,8 @@ import 'package:LaCoro/core/ui_utils/custom_widgets/product_item.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/store_item.dart';
 import 'package:LaCoro/core/ui_utils/model/item_ui.dart';
 import 'package:LaCoro/core/ui_utils/model/store_ui.dart';
+import 'package:LaCoro/presentation/order_detail/order_detail_page.dart';
 import 'package:LaCoro/presentation/store_details/store_details_bloc.dart';
-import 'package:domain/entities/item_entity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,19 +33,18 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
     final StoreUI store = ModalRoute.of(context).settings.arguments;
     final strings = AppLocalizations.of(context);
     _bloc.store = store;
-
     Map<ItemUI, List<ItemUI>> itemList;
-    int orderQuantity = 0;
-    double cartTotal = 0;
     return Scaffold(
         appBar: AppBar(elevation: 0),
         body: SafeArea(
           child: BlocBuilder(
               bloc: _bloc,
               builder: (context, state) {
+
                 int orderQuantity = 0;
                 double cartTotal = 0;
-                Map<ItemEntity, int> products;
+                Map<ItemUI, int> products;
+
                 // Handle states
                 if (state is InitialState) _bloc.add(GetSortedItemsEvent());
                 if (state is ErrorState) {
@@ -79,7 +78,7 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.pushReplacementNamed(context, "routeName");
+                        Navigator.pushReplacementNamed(context, OrderDetailPage.ORDER_DETAIL_ROUTE, arguments: [products, store]);
                       },
                       child: CartTotalBottom(orderQuantity, "\$$cartTotal"),
                     ),

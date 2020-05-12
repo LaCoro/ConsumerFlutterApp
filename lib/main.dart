@@ -51,6 +51,9 @@ class MyApp extends StatelessWidget {
           case StoreDetailsPage.STORE_DETAILS_ROUTE:
             destinationRoute = StoreDetailsPage();
             break;
+          case OrderDetailPage.ORDER_DETAIL_ROUTE:
+            destinationRoute = OrderDetailPage();
+            break;
         }
         return MaterialPageRoute(builder: (context) => destinationRoute, settings: settings);
       },
@@ -63,7 +66,6 @@ class MyApp extends StatelessWidget {
         SplashPage.SPLASH_PAGE_ROUTE: (BuildContext context) => SplashPage(),
         RegisterPage.REGISTER_ROUTE: (BuildContext context) => RegisterPage(),
         CitySelectionPage.CITY_SELECTION_ROUTE: (BuildContext context) => CitySelectionPage(),
-        OrderDetailPage.ORDER_DETAIL_ROUTE: (BuildContext context) => OrderDetailPage(),
         TestPage.TEST_PAGE_ROUTE: (BuildContext context) => TestPage(),
       },
     );
