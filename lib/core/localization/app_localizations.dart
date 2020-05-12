@@ -49,6 +49,8 @@ class AppLocalizations {
       'cash': 'Cash',
       'credit_card': 'Credit Card',
       'debit_card': 'Debit Card',
+      'your_order': 'Your order',
+      'comments':'Comments',
     },
     'es': {
       'total': 'Total',
@@ -89,6 +91,8 @@ class AppLocalizations {
       'search_your_address': 'Buscar tu dirección',
       'use_my_location': 'Usar mi ubicación actual',
       'my_addresses': 'Mis direcciones',
+      'your_order': 'Tu pedido',
+      'comments':'Comentarios',
     },
   };
 
@@ -239,5 +243,13 @@ class AppLocalizations {
 
   String get resend {
     return _localizedValues[locale.languageCode]["resend"];
+  }
+
+  String get yourOrder {
+    return _localizedValues[locale.languageCode]["your_order"];
+  }
+
+  String get comments {
+    return _localizedValues[locale.languageCode]["comments"];
   }
 }

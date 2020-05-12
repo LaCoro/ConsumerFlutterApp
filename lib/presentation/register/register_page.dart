@@ -117,7 +117,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             textStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.normal, fontSize: 20)),
                         decoration: InputDecoration(
                           suffixText: strings.optionalField,
-                          suffixStyle: Theme.of(context).textTheme.caption,
+                          suffixStyle: TextStyle(color: AppColors.greyMedium, fontWeight: FontWeight.normal, fontSize: 20),
                           isDense: true,
                           labelText: strings.email,
                           labelStyle: GoogleFonts.roboto(
@@ -171,7 +171,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(vertical: 16.0),
-                                    child: Text(strings.createAccountAction, style: Theme.of(context).textTheme.button),
+                                    child: Text(strings.continu, style: Theme.of(context).textTheme.button),
                                   ),
                                   onPressed: () {
                                     if (_registerFormKey.currentState.validate()) {
