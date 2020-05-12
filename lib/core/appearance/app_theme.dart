@@ -12,7 +12,6 @@ class AppTheme {
       backgroundColor: Color(0xFFD8D8D8),
       disabledColor: AppColors.greyMedium,
       brightness: Brightness.light,
-      dividerColor: Color(0xffE5E5E5),
       fontFamily: GoogleFonts.roboto().fontFamily,
       primaryIconTheme: IconThemeData(size: 24),
       accentIconTheme: IconThemeData(size: 28),

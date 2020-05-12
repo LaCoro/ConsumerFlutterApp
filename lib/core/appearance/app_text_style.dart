@@ -13,6 +13,7 @@ class AppTextStyle {
   static TextStyle blue16 = GoogleFonts.roboto(fontWeight: FontWeight.normal, fontSize: 16, color: Color(0xFF3D9FE6)); //en buscador blue
   static TextStyle black16 = GoogleFonts.roboto(fontWeight: FontWeight.normal, fontSize: 16, color: Color(0xff383838));//direcciones y resultados busqueda
   static TextStyle grey16 = GoogleFonts.roboto(fontWeight: FontWeight.normal, fontSize: 16, color: Color(0xff868686));//#resultados y sug busqueda
+  static TextStyle grey14overline = GoogleFonts.roboto(fontWeight: FontWeight.normal, fontSize: 14, color: Color(0xff868686),decoration: TextDecoration.lineThrough);//#resultados y sug busqueda
   static TextStyle yellow16 = GoogleFonts.roboto(fontWeight: FontWeight.normal, fontSize: 16, color: Color(0xffFFAC0C)); //edit y chance, adress payment
   static TextStyle black14 = GoogleFonts.roboto(fontWeight: FontWeight.normal, fontSize: 14, color: Color(0xff383838));//horas abierto
   static TextStyle boldBlue13 = GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 13, color: Color(0xFF3D9FE6));//envio gratis list_store
