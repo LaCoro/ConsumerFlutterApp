@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:LaCoro/core/appearance/app_colors.dart';
-import 'package:LaCoro/presentation/city_selection/city_selection_page.dart';
+import 'package:LaCoro/presentation/adresses/my_address_page.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatefulWidget {
@@ -41,7 +41,7 @@ class SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   }
 
   onDoneLoading() async { // TODO arreglar esto
-    Navigator.popAndPushNamed(context, CitySelectionPage.CITY_SELECTION_ROUTE);
+    Navigator.popAndPushNamed(context, MyAddressPage.MY_ADDRESS_ROUTE);
   }
 
   @override

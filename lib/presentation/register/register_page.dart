@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
 
-class RegisterPage extends StatefulWidget{
+class RegisterPage extends StatefulWidget {
   static const REGISTER_ROUTE = '/register';
 
   @override
@@ -21,7 +21,6 @@ class _RegisterPageState extends State<RegisterPage> {
   var _phoneController = TextEditingController();
 
   final _registerFormKey = GlobalKey<FormState>();
-
 
   @override
   void initState() {
@@ -44,20 +43,18 @@ class _RegisterPageState extends State<RegisterPage> {
     super.dispose();
   }
 
-  _fieldFocusChange(BuildContext context, FocusNode currentFocus,FocusNode nextFocus) {
+  _fieldFocusChange(BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
     currentFocus.unfocus();
     FocusScope.of(context).requestFocus(nextFocus);
   }
 
-
   @override
   Widget build(BuildContext context) {
-
     final strings = AppLocalizations.of(context);
 
     return Material(
       child: Form(
-        key: _registerFormKey,
+          key: _registerFormKey,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(24.0, 10.0, 24.0, 10.0),
             child: SafeArea(
@@ -82,21 +79,20 @@ class _RegisterPageState extends State<RegisterPage> {
                         focusNode: _nameFocus,
                         onEditingComplete: () {
                           _fieldFocusChange(context, _nameFocus, _emailFocus);
-                          },
+                        },
                         keyboardType: TextInputType.text,
                         textInputAction: TextInputAction.next,
                         textCapitalization: TextCapitalization.words,
-                        style: GoogleFonts.roboto(
-                          textStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.normal, fontSize: 20)),
+                        style: GoogleFonts.roboto(textStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.normal, fontSize: 20)),
                         decoration: InputDecoration(
                           isDense: true,
                           labelText: strings.name,
                           labelStyle: GoogleFonts.roboto(
-                            textStyle: TextStyle(color: _nameFocus.hasFocus ? AppColors.accentColor : Colors.black, fontWeight: FontWeight.w300, fontSize: 16)
-                          ),
-                            enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.accentColor)),
-                            errorBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+                              textStyle:
+                                  TextStyle(color: _nameFocus.hasFocus ? AppColors.accentColor : Colors.black, fontWeight: FontWeight.w300, fontSize: 16)),
+                          enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.accentColor)),
+                          errorBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
                         ),
                       ),
                     ),
@@ -105,7 +101,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       child: TextFormField(
                         controller: _emailController,
                         validator: (value) {
-                            return value.contains('@') ? null : strings.invalidEmail;
+                          return value.contains('@') ? null : strings.invalidEmail;
                         },
                         focusNode: _emailFocus,
                         onEditingComplete: () {
@@ -113,15 +109,15 @@ class _RegisterPageState extends State<RegisterPage> {
                         },
                         keyboardType: TextInputType.emailAddress,
                         textInputAction: TextInputAction.next,
-                        style: GoogleFonts.roboto(
-                            textStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.normal, fontSize: 20)),
+                        style: GoogleFonts.roboto(textStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.normal, fontSize: 20)),
                         decoration: InputDecoration(
                           suffixText: strings.optionalField,
                           suffixStyle: TextStyle(color: AppColors.greyMedium, fontWeight: FontWeight.normal, fontSize: 20),
                           isDense: true,
                           labelText: strings.email,
                           labelStyle: GoogleFonts.roboto(
-                              textStyle: TextStyle(color: _emailFocus.hasFocus ? AppColors.accentColor : Colors.black, fontWeight: FontWeight.w300, fontSize: 16)),
+                              textStyle:
+                                  TextStyle(color: _emailFocus.hasFocus ? AppColors.accentColor : Colors.black, fontWeight: FontWeight.w300, fontSize: 16)),
                           enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
                           focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.accentColor)),
                           errorBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
@@ -135,25 +131,26 @@ class _RegisterPageState extends State<RegisterPage> {
                         validator: (value) {
                           if (value.isEmpty) {
                             return strings.phoneRequired;
-                          } if(value.length < 10){
+                          }
+                          if (value.length < 10) {
                             return strings.invalidPhone;
                           }
                           return null;
                         },
                         focusNode: _phoneFocus,
-                        onEditingComplete: (){
+                        onEditingComplete: () {
                           _phoneFocus.unfocus();
                         },
                         maxLength: 10,
                         keyboardType: TextInputType.phone,
                         textInputAction: TextInputAction.done,
-                        style: GoogleFonts.roboto(
-                            textStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.normal, fontSize: 20)),
+                        style: GoogleFonts.roboto(textStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.normal, fontSize: 20)),
                         decoration: InputDecoration(
                           isDense: true,
                           labelText: strings.phone,
                           labelStyle: GoogleFonts.roboto(
-                              textStyle: TextStyle(color: _phoneFocus.hasFocus ? AppColors.accentColor : Colors.black, fontWeight: FontWeight.w300, fontSize: 16)),
+                              textStyle:
+                                  TextStyle(color: _phoneFocus.hasFocus ? AppColors.accentColor : Colors.black, fontWeight: FontWeight.w300, fontSize: 16)),
                           enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
                           focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.accentColor)),
                           errorBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
@@ -186,8 +183,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
             ),
-          )
-      ),
+          )),
     );
   }
 }

@@ -2,14 +2,14 @@ import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/preferences/preferences.dart';
 import 'package:domain/entities/ciity_entity.dart';
 import 'package:domain/result.dart';
-import 'package:domain/use_cases/city_use_cases.dart';
+import 'package:domain/use_cases/my_address_use_cases.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CitySelectionBloc extends Bloc<BaseEvent, BaseState> {
-  final CityUseCases _cityUseCases;
+class MyAddressBloc extends Bloc<BaseEvent, BaseState> {
+  final MyAddressUseCases _cityUseCases;
   final Preferences _preferences;
 
-  CitySelectionBloc(this._cityUseCases, this._preferences);
+  MyAddressBloc(this._cityUseCases, this._preferences);
 
   @override
   BaseState get initialState => InitialState();

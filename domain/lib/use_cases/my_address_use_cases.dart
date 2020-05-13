@@ -2,10 +2,10 @@ import 'package:domain/repositories/city_repository.dart';
 
 import '../result.dart';
 
-class CityUseCases {
+class MyAddressUseCases {
   final CityRepository _repository;
 
-  CityUseCases(this._repository);
+  MyAddressUseCases(this._repository);
 
   Future<Result> getAllCities() async {
     return _repository.getAllCities();

@@ -1,10 +1,10 @@
 import 'package:LaCoro/core/di/app_module.dart';
-import 'package:LaCoro/core/di/city_selection_module.dart';
+import 'package:LaCoro/core/di/my_address_module.dart';
 import 'package:LaCoro/core/di/store_list_module.dart';
 import 'package:LaCoro/core/localization/app_localizations_delegate.dart';
+import 'package:LaCoro/presentation/adresses/my_address_page.dart';
 import 'package:LaCoro/presentation/order_detail/order_detail_page.dart';
-import 'package:LaCoro/presentation/adresses/addresses_page.dart';
-import 'package:LaCoro/presentation/city_selection/city_selection_page.dart';
+import 'package:LaCoro/presentation/adresses/addresses_page_new.dart';
 import 'package:LaCoro/presentation/register/register_page.dart';
 import 'package:LaCoro/presentation/splash/splash.dart';
 import 'package:LaCoro/presentation/store_details/store_details_page.dart';
@@ -22,7 +22,7 @@ Future main() async {
   // Inject modules
   await AppModule().initialise(Injector.getInjector());
   StoreListModule().initialise(Injector.getInjector());
-  CitySelectionModule().initialise(Injector.getInjector());
+  MyAddressModule().initialise(Injector.getInjector());
 
   // start app
   runApp(MyApp());
@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
         AddressesPage.ADDRESSES_LIST_ROUTE: (BuildContext context) => AddressesPage(),
         SplashPage.SPLASH_PAGE_ROUTE: (BuildContext context) => SplashPage(),
         RegisterPage.REGISTER_ROUTE: (BuildContext context) => RegisterPage(),
-        CitySelectionPage.CITY_SELECTION_ROUTE: (BuildContext context) => CitySelectionPage(),
+        MyAddressPage.MY_ADDRESS_ROUTE: (BuildContext context) => MyAddressPage(),
         TestPage.TEST_PAGE_ROUTE: (BuildContext context) => TestPage(),
       },
     );
