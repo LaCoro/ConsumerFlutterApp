@@ -78,30 +78,24 @@ class _MyAddressPageState extends State<MyAddressPage> {
                   Spacer(),
                   Expanded(child: Text(strings.myAddressTitle, style: AppTextStyle.title)),
                   SizedBox(height: 12),
-                  Expanded(
-                    child: DropdownButton(
-                      value: currentCity?.name,
-                      items: cityList.map((e) => DropdownMenuItem(value: e.name, child: Text(e.name))).toList(),
-                      onChanged: (value) {
-                        setState(() {
-                          currentCity = cityList.firstWhere((element) => element.name == value);
-                        });
-                      },
-                    ),
+                  DropdownButton(
+                    isExpanded: true,
+                    value: currentCity?.name,
+                    items: cityList.map((e) => DropdownMenuItem(value: e.name, child: Text(e.name))).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        currentCity = cityList.firstWhere((element) => element.name == value);
+                      });
+                    },
                   ),
-                  Spacer(),
                   Expanded(
                     child: TextFormField(
                       controller: _addressController,
                       focusNode: _addressFocus,
-//                      onEditingComplete: () {
-//                        _fieldFocusChange(context, _addressFocus, _phoneFocus);
-//                      },
+                      onEditingComplete: () => _fieldFocusChange(context, _addressFocus, _additionalAddressFocus),
                       textInputAction: TextInputAction.next,
                       style: AppTextStyle.black16,
                       decoration: InputDecoration(
-                        suffixText: strings.optionalField,
-                        suffixStyle: AppTextStyle.grey16,
                         isDense: true,
                         labelText: strings.city,
                         labelStyle: AppTextStyle.black16.copyWith(color: _addressFocus.hasFocus ? AppColors.accentColor : Colors.black),
@@ -111,10 +105,30 @@ class _MyAddressPageState extends State<MyAddressPage> {
                       ),
                     ),
                   ),
+                  Expanded(
+                    child: TextFormField(
+                      controller: _additionalAddressController,
+                      focusNode: _additionalAddressFocus,
+                      onEditingComplete: () => _additionalAddressFocus.unfocus(),
+                      textInputAction: TextInputAction.next,
+                      style: AppTextStyle.black16,
+                      decoration: InputDecoration(
+                        suffixText: strings.optionalField,
+                        suffixStyle: AppTextStyle.grey16,
+                        isDense: true,
+                        labelText: strings.additionalAddressInfo,
+                        labelStyle: AppTextStyle.black16.copyWith(color: _addressFocus.hasFocus ? AppColors.accentColor : Colors.black),
+                        enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                        focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.accentColor)),
+                        errorBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+                      ),
+                    ),
+                  ),
+                  Spacer(),
                   Container(
                     //todo sacar esto como un custom widget (PrimaryButton)
                     height: 40,
-                    margin: EdgeInsets.symmetric(vertical: 21, horizontal: 24),
+                    margin: EdgeInsets.symmetric(vertical: 24),
                     child: RaisedButton(
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
                       color: Theme.of(context).accentColor,

@@ -5,8 +5,6 @@ class AppLocalizations {
 
   final Locale locale;
 
-  
-
   static AppLocalizations of(BuildContext context) {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
@@ -15,13 +13,13 @@ class AppLocalizations {
     'en': {
       'see_order': 'See order',
       'authorization_code': 'Authorization code',
-      "enter_the_code_sent_to_the_cell_phone": "Enter the code sent to the cell phone: ",
-      "processing": "processing...",
-      "wrong_code": "* Wrong code",
-      "verifying": "Verifying ...",
-      "continue": "Continue",
-      "didn't_you_get_the_message": "Didn't you get the message?",
-      "resend": " RESEND",
+      'enter_the_code_sent_to_the_cell_phone': 'Enter the code sent to the cell phone: ',
+      'processing': 'processing...',
+      'wrong_code': '* Wrong code',
+      'verifying': 'Verifying ...',
+      'continue': 'Continue',
+      'didn\'t_you_get_the_message': 'Didn\'t you get the message?',
+      'resend': ' RESEND',
       'Your_order_is_in_progress': 'Your order is in progress',
       'create_account': 'Create your account to complete the order',
       'name_required': 'Please enter a name',
@@ -38,12 +36,12 @@ class AppLocalizations {
       'use_my_location': 'Use my current location',
       'my_addresses': 'My addresses',
       'successful_order': 'Successful order',
-      "delivery_address": "Delivery address",
+      'delivery_address': 'Delivery address',
       'edit': 'Edit',
       'change': 'Change',
-      "estimated_delivery": "Estimated delivery",
-      "payment_method": "Payment method",
-      "summary": "Summary",
+      'estimated_delivery': 'Estimated delivery',
+      'payment_method': 'Payment method',
+      'summary': 'Summary',
       'order': 'Order',
       'delivery': 'Delivery',
       'total': 'Total',
@@ -53,30 +51,32 @@ class AppLocalizations {
       'your_order': 'Your order',
       'comments': 'Comments',
       'my_address_title': 'Where do we send your order?',
+      'city': 'City',
+      'additional_address_info': 'Floor / Office / Flat',
     },
     'es': {
       'total': 'Total',
-      'delivery': "Domicilio",
-      "order": "Pedido",
-      "summary": "Resumen",
-      "cash": "Efectivo",
-      "payment_method": "Método de pago",
-      "estimated_delivery": "Entrega estimada",
+      'delivery': 'Domicilio',
+      'order': 'Pedido',
+      'summary': 'Resumen',
+      'cash': 'Efectivo',
+      'payment_method': 'Método de pago',
+      'estimated_delivery': 'Entrega estimada',
       'change': 'Cambiar',
-      'edit': "Editar",
-      "delivery_address": "Dirección de entrega",
+      'edit': 'Editar',
+      'delivery_address': 'Dirección de entrega',
       'debit_card': 'Tarjeta de Débito',
-      'credit_card': "Tarjeta de Crédito",
+      'credit_card': 'Tarjeta de Crédito',
       'successful_order': 'Orden exitosa',
       'see_order': 'Ver pedido',
       'authorization_code': 'Código de autorizacion',
-      "enter_the_code_sent_to_the_cell_phone": "Ingrese el código enviado al celular: ",
-      "processing": "Procesado...",
-      "rong_code": "* Codigo erróneo",
-      "verifying": "Verificando ...",
-      "continue": "Continuar",
-      "didn't_you_get_the_message": "No resiviste el mensaje? ",
-      "resend": " REENVIAR",
+      'enter_the_code_sent_to_the_cell_phone': 'Ingrese el código enviado al celular: ',
+      'processing': 'Procesado...',
+      'rong_code': '* Codigo erróneo',
+      'verifying': 'Verificando ...',
+      'continue': 'Continuar',
+      'didn\'t_you_get_the_message': 'No resiviste el mensaje? ',
+      'resend': ' REENVIAR',
       'Your_order_is_in_progress': 'Tu pedido está en curso',
       'create_account': 'Crea tu cuenta para completar el pedido',
       'name_required': 'Por favor ingrese un nombre',
@@ -95,112 +95,62 @@ class AppLocalizations {
       'your_order': 'Tu pedido',
       'comments': 'Comentarios',
       'my_address_title': 'A dónde quieres que llevemos tu pedido?',
+      'city': 'Ciudad',
+      'additional_address_info': 'Piso / Offinica / Apto',
     },
   };
 
-  String get debitCard {
-    return _localizedValues[locale.languageCode]["debit_card"];
-  }
+  String get debitCard => _localizedValues[locale.languageCode]['debit_card'];
 
-  String get creditCard {
-    return _localizedValues[locale.languageCode]["credit_card"];
-  }
+  String get creditCard => _localizedValues[locale.languageCode]['credit_card'];
 
-  String get change {
-    return _localizedValues[locale.languageCode]["change"];
-  }
+  String get change => _localizedValues[locale.languageCode]['change'];
 
-  String get cash {
-    return _localizedValues[locale.languageCode]["cash"];
-  }
+  String get cash => _localizedValues[locale.languageCode]['cash'];
 
-  String get paymentMethod {
-    return _localizedValues[locale.languageCode]["payment_method"];
-  }
+  String get paymentMethod => _localizedValues[locale.languageCode]['payment_method'];
 
-  String get total {
-    return _localizedValues[locale.languageCode]["total"];
-  }
+  String get total => _localizedValues[locale.languageCode]['total'];
 
-  String get delivery {
-    return _localizedValues[locale.languageCode]["delivery"];
-  }
+  String get delivery => _localizedValues[locale.languageCode]['delivery'];
 
-  String get order {
-    return _localizedValues[locale.languageCode]["order"];
-  }
+  String get order => _localizedValues[locale.languageCode]['order'];
 
-  String get summary {
-    return _localizedValues[locale.languageCode]["summary"];
-  }
+  String get summary => _localizedValues[locale.languageCode]['summary'];
 
-  String get estimatedDelivery {
-    return _localizedValues[locale.languageCode]['estimated_delivery'];
-  }
+  String get estimatedDelivery => _localizedValues[locale.languageCode]['estimated_delivery'];
 
-  String get edit {
-    return _localizedValues[locale.languageCode]['edit'];
-  }
+  String get edit => _localizedValues[locale.languageCode]['edit'];
 
-  String get deliveryAddress {
-    return _localizedValues[locale.languageCode]['delivery_address'];
-  }
+  String get deliveryAddress => _localizedValues[locale.languageCode]['delivery_address'];
 
-  String get successfulOrder {
-    return _localizedValues[locale.languageCode]['successful_order'];
-  }
+  String get successfulOrder => _localizedValues[locale.languageCode]['successful_order'];
 
-  String get seeOrder {
-    return _localizedValues[locale.languageCode]['see_order'];
-  }
+  String get seeOrder => _localizedValues[locale.languageCode]['see_order'];
 
-  String get yourOrderIsInProgress {
-    return _localizedValues[locale.languageCode]['Your_order_is_in_progress'];
-  }
+  String get yourOrderIsInProgress => _localizedValues[locale.languageCode]['Your_order_is_in_progress'];
 
-  String get createAccount {
-    return _localizedValues[locale.languageCode]['create_account'];
-  }
+  String get createAccount => _localizedValues[locale.languageCode]['create_account'];
 
-  String get nameRequired {
-    return _localizedValues[locale.languageCode]['name_required'];
-  }
+  String get nameRequired => _localizedValues[locale.languageCode]['name_required'];
 
-  String get name {
-    return _localizedValues[locale.languageCode]['name'];
-  }
+  String get name => _localizedValues[locale.languageCode]['name'];
 
-  String get invalidEmail {
-    return _localizedValues[locale.languageCode]['invalid_email'];
-  }
+  String get invalidEmail => _localizedValues[locale.languageCode]['invalid_email'];
 
-  String get optionalField {
-    return _localizedValues[locale.languageCode]['optional_field'];
-  }
+  String get optionalField => _localizedValues[locale.languageCode]['optional_field'];
 
-  String get email {
-    return _localizedValues[locale.languageCode]['email'];
-  }
+  String get email => _localizedValues[locale.languageCode]['email'];
 
-  String get phoneRequired {
-    return _localizedValues[locale.languageCode]['phone_required'];
-  }
+  String get phoneRequired => _localizedValues[locale.languageCode]['phone_required'];
 
-  String get phone {
-    return _localizedValues[locale.languageCode]['phone'];
-  }
+  String get phone => _localizedValues[locale.languageCode]['phone'];
 
-  String get createAccountAction {
-    return _localizedValues[locale.languageCode]['create_account_action'];
-  }
+  String get createAccountAction => _localizedValues[locale.languageCode]['create_account_action'];
 
-  String get invalidPhone {
-    return _localizedValues[locale.languageCode]['invalid_phone'];
-  }
+  String get invalidPhone => _localizedValues[locale.languageCode]['invalid_phone'];
 
-  String get addOrChooseAnAddress {
-    return _localizedValues[locale.languageCode]['add_or_choose_an_address'];
-  }
+  String get addOrChooseAnAddress => _localizedValues[locale.languageCode]['add_or_choose_an_address'];
 
   String get searchYourAddress => _localizedValues[locale.languageCode]['search_your_address'];
 
@@ -210,25 +160,27 @@ class AppLocalizations {
 
   String get authorizationCode => _localizedValues[locale.languageCode]['authorization_code'];
 
-  String get enterTheCodeSentToTheCellPhone => _localizedValues[locale.languageCode]["enter_the_code_sent_to_the_cell_phone"];
+  String get enterTheCodeSentToTheCellPhone => _localizedValues[locale.languageCode]['enter_the_code_sent_to_the_cell_phone'];
 
-  String get processing => _localizedValues[locale.languageCode]["processing"];
+  String get processing => _localizedValues[locale.languageCode]['processing'];
 
-  String get wrongCode => _localizedValues[locale.languageCode]["wrong_code"];
+  String get wrongCode => _localizedValues[locale.languageCode]['wrong_code'];
 
   String get verifying => _localizedValues[locale.languageCode]['verifying'];
 
   String get continu => _localizedValues[locale.languageCode]['continue'];
 
-  String get didntYouGetTheMessage => _localizedValues[locale.languageCode]["didn't_you_get_the_message"];
+  String get didntYouGetTheMessage => _localizedValues[locale.languageCode]['didn\'t_you_get_the_message'];
 
-  String get resend => _localizedValues[locale.languageCode]["resend"];
+  String get resend => _localizedValues[locale.languageCode]['resend'];
 
-  String get yourOrder => _localizedValues[locale.languageCode]["your_order"];
+  String get yourOrder => _localizedValues[locale.languageCode]['your_order'];
 
-  String get comments => _localizedValues[locale.languageCode]["comments"];
+  String get comments => _localizedValues[locale.languageCode]['comments'];
 
-  String get myAddressTitle => _localizedValues[locale.languageCode]["my_address_title"];
+  String get myAddressTitle => _localizedValues[locale.languageCode]['my_address_title'];
 
-  get city => null;
+  String get city => _localizedValues[locale.languageCode]['city'];
+
+  String get additionalAddressInfo => _localizedValues[locale.languageCode]['additional_address_info'];
 }
