@@ -35,6 +35,7 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
     _bloc.store = store;
     Map<ItemUI, List<ItemUI>> itemList;
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(elevation: 0),
         body: SafeArea(
           child: BlocBuilder(

@@ -32,6 +32,7 @@ class _StoreListPageState extends State<StoreListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(elevation: 0),
       body: BlocBuilder(
           bloc: _bloc,
