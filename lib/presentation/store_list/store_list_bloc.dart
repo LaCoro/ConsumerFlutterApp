@@ -31,6 +31,8 @@ class StoreListBloc extends Bloc<BaseEvent, BaseState> {
       yield ErrorState();
     }
   }
+
+  String loadSavedCity() => _preferences.getCity().name;
 }
 
 /// Store list events

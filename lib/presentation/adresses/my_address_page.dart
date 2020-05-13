@@ -57,6 +57,7 @@ class _MyAddressPageState extends State<MyAddressPage> {
     final strings = AppLocalizations.of(context);
     List<CityEntity> cityList;
     return Scaffold(
+      appBar: AppBar(elevation: 0),
       backgroundColor: Theme.of(context).backgroundColor,
       body: BlocBuilder(
           bloc: _bloc,
