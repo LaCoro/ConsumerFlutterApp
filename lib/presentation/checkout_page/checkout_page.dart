@@ -1,3 +1,4 @@
+import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/core/enums/payment_type.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/current_adress.dart';
@@ -31,6 +32,7 @@ class CheckoutPage extends StatelessWidget {
                   child: Divider(
                     thickness: 1,
                     height: 0,
+                    color: AppColors.divider,
                   ),
                 ),
                 Padding(

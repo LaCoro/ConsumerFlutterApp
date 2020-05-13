@@ -33,6 +33,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
     final strings = AppLocalizations.of(context);
 
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         elevation: 0,
         title: Text(strings.yourOrder, style: AppTextStyle.section.copyWith(color: Colors.black)),
@@ -47,7 +48,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
             Divider(
               thickness: 10,
               height: 50,
-              color: Theme.of(context).backgroundColor,
+              color: Theme.of(context).dividerColor,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
@@ -56,7 +57,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
             Divider(
               thickness: 10,
               height: 50,
-              color: Theme.of(context).backgroundColor,
+              color: Theme.of(context).dividerColor,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),

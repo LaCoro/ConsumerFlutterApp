@@ -83,7 +83,7 @@ class AddressesPage extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 0.0, right: 0.0, top: 15.0),
-              child: Divider(thickness: 8, color: AppColors.greyLight),
+              child: Divider(thickness: 8, color: AppColors.divider),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 15.0),
