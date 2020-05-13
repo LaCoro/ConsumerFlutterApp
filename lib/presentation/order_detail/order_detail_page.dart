@@ -44,12 +44,20 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
               padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
               child: RestaurantOrderDetails(store),
             ),
-            Divider(thickness: 8, color: AppColors.greyLight),
+            Divider(
+              thickness: 10,
+              height: 50,
+              color: Theme.of(context).backgroundColor,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
               child: buildItemList(products),
             ),
-            Divider(thickness: 8, color: AppColors.greyLight),
+            Divider(
+              thickness: 10,
+              height: 50,
+              color: Theme.of(context).backgroundColor,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
               child: Row(
