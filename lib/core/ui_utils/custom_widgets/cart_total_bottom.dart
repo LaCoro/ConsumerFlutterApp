@@ -1,9 +1,12 @@
+import 'package:LaCoro/core/appearance/app_colors.dart';
+import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class CartTotalBottom extends StatelessWidget {
   int quantity = 0;
-  String price = "\$111";
+  double price = 0.0;
 
   CartTotalBottom(this.quantity, this.price);
 
@@ -27,14 +30,15 @@ class CartTotalBottom extends StatelessWidget {
                   ),
                   child: Center(
                       child: Text((quantity < 10) ? quantity.toString() : "+9",
-                          textAlign: TextAlign.center, style: TextStyle(color: Theme.of(context).accentColor, fontSize: 18, fontWeight: FontWeight.bold)))),
+                          textAlign: TextAlign.center, style: AppTextStyle.boldBlack16.copyWith(color: AppColors.accentColor)))),
             ),
             Expanded(
               flex: 2,
-              child: Text(strings.seeOrder, textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+              child: Text(strings.seeOrder, textAlign: TextAlign.center, style: AppTextStyle.boldBlack16.copyWith(color: Colors.white)),
             ),
             Expanded(
-              child: Text(price, textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+              child: Text(NumberFormat.simpleCurrency(decimalDigits: 0).format(price),
+                  textAlign: TextAlign.center, style: AppTextStyle.boldBlack16.copyWith(color: Colors.white)),
             ),
           ],
         ),

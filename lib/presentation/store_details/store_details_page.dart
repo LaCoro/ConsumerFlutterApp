@@ -82,7 +82,7 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
                           Navigator.pushNamed(context, OrderDetailPage.ORDER_DETAIL_ROUTE, arguments: [store, products]);
                         }
                       },
-                      child: CartTotalBottom(orderQuantity, "\$$cartTotal"),
+                      child: CartTotalBottom(orderQuantity, cartTotal),
                     ),
                   ],
                 );
