@@ -81,9 +81,6 @@ class _CitySelectionPageState extends State<CitySelectionPage> {
                         style: Theme.of(context).textTheme.headline1.copyWith(color: Colors.white),
                       )),
                     ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                    ),
                   ),
                 ],
               );

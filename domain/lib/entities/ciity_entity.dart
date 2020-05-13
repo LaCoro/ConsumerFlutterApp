@@ -8,7 +8,7 @@ class CityEntity {
   String stateCode;
   int deliveryCost;
 
-  static CityEntity fromJson(Map<String, dynamic> json) {
+  static CityEntity fromJsonMap(Map<String, dynamic> json) {
     return CityEntity()
       ..id = json['id']
       ..countryCode = json['country_code']
@@ -18,7 +18,7 @@ class CityEntity {
       ..deliveryCost = json['delivery_cost'];
   }
 
-  static Map<String, dynamic> toJson(CityEntity cityEntity) {
+  static Map<String, dynamic> toJsonObject(CityEntity cityEntity) {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = cityEntity.id;
     data['country_code'] = cityEntity.countryCode;

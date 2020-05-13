@@ -1,4 +1,5 @@
 import 'package:LaCoro/core/appearance/app_colors.dart';
+import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/product_item.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/restaurant_order_details.dart';
@@ -32,148 +33,128 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
     final strings = AppLocalizations.of(context);
 
     return Scaffold(
-      body: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return <Widget>[
-            SliverAppBar(
-              expandedHeight: 100.0,
-              floating: true,
-              pinned: true,
-              leading: Icon(Icons.arrow_back_ios, color: Colors.black),
-              flexibleSpace: FlexibleSpaceBar(
-                title: Text(strings.yourOrder, style: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.black)),
+      appBar: AppBar(
+        elevation: 0,
+        title: Text(strings.yourOrder, style: AppTextStyle.section.copyWith(color: Colors.black)),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+              child: RestaurantOrderDetails(store),
+            ),
+            Divider(thickness: 8, color: AppColors.greyLight),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+              child: buildItemList(products),
+            ),
+            Divider(thickness: 8, color: AppColors.greyLight),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    strings.order,
+                    style: GoogleFonts.roboto(fontWeight: FontWeight.normal, fontSize: 16, color: AppColors.boldTextColor),
+                  ),
+                  Text(
+                    "\$21.000",
+                    style: GoogleFonts.roboto(fontWeight: FontWeight.normal, fontSize: 16, color: AppColors.boldTextColor),
+                  )
+                ],
               ),
             ),
-          ];
-        },
-        body: Container(
-          color: Colors.white,
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
-                child: RestaurantOrderDetails(),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 12.0, left: 24.0, right: 24.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    strings.delivery,
+                    style: GoogleFonts.roboto(fontWeight: FontWeight.normal, fontSize: 16, color: AppColors.boldTextColor),
+                  ),
+                  Text(
+                    "\$21.000",
+                    style: GoogleFonts.roboto(fontWeight: FontWeight.normal, fontSize: 16, color: AppColors.boldTextColor),
+                  )
+                ],
               ),
-              Divider(thickness: 8, color: AppColors.greyLight),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
-                //child: buildItemList(items),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    strings.total,
+                    style: GoogleFonts.roboto(fontSize: 18, color: AppColors.boldTextColor),
+                  ),
+                  Text("\$21.000", style: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 18, color: AppColors.boldTextColor))
+                ],
               ),
-              Divider(thickness: 8, color: AppColors.greyLight),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      strings.order,
-                      style: GoogleFonts.roboto(fontWeight: FontWeight.normal, fontSize: 16, color: AppColors.boldTextColor),
-                    ),
-                    Text(
-                      "\$21.000",
-                      style: GoogleFonts.roboto(fontWeight: FontWeight.normal, fontSize: 16, color: AppColors.boldTextColor),
-                    )
-                  ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 40.0, left: 24.0, right: 24.0),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  strings.comments,
+                  style: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 16, color: AppColors.boldTextColor),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 12.0, left: 24.0, right: 24.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      strings.delivery,
-                      style: GoogleFonts.roboto(fontWeight: FontWeight.normal, fontSize: 16, color: AppColors.boldTextColor),
-                    ),
-                    Text(
-                      "\$21.000",
-                      style: GoogleFonts.roboto(fontWeight: FontWeight.normal, fontSize: 16, color: AppColors.boldTextColor),
-                    )
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      strings.total,
-                      style: GoogleFonts.roboto(fontSize: 18, color: AppColors.boldTextColor),
-                    ),
-                    Text("\$21.000", style: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 18, color: AppColors.boldTextColor))
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 40.0, left: 24.0, right: 24.0),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    strings.comments,
-                    style: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 16, color: AppColors.boldTextColor),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 12.0, left: 24.0, right: 24.0),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: TextFormField(
+                  controller: _commentController,
+                  keyboardType: TextInputType.multiline,
+                  textInputAction: TextInputAction.next,
+                  style: GoogleFonts.roboto(textStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.normal, fontSize: 16)),
+                  decoration: InputDecoration(
+                    isDense: true,
+                    hintStyle: TextStyle(color: AppColors.greyMedium, fontWeight: FontWeight.w300, fontSize: 16),
+                    hintText: strings.comments,
+                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: AppColors.greyMedium)),
+                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: AppColors.accentColor)),
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 12.0, left: 24.0, right: 24.0),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: TextFormField(
-                    controller: _commentController,
-                    keyboardType: TextInputType.multiline,
-                    textInputAction: TextInputAction.next,
-                    style: GoogleFonts.roboto(textStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.normal, fontSize: 16)),
-                    decoration: InputDecoration(
-                      isDense: true,
-                      hintStyle: TextStyle(color: AppColors.greyMedium, fontWeight: FontWeight.w300, fontSize: 16),
-                      hintText: strings.comments,
-                      enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: AppColors.greyMedium)),
-                      focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: AppColors.accentColor)),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 24.0),
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                        child: RaisedButton(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(6.0),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 16.0),
-                              child: Text(strings.continu, style: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white)),
-                            ),
-                            onPressed: () {},
-                            color: AppColors.accentColor)),
-                  ],
-                ),
-              ),
-            ],
-          ),
+            ),
+            Container(
+              //todo sacar esto como un custom widget (PrimaryButton)
+              height: 40,
+              margin: EdgeInsets.symmetric(vertical: 21, horizontal: 24),
+              child: RaisedButton(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                  child: Center(child: Text(strings.continu, style: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white))),
+                  onPressed: () {},
+                  color: AppColors.accentColor),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  Widget buildItemList(List<ItemUI> items) {
+  Widget buildItemList(Map<ItemUI, int> items) {
     return items == null
         ? Center(child: CircularProgressIndicator())
-        : ListView.separated(
-            separatorBuilder: (BuildContext context, int index) => Divider(
-                  thickness: 10,
-                  height: 50,
-                  color: Theme.of(context).backgroundColor,
+        : Column(
+            children: items.keys.map((element) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: ProductItem(
+                  itemUI: element,
+                  onQuantityChange: (value) => null,
+                  quantity: items[element],
+                  divider: false,
                 ),
-            itemCount: items?.length ?? 0,
-            itemBuilder: (c, i) {
-              return ProductItem(
-                itemUI: items[i],
-                onQuantityChange: (value) => null,
               );
-            });
+            }).toList(),
+          );
   }
 }

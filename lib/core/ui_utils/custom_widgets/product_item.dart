@@ -9,21 +9,24 @@ import 'package:flutter/material.dart';
 class ProductItem extends StatefulWidget {
   final ItemUI itemUI;
   final Function(int) onQuantityChange;
+  final int quantity;
+  final bool divider;
 
-  const ProductItem({Key key, @required this.itemUI, this.onQuantityChange}) : super(key: key);
+  const ProductItem({Key key, @required this.itemUI, this.onQuantityChange, this.quantity, this.divider}) : super(key: key);
 
   @override
-  _ProductItemState createState() => _ProductItemState(onQuantityChange);
+  _ProductItemState createState() => _ProductItemState(onQuantityChange, quantity ?? 0, divider ?? false);
 }
 
 class _ProductItemState extends State<ProductItem> {
-  int quantity = 0;
+  final bool divider;
 
+  int quantity;
   bool animateQuantity = false;
 
   final Function(int) onQuantityChange;
 
-  _ProductItemState(this.onQuantityChange);
+  _ProductItemState(this.onQuantityChange, this.quantity, this.divider);
 
   @override
   Widget build(BuildContext context) {
@@ -32,30 +35,27 @@ class _ProductItemState extends State<ProductItem> {
         Row(
           children: <Widget>[
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(left:24,top:16,right: 8),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(widget.itemUI.name ?? "", style: AppTextStyle.boldBlack16),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: Text(widget.itemUI.description ?? "", style: AppTextStyle.grey13, maxLines: 3),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(widget.itemUI.name ?? "", style: AppTextStyle.boldBlack16),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Text(widget.itemUI.description ?? "", style: AppTextStyle.grey13, maxLines: 3),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text("\$${widget.itemUI.price}", style: AppTextStyle.black16),
+                        Text("\$16.000", style: AppTextStyle.grey14overline),
+                        DiscountChip(discountPercentage: "50"),
+                      ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text("\$${widget.itemUI.price}", style: AppTextStyle.black16),
-                          Text("\$16.000", style: AppTextStyle.grey14overline),
-                          DiscountChip(discountPercentage: "50"),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+                  )
+                ],
               ),
             ),
             Column(
@@ -64,7 +64,9 @@ class _ProductItemState extends State<ProductItem> {
                   padding: const EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 8.0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
-                    child: widget.itemUI.image == null ? SizedBox() : Image.network("https://www.liberaldictionary.com/wp-content/uploads/2018/11/pizza.jpg", height: 100, width: 100, fit: BoxFit.fill),
+                    child: widget.itemUI.image == null
+                        ? SizedBox()
+                        : Image.network("https://www.liberaldictionary.com/wp-content/uploads/2018/11/pizza.jpg", height: 100, width: 100, fit: BoxFit.fill),
                   ),
                 ),
                 AnimatedOpacity(
@@ -73,7 +75,7 @@ class _ProductItemState extends State<ProductItem> {
                   curve: Curves.elasticInOut,
                   onEnd: () => setState(() => animateQuantity = false),
                   child: Counter(
-                      quantity: quantity,
+                      quantity: quantity ?? 0,
                       onQuantityChange: (value) {
                         setState(() {
                           quantity = value;
@@ -86,7 +88,7 @@ class _ProductItemState extends State<ProductItem> {
             ),
           ],
         ),
-        Divider(color: AppColors.divider),
+        divider ? Divider(color: AppColors.divider) : SizedBox(),
       ],
     );
   }

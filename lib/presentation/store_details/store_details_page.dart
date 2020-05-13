@@ -40,7 +40,6 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
           child: BlocBuilder(
               bloc: _bloc,
               builder: (context, state) {
-
                 int orderQuantity = 0;
                 double cartTotal = 0;
                 Map<ItemUI, int> products;
@@ -70,7 +69,7 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
                           onCategorySelected: (category, position) {
                             _controller.scrollToIndex(position, duration: Duration(milliseconds: 500), preferPosition: AutoScrollPosition.begin);
                           },
-                          categories: itemList.keys.map((e) => e.name).toList(),
+                          categories: itemList?.keys?.map((e) => e.name)?.toList(),
                         )),
                     Expanded(
                       flex: 10,
@@ -78,7 +77,9 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.pushReplacementNamed(context, OrderDetailPage.ORDER_DETAIL_ROUTE, arguments: [products, store]);
+                        if (orderQuantity > 0) {
+                          Navigator.pushNamed(context, OrderDetailPage.ORDER_DETAIL_ROUTE, arguments: [store, products]);
+                        }
                       },
                       child: CartTotalBottom(orderQuantity, "\$$cartTotal"),
                     ),
@@ -111,9 +112,13 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
                     Padding(padding: const EdgeInsets.all(16.0), child: Text(category.name, style: AppTextStyle.section)),
                     Column(
                         children: items[category]
-                            .map((e) => ProductItem(
-                                  itemUI: e,
-                                  onQuantityChange: (value) => _bloc.add(UpdateProductEvent(e, value)),
+                            .map((e) => Padding(
+                                  padding: const EdgeInsets.only(left: 24, top: 8, right: 24),
+                                  child: ProductItem(
+                                    itemUI: e,
+                                    onQuantityChange: (value) => _bloc.add(UpdateProductEvent(e, value)),
+                                    divider: e != items[category]?.last,
+                                  ),
                                 ))
                             .toList()),
                   ],

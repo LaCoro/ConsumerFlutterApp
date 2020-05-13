@@ -28,13 +28,13 @@ class Preferences {
   }
 
   Future saveCity(CityEntity city) async {
-    await _preferences.setString(SELECTED_CITY, json.encode(CityEntity.toJson(city)));
+    await _preferences.setString(SELECTED_CITY, json.encode(CityEntity.toJsonObject(city)));
   }
 
   CityEntity getCity() {
     final cityJson = _preferences.getString(SELECTED_CITY);
     try {
-      return CityEntity.fromJson(json.decode(cityJson));
+      return CityEntity.fromJsonMap(json.decode(cityJson));
     } catch (e) {
       return null;
     }
