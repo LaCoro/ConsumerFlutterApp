@@ -1,8 +1,11 @@
 import 'dart:async';
 
 import 'package:LaCoro/core/appearance/app_colors.dart';
+import 'package:LaCoro/core/preferences/preferences.dart';
 import 'package:LaCoro/presentation/adresses/my_address_page.dart';
+import 'package:LaCoro/presentation/store_list/store_list_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_simple_dependency_injection/injector.dart';
 
 class SplashPage extends StatefulWidget {
   static const SPLASH_PAGE_ROUTE = '/splash_page';
@@ -40,8 +43,9 @@ class SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     return new Timer(Duration(seconds: 3), onDoneLoading);
   }
 
-  onDoneLoading() async { // TODO arreglar esto
-    Navigator.popAndPushNamed(context, MyAddressPage.MY_ADDRESS_ROUTE);
+  onDoneLoading() async {
+    final Preferences pref = Injector.getInjector().get();
+    Navigator.popAndPushNamed(context, pref.getCity()?.name == null ? MyAddressPage.MY_ADDRESS_ROUTE : StoreListPage.STORE_LIST_ROUTE);
   }
 
   @override
