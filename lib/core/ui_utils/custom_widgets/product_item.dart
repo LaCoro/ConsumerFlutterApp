@@ -60,15 +60,16 @@ class _ProductItemState extends State<ProductItem> {
             ),
             Column(
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 8.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8.0),
-                    child: widget.itemUI.image == null
-                        ? SizedBox()
-                        : Image.network("https://www.liberaldictionary.com/wp-content/uploads/2018/11/pizza.jpg", height: 100, width: 100, fit: BoxFit.fill),
-                  ),
-                ),
+                widget.itemUI.image == null
+                    ? SizedBox()
+                    : Padding(
+                        padding: const EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 8.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Image.network("https://www.liberaldictionary.com/wp-content/uploads/2018/11/pizza.jpg",
+                              height: 100, width: 100, fit: BoxFit.fill),
+                        ),
+                      ),
                 AnimatedOpacity(
                   opacity: animateQuantity ? 0.7 : 1,
                   duration: Duration(milliseconds: 200),
