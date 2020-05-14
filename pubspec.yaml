@@ -12,6 +12,8 @@ environment:
 
 dependencies:
 
+  responsive_framework: ^0.0.7
+
   flutter_localizations:
     sdk: flutter
 
