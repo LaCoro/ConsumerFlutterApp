@@ -1,4 +1,5 @@
 import 'package:LaCoro/core/enums/payment_type.dart';
+import 'package:LaCoro/core/ui_utils/custom_widgets/counter.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/payment_method.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,9 @@ class TestPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: PaymentMethod(PaymentType.cash),
+        child: Center(
+          child: Counter(quantity: 0,),
+        ),
       ),
     );
   }

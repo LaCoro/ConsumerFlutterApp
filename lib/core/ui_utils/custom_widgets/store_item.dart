@@ -13,12 +13,18 @@ class StoreItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var deliveryCostColor = storeItem.isDeliveryFree ? AppColors.accentColor : AppColors.boldTextColor;
+    var deliveryCostColor = storeItem.isDeliveryFree
+        ? AppColors.accentColor
+        : AppColors.boldTextColor;
 
-    var deliveryServiceMsg = storeItem.isDeliveryFree ? "gratis" : "\$${storeItem.deliveryCost}";
+    var deliveryServiceMsg =
+        storeItem.isDeliveryFree ? "gratis" : "\$${storeItem.deliveryCost}";
 
     var promoWidget = storeItem.hasAPromo
-        ? Align(alignment: Alignment.topLeft, child: DiscountChip(discountPercentage: storeItem.discountPercentage))
+        ? Align(
+            alignment: Alignment.topLeft,
+            child:
+                DiscountChip(discountPercentage: storeItem.discountPercentage))
         : SizedBox(height: 8.0);
 
     var storeClosedWidget = storeItem.isStoreClosed
@@ -29,17 +35,19 @@ class StoreItem extends StatelessWidget {
         : SizedBox(height: 8.0);
 
     return Container(
-      height: 90,
+      height: 110,
       padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
+
           Container(
-              width: 90,
+              width: 110,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
                 child: FadeInImage.assetNetwork(
-                  placeholder: placeHolderAsset ?? 'assets/loading_resource.gif',
+                  placeholder:
+                      placeHolderAsset ?? 'assets/loading_resource.gif',
                   image: storeItem.logo,
                   fit: BoxFit.fill,
                 ),
@@ -51,15 +59,19 @@ class StoreItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(storeItem.name, style: AppTextStyle.appBar),
-                    Spacer(),
+                    Text(storeItem.name,
+                        style: AppTextStyle.section),
+
                     Text(storeItem.tag, style: AppTextStyle.grey13),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text("${storeItem.openAt} - ${storeItem.closeAt}", style: AppTextStyle.black14),
-                        SizedBox(width: 16.0),
-                        Text("Envio $deliveryServiceMsg", style: AppTextStyle.black14.copyWith(color: deliveryCostColor)),
+                        Text("${storeItem.openAt} - ${storeItem.closeAt}",
+                            style: AppTextStyle.black14),
+                        SizedBox(width: 30.0),
+                        Text("Envio $deliveryServiceMsg",
+                            style: AppTextStyle.black14
+                                .copyWith(color: deliveryCostColor)),
                       ],
                     ),
                     promoWidget,

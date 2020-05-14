@@ -67,7 +67,7 @@ class _StoreListPageState extends State<StoreListPage> {
               }
               return Column(
                 children: <Widget>[
-                  Padding(
+                  Padding(  // todo sacar en un widget
                     padding: const EdgeInsets.all(16.0),
                     child: Material(
                       borderRadius: BorderRadius.all(Radius.circular(6.0)),
@@ -79,7 +79,7 @@ class _StoreListPageState extends State<StoreListPage> {
                         child: TextField(
                             decoration: InputDecoration(
                               hintText: strings.searchYourAddress,
-                              hintStyle: Theme.of(context).textTheme.caption,
+                              hintStyle: AppTextStyle.grey16,
                               prefixIcon: Icon(Icons.search, color: AppColors.greyMedium, size: 24),
                               suffixIcon: Icon(Icons.cancel, color: Colors.black, size: 24),
                               border: OutlineInputBorder(),
