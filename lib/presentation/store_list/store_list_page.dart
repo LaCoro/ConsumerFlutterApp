@@ -24,7 +24,6 @@ class _StoreListPageState extends State<StoreListPage> {
 
   final StoreListBloc _bloc;
   List<StoreUI> _stores;
-
   _StoreListPageState(this._bloc);
 
   @override
