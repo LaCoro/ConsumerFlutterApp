@@ -53,7 +53,7 @@ class _ProductItemState extends State<ProductItem> {
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0),
                     child: Text(widget.itemUI.description ?? "",
-                        style: AppTextStyle.grey13, maxLines: 3),
+                        style: AppTextStyle.grey13, maxLines: 2),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 1.0),

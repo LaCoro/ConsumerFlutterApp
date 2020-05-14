@@ -40,7 +40,6 @@ class StoreItem extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-
           Container(
               width: 110,
               child: ClipRRect(
@@ -59,8 +58,20 @@ class StoreItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(storeItem.name,
-                        style: AppTextStyle.section),
+                    SizedBox(
+                      height: 2,
+                    ),
+//
+                    Text(
+                      storeItem.name,
+                      style: AppTextStyle.section.copyWith(height: 0.95,
+                        fontSize: 18,),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
 
                     Text(storeItem.tag, style: AppTextStyle.grey13),
                     Row(
@@ -76,6 +87,9 @@ class StoreItem extends StatelessWidget {
                     ),
                     promoWidget,
                     storeClosedWidget,
+                    SizedBox(
+                      height: 3,
+                    ),
                   ],
                 )),
           ),

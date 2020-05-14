@@ -32,9 +32,12 @@ class Counter extends StatelessWidget {
           ),
           Column(
             children: <Widget>[
-              GestureDetector(
-                  child: Icon(Icons.add, color: AppColors.accentColor, size: 35),
-                  onTap: () => onQuantityChange.call(quantity + 1)),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 8),
+                child: GestureDetector(
+                    child: Icon(Icons.add, color: AppColors.accentColor, size: 35),
+                    onTap: () => onQuantityChange.call(quantity + 1)),
+              ),
             ],
           ),
         ],
