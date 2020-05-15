@@ -1,3 +1,4 @@
+import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -15,30 +16,18 @@ class Counter extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(width: 2, color: AppColors.accentColor),
         shape: BoxShape.rectangle,
-        borderRadius: BorderRadius.all(Radius.circular(6.0)),
+        borderRadius: BorderRadius.all(Radius.circular(8.0)),
       ),
       child: Row(
-
-
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-
           GestureDetector(
-              child: Icon(Icons.remove, color: quantity == 0 ? AppColors.greyMedium : AppColors.accentColor, size: 35),
+              child: Icon(Icons.remove, color: quantity == 0 ? AppColors.greyMedium : AppColors.accentColor, size: 32),
               onTap: quantity < 1 ? null : () => onQuantityChange.call(quantity - 1)),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 0),
-            child: Text('$quantity', style: TextStyle(color: AppColors.accentColor, fontSize: 20, fontWeight: FontWeight.bold)),
-          ),
-          Column(
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 8),
-                child: GestureDetector(
-                    child: Icon(Icons.add, color: AppColors.accentColor, size: 35),
-                    onTap: () => onQuantityChange.call(quantity + 1)),
-              ),
-            ],
+          Text('$quantity', style: AppTextStyle.boldBlack16.copyWith(color: AppColors.accentColor, fontSize: 17)),
+          GestureDetector(
+            onTap: () => onQuantityChange.call(quantity + 1),
+            child: Icon(Icons.add, color: AppColors.accentColor, size: 32),
           ),
         ],
       ),

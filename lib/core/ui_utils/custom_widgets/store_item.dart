@@ -39,17 +39,18 @@ class StoreItem extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Container(
-              width: 110,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
-                child: FadeInImage.assetNetwork(
-                  placeholder:
-                      placeHolderAsset ?? 'assets/loading_resource.gif',
-                  image: storeItem.logo,
-                  fit: BoxFit.fill,
-                ),
-              )),
+          AspectRatio(
+            aspectRatio: 1,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8.0),
+              child: FadeInImage.assetNetwork(
+                placeholder:
+                    placeHolderAsset ?? 'assets/loading_resource.gif',
+                image: storeItem.logo,
+                fit: BoxFit.fill,
+              ),
+            ),
+          ),
           Expanded(
             child: Container(
                 margin: const EdgeInsets.only(left: 16),
