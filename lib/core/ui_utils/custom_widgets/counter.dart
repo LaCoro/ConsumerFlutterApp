@@ -18,24 +18,28 @@ class Counter extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(6.0)),
       ),
       child: Row(
+
+
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
+
           GestureDetector(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 4.0),
-                child: Icon(Icons.remove, color: quantity == 0 ? AppColors.greyMedium : AppColors.accentColor, size: 20),
-              ),
+              child: Icon(Icons.remove, color: quantity == 0 ? AppColors.greyMedium : AppColors.accentColor, size: 35),
               onTap: quantity < 1 ? null : () => onQuantityChange.call(quantity - 1)),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 2),
-            child: Text('$quantity', style: TextStyle(color: AppColors.accentColor, fontSize: 16, fontWeight: FontWeight.bold)),
+            padding: const EdgeInsets.symmetric(horizontal: 0),
+            child: Text('$quantity', style: TextStyle(color: AppColors.accentColor, fontSize: 20, fontWeight: FontWeight.bold)),
           ),
-          GestureDetector(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
-                child: Icon(Icons.add, color: AppColors.accentColor, size: 20),
+          Column(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 8),
+                child: GestureDetector(
+                    child: Icon(Icons.add, color: AppColors.accentColor, size: 35),
+                    onTap: () => onQuantityChange.call(quantity + 1)),
               ),
-              onTap: () => onQuantityChange.call(quantity + 1)),
+            ],
+          ),
         ],
       ),
     );

@@ -2,9 +2,9 @@ import 'package:LaCoro/core/di/app_module.dart';
 import 'package:LaCoro/core/di/my_address_module.dart';
 import 'package:LaCoro/core/di/store_list_module.dart';
 import 'package:LaCoro/core/localization/app_localizations_delegate.dart';
+import 'package:LaCoro/presentation/adresses/addresses_page_new.dart';
 import 'package:LaCoro/presentation/adresses/my_address_page.dart';
 import 'package:LaCoro/presentation/order_detail/order_detail_page.dart';
-import 'package:LaCoro/presentation/adresses/addresses_page_new.dart';
 import 'package:LaCoro/presentation/register/register_page.dart';
 import 'package:LaCoro/presentation/splash/splash.dart';
 import 'package:LaCoro/presentation/store_details/store_details_page.dart';
@@ -13,6 +13,7 @@ import 'package:LaCoro/presentation/test/test_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 import 'core/appearance/app_theme.dart';
 import 'presentation/adresses/select_address_map_page.dart';
@@ -32,6 +33,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      builder: (context, widget) => ResponsiveWrapper.builder(
+        BouncingScrollWrapper.builder(context, widget),
+        maxWidth: 1200,
+        minWidth: 450,
+        defaultScale: true,
+          breakpoints: [
+            ResponsiveBreakpoint.resize(480, name: MOBILE),
+            ResponsiveBreakpoint.resize(800, name: TABLET),
+//            ResponsiveBreakpoint.resize(1000, name: DESKTOP),
+//            ResponsiveBreakpoint.autoScale(2460, name: '4K'),
+          ],
+
+
+
+      ),
       localizationsDelegates: [
         const AppLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
@@ -55,17 +71,23 @@ class MyApp extends StatelessWidget {
             destinationRoute = OrderDetailPage();
             break;
         }
-        return MaterialPageRoute(builder: (context) => destinationRoute, settings: settings);
+        return MaterialPageRoute(
+            builder: (context) => destinationRoute, settings: settings);
       },
       routes: {
         '/': (BuildContext context) => SplashPage(),
-        StoreListPage.STORE_LIST_ROUTE: (BuildContext context) => StoreListPage(),
-        SelectAddressMapPage.SELECT_ADDRESS_MAP_ROUTE: (BuildContext context) => SelectAddressMapPage(),
-        StylesTestPage.STYLE_TEST_PAGE_ROUTE: (BuildContext context) => StylesTestPage(),
-        AddressesPage.ADDRESSES_LIST_ROUTE: (BuildContext context) => AddressesPage(),
+        StoreListPage.STORE_LIST_ROUTE: (BuildContext context) =>
+            StoreListPage(),
+        SelectAddressMapPage.SELECT_ADDRESS_MAP_ROUTE: (BuildContext context) =>
+            SelectAddressMapPage(),
+        StylesTestPage.STYLE_TEST_PAGE_ROUTE: (BuildContext context) =>
+            StylesTestPage(),
+        AddressesPage.ADDRESSES_LIST_ROUTE: (BuildContext context) =>
+            AddressesPage(),
         SplashPage.SPLASH_PAGE_ROUTE: (BuildContext context) => SplashPage(),
         RegisterPage.REGISTER_ROUTE: (BuildContext context) => RegisterPage(),
-        MyAddressPage.MY_ADDRESS_ROUTE: (BuildContext context) => MyAddressPage(),
+        MyAddressPage.MY_ADDRESS_ROUTE: (BuildContext context) =>
+            MyAddressPage(),
         TestPage.TEST_PAGE_ROUTE: (BuildContext context) => TestPage(),
       },
     );
