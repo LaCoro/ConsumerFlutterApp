@@ -24,6 +24,7 @@ dependencies:
   domain:
     path: ./domain
 
+  responsive_framework: ^0.0.7
   step_progress_indicator: ^0.2.2+5
   pull_to_refresh: ^1.4.5
   flutter_dotenv: ^2.1.0

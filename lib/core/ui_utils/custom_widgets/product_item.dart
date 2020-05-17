@@ -33,19 +33,23 @@ class _ProductItemState extends State<ProductItem> {
     return Column(
       children: <Widget>[
         Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            Expanded(
+            Container(
+              width: MediaQuery.of(context).size.width * 0.67,
+              padding: EdgeInsets.only(right: 16, top: 16),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(widget.itemUI.name ?? "", style: AppTextStyle.boldBlack16),
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0),
-                    child: Text(widget.itemUI.description ?? "", style: AppTextStyle.grey13, maxLines: 3),
+                    child: Text(widget.itemUI.description ?? "", style: AppTextStyle.grey13, maxLines: 2),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10.0),
+                    padding: const EdgeInsets.symmetric(vertical: 1.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -58,38 +62,46 @@ class _ProductItemState extends State<ProductItem> {
                 ],
               ),
             ),
-            Column(
-              children: <Widget>[
-                widget.itemUI.image == null
-                    ? SizedBox()
-                    : Padding(
-                        padding: const EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 8.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Image.network("https://www.liberaldictionary.com/wp-content/uploads/2018/11/pizza.jpg",
-                              height: 100, width: 100, fit: BoxFit.fill),
+            Expanded(
+              child: Column(
+                children: <Widget>[
+                  SizedBox(height: 8),
+                  widget.itemUI.image == null
+                      ? SizedBox()
+                      : Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: AspectRatio(
+                            aspectRatio: 1,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.network("https://www.liberaldictionary.com/wp-content/uploads/2018/11/pizza.jpg", fit: BoxFit.fill),
+                            ),
+                          ),
                         ),
-                      ),
-                AnimatedOpacity(
-                  opacity: animateQuantity ? 0.7 : 1,
-                  duration: Duration(milliseconds: 200),
-                  curve: Curves.elasticInOut,
-                  onEnd: () => setState(() => animateQuantity = false),
-                  child: Counter(
-                      quantity: quantity ?? 0,
-                      onQuantityChange: (value) {
-                        setState(() {
-                          quantity = value;
-                          animateQuantity = true;
-                        });
-                        onQuantityChange.call(value);
-                      }),
-                ),
-              ],
+                  AnimatedOpacity(
+                    opacity: animateQuantity ? 0.7 : 1,
+                    duration: Duration(milliseconds: 200),
+                    curve: Curves.elasticInOut,
+                    onEnd: () => setState(() => animateQuantity = false),
+                    child: AspectRatio(
+                      aspectRatio: 6.0 / 2.5,
+                      child: Counter(
+                          quantity: quantity ?? 0,
+                          onQuantityChange: (value) {
+                            setState(() {
+                              quantity = value;
+                              animateQuantity = true;
+                            });
+                            onQuantityChange.call(value);
+                          }),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
-        divider ? Divider(color: AppColors.divider) : SizedBox(),
+        divider ? Divider(thickness: 2) : SizedBox(),
       ],
     );
   }

@@ -1,3 +1,4 @@
+import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
@@ -64,6 +65,7 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
                 return Column(
                   children: <Widget>[
                     Hero(tag: store.name, child: StoreItem(storeItem: store)),
+                    Divider(thickness: 8),
                     Expanded(
                         flex: 1,
                         child: CategoryTabs(
@@ -72,6 +74,7 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
                           },
                           categories: itemList?.keys?.map((e) => e.name)?.toList(),
                         )),
+                    Divider(thickness: 8),
                     Expanded(
                       flex: 10,
                       child: state is LoadingState ? Center(child: CircularProgressIndicator()) : buildItemList(itemList),

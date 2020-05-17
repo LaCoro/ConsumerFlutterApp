@@ -10,7 +10,8 @@ class CategoryTabs extends StatefulWidget {
   CategoryTabs({this.categories, this.onCategorySelected});
 
   @override
-  _CategoryTabsState createState() => _CategoryTabsState(categorySelected: categories?.first);
+  _CategoryTabsState createState() =>
+      _CategoryTabsState(categorySelected: categories?.first);
 }
 
 class _CategoryTabsState extends State<CategoryTabs> {
@@ -30,25 +31,34 @@ class _CategoryTabsState extends State<CategoryTabs> {
       child: ListView.builder(
           controller: _controller,
           scrollDirection: Axis.horizontal,
-          padding: EdgeInsets.only(right: MediaQuery.of(context).size.width - (widget.categories.last.length * 10)),
+          padding: EdgeInsets.only(
+              right: MediaQuery.of(context).size.width -
+                  (widget.categories.last.length * 10)),
           itemCount: widget.categories.length,
           itemBuilder: (c, index) {
             return AutoScrollTag(
               controller: _controller,
               index: index,
               key: ValueKey(index),
+              //todo add Divider horizontal para los Tags superiores
               child: GestureDetector(
                 onTap: () {
-                  _controller.scrollToIndex(index, duration: Duration(milliseconds: 500), preferPosition: AutoScrollPosition.middle);
+                  _controller.scrollToIndex(index,
+                      duration: Duration(milliseconds: 500),
+                      preferPosition: AutoScrollPosition.middle);
                   setState(() => categorySelected = widget.categories[index]);
-                  widget.onCategorySelected?.call(widget.categories[index], index);
+                  widget.onCategorySelected
+                      ?.call(widget.categories[index], index);
                 },
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 12.0),
                   child: Center(
                     child: Text(
                       widget.categories[index],
-                        style: AppTextStyle.grey13.copyWith(color: widget.categories[index] == categorySelected ? theme.accentColor : theme.disabledColor),
+                      style: AppTextStyle.grey16.copyWith(
+                          color: widget.categories[index] == categorySelected
+                              ? theme.accentColor
+                              : theme.disabledColor),
                     ),
                   ),
                 ),

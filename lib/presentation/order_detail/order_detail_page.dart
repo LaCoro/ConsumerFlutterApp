@@ -2,7 +2,7 @@ import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/product_item.dart';
-import 'package:LaCoro/core/ui_utils/custom_widgets/restaurant_order_details.dart';
+import 'package:LaCoro/core/ui_utils/custom_widgets/store_item_small.dart';
 import 'package:LaCoro/core/ui_utils/model/item_ui.dart';
 import 'package:LaCoro/core/ui_utils/model/store_ui.dart';
 import 'package:flutter/cupertino.dart';
@@ -43,7 +43,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
-              child: RestaurantOrderDetails(store),
+              child: StoreItemSmall(store),
             ),
             Divider(
               thickness: 10,

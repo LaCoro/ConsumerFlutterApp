@@ -4,10 +4,10 @@ import 'package:LaCoro/core/ui_utils/model/store_ui.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class RestaurantOrderDetails extends StatelessWidget {
+class StoreItemSmall extends StatelessWidget {
   final StoreUI _storeUI;
 
-  const RestaurantOrderDetails(this._storeUI);
+  const StoreItemSmall(this._storeUI);
 
   @override
   Widget build(BuildContext context) {
@@ -16,17 +16,20 @@ class RestaurantOrderDetails extends StatelessWidget {
     final deliveryServiceMsg = _storeUI.isDeliveryFree ? "gratis" : "\$${_storeUI.deliveryCost}";
 
     return Container(
-      height: 70,
+      height: 90,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          Container(
-            margin: const EdgeInsets.all(10),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
-              child: Image.network(
-                  _storeUI.logo, width: 60, fit: BoxFit.fill),
+          AspectRatio(
+            aspectRatio: 1,
+            child: Container(
+              margin: const EdgeInsets.all(10),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.network(
+                    _storeUI.logo, width: 60, fit: BoxFit.fill),
+              ),
             ),
           ),
           Expanded(
