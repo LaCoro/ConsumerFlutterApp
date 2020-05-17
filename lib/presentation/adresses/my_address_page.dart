@@ -2,6 +2,7 @@ import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
+import 'package:LaCoro/core/ui_utils/custom_widgets/primary_button.dart';
 import 'package:LaCoro/presentation/adresses/my_address_bloc.dart';
 import 'package:LaCoro/presentation/store_list/store_list_page.dart';
 import 'package:domain/entities/ciity_entity.dart';
@@ -114,13 +115,15 @@ class _MyAddressPageState extends State<MyAddressPage> {
                       ),
                     )
                   ),
-                  SizedBox(height:50.0),
+                  SizedBox(height:60.0),
                   Expanded(
                     child: TextFormField(
                       controller: _addressController,
                       focusNode: _addressFocus,
-                      validator: (value) {
-                        _currentAddress = value;
+                      onChanged: (value) {
+                        setState(() {
+                          _currentAddress = value;
+                        });
                         if (value.isEmpty) {
                           return strings.addressIsRequired;
                         }
@@ -159,25 +162,15 @@ class _MyAddressPageState extends State<MyAddressPage> {
                     ),
                   ),
                   Spacer(),
-                  Container(
-                    //todo sacar esto como un custom widget (PrimaryButton)
-                    height: 40,
-                    margin: EdgeInsets.symmetric(vertical: 24),
-                    child: RaisedButton(
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                      color: Theme.of(context).accentColor,
-                      onPressed: currentCity == null || _currentAddress.isEmpty
-                          ? null
-                          : () async {
+                  PrimaryButton(
+                      buttonText: strings.continu,
+                      onButtonPressed: currentCity == null || _currentAddress.isEmpty
+                      ? null
+                      : () async {
                         await _bloc.submitCitySelected(currentCity);
-                        Navigator.pushReplacementNamed(context, StoreListPage.STORE_LIST_ROUTE);
-                      },
-                      child: Center(
-                          child: Text(
-                        strings.continu,
-                        style: Theme.of(context).textTheme.headline1.copyWith(color: Colors.white),
-                      )),
-                    ),
+                        Navigator.pushReplacementNamed(
+                            context, StoreListPage.STORE_LIST_ROUTE);
+                      }
                   ),
                 ],
               ),
