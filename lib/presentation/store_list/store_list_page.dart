@@ -10,6 +10,7 @@ import 'package:LaCoro/presentation/store_list/store_list_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
+import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class StoreListPage extends StatefulWidget {
@@ -23,13 +24,15 @@ class _StoreListPageState extends State<StoreListPage> {
   final RefreshController _refreshController = RefreshController();
 
   final StoreListBloc _bloc;
+  bool _loading = false;
   List<StoreUI> _stores;
+
   _StoreListPageState(this._bloc);
 
   @override
   void initState() {
     super.initState();
-    fetchStores();
+    _bloc.add(GetAllStoresEvent());
   }
 
   @override
@@ -37,36 +40,42 @@ class _StoreListPageState extends State<StoreListPage> {
     final strings = AppLocalizations.of(context);
     final currentCity = _bloc.loadSavedCity();
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
-      appBar: AppBar(
-          elevation: 0,
-          title: GestureDetector(
-            onTap: () => Navigator.pushNamed(context, MyAddressPage.MY_ADDRESS_ROUTE),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text("Carrera 123 #72, " + currentCity, style: AppTextStyle.section.copyWith(color: Colors.black)),
-                Icon(
-                  Icons.keyboard_arrow_down,
-                  size: 36,
-                  color: Theme.of(context).accentColor,
-                )
-              ],
-            ),
-          )),
-      body: Container(
-        child: BlocBuilder(
-            bloc: _bloc,
-            builder: (context, state) {
-              _refreshController.refreshCompleted();
-              if (state is LoadingState) return Center(child: CircularProgressIndicator());
-
-              if (state is SuccessState<List<StoreUI>>) {
-                _stores = state.data;
-              }
-              return Column(
+        backgroundColor: Theme.of(context).backgroundColor,
+        appBar: AppBar(
+            elevation: 0,
+            title: GestureDetector(
+              onTap: () => Navigator.pushNamed(context, MyAddressPage.MY_ADDRESS_ROUTE),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Padding(  // todo sacar en un widget
+                  Text("Carrera 123 #72, " + currentCity, style: AppTextStyle.section.copyWith(color: Colors.black)),
+                  Icon(
+                    Icons.keyboard_arrow_down,
+                    size: 36,
+                    color: Theme.of(context).accentColor,
+                  )
+                ],
+              ),
+            )),
+        body: BlocListener(
+            bloc: _bloc,
+            listener: (context, state) {
+              setState(() => _loading = false);
+              _refreshController.refreshCompleted();
+
+              if (state is LoadingState) setState(() => _loading = true);
+
+              if (state is SuccessState<List<StoreUI>>) setState(() => _stores = state.data);
+
+              if (state is MoreStoresLoadedState) setState(() => _stores.addAll(state.data));
+
+              //if (state is ErrorState)// TODO show error banner
+            },
+            child: Stack(children: [
+              Column(
+                children: <Widget>[
+                  Padding(
+                    // todo sacar en un widget
                     padding: const EdgeInsets.all(16.0),
                     child: Material(
                       borderRadius: BorderRadius.all(Radius.circular(6.0)),
@@ -93,22 +102,22 @@ class _StoreListPageState extends State<StoreListPage> {
                     ),
                   ),
                   Expanded(
-                    child: SmartRefresher(
-                      controller: _refreshController,
-                      enablePullDown: true,
-                      onRefresh: () => fetchStores(),
-                      child: buildList(),
+                    child: LazyLoadScrollView(
+                      onEndOfPage: () {
+                        if (_stores != null) _bloc.add(LoadMoreStoresEvent());
+                      },
+                      child: SmartRefresher(
+                        controller: _refreshController,
+                        enablePullDown: true,
+                        onRefresh: () => _bloc.add(GetAllStoresEvent()),
+                        child: buildList(),
+                      ),
                     ),
                   ),
                 ],
-              );
-            }),
-      ),
-    );
-  }
-
-  void fetchStores() {
-    _bloc.add(GetAllStoresEvent());
+              ),
+              Center(child: _loading ? CircularProgressIndicator() : null),
+            ])));
   }
 
   Widget buildList() {

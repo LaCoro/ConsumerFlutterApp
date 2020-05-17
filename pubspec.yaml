@@ -38,6 +38,7 @@ dependencies:
   google_maps_flutter: ^0.5.27
   geolocator: ^5.3.1
   shared_preferences: ^0.5.7
+  lazy_load_scrollview: ^1.1.0
 
   cupertino_icons: ^0.1.3
 

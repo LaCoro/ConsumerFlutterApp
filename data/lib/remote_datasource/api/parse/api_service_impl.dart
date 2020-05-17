@@ -9,9 +9,13 @@ import 'package:parse_server_sdk/parse_server_sdk.dart';
 ///Manager that defines all the API service requests.
 class ApiServiceImpl extends ApiService {
   @override
-  Future<ParseResponse> getAllStoresByCity(String cityId) async {
+  Future<ParseResponse> getAllStoresByCity(String cityId, int page, int size) async {
     final city = await City().getObject(cityId);
-    final QueryBuilder query = QueryBuilder<ParseObject>(Store())..whereEqualTo(Store.keyCity, (city.result as City).name);
+    final QueryBuilder query = QueryBuilder<ParseObject>(Store())
+//      ..orderByDescending(Store.keyState)
+      ..setAmountToSkip(page * size)
+      ..setLimit(size)
+      ..whereEqualTo(Store.keyCity, (city.result as City).name);
     return await query.query();
   }
 

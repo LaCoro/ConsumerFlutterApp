@@ -21,14 +21,17 @@ class StoreItemSmall extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          AspectRatio(
-            aspectRatio: 1,
-            child: Container(
-              margin: const EdgeInsets.all(10),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
-                child: Image.network(
-                    _storeUI.logo, width: 60, fit: BoxFit.fill),
+          Opacity(
+            opacity: _storeUI.isStoreClosed ? 0.4 : 1.0,
+            child: AspectRatio(
+              aspectRatio: 1,
+              child: Container(
+                margin: const EdgeInsets.all(10),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Image.network(
+                      _storeUI.logo, width: 60, fit: BoxFit.fill),
+                ),
               ),
             ),
           ),

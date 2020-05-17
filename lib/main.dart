@@ -38,15 +38,12 @@ class MyApp extends StatelessWidget {
         maxWidth: 1200,
         minWidth: 450,
         defaultScale: true,
-          breakpoints: [
-            ResponsiveBreakpoint.resize(480, name: MOBILE),
-            ResponsiveBreakpoint.resize(800, name: TABLET),
+        breakpoints: [
+          ResponsiveBreakpoint.resize(480, name: MOBILE),
+          ResponsiveBreakpoint.resize(800, name: TABLET),
 //            ResponsiveBreakpoint.resize(1000, name: DESKTOP),
 //            ResponsiveBreakpoint.autoScale(2460, name: '4K'),
-          ],
-
-
-
+        ],
       ),
       localizationsDelegates: [
         const AppLocalizationsDelegate(),
@@ -71,24 +68,18 @@ class MyApp extends StatelessWidget {
             destinationRoute = OrderDetailPage();
             break;
         }
-        return MaterialPageRoute(
-            builder: (context) => destinationRoute, settings: settings);
+        return MaterialPageRoute(builder: (context) => destinationRoute, settings: settings);
       },
       routes: {
-        '/': (BuildContext context) => SplashPage(),
-        StoreListPage.STORE_LIST_ROUTE: (BuildContext context) =>
-            StoreListPage(),
-        SelectAddressMapPage.SELECT_ADDRESS_MAP_ROUTE: (BuildContext context) =>
-            SelectAddressMapPage(),
-        StylesTestPage.STYLE_TEST_PAGE_ROUTE: (BuildContext context) =>
-            StylesTestPage(),
-        AddressesPage.ADDRESSES_LIST_ROUTE: (BuildContext context) =>
-            AddressesPage(),
+        '/': (BuildContext context) => StoreListPage(),
+        StoreListPage.STORE_LIST_ROUTE: (BuildContext context) => StoreListPage(),
+        SelectAddressMapPage.SELECT_ADDRESS_MAP_ROUTE: (BuildContext context) => SelectAddressMapPage(),
+        StylesTestPage.STYLE_TEST_PAGE_ROUTE: (BuildContext context) => StylesTestPage(),
+        AddressesPage.ADDRESSES_LIST_ROUTE: (BuildContext context) => AddressesPage(),
         SplashPage.SPLASH_PAGE_ROUTE: (BuildContext context) => SplashPage(),
         RegisterPage.REGISTER_ROUTE: (BuildContext context) => RegisterPage(),
-        MyAddressPage.MY_ADDRESS_ROUTE: (BuildContext context) =>
-            MyAddressPage(),
-        TestPage.TEST_PAGE_ROUTE: (BuildContext context) => TestPage(),
+        MyAddressPage.MY_ADDRESS_ROUTE: (BuildContext context) => MyAddressPage(),
+        TestPage.TEST_PAGE_ROUTE: (BuildContext context) => TestPage()
       },
     );
   }
