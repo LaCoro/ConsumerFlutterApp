@@ -53,6 +53,8 @@ class AppLocalizations {
       'my_address_title': 'Where do we send your order?',
       'city': 'City',
       'additional_address_info': 'Floor / Office / Flat',
+      'address': 'Address',
+      'address_is_required': 'Please enter an address',
     },
     'es': {
       'total': 'Total',
@@ -97,6 +99,8 @@ class AppLocalizations {
       'my_address_title': 'A dónde quieres que llevemos tu pedido?',
       'city': 'Ciudad',
       'additional_address_info': 'Piso / Offinica / Apto',
+      'address': 'Dirección',
+      'address_is_required': 'Por favor entre una direccion',
     },
   };
 
@@ -183,4 +187,8 @@ class AppLocalizations {
   String get city => _localizedValues[locale.languageCode]['city'];
 
   String get additionalAddressInfo => _localizedValues[locale.languageCode]['additional_address_info'];
+
+  String get address => _localizedValues[locale.languageCode]['address'];
+
+  String get addressIsRequired => _localizedValues[locale.languageCode]['address_is_required'];
 }

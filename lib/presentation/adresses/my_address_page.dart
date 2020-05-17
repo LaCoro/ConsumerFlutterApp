@@ -2,10 +2,12 @@ import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
+import 'package:LaCoro/core/ui_utils/custom_widgets/primary_button.dart';
 import 'package:LaCoro/presentation/adresses/my_address_bloc.dart';
 import 'package:LaCoro/presentation/store_list/store_list_page.dart';
 import 'package:domain/entities/ciity_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 
@@ -20,6 +22,7 @@ class _MyAddressPageState extends State<MyAddressPage> {
   final MyAddressBloc _bloc;
 
   CityEntity currentCity;
+  String  _currentAddress = "";
 
   _MyAddressPageState(this._bloc) {
     currentCity = _bloc.loadSavedCity();
@@ -30,7 +33,7 @@ class _MyAddressPageState extends State<MyAddressPage> {
   final _addressController = TextEditingController();
   final _additionalAddressController = TextEditingController();
 
-  final _registerFormKey = GlobalKey<FormState>();
+  List<CityEntity> cityList;
 
   @override
   void dispose() {
@@ -48,14 +51,15 @@ class _MyAddressPageState extends State<MyAddressPage> {
 
   @override
   void initState() {
-//    setState(() => currentCity = _bloc.loadSavedCity());
+    setState(() {
+      return currentCity = _bloc.loadSavedCity();
+    });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context);
-    List<CityEntity> cityList;
     return Scaffold(
       appBar: AppBar(elevation: 0),
       backgroundColor: Theme.of(context).backgroundColor,
@@ -76,29 +80,61 @@ class _MyAddressPageState extends State<MyAddressPage> {
               margin: EdgeInsets.symmetric(horizontal: 24),
               child: Column(
                 children: <Widget>[
-                  Spacer(),
                   Expanded(child: Text(strings.myAddressTitle, style: AppTextStyle.title)),
-                  SizedBox(height: 12),
-                  DropdownButton(
-                    isExpanded: true,
-                    value: currentCity?.name,
-                    items: cityList.map((e) => DropdownMenuItem(value: e.name, child: Text(e.name))).toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        currentCity = cityList.firstWhere((element) => element.name == value);
-                      });
+                  GestureDetector(
+                    onTap: (){
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8.0)
+                              ),
+                              title:Text("Elige tu ciudad", style: AppTextStyle.section),
+                              content: citiesDialog(),
+                            );
+                          }
+                      );
                     },
+                    child: Container(
+                      height: 50.0,
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(
+                            color: Colors.black,
+                            width: 1.0,
+                          ),
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(currentCity?.name == null ? strings.city : currentCity.name, style: AppTextStyle.black16),
+                          Icon(Icons.keyboard_arrow_down, color: Colors.black, size: 24)
+                        ],
+                      ),
+                    )
                   ),
+                  SizedBox(height:60.0),
                   Expanded(
                     child: TextFormField(
                       controller: _addressController,
                       focusNode: _addressFocus,
+                      onChanged: (value) {
+                        setState(() {
+                          _currentAddress = value;
+                        });
+                        if (value.isEmpty) {
+                          return strings.addressIsRequired;
+                        }
+                        return null;
+                      },
                       onEditingComplete: () => _fieldFocusChange(context, _addressFocus, _additionalAddressFocus),
                       textInputAction: TextInputAction.next,
                       style: AppTextStyle.black16,
                       decoration: InputDecoration(
                         isDense: true,
-                        labelText: strings.city,
+                        labelText: strings.address,
                         labelStyle: AppTextStyle.black16.copyWith(color: _addressFocus.hasFocus ? AppColors.accentColor : Colors.black),
                         enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
                         focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.accentColor)),
@@ -126,30 +162,50 @@ class _MyAddressPageState extends State<MyAddressPage> {
                     ),
                   ),
                   Spacer(),
-                  Container(
-                    //todo sacar esto como un custom widget (PrimaryButton)
-                    height: 40,
-                    margin: EdgeInsets.symmetric(vertical: 24),
-                    child: RaisedButton(
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                      color: Theme.of(context).accentColor,
-                      onPressed: currentCity == null
-                          ? null
-                          : () async {
-                              await _bloc.submitCitySelected(currentCity);
-                              Navigator.pushReplacementNamed(context, StoreListPage.STORE_LIST_ROUTE);
-                            },
-                      child: Center(
-                          child: Text(
-                        strings.continu,
-                        style: Theme.of(context).textTheme.headline1.copyWith(color: Colors.white),
-                      )),
-                    ),
+                  PrimaryButton(
+                      buttonText: strings.continu,
+                      onButtonPressed: currentCity == null || _currentAddress.isEmpty
+                      ? null
+                      : () async {
+                        await _bloc.submitCitySelected(currentCity);
+                        Navigator.pushReplacementNamed(
+                            context, StoreListPage.STORE_LIST_ROUTE);
+                      }
                   ),
                 ],
               ),
             );
           }),
+    );
+  }
+
+  Widget citiesDialog() {
+    return Container(
+      height: 200.0,
+      width: 200.0,
+      child: ListView.separated(
+              separatorBuilder: (c, i) => SizedBox(height: 12.0),
+              itemBuilder: (c, index) {
+                return InkWell(
+                    onTap: () => {
+                      setState((){
+                        currentCity = cityList[index];
+                      }),
+                      Navigator.of(context, rootNavigator: true).pop(),
+                    },
+                    child: Container(
+                      height: 40,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(cityList[index].name, style: AppTextStyle.black16),
+                          currentCity?.name == cityList[index].name ? Icon(Icons.check_circle, color: AppColors.accentColor, size: 22) : SizedBox()
+                        ]),
+                    ),
+                );
+              },
+              itemCount: cityList?.length ?? 0)
+
     );
   }
 }
