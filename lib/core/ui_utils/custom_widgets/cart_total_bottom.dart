@@ -14,8 +14,9 @@ class CartTotalBottom extends StatelessWidget {
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context);
 
-    return Container(
-      color: Theme.of(context).accentColor,
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 300),
+      color: quantity == 0 ? Theme.of(context).disabledColor : Theme.of(context).accentColor,
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 8.0),
         child: Row(
@@ -30,7 +31,8 @@ class CartTotalBottom extends StatelessWidget {
                   ),
                   child: Center(
                       child: Text((quantity < 10) ? quantity.toString() : "+9",
-                          textAlign: TextAlign.center, style: AppTextStyle.boldBlack16.copyWith(color: AppColors.accentColor)))),
+                          textAlign: TextAlign.center,
+                          style: AppTextStyle.boldBlack16.copyWith(color: quantity == 0 ? Theme.of(context).disabledColor : Theme.of(context).accentColor)))),
             ),
             Expanded(
               flex: 2,
