@@ -4,7 +4,7 @@ import 'package:parse_server_sdk/parse_server_sdk.dart';
 
 ///Manager that defines all the API service requests.
 abstract class ApiService {
-  Future<ParseResponse> getAllStoresByCity(String cityId, int page, int size);
+  Future<ParseResponse> fetchStores(String cityId, int page, int size, {String searchQuery});
 
   Future<ParseResponse> getStoreItems(String storeId);
 

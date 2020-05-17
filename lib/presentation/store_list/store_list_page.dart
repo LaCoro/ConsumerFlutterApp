@@ -7,6 +7,7 @@ import 'package:LaCoro/core/ui_utils/model/store_ui.dart';
 import 'package:LaCoro/presentation/adresses/my_address_page.dart';
 import 'package:LaCoro/presentation/store_details/store_details_page.dart';
 import 'package:LaCoro/presentation/store_list/store_list_bloc.dart';
+import 'package:domain/use_cases/store_use_cases.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
@@ -22,17 +23,18 @@ class StoreListPage extends StatefulWidget {
 
 class _StoreListPageState extends State<StoreListPage> {
   final RefreshController _refreshController = RefreshController();
-
   final StoreListBloc _bloc;
-  bool _loading = false;
-  List<StoreUI> _stores;
 
   _StoreListPageState(this._bloc);
+
+  List<StoreUI> _stores;
+  bool _loading = false;
+  String searchQuery;
 
   @override
   void initState() {
     super.initState();
-    _bloc.add(GetAllStoresEvent());
+    _bloc.add(GetStoresEvent(searchQuery: searchQuery));
   }
 
   @override
@@ -104,12 +106,12 @@ class _StoreListPageState extends State<StoreListPage> {
                   Expanded(
                     child: LazyLoadScrollView(
                       onEndOfPage: () {
-                        if (_stores != null) _bloc.add(LoadMoreStoresEvent());
+                        if (_stores != null && _stores.length >= StoreUseCases.PAGE_SIZE) _bloc.add(LoadMoreStoresEvent(searchQuery: searchQuery));
                       },
                       child: SmartRefresher(
                         controller: _refreshController,
                         enablePullDown: true,
-                        onRefresh: () => _bloc.add(GetAllStoresEvent()),
+                        onRefresh: () => _bloc.add(GetStoresEvent(searchQuery: searchQuery)),
                         child: buildList(),
                       ),
                     ),

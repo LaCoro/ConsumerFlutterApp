@@ -20,10 +20,10 @@ class StoreListBloc extends Bloc<BaseEvent, BaseState> {
   @override
   Stream<BaseState> mapEventToState(BaseEvent event) async* {
     try {
-      if (event is GetAllStoresEvent) {
+      if (event is GetStoresEvent) {
         yield LoadingState();
         _page = 0;
-        final result = await _getAllStores.getAllStoresByCity(_preferences.getCity());
+        final result = await _getAllStores.fetchStores(_preferences.getCity(), searchQuery: event.searchQuery);
         if (result is Success<List<StoreEntity>>) {
           yield SuccessState(data: StoreUIMapper().processList(result.data));
         } else {
@@ -32,7 +32,7 @@ class StoreListBloc extends Bloc<BaseEvent, BaseState> {
       } else if (event is LoadMoreStoresEvent) {
         yield LoadingState();
         _page = _page + 1;
-        final result = await _getAllStores.getAllStoresByCity(_preferences.getCity(), page: _page);
+        final result = await _getAllStores.fetchStores(_preferences.getCity(), page: _page, searchQuery: event.searchQuery);
         if (result is Success<List<StoreEntity>>) {
           yield MoreStoresLoadedState(data: StoreUIMapper().processList(result.data));
         } else {
@@ -48,9 +48,17 @@ class StoreListBloc extends Bloc<BaseEvent, BaseState> {
 }
 
 /// store list events
-class GetAllStoresEvent extends BaseEvent {}
+class GetStoresEvent extends BaseEvent {
+  final String searchQuery;
 
-class LoadMoreStoresEvent extends BaseEvent {}
+  GetStoresEvent({this.searchQuery});
+}
+
+class LoadMoreStoresEvent extends BaseEvent {
+  final String searchQuery;
+
+  LoadMoreStoresEvent({this.searchQuery});
+}
 
 /// states
 class MoreStoresLoadedState extends BaseState {

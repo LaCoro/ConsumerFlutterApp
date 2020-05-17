@@ -1,8 +1,8 @@
 import 'package:domain/result.dart';
 
 abstract class StoreRepository {
-  /// Fetch All stores from the specific city
-  Future<Result> getAllStoresByCity(String cityId, int page, int size);
+  /// Fetch stores from the specific city
+  Future<Result> fetchStores(String cityId, int page, int size, {String searchQuery});
 
   Future<Result> getStoreItems(String storeId);
 }
