@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 class PrimaryButton extends StatelessWidget{
 
   final String buttonText;
-  final Function() onButtonPressed;
+  final Function onPressed;
 
-  PrimaryButton({this.buttonText, this.onButtonPressed});
+  PrimaryButton({this.buttonText, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class PrimaryButton extends StatelessWidget{
       child: RaisedButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
         color: Theme.of(context).accentColor,
-        onPressed: onButtonPressed,
+        onPressed: onPressed,
         child: Center(
             child: Text(
               buttonText,

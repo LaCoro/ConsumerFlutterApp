@@ -1,7 +1,7 @@
 import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:LaCoro/core/extensions/number_extensions.dart';
 
 class CartTotalBottom extends StatelessWidget {
   int quantity = 0;
@@ -38,8 +38,7 @@ class CartTotalBottom extends StatelessWidget {
               child: Text(strings.seeOrder, textAlign: TextAlign.center, style: AppTextStyle.boldBlack16.copyWith(color: Colors.white)),
             ),
             Expanded(
-              child: Text(NumberFormat.simpleCurrency(decimalDigits: 0).format(price),
-                  textAlign: TextAlign.center, style: AppTextStyle.boldBlack16.copyWith(color: Colors.white)),
+              child: Text(price.currencyFormat(), textAlign: TextAlign.center, style: AppTextStyle.boldBlack16.copyWith(color: Colors.white)),
             ),
           ],
         ),

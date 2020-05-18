@@ -164,7 +164,7 @@ class _MyAddressPageState extends State<MyAddressPage> {
                   Spacer(),
                   PrimaryButton(
                       buttonText: strings.continu,
-                      onButtonPressed: currentCity == null || _currentAddress.isEmpty
+                      onPressed: currentCity == null || _currentAddress.isEmpty
                       ? null
                       : () async {
                         await _bloc.submitCitySelected(currentCity);

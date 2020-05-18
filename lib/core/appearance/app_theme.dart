@@ -17,9 +17,6 @@ class AppTheme {
       primaryIconTheme: IconThemeData(size: 24),
       accentIconTheme: IconThemeData(size: 28),
       textTheme: TextTheme(
-        bodyText1: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 28, color: Color(0xff383838)), //titulos
-        bodyText2: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 20, color: Color(0xff383838)),//Appbar
-
         headline1: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 16, color: Color(0xff383838)),//title store en ListStore
         headline2: GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xff383838)),//title popUp
         headline3: GoogleFonts.roboto(fontWeight: FontWeight.normal, fontSize: 16, color: Color(0xFF3D9FE6)), //en buscador blue
