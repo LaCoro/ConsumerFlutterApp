@@ -5,6 +5,7 @@ import 'package:LaCoro/core/localization/app_localizations.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/primary_button.dart';
 import 'package:LaCoro/presentation/adresses/my_address_bloc.dart';
 import 'package:LaCoro/presentation/store_list/store_list_page.dart';
+import 'package:domain/entities/address_entity.dart';
 import 'package:domain/entities/ciity_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -21,11 +22,11 @@ class MyAddressPage extends StatefulWidget {
 class _MyAddressPageState extends State<MyAddressPage> {
   final MyAddressBloc _bloc;
 
-  CityEntity currentCity;
+  AddressEntity currentAddress;
   String  _currentAddress = "";
 
   _MyAddressPageState(this._bloc) {
-    currentCity = _bloc.loadSavedCity();
+    currentAddress = _bloc.loadSavedAddress();
   }
 
   final _addressFocus = FocusNode();
@@ -52,7 +53,7 @@ class _MyAddressPageState extends State<MyAddressPage> {
   @override
   void initState() {
     setState(() {
-      return currentCity = _bloc.loadSavedCity();
+      return currentAddress = _bloc.loadSavedAddress();
     });
     super.initState();
   }
@@ -109,7 +110,7 @@ class _MyAddressPageState extends State<MyAddressPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text(currentCity?.name == null ? strings.city : currentCity.name, style: AppTextStyle.black16),
+                          Text(currentAddress?.cityEntity?.name == null ? strings.city : currentAddress?.cityEntity?.name, style: AppTextStyle.black16),
                           Icon(Icons.keyboard_arrow_down, color: Colors.black, size: 24)
                         ],
                       ),
@@ -164,10 +165,10 @@ class _MyAddressPageState extends State<MyAddressPage> {
                   Spacer(),
                   PrimaryButton(
                       buttonText: strings.continu,
-                      onPressed: currentCity == null || _currentAddress.isEmpty
+                      onPressed: currentAddress?.cityEntity == null || _currentAddress.isEmpty
                       ? null
                       : () async {
-                        await _bloc.submitCitySelected(currentCity);
+                        await _bloc.submitAddressSelected(currentAddress);
                         Navigator.pushReplacementNamed(
                             context, StoreListPage.STORE_LIST_ROUTE);
                       }
@@ -189,7 +190,7 @@ class _MyAddressPageState extends State<MyAddressPage> {
                 return InkWell(
                     onTap: () => {
                       setState((){
-                        currentCity = cityList[index];
+                        currentAddress?.cityEntity = cityList[index];
                       }),
                       Navigator.of(context, rootNavigator: true).pop(),
                     },
@@ -199,7 +200,7 @@ class _MyAddressPageState extends State<MyAddressPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text(cityList[index].name, style: AppTextStyle.black16),
-                          currentCity?.name == cityList[index].name ? Icon(Icons.check_circle, color: AppColors.accentColor, size: 22) : SizedBox()
+                          currentAddress?.cityEntity?.name == cityList[index].name ? Icon(Icons.check_circle, color: AppColors.accentColor, size: 22) : SizedBox()
                         ]),
                     ),
                 );

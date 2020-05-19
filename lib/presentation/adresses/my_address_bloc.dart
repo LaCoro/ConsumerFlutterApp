@@ -1,5 +1,6 @@
 import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/preferences/preferences.dart';
+import 'package:domain/entities/address_entity.dart';
 import 'package:domain/entities/ciity_entity.dart';
 import 'package:domain/result.dart';
 import 'package:domain/use_cases/my_address_use_cases.dart';
@@ -25,28 +26,28 @@ class MyAddressBloc extends Bloc<BaseEvent, BaseState> {
         } else {
           yield ErrorState();
         }
-      } else if (event is SubmitCitySelected) {
-        await _preferences.saveCity(event.cityEntity);
+      } else if (event is SubmitAddressSelected) {
+        await _preferences.saveAddress(event.addressEntity);
       }
     } catch (e) {
       yield ErrorState();
     }
   }
 
-  CityEntity loadSavedCity() {
-    return _preferences.getCity();
+  AddressEntity loadSavedAddress() {
+    return _preferences.getAddress();
   }
 
-  Future<void> submitCitySelected(CityEntity cityEntity) async {
-    await _preferences.saveCity(cityEntity);
+  Future<void> submitAddressSelected(AddressEntity addressEntity) async {
+    await _preferences.saveAddress(addressEntity);
   }
 }
 
 /// Events
 class GetAllCitiesEvent extends BaseEvent {}
 
-class SubmitCitySelected extends BaseEvent {
-  final CityEntity cityEntity;
+class SubmitAddressSelected extends BaseEvent {
+  final AddressEntity addressEntity;
 
-  SubmitCitySelected(this.cityEntity);
+  SubmitAddressSelected(this.addressEntity);
 }
