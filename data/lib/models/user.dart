@@ -24,7 +24,8 @@ class User extends ParseObject with UserEntity implements ParseCloneable {
   static const String keyPhone = 'phone';
   static const String keyBirthday = 'birthday';
   static const String keyIMEI = 'iMEI';
-  static const String keyManagedStore = 'managedStore';
+
+  String get id => this.objectId;
 
   String get username => get<String>(keyUsername);
 
@@ -73,12 +74,5 @@ class User extends ParseObject with UserEntity implements ParseCloneable {
   String get iMEI => get<String>(keyIMEI);
 
   set iMEI(String iMEI) => set<String>(keyIMEI, iMEI);
-
-  StoreEntity get managedStore => get<StoreEntity>(keyManagedStore);
-
-  set managedStore(StoreEntity managedStore) => set<StoreEntity>(keyManagedStore, managedStore);
-
-
-
 
 }
