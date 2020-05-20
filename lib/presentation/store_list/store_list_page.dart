@@ -50,7 +50,7 @@ class _StoreListPageState extends State<StoreListPage> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Text(currentAddress.address + currentAddress?.cityEntity?.name, style: AppTextStyle.section.copyWith(color: Colors.black)),
+                  Text('${currentAddress.address}, ${currentAddress.cityEntity.name}', style: AppTextStyle.section.copyWith(color: Colors.black)),
                   Icon(
                     Icons.keyboard_arrow_down,
                     size: 36,

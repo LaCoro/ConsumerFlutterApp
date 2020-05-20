@@ -12,7 +12,7 @@ class PrimaryButton extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40,
+      height: 60,
       margin: EdgeInsets.symmetric(vertical: 24),
       child: RaisedButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
