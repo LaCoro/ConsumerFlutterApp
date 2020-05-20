@@ -40,7 +40,7 @@ class _StoreListPageState extends State<StoreListPage> {
   @override
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context);
-    final currentCity = _bloc.loadSavedCity();
+    final currentAddress = _bloc.loadSavedAddress();
     return Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(
@@ -50,7 +50,7 @@ class _StoreListPageState extends State<StoreListPage> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Text("Carrera 123 #72, " + currentCity, style: AppTextStyle.section.copyWith(color: Colors.black)),
+                  Text('${currentAddress.address}, ${currentAddress.cityEntity.name}', style: AppTextStyle.section.copyWith(color: Colors.black)),
                   Icon(
                     Icons.keyboard_arrow_down,
                     size: 36,
