@@ -8,7 +8,7 @@ import 'package:domain/result.dart';
 import 'package:domain/use_cases/store_use_cases.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class OrderStoreDetailsBloc extends Bloc<BaseEvent, BaseState> {
+class OrderDetailsBloc extends Bloc<BaseEvent, BaseState> {
   final StoreUseCases _storeUseCases;
   final Preferences _preferences;
 
@@ -16,7 +16,7 @@ class OrderStoreDetailsBloc extends Bloc<BaseEvent, BaseState> {
 
   Map<ItemUI, int> products = Map();
 
-  OrderStoreDetailsBloc(this._storeUseCases, this._preferences);
+  OrderDetailsBloc(this._storeUseCases, this._preferences);
 
   @override
   BaseState get initialState => InitialState();

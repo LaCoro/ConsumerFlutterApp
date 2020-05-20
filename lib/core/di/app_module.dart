@@ -1,4 +1,9 @@
 import 'package:LaCoro/core/preferences/preferences.dart';
+import 'package:LaCoro/presentation/adresses/my_address_bloc.dart';
+import 'package:LaCoro/presentation/order_detail/order_details_bloc.dart';
+import 'package:LaCoro/presentation/register/register_bloc.dart';
+import 'package:LaCoro/presentation/store_details/store_details_bloc.dart';
+import 'package:LaCoro/presentation/store_list/store_list_bloc.dart';
 import 'package:data/remote_datasource/api/city_api.dart';
 import 'package:data/remote_datasource/api/parse/api_service.dart';
 import 'package:data/remote_datasource/api/parse/api_service_impl.dart';
@@ -7,6 +12,9 @@ import 'package:data/repositories/city_repository_impl.dart';
 import 'package:data/repositories/store_repository_impl.dart';
 import 'package:domain/repositories/city_repository.dart';
 import 'package:domain/repositories/store_repository.dart';
+import 'package:domain/use_cases/my_address_use_cases.dart';
+import 'package:domain/use_cases/profile_use_cases.dart';
+import 'package:domain/use_cases/store_use_cases.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
@@ -25,6 +33,16 @@ class AppModule {
     // Repository
     injector.map<StoreRepository>((injector) => StoreRepositoryImpl(injector.get()));
     injector.map<CityRepository>((injector) => CityRepositoryImpl(injector.get()));
+    // Use case
+    injector.map<MyAddressUseCases>((injector) => MyAddressUseCases(injector.get()));
+    injector.map<StoreUseCases>((injector) => StoreUseCases(injector.get()));
+    injector.map<ProfileUseCases>((injector) => ProfileUseCases());
+    // BLoC
+    injector.map<MyAddressBloc>((injector) => MyAddressBloc(injector.get(), injector.get()));
+    injector.map<StoreListBloc>((injector) => StoreListBloc(injector.get(), injector.get()));
+    injector.map<StoreDetailsBloc>((injector) => StoreDetailsBloc(injector.get()));
+    injector.map<OrderDetailsBloc>((injector) => OrderDetailsBloc(injector.get(), injector.get()));
+    injector.map<RegisterBloc>((injector) => RegisterBloc(injector.get(), injector.get()));
     return injector;
   }
 

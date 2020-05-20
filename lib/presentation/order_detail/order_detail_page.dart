@@ -19,11 +19,11 @@ class OrderDetailPage extends StatefulWidget {
   static const ORDER_DETAIL_ROUTE = '/order_detail_route';
 
   @override
-  State<StatefulWidget> createState() => _OrderDetailPageState(OrderStoreDetailsBloc(Injector.getInjector().get(), Injector.getInjector().get()));
+  State<StatefulWidget> createState() => _OrderDetailPageState(Injector.getInjector().get());
 }
 
 class _OrderDetailPageState extends State<OrderDetailPage> {
-  final OrderStoreDetailsBloc _bloc;
+  final OrderDetailsBloc _bloc;
 
   _OrderDetailPageState(this._bloc);
 
