@@ -7,7 +7,9 @@ import 'package:LaCoro/core/ui_utils/custom_widgets/primary_button.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/product_item.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/store_item_small.dart';
 import 'package:LaCoro/core/ui_utils/model/item_ui.dart';
+import 'package:LaCoro/presentation/checkout_page/checkout_page.dart';
 import 'package:LaCoro/presentation/order_detail/order_details_bloc.dart';
+import 'package:LaCoro/presentation/register/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
@@ -17,7 +19,7 @@ class OrderDetailPage extends StatefulWidget {
   static const ORDER_DETAIL_ROUTE = '/order_detail_route';
 
   @override
-  State<StatefulWidget> createState() => _OrderDetailPageState(OrderStoreDetailsBloc(Injector.getInjector().get()));
+  State<StatefulWidget> createState() => _OrderDetailPageState(OrderStoreDetailsBloc(Injector.getInjector().get(), Injector.getInjector().get()));
 }
 
 class _OrderDetailPageState extends State<OrderDetailPage> {
@@ -63,10 +65,10 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
               child: Column(
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+                    padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
                     child: StoreItemSmall(_bloc.store),
                   ),
-                  Divider(thickness: 10, height: 50),
+                  Divider(thickness: 10, height: 24),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
                     child: buildItemList(_bloc.products),
@@ -134,10 +136,14 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24.0),
                     child: PrimaryButton(
-                      onPressed: cartTotal == 0 ? null : () {},
+                      onPressed: cartTotal == 0
+                          ? null
+                          : () {
+                              return Navigator.pushNamed(context, _bloc.isUserLoggedIn() ? CheckoutPage.CHECKOUT_ORDER_ROUTE : RegisterPage.REGISTER_ROUTE);
+                            },
                       buttonText: strings.continu,
                     ),
-                  )
+                  ),
                 ],
               ),
             );
