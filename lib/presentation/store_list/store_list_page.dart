@@ -32,12 +32,6 @@ class _StoreListPageState extends State<StoreListPage> {
   String searchQuery;
 
   @override
-  void initState() {
-    super.initState();
-    _bloc.add(GetStoresEvent(searchQuery: searchQuery));
-  }
-
-  @override
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context);
     final currentAddress = _bloc.loadSavedAddress();
@@ -85,15 +79,24 @@ class _StoreListPageState extends State<StoreListPage> {
                       elevation: 2,
                       color: Colors.white,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 6.0),
+                        padding: const EdgeInsets.symmetric(vertical: 0.0),
                         child: TextField(
+
                             decoration: InputDecoration(
+
+
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(6)),
+                                borderSide: BorderSide(width: 2,color: Colors.blue),
+                              ),
+
+                              focusColor: Colors.red,
                               hintText: strings.searchYourAddress,
                               hintStyle: AppTextStyle.grey16,
                               prefixIcon: Icon(Icons.search, color: AppColors.greyMedium, size: 24),
                               suffixIcon: Icon(Icons.cancel, color: Colors.black, size: 24),
                               border: OutlineInputBorder(),
-                              focusedBorder: InputBorder.none,
+//                              focusedBorder: InputBorder.none,
                               enabledBorder: InputBorder.none,
                               errorBorder: InputBorder.none,
                               disabledBorder: InputBorder.none,
