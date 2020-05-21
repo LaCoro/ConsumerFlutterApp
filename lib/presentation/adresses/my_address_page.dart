@@ -16,7 +16,8 @@ class MyAddressPage extends StatefulWidget {
   static const MY_ADDRESS_ROUTE = '/city_selection';
 
   @override
-  _MyAddressPageState createState() => _MyAddressPageState(Injector.getInjector().get());
+  _MyAddressPageState createState() =>
+      _MyAddressPageState(Injector.getInjector().get());
 }
 
 class _MyAddressPageState extends State<MyAddressPage> {
@@ -40,7 +41,8 @@ class _MyAddressPageState extends State<MyAddressPage> {
     super.dispose();
   }
 
-  _fieldFocusChange(BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
+  _fieldFocusChange(
+      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
     currentFocus.unfocus();
     FocusScope.of(context).requestFocus(nextFocus);
   }
@@ -50,7 +52,8 @@ class _MyAddressPageState extends State<MyAddressPage> {
     setState(() {
       _addressEntity = _bloc.loadSavedAddress() ?? AddressEntity();
       _addressController = TextEditingController(text: _addressEntity.address);
-      _additionalAddressController = TextEditingController(text: _addressEntity.additionalAddress);
+      _additionalAddressController =
+          TextEditingController(text: _addressEntity.additionalAddress);
     });
     super.initState();
   }
@@ -69,49 +72,60 @@ class _MyAddressPageState extends State<MyAddressPage> {
             if (state is SuccessState<List<CityEntity>>) cityList = state.data;
 
             if (state is NavigateState) {
-              Navigator.popAndPushNamed(context, StoreListPage.STORE_LIST_ROUTE);
+              Navigator.popAndPushNamed(
+                  context, StoreListPage.STORE_LIST_ROUTE);
             }
 
-            if (cityList?.isNotEmpty != true) return Center(child: CircularProgressIndicator());
+            if (cityList?.isNotEmpty != true)
+              return Center(child: CircularProgressIndicator());
 
             return Container(
               margin: EdgeInsets.symmetric(horizontal: 24),
-              child: Column(
-                children: <Widget>[
-                  Expanded(child: Text(strings.myAddressTitle, style: AppTextStyle.title)),
-                  GestureDetector(
-                      onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-                                title: Text("Elige tu ciudad", style: AppTextStyle.section),
-                                content: citiesDialog(),
-                              );
-                            });
-                      },
-                      child: Container(
-                        height: 50.0,
-                        decoration: BoxDecoration(
-                          border: Border(
-                            bottom: BorderSide(
-                              color: Colors.black,
-                              width: 1.0,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(strings.myAddressTitle, style: AppTextStyle.title),
+                    SizedBox(height: 40.0),
+                    GestureDetector(
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8.0)),
+                                  title: Text("Elige tu ciudad",
+                                      style: AppTextStyle.section),
+                                  content: citiesDialog(),
+                                );
+                              });
+                        },
+                        child: Container(
+                          height: 50.0,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: Colors.black,
+                                width: 1.0,
+                              ),
                             ),
                           ),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(_addressEntity?.cityEntity?.name == null ? strings.city : _addressEntity?.cityEntity?.name, style: AppTextStyle.black16),
-                            Icon(Icons.keyboard_arrow_down, color: Colors.black, size: 24)
-                          ],
-                        ),
-                      )),
-                  SizedBox(height: 60.0),
-                  Expanded(
-                    child: TextFormField(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text(
+                                  _addressEntity?.cityEntity?.name == null
+                                      ? strings.city
+                                      : _addressEntity?.cityEntity?.name,
+                                  style: AppTextStyle.black16),
+                              Icon(Icons.keyboard_arrow_down,
+                                  color: Colors.black, size: 24)
+                            ],
+                          ),
+                        )),
+                    SizedBox(height: 35.0),
+                    TextFormField(
                       controller: _addressController,
                       focusNode: _addressFocus,
                       onChanged: (value) {
@@ -121,48 +135,66 @@ class _MyAddressPageState extends State<MyAddressPage> {
                         }
                         return null;
                       },
-                      onEditingComplete: () => _fieldFocusChange(context, _addressFocus, _additionalAddressFocus),
+                      onEditingComplete: () => _fieldFocusChange(
+                          context, _addressFocus, _additionalAddressFocus),
                       textInputAction: TextInputAction.next,
                       style: AppTextStyle.black16,
                       decoration: InputDecoration(
                         isDense: true,
                         labelText: strings.address,
-                        labelStyle: AppTextStyle.black16.copyWith(color: _addressFocus.hasFocus ? AppColors.accentColor : Colors.black),
-                        enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                        focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.accentColor)),
-                        errorBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+                        labelStyle: AppTextStyle.black16.copyWith(
+                            color: _addressFocus.hasFocus
+                                ? AppColors.accentColor
+                                : Colors.black),
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black)),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: AppColors.accentColor)),
+                        errorBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.red)),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    child: TextFormField(
+                    SizedBox(height: 35.0),
+                    TextFormField(
                       controller: _additionalAddressController,
                       focusNode: _additionalAddressFocus,
-                      onEditingComplete: () => _additionalAddressFocus.unfocus(),
-                      textInputAction: TextInputAction.next,
+                      onEditingComplete: () =>
+                          _additionalAddressFocus.unfocus(),
+                      textInputAction: TextInputAction.done,
                       style: AppTextStyle.black16,
                       decoration: InputDecoration(
                         suffixText: strings.optionalField,
                         suffixStyle: AppTextStyle.grey16,
                         isDense: true,
                         labelText: strings.additionalAddressInfo,
-                        labelStyle: AppTextStyle.black16.copyWith(color: _additionalAddressFocus.hasFocus ? AppColors.accentColor : Colors.black),
-                        enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                        focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.accentColor)),
-                        errorBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+                        labelStyle: AppTextStyle.black16.copyWith(
+                            color: _additionalAddressFocus.hasFocus
+                                ? AppColors.accentColor
+                                : Colors.black),
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black)),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: AppColors.accentColor)),
+                        errorBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.red)),
                       ),
                     ),
-                  ),
-                  Spacer(),
-                  PrimaryButton(
-                      buttonText: strings.continu,
-                      onPressed: _addressEntity?.cityEntity == null || _addressEntity.address?.isEmpty != false
-                          ? null
-                          : () async {
-                              await _bloc.submitAddressSelected(_addressEntity);
-                              Navigator.pushReplacementNamed(context, StoreListPage.STORE_LIST_ROUTE);
-                            }),
-                ],
+                    SizedBox(height: 20.0),
+                    PrimaryButton(
+                        buttonText: strings.continu,
+                        onPressed: _addressEntity?.cityEntity == null ||
+                                _addressEntity.address?.isEmpty != false
+                            ? null
+                            : () async {
+                                await _bloc
+                                    .submitAddressSelected(_addressEntity);
+                                Navigator.pushReplacementNamed(
+                                    context, StoreListPage.STORE_LIST_ROUTE);
+                              }),
+                  ],
+                ),
               ),
             );
           }),
@@ -185,10 +217,15 @@ class _MyAddressPageState extends State<MyAddressPage> {
                 },
                 child: Container(
                   height: 40,
-                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                    Text(cityList[index].name, style: AppTextStyle.black16),
-                    _addressEntity?.cityEntity?.name == cityList[index].name ? Icon(Icons.check_circle, color: AppColors.accentColor, size: 22) : SizedBox()
-                  ]),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(cityList[index].name, style: AppTextStyle.black16),
+                        _addressEntity?.cityEntity?.name == cityList[index].name
+                            ? Icon(Icons.check_circle,
+                                color: AppColors.accentColor, size: 22)
+                            : SizedBox()
+                      ]),
                 ),
               );
             },

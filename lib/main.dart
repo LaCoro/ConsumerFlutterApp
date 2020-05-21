@@ -28,55 +28,66 @@ Future main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      builder: (context, widget) => ResponsiveWrapper.builder(
-        BouncingScrollWrapper.builder(context, widget),
-        maxWidth: 1200,
-        minWidth: 450,
-        defaultScale: true,
-        breakpoints: [
-          ResponsiveBreakpoint.resize(480, name: MOBILE),
-          ResponsiveBreakpoint.resize(800, name: TABLET),
+    return
+      GestureDetector(
+        onTap: () {
+          FocusScopeNode currentFocus = FocusScope.of(context);
+
+          if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild !=null) {
+            currentFocus.focusedChild.unfocus();
+          }
+        },
+        child: MaterialApp(
+
+        builder: (context, widget) => ResponsiveWrapper.builder(
+          BouncingScrollWrapper.builder(context, widget),
+          maxWidth: 1200,
+          minWidth: 450,
+          defaultScale: true,
+          breakpoints: [
+            ResponsiveBreakpoint.resize(480, name: MOBILE),
+            ResponsiveBreakpoint.resize(800, name: TABLET),
 //            ResponsiveBreakpoint.resize(1000, name: DESKTOP),
 //            ResponsiveBreakpoint.autoScale(2460, name: '4K'),
+          ],
+        ),
+        localizationsDelegates: [
+          const AppLocalizationsDelegate(),
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
         ],
-      ),
-      localizationsDelegates: [
-        const AppLocalizationsDelegate(),
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      supportedLocales: [
-        const Locale('en', ''),
-        const Locale('es', ''),
-      ],
-      debugShowCheckedModeBanner: false,
-      title: 'LaCoro',
-      theme: AppTheme.build(),
-      initialRoute: '/',
-      onGenerateRoute: (settings) {
-        Widget destinationRoute = SplashPage();
-        switch (settings.name) {
-          case StoreDetailsPage.STORE_DETAILS_ROUTE:
-            destinationRoute = StoreDetailsPage();
-            break;
-          case OrderDetailPage.ORDER_DETAIL_ROUTE:
-            destinationRoute = OrderDetailPage();
-            break;
-        }
-        return MaterialPageRoute(builder: (context) => destinationRoute, settings: settings);
-      },
-      routes: {
-        '/': (BuildContext context) => RegisterPage(),
-        StoreListPage.STORE_LIST_ROUTE: (BuildContext context) => StoreListPage(),
-        SelectAddressMapPage.SELECT_ADDRESS_MAP_ROUTE: (BuildContext context) => SelectAddressMapPage(),
-        StylesTestPage.STYLE_TEST_PAGE_ROUTE: (BuildContext context) => StylesTestPage(),
-        AddressesPage.ADDRESSES_LIST_ROUTE: (BuildContext context) => AddressesPage(),
-        SplashPage.SPLASH_PAGE_ROUTE: (BuildContext context) => SplashPage(),
-        RegisterPage.REGISTER_ROUTE: (BuildContext context) => RegisterPage(),
-        MyAddressPage.MY_ADDRESS_ROUTE: (BuildContext context) => MyAddressPage(),
-        TestPage.TEST_PAGE_ROUTE: (BuildContext context) => TestPage()
-      },
-    );
+        supportedLocales: [
+          const Locale('en', ''),
+          const Locale('es', ''),
+        ],
+        debugShowCheckedModeBanner: false,
+        title: 'LaCoro',
+        theme: AppTheme.build(),
+        initialRoute: '/',
+        onGenerateRoute: (settings) {
+          Widget destinationRoute = SplashPage();
+          switch (settings.name) {
+            case StoreDetailsPage.STORE_DETAILS_ROUTE:
+              destinationRoute = StoreDetailsPage();
+              break;
+            case OrderDetailPage.ORDER_DETAIL_ROUTE:
+              destinationRoute = OrderDetailPage();
+              break;
+          }
+          return MaterialPageRoute(builder: (context) => destinationRoute, settings: settings);
+        },
+        routes: {
+          '/': (BuildContext context) => SplashPage(),
+          StoreListPage.STORE_LIST_ROUTE: (BuildContext context) => StoreListPage(),
+          SelectAddressMapPage.SELECT_ADDRESS_MAP_ROUTE: (BuildContext context) => SelectAddressMapPage(),
+          StylesTestPage.STYLE_TEST_PAGE_ROUTE: (BuildContext context) => StylesTestPage(),
+          AddressesPage.ADDRESSES_LIST_ROUTE: (BuildContext context) => AddressesPage(),
+          SplashPage.SPLASH_PAGE_ROUTE: (BuildContext context) => SplashPage(),
+          RegisterPage.REGISTER_ROUTE: (BuildContext context) => RegisterPage(),
+          MyAddressPage.MY_ADDRESS_ROUTE: (BuildContext context) => MyAddressPage(),
+          TestPage.TEST_PAGE_ROUTE: (BuildContext context) => TestPage()
+        },
+    ),
+      );
   }
 }
