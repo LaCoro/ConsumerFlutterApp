@@ -1,6 +1,4 @@
 import 'package:LaCoro/core/di/app_module.dart';
-import 'package:LaCoro/core/di/my_address_module.dart';
-import 'package:LaCoro/core/di/store_list_module.dart';
 import 'package:LaCoro/core/localization/app_localizations_delegate.dart';
 import 'package:LaCoro/presentation/adresses/addresses_page_new.dart';
 import 'package:LaCoro/presentation/adresses/my_address_page.dart';
@@ -22,8 +20,6 @@ import 'presentation/store_list/store_list_page.dart';
 Future main() async {
   // Inject modules
   await AppModule().initialise(Injector.getInjector());
-  StoreListModule().initialise(Injector.getInjector());
-  MyAddressModule().initialise(Injector.getInjector());
 
   // start app
   runApp(MyApp());

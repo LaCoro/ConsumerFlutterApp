@@ -1,4 +1,3 @@
-import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
@@ -20,7 +19,7 @@ class StoreDetailsPage extends StatefulWidget {
   static const STORE_DETAILS_ROUTE = '/store_details';
 
   @override
-  _StoreDetailsPageState createState() => _StoreDetailsPageState(StoreDetailsBloc(Injector.getInjector().get()));
+  _StoreDetailsPageState createState() => _StoreDetailsPageState(Injector.getInjector().get());
 }
 
 class _StoreDetailsPageState extends State<StoreDetailsPage> {
@@ -36,7 +35,7 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
     _bloc.store = store;
     Map<ItemUI, List<ItemUI>> itemList;
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(elevation: 0),
         body: SafeArea(
           child: BlocBuilder(

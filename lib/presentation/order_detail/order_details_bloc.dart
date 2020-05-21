@@ -1,4 +1,5 @@
 import 'package:LaCoro/core/bloc/base_bloc.dart';
+import 'package:LaCoro/core/preferences/preferences.dart';
 import 'package:LaCoro/core/ui_utils/mappers/item_ui_mapper.dart';
 import 'package:LaCoro/core/ui_utils/model/item_ui.dart';
 import 'package:LaCoro/core/ui_utils/model/store_ui.dart';
@@ -7,14 +8,15 @@ import 'package:domain/result.dart';
 import 'package:domain/use_cases/store_use_cases.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class OrderStoreDetailsBloc extends Bloc<BaseEvent, BaseState> {
+class OrderDetailsBloc extends Bloc<BaseEvent, BaseState> {
   final StoreUseCases _storeUseCases;
+  final Preferences _preferences;
 
   StoreUI store;
 
   Map<ItemUI, int> products = Map();
 
-  OrderStoreDetailsBloc(this._storeUseCases);
+  OrderDetailsBloc(this._storeUseCases, this._preferences);
 
   @override
   BaseState get initialState => InitialState();
@@ -22,10 +24,9 @@ class OrderStoreDetailsBloc extends Bloc<BaseEvent, BaseState> {
   @override
   Stream<BaseState> mapEventToState(BaseEvent event) async* {
     try {
-      if(event is GetOrderSummaryEvent) {
+      if (event is GetOrderSummaryEvent) {
         yield OrderSummarySate(cartTotal: _getCartTotal(), deliveryCost: store?.deliveryCost ?? 0);
-      }
-      else if (event is UpdateProductEvent) {
+      } else if (event is UpdateProductEvent) {
         products.update(event.product, (value) => event.quantity, ifAbsent: () => 1);
         yield OrderSummarySate(cartTotal: _getCartTotal(), deliveryCost: store.deliveryCost);
       }
@@ -48,6 +49,8 @@ class OrderStoreDetailsBloc extends Bloc<BaseEvent, BaseState> {
   double _getCartTotal() {
     return products.isEmpty ? 0 : products.entries.map((entry) => (entry.key.price * entry.value.toDouble())).reduce((a, b) => a + b);
   }
+
+  bool isUserLoggedIn() => _preferences.getProfile() != null;
 }
 
 /// Events

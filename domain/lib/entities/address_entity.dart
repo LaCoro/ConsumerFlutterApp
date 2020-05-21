@@ -24,4 +24,8 @@ class AddressEntity {
     data['additional_address'] = addressEntity.additionalAddress;
     return data;
   }
+
+  String getFullAddress() {
+    return '$additionalAddress, $additionalAddress, ${cityEntity.name}';
+  }
 }

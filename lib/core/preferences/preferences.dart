@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:domain/entities/address_entity.dart';
 import 'package:domain/entities/ciity_entity.dart';
 import 'package:domain/entities/location.dart';
+import 'package:domain/entities/user_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Preferences {
@@ -12,6 +13,7 @@ class Preferences {
   static const LAST_LONGITUDE = 'lastLongitude';
   static const SELECTED_CITY = 'selectedCity';
   static const SELECTED_ADDRESS = 'selectedAddress';
+  static const PROFILE = 'profile';
 
   Future<Preferences> init() async {
     _preferences = await SharedPreferences.getInstance();
@@ -50,6 +52,19 @@ class Preferences {
     final cityJson = _preferences.getString(SELECTED_CITY);
     try {
       return CityEntity.fromJsonMap(json.decode(cityJson));
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future saveProfile(UserEntity city) async {
+    await _preferences.setString(PROFILE, json.encode(UserEntity.toJsonObject(city)));
+  }
+
+  UserEntity getProfile() {
+    final userJson = _preferences.getString(PROFILE);
+    try {
+      return UserEntity.fromJsonMap(json.decode(userJson));
     } catch (e) {
       return null;
     }
