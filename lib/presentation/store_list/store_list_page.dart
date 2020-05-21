@@ -32,6 +32,12 @@ class _StoreListPageState extends State<StoreListPage> {
   String searchQuery;
 
   @override
+  void initState() {
+    super.initState();
+    _bloc.add(GetStoresEvent(searchQuery: searchQuery));
+  }
+
+  @override
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context);
     final currentAddress = _bloc.loadSavedAddress();
