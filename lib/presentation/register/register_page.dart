@@ -2,6 +2,7 @@ import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/primary_button.dart';
+import 'package:LaCoro/presentation/register/pin_page.dart';
 import 'package:LaCoro/presentation/register/register_bloc.dart';
 import 'package:domain/entities/user_entity.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,17 +23,24 @@ class _RegisterPageState extends State<RegisterPage> {
 
   _RegisterPageState(this._bloc);
 
+  final _registerFormKey = GlobalKey<FormState>();
   final _nameFocus = FocusNode();
   final _emailFocus = FocusNode();
   final _phoneFocus = FocusNode();
 
-  var _nameController = TextEditingController();
-  var _emailController = TextEditingController();
-  var _phoneController = TextEditingController();
-
-  final _registerFormKey = GlobalKey<FormState>();
-
   bool isLoading = false;
+  TextEditingController _nameController, _emailController, _phoneController;
+
+  @override
+  void initState() {
+    final profile = _bloc.getProfileInfo();
+    setState(() {
+      _nameController = TextEditingController(text: profile?.fullname);
+      _emailController = TextEditingController(text: profile?.email);
+      _phoneController = TextEditingController(text: profile?.phone);
+    });
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -56,11 +64,15 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context);
     return BlocListener(
-        bloc: _bloc,
-        listener: (context, state) {
-          setState(() => isLoading = state is LoadingState);
-        },
-        child: Material(
+      bloc: _bloc,
+      listener: (context, state) {
+        setState(() => isLoading = state is LoadingState);
+
+        if (state is SuccessState) Navigator.pushNamed(context, PinPage.PIN_REGISTER_ROUTE);
+      },
+      child: Scaffold(
+        appBar: AppBar(elevation: 0),
+        body: Material(
           child: Form(
               key: _registerFormKey,
               child: Padding(
@@ -69,6 +81,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: <Widget>[
+                        SizedBox(height: 48),
                         Padding(
                           padding: const EdgeInsets.only(top: 30.0),
                           child: Text(strings.createAccount, style: Theme.of(context).textTheme.headline1),
@@ -165,30 +178,25 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 24.0),
-                          child: AnimatedSwitcher(
-                            duration: Duration(milliseconds: 150),
-                            transitionBuilder: (child, animation) => ScaleTransition(child: child, scale: animation),
-                            child: isLoading
-                                ? CircularProgressIndicator()
-                                : PrimaryButton(
-                                    buttonText: strings.continu,
-                                    onPressed: () {
-                                      if (_registerFormKey.currentState.validate()) {
-                                        _bloc.add(SubmitSaveProfileEvent(UserEntity()
-                                          ..fullname = _nameController.text
-                                          ..email = _emailController.text
-                                          ..phone = _phoneController.text));
-                                      }
-                                    }),
-                          ),
-                        )
+                        PrimaryButton(
+                            margin: const EdgeInsets.symmetric(vertical: 24.0),
+                            isLoading: isLoading,
+                            buttonText: strings.continu,
+                            onPressed: () {
+                              if (_registerFormKey.currentState.validate()) {
+                                _bloc.add(SubmitSaveProfileEvent(UserEntity()
+                                  ..fullname = _nameController.value.text
+                                  ..email = _emailController.value.text
+                                  ..phone = _phoneController.value.text));
+                              }
+                            }),
                       ],
                     ),
                   ),
                 ),
               )),
-        ));
+        ),
+      ),
+    );
   }
 }

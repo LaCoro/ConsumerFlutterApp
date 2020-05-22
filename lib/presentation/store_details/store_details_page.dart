@@ -36,7 +36,7 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
     Map<ItemUI, List<ItemUI>> itemList;
     return Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,
-        appBar: AppBar(elevation: 0),
+        appBar: AppBar(elevation: 0, backgroundColor: Theme.of(context).dividerColor),
         body: SafeArea(
           child: BlocBuilder(
               bloc: _bloc,
@@ -63,8 +63,10 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
                 // Build widget
                 return Column(
                   children: <Widget>[
-                    Hero(tag: store.name, child: StoreItem(storeItem: store)),
-                    Divider(thickness: 8),
+                    Container(
+                        padding: EdgeInsets.only(bottom: 16),
+                        color: Theme.of(context).dividerColor,
+                        child: Hero(tag: store.name, child: StoreItem(storeItem: store))),
                     Expanded(
                         flex: 1,
                         child: CategoryTabs(

@@ -19,14 +19,26 @@ class RegisterBloc extends Bloc<BaseEvent, BaseState> {
       if (event is SubmitSaveProfileEvent) {
         yield LoadingState();
         // todo remove this and implement API request to register user here
-        await Future.delayed(Duration(seconds: 2));
-        _preferences.saveProfile(event.userEntity);
+        await Future.delayed(Duration(seconds: 1));
+        await _preferences.saveProfile(event.userEntity);
         yield SuccessState();
+      } else if (event is SubmitVerificationCodeEvent) {
+        yield LoadingState();
+        // todo remove this and implement API request to register user here
+        await Future.delayed(Duration(seconds: 1));
+        if (event.code == "12345") {
+          await _preferences.saveProfile(_preferences.getProfile()..isValidated = true);
+          yield SuccessState();
+        } else {
+          yield ErrorState(message: "Wrong code");
+        }
       }
     } catch (error) {
       yield ErrorState();
     }
   }
+
+  UserEntity getProfileInfo() => _preferences.getProfile();
 }
 
 /// Events
@@ -34,4 +46,10 @@ class SubmitSaveProfileEvent extends BaseEvent {
   final UserEntity userEntity;
 
   SubmitSaveProfileEvent(this.userEntity);
+}
+
+class SubmitVerificationCodeEvent extends BaseEvent {
+  final String code;
+
+  SubmitVerificationCodeEvent(this.code);
 }

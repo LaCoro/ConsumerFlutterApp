@@ -14,16 +14,16 @@ class CheckoutPage extends StatelessWidget {
     final strings = AppLocalizations.of(context);
 
     return Scaffold(
+      backgroundColor: AppColors.itemBackgroundColor,
       appBar: AppBar(
-        //
+        elevation: 0,
         title: Text("data"), //
       ),
       body: Column(
         children: <Widget>[
           Container(
-            height: MediaQuery.of(context).size.height-170,
+            height: MediaQuery.of(context).size.height - 170,
             width: MediaQuery.of(context).size.width,
-
             child: ListView(
               children: <Widget>[
                 CurrentAdress("Cr 56 # 13 - 168 Florida, Miami, Cr 56 # 13 - 168 Florida, Miami"),
@@ -41,9 +41,7 @@ class CheckoutPage extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 14, bottom: 16),
                     child: Row(
                       children: <Widget>[
-                        Expanded(
-                            child: Text(strings.estimatedDelivery,
-                                style: Theme.of(context).textTheme.headline5)),
+                        Expanded(child: Text(strings.estimatedDelivery, style: Theme.of(context).textTheme.headline5)),
                         Text("30 min", style: Theme.of(context).textTheme.headline5)
                       ],
                     ),
@@ -59,8 +57,12 @@ class CheckoutPage extends StatelessWidget {
                   thickness: 10,
                   height: 10,
                   color: Theme.of(context).dividerColor,
-                ),SingleChildScrollView(
-                  child: OrderSumary(orderCost: 21000,deliveryCost: 3000,),
+                ),
+                SingleChildScrollView(
+                  child: OrderSumary(
+                    orderCost: 21000,
+                    deliveryCost: 3000,
+                  ),
                 ),
               ],
             ),
@@ -68,13 +70,12 @@ class CheckoutPage extends StatelessWidget {
           Container(
             margin: EdgeInsets.symmetric(vertical: 21, horizontal: 24),
             child: FlatButton(
-              onPressed: () {
-              },
+              onPressed: () {},
               child: Center(
                   child: Text(
-                    strings.continu,
-                    style: Theme.of(context).textTheme.headline1.copyWith(color: Colors.white),
-                  )),
+                strings.continu,
+                style: Theme.of(context).textTheme.headline1.copyWith(color: Colors.white),
+              )),
             ),
             decoration: BoxDecoration(
               color: Theme.of(context).accentColor,

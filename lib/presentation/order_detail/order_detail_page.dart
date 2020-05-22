@@ -133,16 +133,14 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                    child: PrimaryButton(
-                      onPressed: cartTotal == 0
-                          ? null
-                          : () {
-                              return Navigator.pushNamed(context, _bloc.isUserLoggedIn() ? CheckoutPage.CHECKOUT_ORDER_ROUTE : RegisterPage.REGISTER_ROUTE);
-                            },
-                      buttonText: strings.continu,
-                    ),
+                  PrimaryButton(
+                    margin: const EdgeInsets.all(24.0),
+                    onPressed: cartTotal == 0
+                        ? null
+                        : () {
+                            Navigator.pushNamed(context, _bloc.isUserValidated() ? CheckoutPage.CHECKOUT_ORDER_ROUTE : RegisterPage.REGISTER_ROUTE);
+                          },
+                    buttonText: strings.continu,
                   ),
                 ],
               ),

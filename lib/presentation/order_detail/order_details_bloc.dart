@@ -50,7 +50,7 @@ class OrderDetailsBloc extends Bloc<BaseEvent, BaseState> {
     return products.isEmpty ? 0 : products.entries.map((entry) => (entry.key.price * entry.value.toDouble())).reduce((a, b) => a + b);
   }
 
-  bool isUserLoggedIn() => _preferences.getProfile() != null;
+  bool isUserValidated() => _preferences.getProfile()?.isValidated == true;
 }
 
 /// Events
