@@ -181,8 +181,8 @@ class _MyAddressPageState extends State<MyAddressPage> {
                             borderSide: BorderSide(color: Colors.red)),
                       ),
                     ),
-                    SizedBox(height: 20.0),
                     PrimaryButton(
+                        margin: const EdgeInsets.symmetric(vertical: 36.0),
                         buttonText: strings.continu,
                         onPressed: _addressEntity?.cityEntity == null ||
                                 _addressEntity.address?.isEmpty != false

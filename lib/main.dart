@@ -2,7 +2,9 @@ import 'package:LaCoro/core/di/app_module.dart';
 import 'package:LaCoro/core/localization/app_localizations_delegate.dart';
 import 'package:LaCoro/presentation/adresses/addresses_page_new.dart';
 import 'package:LaCoro/presentation/adresses/my_address_page.dart';
+import 'package:LaCoro/presentation/checkout_page/checkout_page.dart';
 import 'package:LaCoro/presentation/order_detail/order_detail_page.dart';
+import 'package:LaCoro/presentation/register/pin_page.dart';
 import 'package:LaCoro/presentation/register/register_page.dart';
 import 'package:LaCoro/presentation/splash/splash.dart';
 import 'package:LaCoro/presentation/store_details/store_details_page.dart';
@@ -28,17 +30,15 @@ Future main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return
-      GestureDetector(
-        onTap: () {
-          FocusScopeNode currentFocus = FocusScope.of(context);
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
 
-          if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild !=null) {
-            currentFocus.focusedChild.unfocus();
-          }
-        },
-        child: MaterialApp(
-
+        if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
+          currentFocus.focusedChild.unfocus();
+        }
+      },
+      child: MaterialApp(
         builder: (context, widget) => ResponsiveWrapper.builder(
           BouncingScrollWrapper.builder(context, widget),
           maxWidth: 1200,
@@ -73,6 +73,9 @@ class MyApp extends StatelessWidget {
             case OrderDetailPage.ORDER_DETAIL_ROUTE:
               destinationRoute = OrderDetailPage();
               break;
+            case CheckoutPage.CHECKOUT_ORDER_ROUTE:
+              destinationRoute = CheckoutPage();
+              break;
           }
           return MaterialPageRoute(builder: (context) => destinationRoute, settings: settings);
         },
@@ -85,9 +88,10 @@ class MyApp extends StatelessWidget {
           SplashPage.SPLASH_PAGE_ROUTE: (BuildContext context) => SplashPage(),
           RegisterPage.REGISTER_ROUTE: (BuildContext context) => RegisterPage(),
           MyAddressPage.MY_ADDRESS_ROUTE: (BuildContext context) => MyAddressPage(),
+          PinPage.PIN_REGISTER_ROUTE: (BuildContext context) => PinPage(),
           TestPage.TEST_PAGE_ROUTE: (BuildContext context) => TestPage()
         },
-    ),
-      );
+      ),
+    );
   }
 }
