@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/primary_button.dart';
@@ -25,7 +26,8 @@ class _PinPageState extends State<PinPage> {
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
-  StreamController<ErrorAnimationType> errorController = StreamController<ErrorAnimationType>();
+  StreamController<ErrorAnimationType> errorController =
+      StreamController<ErrorAnimationType>();
   TextEditingController _textEditingController = TextEditingController();
   bool hasError = false;
   bool isLoading = false;
@@ -48,26 +50,29 @@ class _PinPageState extends State<PinPage> {
         bloc: _bloc,
         listener: (BuildContext context, state) => handleState(state, context),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Spacer(),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 24),
               child: Text(
                 strings.authorizationCode,
-                style: Theme.of(context).textTheme.headline1,
+                style: AppTextStyle.title,
                 textAlign: TextAlign.center,
               ),
             ),
             Text(
               strings.enterTheCodeSentToTheCellPhone,
-              style: Theme.of(context).textTheme.bodyText1,
+              style: AppTextStyle.black16,
             ),
+            SizedBox(height: 12,),
             Text(
-              _bloc.getProfileInfo().phone,
-              style: Theme.of(context).textTheme.bodyText2,
+//              _bloc.getProfileInfo().phone,
+              '+312 123 2323',
+              style: AppTextStyle.w500Black16,
             ),
             Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
                 child: PinCodeTextField(
                   length: 5,
                   obsecureText: false,
@@ -75,8 +80,8 @@ class _PinPageState extends State<PinPage> {
                   shape: PinCodeFieldShape.box,
                   animationDuration: Duration(milliseconds: 300),
                   borderRadius: BorderRadius.circular(5),
-                  fieldHeight: 52,
-                  fieldWidth: 52,
+                  fieldHeight: 60,
+                  fieldWidth: 60,
                   backgroundColor: Theme.of(context).backgroundColor,
                   inactiveColor: Theme.of(context).disabledColor,
                   activeColor: Theme.of(context).disabledColor,
@@ -87,12 +92,9 @@ class _PinPageState extends State<PinPage> {
                   },
                   onChanged: (String value) {},
                 )),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 12.0),
-              child: Text(
-                hasError ? strings.wrongCode : "",
-                style: Theme.of(context).textTheme.caption,
-              ),
+            Text(
+              hasError ? strings.wrongCode : "",
+              style: Theme.of(context).textTheme.caption,
             ),
             PrimaryButton(
                 margin: const EdgeInsets.symmetric(horizontal: 24),
@@ -100,33 +102,40 @@ class _PinPageState extends State<PinPage> {
                 buttonText: strings.continu,
                 onPressed: () {
                   if (_textEditingController.text.length != 5) {
-                    errorController.add(ErrorAnimationType.shake); // Triggering error shake animation
+                    errorController.add(ErrorAnimationType
+                        .shake); // Triggering error shake animation
                     setState(() {
                       hasError = true;
                     });
                   } else {
                     setState(() {
                       hasError = false;
-                      _bloc.add(SubmitVerificationCodeEvent(_textEditingController.text));
+                      _bloc.add(SubmitVerificationCodeEvent(
+                          _textEditingController.text));
                     });
                   }
                 }),
-            Spacer(),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 45),
-              child: RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(text: strings.didntYouGetTheMessage, style: Theme.of(context).textTheme.bodyText1, children: [
-                  TextSpan(
-                      text: strings.resend,
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          Navigator.pop(context);
-                        },
-                      style: TextStyle(color: Theme.of(context).accentColor, fontWeight: FontWeight.bold, fontSize: 16))
-                ]),
-              ),
+            Spacer(flex: 3,),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 70,),
+            child: RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                  text: strings.didntYouGetTheMessage,
+                  style: AppTextStyle.black13,
+                  children: [
+                    TextSpan(
+                        text: strings.resend,
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Navigator.pop(context);
+                          },
+                        style: AppTextStyle.boldBlue13)
+                  ]),
             ),
+          )
+
+
           ],
         ),
       ),
@@ -137,13 +146,15 @@ class _PinPageState extends State<PinPage> {
     setState(() => isLoading = state is LoadingState);
 
     if (state is SuccessState) {
-      Navigator.popUntil(context, ModalRoute.withName(OrderDetailPage.ORDER_DETAIL_ROUTE));
+      Navigator.popUntil(
+          context, ModalRoute.withName(OrderDetailPage.ORDER_DETAIL_ROUTE));
     }
 
     if (state is ErrorState) {
       setState(() => hasError = true);
       errorController.add(ErrorAnimationType.shake);
-      scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(state.message), duration: Duration(seconds: 3)));
+      scaffoldKey.currentState.showSnackBar(SnackBar(
+          content: Text(state.message), duration: Duration(seconds: 3)));
     }
   }
 }
