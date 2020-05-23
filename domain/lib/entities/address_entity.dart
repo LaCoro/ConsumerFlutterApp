@@ -1,4 +1,3 @@
-
 import 'package:domain/entities/ciity_entity.dart';
 
 /// Class that represents the generic info for an address
@@ -26,6 +25,7 @@ class AddressEntity {
   }
 
   String getFullAddress() {
-    return '$additionalAddress, $additionalAddress, ${cityEntity.name}';
+    final addressArray = [address, additionalAddress, cityEntity.name, cityEntity.stateCode]..removeWhere((element) => element == null || element.isEmpty);
+    return addressArray.join(', ');
   }
 }

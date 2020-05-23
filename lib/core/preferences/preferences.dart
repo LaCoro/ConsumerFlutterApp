@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:domain/entities/address_entity.dart';
-import 'package:domain/entities/ciity_entity.dart';
 import 'package:domain/entities/location.dart';
 import 'package:domain/entities/user_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -31,8 +30,9 @@ class Preferences {
     return Location(lat, lng);
   }
 
-  Future saveAddress(AddressEntity address) async {
-    await _preferences.setString(SELECTED_ADDRESS, json.encode(AddressEntity.toJsonObject(address)));
+  Future<bool> saveAddress(AddressEntity address) async {
+    await saveProfile(getProfile()..address = address.getFullAddress());
+    return await _preferences.setString(SELECTED_ADDRESS, json.encode(AddressEntity.toJsonObject(address)));
   }
 
   AddressEntity getAddress() {
@@ -44,8 +44,8 @@ class Preferences {
     }
   }
 
-  Future saveProfile(UserEntity city) async {
-    await _preferences.setString(PROFILE, json.encode(UserEntity.toJsonObject(city)));
+  Future saveProfile(UserEntity user) async {
+    await _preferences.setString(PROFILE, json.encode(UserEntity.toJsonObject(user)));
   }
 
   UserEntity getProfile() {

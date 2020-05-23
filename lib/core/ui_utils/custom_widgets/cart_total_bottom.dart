@@ -14,6 +14,7 @@ class CartTotalBottom extends StatelessWidget {
     final strings = AppLocalizations.of(context);
 
     return AnimatedContainer(
+      height: 50,
       duration: Duration(milliseconds: 300),
       color: quantity == 0 ? Theme.of(context).disabledColor : Theme.of(context).accentColor,
       child: Padding(

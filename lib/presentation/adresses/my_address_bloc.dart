@@ -38,7 +38,7 @@ class MyAddressBloc extends Bloc<BaseEvent, BaseState> {
     return _preferences.getAddress();
   }
 
-  Future<void> submitAddressSelected(AddressEntity addressEntity) async {
+  Future submitAddressSelected(AddressEntity addressEntity) async {
     await _preferences.saveAddress(addressEntity);
   }
 }

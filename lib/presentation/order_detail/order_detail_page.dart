@@ -138,7 +138,9 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                     onPressed: cartTotal == 0
                         ? null
                         : () {
-                            Navigator.pushNamed(context, _bloc.isUserValidated() ? CheckoutPage.CHECKOUT_ORDER_ROUTE : RegisterPage.REGISTER_ROUTE);
+                            final order = _bloc.createOrder(_commentController.value.text);
+                            Navigator.pushNamed(context, _bloc.isUserValidated() ? CheckoutPage.CHECKOUT_ORDER_ROUTE : RegisterPage.REGISTER_ROUTE,
+                                arguments: order);
                           },
                     buttonText: strings.continu,
                   ),

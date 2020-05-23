@@ -25,12 +25,6 @@ class SuccessState<T> extends BaseState {
   SuccessState({this.data}) : super([data]);
 }
 
-class NavigateState<T> extends BaseState {
-  final T data;
-
-  NavigateState({this.data}) : super([data]);
-}
-
 class ErrorState extends BaseState {
   final String message;
 

@@ -1,12 +1,15 @@
 import 'package:LaCoro/app_icons.dart';
+import 'package:LaCoro/core/appearance/app_colors.dart';
+import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/enums/payment_type.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class PaymentMethod extends StatelessWidget {
   final PaymentType pay;
+  final Function onChangePressed;
 
-  PaymentMethod(this.pay);
+  PaymentMethod(this.pay, {this.onChangePressed});
 
   @override
   Widget build(BuildContext context) {
@@ -35,11 +38,14 @@ class PaymentMethod extends StatelessWidget {
                         maxLines: 2, textAlign: TextAlign.left, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.headline4),
                   ),
                 ),
-                Align(
-                    child: Text(
-                  strings.change,
-                  style: Theme.of(context).textTheme.headline6,
-                )),
+
+                     GestureDetector(
+                        onTap: onChangePressed,
+                        child: Text(
+                          strings.change,
+                          style: AppTextStyle.black16.copyWith(color: onChangePressed != null ? AppColors.yellowAction : AppColors.greyMedium),
+                        ),
+                      ),
               ],
             ),
           )

@@ -6,11 +6,11 @@ class ItemUI {
   String description;
   int price;
   String image;
-  ItemEntity item;
+  ItemEntity itemEntity;
 
   ItemUI.fromEntity(ItemEntity item)
       : name = item.name,
         description = item.description,
         price = item.price,
-        item = item;
+        itemEntity = item;
 }

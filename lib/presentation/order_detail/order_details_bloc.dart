@@ -4,6 +4,7 @@ import 'package:LaCoro/core/ui_utils/mappers/item_ui_mapper.dart';
 import 'package:LaCoro/core/ui_utils/model/item_ui.dart';
 import 'package:LaCoro/core/ui_utils/model/store_ui.dart';
 import 'package:domain/entities/item_entity.dart';
+import 'package:domain/entities/order_entity.dart';
 import 'package:domain/result.dart';
 import 'package:domain/use_cases/store_use_cases.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,6 +52,14 @@ class OrderDetailsBloc extends Bloc<BaseEvent, BaseState> {
   }
 
   bool isUserValidated() => _preferences.getProfile()?.isValidated == true;
+
+  OrderEntity createOrder(String comments) {
+    return OrderEntity()
+      ..store = store.storeEntity
+      ..deliveryCost = store.deliveryCost
+      ..additionalRequests = comments
+      ..products = products.map((key, value) => MapEntry(key.itemEntity, value));
+  }
 }
 
 /// Events

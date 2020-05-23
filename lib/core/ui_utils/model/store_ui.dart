@@ -16,10 +16,11 @@ class StoreUI {
   String closeAt;
   bool active;
   String logo;
-  StoreEntity store;
+  StoreEntity storeEntity;
 
   StoreUI.fromEntity(StoreEntity store)
-      : store = store,
+      : id = store.id,
+        storeEntity = store,
         name = store.name,
         logo = store.logo,
         openAt = store.openAt,

@@ -21,7 +21,7 @@ class ItemUIMapper extends UIModelMapper<ItemUI, ItemEntity> {
     itemUI.name = item.name;
     itemUI.description = item.description;
     itemUI.price = item.price;
-    itemUI.item = item;
+    itemUI.itemEntity = item;
 
     return itemUI;
   }

@@ -18,6 +18,7 @@ class AppLocalizations {
       'wrong_code': '* Wrong code',
       'verifying': 'Verifying ...',
       'continue': 'Continue',
+      'confirm': 'Confirm',
       'didn\'t_you_get_the_message': 'Didn\'t you get the message?',
       'resend': ' RESEND',
       'Your_order_is_in_progress': 'Your order is in progress',
@@ -77,6 +78,7 @@ class AppLocalizations {
       'rong_code': '* Codigo erróneo',
       'verifying': 'Verificando ...',
       'continue': 'Continuar',
+      'confirm': 'Confirmar',
       'didn\'t_you_get_the_message': 'No resiviste el mensaje? ',
       'resend': ' REENVIAR',
       'Your_order_is_in_progress': 'Tu pedido está en curso',
@@ -173,6 +175,8 @@ class AppLocalizations {
   String get verifying => _localizedValues[locale.languageCode]['verifying'];
 
   String get continu => _localizedValues[locale.languageCode]['continue'];
+
+  String get confirm => _localizedValues[locale.languageCode]['confirm'];
 
   String get didntYouGetTheMessage => _localizedValues[locale.languageCode]['didn\'t_you_get_the_message'];
 

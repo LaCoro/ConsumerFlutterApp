@@ -45,7 +45,7 @@ class SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
   onDoneLoading() async {
     final Preferences pref = Injector.getInjector().get();
-    Navigator.popAndPushNamed(context, pref.getAddress() == null ? MyAddressPage.MY_ADDRESS_ROUTE : StoreListPage.STORE_LIST_ROUTE);
+    Navigator.popAndPushNamed(context, pref.getAddress() == null ? MyAddressPage.MY_ADDRESS_ROUTE : StoreListPage.STORE_LIST_ROUTE, arguments: false);
   }
 
   @override

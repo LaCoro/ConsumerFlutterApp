@@ -1,12 +1,14 @@
+import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:LaCoro/core/extensions/number_extensions.dart';
 
 class OrderSumary extends StatelessWidget {
   final double orderCost;
-  final double deliveryCost;
+  final int deliveryCost;
+  final String comments;
 
-  const OrderSumary({Key key, this.orderCost, this.deliveryCost = 0})
-      : super(key: key);
+  const OrderSumary({Key key, this.orderCost, this.deliveryCost = 0, this.comments = ''}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,13 +34,13 @@ class OrderSumary extends StatelessWidget {
               ),
               Spacer(),
               Text(
-                "\$ $orderCost",
+                orderCost.currencyFormat(),
                 style: Theme.of(context).textTheme.headline5,
               ),
             ],
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 9,bottom: 15),
+            padding: const EdgeInsets.only(top: 9, bottom: 15),
             child: Row(
               children: <Widget>[
                 Text(
@@ -47,7 +49,7 @@ class OrderSumary extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  "\$ $deliveryCost",
+                  deliveryCost.currencyFormat(),
                   style: Theme.of(context).textTheme.headline5,
                 ),
               ],
@@ -59,11 +61,19 @@ class OrderSumary extends StatelessWidget {
                 strings.total,
                 style: Theme.of(context).textTheme.headline1,
               ),
-              Spacer(), Text(
-                "\$ ${orderCost+deliveryCost}",
+              Spacer(),
+              Text(
+                (orderCost + deliveryCost).currencyFormat(),
                 style: Theme.of(context).textTheme.headline1,
               ),
             ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 48.0),
+            child: Text(
+              comments,
+              style: AppTextStyle.grey16.copyWith(fontStyle: FontStyle.italic),
+            ),
           ),
         ],
       ),

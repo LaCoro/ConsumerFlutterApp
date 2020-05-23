@@ -76,6 +76,9 @@ class MyApp extends StatelessWidget {
             case CheckoutPage.CHECKOUT_ORDER_ROUTE:
               destinationRoute = CheckoutPage();
               break;
+            case MyAddressPage.MY_ADDRESS_ROUTE:
+              destinationRoute = MyAddressPage();
+              break;
           }
           return MaterialPageRoute(builder: (context) => destinationRoute, settings: settings);
         },
@@ -87,7 +90,6 @@ class MyApp extends StatelessWidget {
           AddressesPage.ADDRESSES_LIST_ROUTE: (BuildContext context) => AddressesPage(),
           SplashPage.SPLASH_PAGE_ROUTE: (BuildContext context) => SplashPage(),
           RegisterPage.REGISTER_ROUTE: (BuildContext context) => RegisterPage(),
-          MyAddressPage.MY_ADDRESS_ROUTE: (BuildContext context) => MyAddressPage(),
           PinPage.PIN_REGISTER_ROUTE: (BuildContext context) => PinPage(),
           TestPage.TEST_PAGE_ROUTE: (BuildContext context) => TestPage()
         },

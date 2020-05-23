@@ -18,8 +18,7 @@ class StoreListPage extends StatefulWidget {
   static const STORE_LIST_ROUTE = '/store_list';
 
   @override
-  _StoreListPageState createState() =>
-      _StoreListPageState((Injector.getInjector().get()));
+  _StoreListPageState createState() => _StoreListPageState((Injector.getInjector().get()));
 }
 
 class _StoreListPageState extends State<StoreListPage> {
@@ -53,15 +52,13 @@ class _StoreListPageState extends State<StoreListPage> {
         appBar: AppBar(
             elevation: 0,
             title: GestureDetector(
-              onTap: () =>
-                  Navigator.pushNamed(context, MyAddressPage.MY_ADDRESS_ROUTE),
+              onTap: () {
+                Navigator.pushNamed(context, MyAddressPage.MY_ADDRESS_ROUTE, arguments: true);
+              },
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                      '${currentAddress.address}, ${currentAddress.cityEntity.name}',
-                      style:
-                          AppTextStyle.section.copyWith(color: Colors.black)),
+                  Text('${currentAddress.address}, ${currentAddress.cityEntity.name}', style: AppTextStyle.section.copyWith(color: Colors.black)),
                   Icon(
                     Icons.keyboard_arrow_down,
                     size: 36,
@@ -78,11 +75,9 @@ class _StoreListPageState extends State<StoreListPage> {
 
               if (state is LoadingState) setState(() => _loading = true);
 
-              if (state is SuccessState<List<StoreUI>>)
-                setState(() => _stores = state.data);
+              if (state is SuccessState<List<StoreUI>>) setState(() => _stores = state.data);
 
-              if (state is MoreStoresLoadedState)
-                setState(() => _stores.addAll(state.data));
+              if (state is MoreStoresLoadedState) setState(() => _stores.addAll(state.data));
 
               //if (state is ErrorState)// TODO show error banner
             },
@@ -101,14 +96,12 @@ class _StoreListPageState extends State<StoreListPage> {
                           focusNode: _focusNode,
                           controller: _textFieldController,
                           decoration: InputDecoration(
-                            filled: true, //fillColor: Colors.red,
-                            prefixIcon: Icon(Icons.search,
-                                color: AppColors.greyMedium, size: 24),
-                            suffixIcon: Icon(Icons.cancel,
-                                color: Colors.black, size: 24),
+                            filled: true,
+                            //fillColor: Colors.red,
+                            prefixIcon: Icon(Icons.search, color: AppColors.greyMedium, size: 24),
+                            suffixIcon: Icon(Icons.cancel, color: Colors.black, size: 24),
                             focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(6)),
+                              borderRadius: BorderRadius.all(Radius.circular(6)),
                               borderSide: BorderSide(
                                 width: 2,
                                 color: Theme.of(context).accentColor,
@@ -129,16 +122,12 @@ class _StoreListPageState extends State<StoreListPage> {
                   Expanded(
                     child: LazyLoadScrollView(
                       onEndOfPage: () {
-                        if (_stores != null &&
-                            _stores.length >= StoreUseCases.PAGE_SIZE)
-                          _bloc.add(
-                              LoadMoreStoresEvent(searchQuery: searchQuery));
+                        if (_stores != null && _stores.length >= StoreUseCases.PAGE_SIZE) _bloc.add(LoadMoreStoresEvent(searchQuery: searchQuery));
                       },
                       child: SmartRefresher(
                         controller: _refreshController,
                         enablePullDown: true,
-                        onRefresh: () =>
-                            _bloc.add(GetStoresEvent(searchQuery: searchQuery)),
+                        onRefresh: () => _bloc.add(GetStoresEvent(searchQuery: searchQuery)),
                         child: buildList(),
                       ),
                     ),
@@ -156,13 +145,9 @@ class _StoreListPageState extends State<StoreListPage> {
           return InkWell(
               onTap: () {
                 if (_focusNode.hasFocus) _textFieldController.clear();
-                return Navigator.pushNamed(
-                    context, StoreDetailsPage.STORE_DETAILS_ROUTE,
-                    arguments: _stores[index]);
+                return Navigator.pushNamed(context, StoreDetailsPage.STORE_DETAILS_ROUTE, arguments: _stores[index]);
               },
-              child: Hero(
-                  tag: _stores[index].name,
-                  child: StoreItem(storeItem: _stores[index])));
+              child: Hero(tag: _stores[index].name, child: StoreItem(storeItem: _stores[index])));
         },
         itemCount: _stores?.length ?? 0);
   }
