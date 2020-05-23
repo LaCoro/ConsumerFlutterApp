@@ -26,13 +26,13 @@ class _StoreListPageState extends State<StoreListPage> {
   final RefreshController _refreshController = RefreshController();
   final StoreListBloc _bloc;
   FocusNode _focusNode;
-  TextEditingController _textFieldController;
+  TextEditingController _textFieldController = TextEditingController(text: "");
 
   _StoreListPageState(this._bloc);
 
   List<StoreUI> _stores;
   bool _loading = false;
-  String searchQuery;
+  bool _wasEmpty;
 
   @override
   void initState() {
@@ -41,7 +41,20 @@ class _StoreListPageState extends State<StoreListPage> {
       //TODO no funciona el desenfoque del textLabel al regresar a la lista
     });
     super.initState();
-    _bloc.add(GetStoresEvent(searchQuery: searchQuery));
+    _bloc.add(GetStoresEvent(searchQuery: _textFieldController.text.toString()));
+
+    _wasEmpty = _textFieldController.text.isEmpty;
+    _textFieldController.addListener(() {
+      if (_wasEmpty != _textFieldController.text.isEmpty) {
+        setState(() => {_wasEmpty = _textFieldController.text.isEmpty});
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _textFieldController.dispose();
+    super.dispose();
   }
 
   @override
@@ -104,8 +117,17 @@ class _StoreListPageState extends State<StoreListPage> {
                             filled: true, //fillColor: Colors.red,
                             prefixIcon: Icon(Icons.search,
                                 color: AppColors.greyMedium, size: 24),
-                            suffixIcon: Icon(Icons.cancel,
-                                color: Colors.black, size: 24),
+                            suffixIcon: _textFieldController.text.isNotEmpty ? IconButton(
+                              icon: Icon(Icons.cancel,
+                                  color: Colors.black, size: 26),
+                              onPressed: () {
+                                setState(() {
+                                  _textFieldController.clear();
+                                  _textFieldController.text = "";
+                                });
+                                _bloc.add(GetStoresEvent());
+                              },
+                            ) : SizedBox(),
                             focusedBorder: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(6)),
@@ -114,16 +136,17 @@ class _StoreListPageState extends State<StoreListPage> {
                                 color: Theme.of(context).accentColor,
                               ),
                             ),
-
                             hintText: strings.searchYourAddress,
                             hintStyle: AppTextStyle.grey16,
-//                            border: OutlineInputBorder(),
-//                              focusedBorder: InputBorder.none,
                             enabledBorder: InputBorder.none,
                             errorBorder: InputBorder.none,
                             disabledBorder: InputBorder.none,
                           ),
-                          keyboardType: TextInputType.text),
+                          keyboardType: TextInputType.text,
+                          onSubmitted: (value) {
+                            _bloc.add(GetStoresEvent(searchQuery: value));
+                          }
+                      ),
                     ),
                   ),
                   Expanded(
@@ -132,13 +155,13 @@ class _StoreListPageState extends State<StoreListPage> {
                         if (_stores != null &&
                             _stores.length >= StoreUseCases.PAGE_SIZE)
                           _bloc.add(
-                              LoadMoreStoresEvent(searchQuery: searchQuery));
+                              LoadMoreStoresEvent(searchQuery: _textFieldController.text.toString()));
                       },
                       child: SmartRefresher(
                         controller: _refreshController,
                         enablePullDown: true,
                         onRefresh: () =>
-                            _bloc.add(GetStoresEvent(searchQuery: searchQuery)),
+                            _bloc.add(GetStoresEvent(searchQuery:  _textFieldController.text.toString())),
                         child: buildList(),
                       ),
                     ),
