@@ -65,10 +65,11 @@ class _PinPageState extends State<PinPage> {
               strings.enterTheCodeSentToTheCellPhone,
               style: AppTextStyle.black16,
             ),
-            SizedBox(height: 12,),
+            SizedBox(
+              height: 12,
+            ),
             Text(
-//              _bloc.getProfileInfo().phone,
-              '+312 123 2323',
+              _bloc.getProfileInfo().phone,
               style: AppTextStyle.w500Black16,
             ),
             Padding(
@@ -115,10 +116,10 @@ class _PinPageState extends State<PinPage> {
                     });
                   }
                 }),
-            Spacer(flex: 3,),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 70,),
-            child: RichText(
+            Spacer(
+              flex: 3,
+            ),
+            RichText(
               textAlign: TextAlign.center,
               text: TextSpan(
                   text: strings.didntYouGetTheMessage,
@@ -133,9 +134,7 @@ class _PinPageState extends State<PinPage> {
                         style: AppTextStyle.boldBlue13)
                   ]),
             ),
-          )
-
-
+            SizedBox(height: 70,)
           ],
         ),
       ),
