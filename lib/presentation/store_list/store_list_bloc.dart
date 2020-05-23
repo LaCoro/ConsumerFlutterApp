@@ -11,9 +11,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class StoreListBloc extends Bloc<BaseEvent, BaseState> {
   final StoreUseCases _getAllStores;
   final Preferences _preferences;
+  final bool isLoading;
+  final List<StoreUI> stores;
+  final bool hasError;
   int _page = 0;
 
-  StoreListBloc(this._getAllStores, this._preferences);
+  StoreListBloc(this._getAllStores, this._preferences, {this.isLoading, this.stores, this.hasError});
 
   @override
   BaseState get initialState => InitialState();
