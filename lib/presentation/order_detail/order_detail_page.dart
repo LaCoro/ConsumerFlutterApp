@@ -122,7 +122,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                         controller: _commentController,
                         keyboardType: TextInputType.multiline,
                         textInputAction: TextInputAction.next,
-                        style: GoogleFonts.roboto(textStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.normal, fontSize: 16)),
+                        style: AppTextStyle.black16,
                         decoration: InputDecoration(
                           isDense: true,
                           hintStyle: TextStyle(color: AppColors.greyMedium, fontWeight: FontWeight.w300, fontSize: 16),

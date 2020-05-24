@@ -1,4 +1,5 @@
 import 'package:LaCoro/core/appearance/app_colors.dart';
+import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/enums/payment_type.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
@@ -38,11 +39,11 @@ class CheckoutPage extends StatelessWidget {
                       CurrentAddress(_bloc.getUserAddress(), onEditPressed: () => Navigator.pushNamed(context, MyAddressPage.MY_ADDRESS_ROUTE, arguments: true)),
                       Divider(endIndent: 24, indent: 24, thickness: 2),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                         child: Row(
                           children: <Widget>[
-                            Expanded(child: Text(strings.estimatedDelivery, style: Theme.of(context).textTheme.headline5)),
-                            Text("30 min", style: Theme.of(context).textTheme.headline5)
+                            Expanded(child: Text(strings.estimatedDelivery, style: AppTextStyle.grey16)),
+                            Text("30 min", style: AppTextStyle.grey16)
                           ],
                         ),
                       ),
