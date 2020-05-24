@@ -31,7 +31,9 @@ class Preferences {
   }
 
   Future<bool> saveAddress(AddressEntity address) async {
-    await saveProfile(getProfile()..address = address.getFullAddress());
+    if (getProfile() != null) {
+      await saveProfile(getProfile()..address = address.getFullAddress());
+    }
     return await _preferences.setString(SELECTED_ADDRESS, json.encode(AddressEntity.toJsonObject(address)));
   }
 
