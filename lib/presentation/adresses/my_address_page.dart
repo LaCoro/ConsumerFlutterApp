@@ -76,6 +76,7 @@ class _MyAddressPageState extends State<MyAddressPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
+                    Spacer(flex: 1,),
                     Text(strings.myAddressTitle, style: AppTextStyle.title),
                     SizedBox(height: 40.0),
                     GestureDetector(
@@ -163,6 +164,8 @@ class _MyAddressPageState extends State<MyAddressPage> {
                                   Navigator.pushReplacementNamed(context, StoreListPage.STORE_LIST_ROUTE);
                                 }
                               }),
+                    Spacer(flex: 3,),
+
                   ],
                 ),
               ),

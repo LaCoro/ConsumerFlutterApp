@@ -3,7 +3,6 @@ import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/counter.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/discount_chip.dart';
 import 'package:LaCoro/core/ui_utils/model/item_ui.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ProductItem extends StatefulWidget {
