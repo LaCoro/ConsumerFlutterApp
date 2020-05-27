@@ -21,7 +21,7 @@ class PaymentMethod extends StatelessWidget {
         children: <Widget>[
           Text(
             strings.paymentMethod,
-            style: Theme.of(context).textTheme.bodyText2,
+            style: AppTextStyle.section,
           ),
           Padding(
             padding: const EdgeInsets.only(top: 20),
@@ -35,7 +35,7 @@ class PaymentMethod extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 12.0, right: 24),
                     child: Text("${getPaymentName(context, pay)}",
-                        maxLines: 2, textAlign: TextAlign.left, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.headline4),
+                        maxLines: 2, textAlign: TextAlign.left, overflow: TextOverflow.ellipsis, style: AppTextStyle.black16),
                   ),
                 ),
 

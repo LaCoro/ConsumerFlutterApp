@@ -52,7 +52,7 @@ class _PinPageState extends State<PinPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Spacer(),
+            Spacer(flex: 1,),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 24),
               child: Text(
@@ -96,6 +96,9 @@ class _PinPageState extends State<PinPage> {
             Text(
               hasError ? strings.wrongCode : "",
               style: Theme.of(context).textTheme.caption,
+            ),
+            SizedBox(
+              height: 8,
             ),
             PrimaryButton(
                 margin: const EdgeInsets.symmetric(horizontal: 24),

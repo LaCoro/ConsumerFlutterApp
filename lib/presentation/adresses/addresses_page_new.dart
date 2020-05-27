@@ -1,7 +1,6 @@
 import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/presentation/adresses/select_address_map_page.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AddressesPage extends StatelessWidget {

@@ -23,19 +23,19 @@ class OrderSumary extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 24),
             child: Text(
               strings.summary,
-              style: Theme.of(context).textTheme.bodyText2,
+              style: AppTextStyle.section,
             ),
           ),
           Row(
             children: <Widget>[
               Text(
                 strings.order,
-                style: Theme.of(context).textTheme.headline5,
+                style: AppTextStyle.grey16,
               ),
               Spacer(),
               Text(
                 orderCost.currencyFormat(),
-                style: Theme.of(context).textTheme.headline5,
+                style: AppTextStyle.grey16,
               ),
             ],
           ),
@@ -45,12 +45,12 @@ class OrderSumary extends StatelessWidget {
               children: <Widget>[
                 Text(
                   strings.delivery,
-                  style: Theme.of(context).textTheme.headline5,
+                  style: AppTextStyle.grey16,
                 ),
                 Spacer(),
                 Text(
                   deliveryCost.currencyFormat(),
-                  style: Theme.of(context).textTheme.headline5,
+                  style: AppTextStyle.grey16,
                 ),
               ],
             ),
@@ -59,17 +59,18 @@ class OrderSumary extends StatelessWidget {
             children: <Widget>[
               Text(
                 strings.total,
-                style: Theme.of(context).textTheme.headline1,
+                style: AppTextStyle.w500Black16,
               ),
               Spacer(),
               Text(
                 (orderCost + deliveryCost).currencyFormat(),
-                style: Theme.of(context).textTheme.headline1,
+                style: AppTextStyle.w500Black16,
               ),
             ],
           ),
           Padding(
             padding: const EdgeInsets.only(top: 48.0),
+//            TODO add el comentario en un TextField con enabled=false, no editable
             child: Text(
               comments,
               style: AppTextStyle.grey16.copyWith(fontStyle: FontStyle.italic),
