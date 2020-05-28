@@ -12,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class CheckoutBloc extends Bloc<BaseEvent, BaseState> {
   final Preferences _preferences;
 
+
   CheckoutBloc(this._preferences);
 
   @override

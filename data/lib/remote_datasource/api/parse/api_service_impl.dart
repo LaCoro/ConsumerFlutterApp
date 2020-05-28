@@ -3,6 +3,7 @@ import 'package:data/models/item.dart';
 import 'package:data/models/order.dart';
 import 'package:data/models/order_detail.dart';
 import 'package:data/models/store.dart';
+import 'package:data/models/user.dart';
 import 'package:data/remote_datasource/api/parse/api_service.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 
@@ -44,5 +45,16 @@ class ApiServiceImpl extends ApiService {
   @override
   Future<ParseResponse> getAllCities() {
     return City().getAll();
+  }
+
+  @override
+  Future<ParseResponse> submitUserRegister(User user) async {
+    final QueryBuilder query = QueryBuilder<ParseObject>(User())..whereEqualTo(User.keyPhone, user.phone);
+    final response = await query.query();
+    if (response.success && response.count != 0) {
+      user.id = (response.results.first as User).id;
+    }
+    await user.pin();
+    return user.save();
   }
 }

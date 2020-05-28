@@ -1,6 +1,7 @@
 import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/preferences/preferences.dart';
 import 'package:domain/entities/user_entity.dart';
+import 'package:domain/result.dart';
 import 'package:domain/use_cases/profile_use_cases.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,10 +19,13 @@ class RegisterBloc extends Bloc<BaseEvent, BaseState> {
     try {
       if (event is SubmitSaveProfileEvent) {
         yield LoadingState();
-        // todo remove this and implement API request to register user here
-        await Future.delayed(Duration(seconds: 1));
-        await _preferences.saveProfile(event.userEntity);
-        yield SuccessState();
+        final result = await _useCases.submitUserRegister(event.userEntity);
+        if (result is Success<String>) {
+          await _preferences.saveProfile(event.userEntity..id = result.data);
+          yield SuccessState();
+        } else {
+          yield ErrorState(message: "Error registering user");
+        }
       } else if (event is SubmitVerificationCodeEvent) {
         yield LoadingState();
         // todo remove this and implement API request to register user here

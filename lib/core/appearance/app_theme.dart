@@ -29,8 +29,6 @@ class AppTheme {
         overline: GoogleFonts.roboto(fontWeight: FontWeight.normal, fontSize: 13, color: Color(0xff383838)),//horario Store
         button: GoogleFonts.roboto(fontWeight: FontWeight.normal, fontSize: 13, color: Color(0xff868686)), //subtitle store
         caption: GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 13, color: Color(0xffFFAC0C))),
-
-      //fontFamily: "Poppins", TODO
       );
 
   /// Wrap a widget to be affected for this theme
