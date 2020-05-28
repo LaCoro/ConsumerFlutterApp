@@ -69,7 +69,7 @@ class _PinPageState extends State<PinPage> {
               height: 12,
             ),
             Text(
-              _bloc.getProfileInfo().phone,
+              _bloc.getProfileInfo().mobile,
               style: AppTextStyle.w500Black16,
             ),
             Padding(

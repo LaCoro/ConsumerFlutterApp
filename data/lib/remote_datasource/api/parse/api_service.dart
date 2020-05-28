@@ -7,6 +7,8 @@ import 'package:parse_server_sdk/parse_server_sdk.dart';
 abstract class ApiService {
   Future<ParseResponse> fetchStores(String cityId, int page, int size, {String searchQuery});
 
+  Future<ParseResponse> getStore(String storeId);
+
   Future<ParseResponse> getStoreItems(String storeId);
 
   Future<ParseResponse> createOrder(Order order);

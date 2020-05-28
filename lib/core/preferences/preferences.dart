@@ -47,6 +47,9 @@ class Preferences {
   }
 
   Future saveProfile(UserEntity user) async {
+    if(getAddress() != null) {
+      user.address = getAddress().getFullAddress();
+    }
     await _preferences.setString(PROFILE, json.encode(UserEntity.toJsonObject(user)));
   }
 

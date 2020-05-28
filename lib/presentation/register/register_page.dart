@@ -38,7 +38,7 @@ class _RegisterPageState extends State<RegisterPage> {
     setState(() {
       _nameController = TextEditingController(text: profile?.fullname);
       _emailController = TextEditingController(text: profile?.email);
-      _phoneController = TextEditingController(text: profile?.phone);
+      _phoneController = TextEditingController(text: profile?.mobile);
     });
     super.initState();
   }
@@ -216,7 +216,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               _bloc.add(SubmitSaveProfileEvent(UserEntity()
                                 ..fullname = _nameController.value.text
                                 ..email = _emailController.value.text
-                                ..phone = _phoneController.value.text));
+                                ..mobile = _phoneController.value.text));
                             }
                           }),
                       SizedBox(height: 70,),

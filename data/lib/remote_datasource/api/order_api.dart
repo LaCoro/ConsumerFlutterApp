@@ -2,9 +2,10 @@ import 'package:data/models/item.dart';
 import 'package:data/models/order.dart';
 import 'package:data/models/order_detail.dart';
 import 'package:data/models/store.dart';
-import 'package:data/models/user.dart';
 import 'package:data/remote_datasource/api/parse/api_service.dart';
 import 'package:data/remote_datasource/errors/service_error.dart';
+import 'package:domain/entities/order_entity.dart';
+import 'package:domain/entities/user_entity.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 
 /// Class to handle all related to the Order API request using the Parse SDK Manager
@@ -13,28 +14,31 @@ class OrderApi {
 
   OrderApi(this.apiService);
 
-  Future<Order> createOrder(Store store, Map<Item, int> products, User user, {String comments}) async {
+  Future<Order> submitOrder(OrderEntity orderEntity, UserEntity user) async {
     // Create order model
     final order = Order()
-      ..buyerId = user.objectId
+      ..buyerId = user.id
       ..buyerName = user.fullname
-      ..additionalRequests = comments
+      ..additionalRequests = orderEntity.additionalRequests
       ..deliveryAddress = user.address
-      ..deliveryCost = store.deliveryCost;
+      ..deliveryCost = orderEntity.deliveryCost;
+
+    final storeResponse = await apiService.getStore(orderEntity.store.id);
+
+    final store = storeResponse.result as Store;
 
     order.set(Order.keyStore, store.toPointer());
-    order.set(Order.keyCustomer, user.toPointer());
+//    order.set(Order.keyCustomer, User().getoPointer());
 
     ParseResponse response = await apiService.createOrder(order);
 
     if (response.success == false) throw ServiceError();
 
-    for (Item product in products.keys) {
+    for (Item product in orderEntity.products.keys) {
       final orderDetail = OrderDetail()
-        ..set(OrderDetail.keyQuantity, products[product])
+        ..set(OrderDetail.keyQuantity, orderEntity.products[product])
         ..set(OrderDetail.keyProduct, product.toPointer())
-        ..set(OrderDetail.keyOrder, order.toPointer())
-        ..set(OrderDetail.keyNotes, comments);
+        ..set(OrderDetail.keyOrder, order.toPointer());
 
       ParseResponse res = await apiService.createOrderDetail(orderDetail);
 

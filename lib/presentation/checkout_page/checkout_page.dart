@@ -17,7 +17,7 @@ import 'package:flutter_simple_dependency_injection/injector.dart';
 class CheckoutPage extends StatelessWidget {
   static const CHECKOUT_ORDER_ROUTE = '/checkout_order';
 
-  final _bloc = CheckoutBloc(Injector.getInjector().get());
+  final CheckoutBloc _bloc = Injector.getInjector().get();
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,8 @@ class CheckoutPage extends StatelessWidget {
                 Expanded(
                   child: ListView(
                     children: <Widget>[
-                      CurrentAddress(_bloc.getUserAddress(), onEditPressed: () => Navigator.pushNamed(context, MyAddressPage.MY_ADDRESS_ROUTE, arguments: true)),
+                      CurrentAddress(_bloc.getUserAddress(),
+                          onEditPressed: () => Navigator.pushNamed(context, MyAddressPage.MY_ADDRESS_ROUTE, arguments: true)),
                       Divider(endIndent: 24, indent: 24, thickness: 2),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),

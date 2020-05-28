@@ -26,9 +26,15 @@ class ApiServiceImpl extends ApiService {
   }
 
   @override
+  Future<ParseResponse> getStore(String storeId) async {
+    return await Store().getObject(storeId);
+  }
+
+  @override
   Future<ParseResponse> getStoreItems(String storeId) async {
     final store = await Store().getObject(storeId);
-    final QueryBuilder query = QueryBuilder<Item>(Item())..whereEqualTo(Item.keyStore, (store.result as Store).toPointer());
+    final QueryBuilder query = QueryBuilder<Item>(Item())
+      ..whereEqualTo(Item.keyStore, (store.result as Store).toPointer());
     return await query.query();
   }
 
@@ -49,7 +55,8 @@ class ApiServiceImpl extends ApiService {
 
   @override
   Future<ParseResponse> submitUserRegister(User user) async {
-    final QueryBuilder query = QueryBuilder<ParseObject>(User())..whereEqualTo(User.keyPhone, user.phone);
+    final QueryBuilder query = QueryBuilder<ParseObject>(User())
+      ..whereEqualTo(User.keyMobile, user.mobile);
     final response = await query.query();
     if (response.success && response.count != 0) {
       user.id = (response.results.first as User).id;

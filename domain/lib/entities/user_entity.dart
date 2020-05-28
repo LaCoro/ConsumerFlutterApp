@@ -6,7 +6,7 @@ class UserEntity {
   String address;
   String city;
   String country;
-  String phone;
+  String mobile;
   String birthday;
   String iMEI;
   bool isValidated;
@@ -20,7 +20,7 @@ class UserEntity {
       ..address = json['address']
       ..city = json['city']
       ..country = json['country']
-      ..phone = json['phone']
+      ..mobile = json['phone']
       ..birthday = json['birthday']
       ..iMEI = json['IMEI']
       ..isValidated = json['is_validated'];
@@ -35,7 +35,7 @@ class UserEntity {
     data['address'] = user.address;
     data['city'] = user.city;
     data['country'] = user.country;
-    data['phone'] = user.phone;
+    data['mobile'] = user.mobile;
     data['birthday'] = user.birthday;
     data['IMEI'] = user.iMEI;
     data['is_validated'] = user.isValidated;

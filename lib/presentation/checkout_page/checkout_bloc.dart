@@ -1,19 +1,15 @@
 import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/preferences/preferences.dart';
-import 'package:LaCoro/core/ui_utils/mappers/item_ui_mapper.dart';
-import 'package:LaCoro/core/ui_utils/model/item_ui.dart';
-import 'package:LaCoro/core/ui_utils/model/store_ui.dart';
-import 'package:domain/entities/item_entity.dart';
 import 'package:domain/entities/order_entity.dart';
 import 'package:domain/result.dart';
-import 'package:domain/use_cases/store_use_cases.dart';
+import 'package:domain/use_cases/order_use_cases.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CheckoutBloc extends Bloc<BaseEvent, BaseState> {
   final Preferences _preferences;
+  final OrderUseCases _useCases;
 
-
-  CheckoutBloc(this._preferences);
+  CheckoutBloc(this._preferences, this._useCases);
 
   @override
   BaseState get initialState => InitialState();
@@ -21,12 +17,15 @@ class CheckoutBloc extends Bloc<BaseEvent, BaseState> {
   @override
   Stream<BaseState> mapEventToState(BaseEvent event) async* {
     try {
-      if(event is SubmitOrderEvent) {
+      if (event is SubmitOrderEvent) {
         yield LoadingState();
-        await Future.delayed(Duration(seconds: 1));
-        yield SuccessState(data: event.orderEntity);
+        final result = await _useCases.submitOrder(event.orderEntity, _preferences.getProfile());
+        if (result is Success) {
+          yield SuccessState(data: event.orderEntity);
+        } else {
+          yield ErrorState(message: "Error creating order");
+        }
       }
-
     } catch (error) {
       yield ErrorState();
     }

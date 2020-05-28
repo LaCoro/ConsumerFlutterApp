@@ -63,10 +63,6 @@ class User extends ParseObject with UserEntity implements ParseCloneable {
 
   set country(String country) => set<String>(keyCountry, country);
 
-  String get phone => get<String>(keyPhone);
-
-  set phone(String phone) => set<String>(keyPhone, phone);
-
   String get birthday => get<String>(keyBirthday);
 
   set birthday(String birthday) => set<String>(keyBirthday, birthday);
