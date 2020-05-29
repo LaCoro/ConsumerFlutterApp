@@ -20,7 +20,7 @@ class UserEntity {
       ..address = json['address']
       ..city = json['city']
       ..country = json['country']
-      ..mobile = json['phone']
+      ..mobile = json['mobile']
       ..birthday = json['birthday']
       ..iMEI = json['IMEI']
       ..isValidated = json['is_validated'];

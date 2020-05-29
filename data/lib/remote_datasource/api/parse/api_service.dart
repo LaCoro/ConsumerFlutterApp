@@ -1,6 +1,7 @@
 import 'package:data/models/order.dart';
 import 'package:data/models/order_detail.dart';
 import 'package:data/models/user.dart';
+import 'package:domain/entities/user_entity.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 
 ///Manager that defines all the API service requests.

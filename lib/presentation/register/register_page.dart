@@ -70,8 +70,9 @@ class _RegisterPageState extends State<RegisterPage> {
       listener: (context, state) {
         setState(() => isLoading = state is LoadingState);
 
-        if (state is SuccessState)
+        if (state is SuccessState) {
           Navigator.pushNamed(context, PinPage.PIN_REGISTER_ROUTE);
+        }
       },
       child: Scaffold(
         appBar: AppBar(elevation: 0),

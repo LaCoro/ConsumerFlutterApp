@@ -2,11 +2,13 @@ import 'package:data/models/item.dart';
 import 'package:data/models/order.dart';
 import 'package:data/models/order_detail.dart';
 import 'package:data/models/store.dart';
+import 'package:data/models/user.dart';
 import 'package:data/remote_datasource/api/parse/api_service.dart';
 import 'package:data/remote_datasource/errors/service_error.dart';
 import 'package:domain/entities/order_entity.dart';
 import 'package:domain/entities/user_entity.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
+import 'package:uuid/uuid.dart';
 
 /// Class to handle all related to the Order API request using the Parse SDK Manager
 class OrderApi {
@@ -15,8 +17,11 @@ class OrderApi {
   OrderApi(this.apiService);
 
   Future<Order> submitOrder(OrderEntity orderEntity, UserEntity user) async {
+    var parseUser = (await ParseUser.currentUser());
+
     // Create order model
     final order = Order()
+      ..code = Uuid().v4()
       ..buyerId = user.id
       ..buyerName = user.fullname
       ..additionalRequests = orderEntity.additionalRequests
@@ -28,7 +33,7 @@ class OrderApi {
     final store = storeResponse.result as Store;
 
     order.set(Order.keyStore, store.toPointer());
-//    order.set(Order.keyCustomer, User().getoPointer());
+    order.set(Order.keyCustomer, parseUser);
 
     ParseResponse response = await apiService.createOrder(order);
 

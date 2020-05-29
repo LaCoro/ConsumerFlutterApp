@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:crypto/crypto.dart';
 import 'package:data/models/city.dart';
 import 'package:data/models/item.dart';
 import 'package:data/models/order.dart';
@@ -33,8 +36,7 @@ class ApiServiceImpl extends ApiService {
   @override
   Future<ParseResponse> getStoreItems(String storeId) async {
     final store = await Store().getObject(storeId);
-    final QueryBuilder query = QueryBuilder<Item>(Item())
-      ..whereEqualTo(Item.keyStore, (store.result as Store).toPointer());
+    final QueryBuilder query = QueryBuilder<Item>(Item())..whereEqualTo(Item.keyStore, (store.result as Store).toPointer());
     return await query.query();
   }
 
@@ -55,13 +57,20 @@ class ApiServiceImpl extends ApiService {
 
   @override
   Future<ParseResponse> submitUserRegister(User user) async {
-    final QueryBuilder query = QueryBuilder<ParseObject>(User())
-      ..whereEqualTo(User.keyMobile, user.mobile);
-    final response = await query.query();
-    if (response.success && response.count != 0) {
-      user.id = (response.results.first as User).id;
-    }
-    await user.pin();
+    final pass = md5.convert(utf8.encode(user.mobile)).toString();
+
+    final userRegister = ParseUser.createUser(user.mobile, pass, user.email)
+      ..set(User.keyMobile, user.mobile)
+      ..set(User.keyPhone, user.mobile)
+      ..set(User.keyUsername, user.mobile)
+      ..set(User.keyFullname, user.fullname)
+      ..set(User.keyEmail, user.email);
+
+    var response = await userRegister.signUp();
+    response = await userRegister.login();
+
+    user.id = (response.result as ParseUser).objectId;
+
     return user.save();
   }
 }

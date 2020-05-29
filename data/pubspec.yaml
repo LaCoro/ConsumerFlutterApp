@@ -14,7 +14,7 @@ dependencies:
     path: ../domain
 
   parse_server_sdk: ^1.0.26
-  flutter_dotenv: ^2.1.0
+  crypto: ^2.1.4
 
   json_serializable: ^3.3.0
   json_annotation: ^3.0.1
