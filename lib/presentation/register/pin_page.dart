@@ -26,8 +26,7 @@ class _PinPageState extends State<PinPage> {
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
-  StreamController<ErrorAnimationType> errorController =
-      StreamController<ErrorAnimationType>();
+  StreamController<ErrorAnimationType> errorController = StreamController<ErrorAnimationType>();
   TextEditingController _textEditingController = TextEditingController();
   bool hasError = false;
   bool isLoading = false;
@@ -52,7 +51,9 @@ class _PinPageState extends State<PinPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Spacer(flex: 1,),
+            Spacer(
+              flex: 1,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 24),
               child: Text(
@@ -106,16 +107,14 @@ class _PinPageState extends State<PinPage> {
                 buttonText: strings.continu,
                 onPressed: () {
                   if (_textEditingController.text.length != 5) {
-                    errorController.add(ErrorAnimationType
-                        .shake); // Triggering error shake animation
+                    errorController.add(ErrorAnimationType.shake); // Triggering error shake animation
                     setState(() {
                       hasError = true;
                     });
                   } else {
                     setState(() {
                       hasError = false;
-                      _bloc.add(SubmitVerificationCodeEvent(
-                          _textEditingController.text));
+                      _bloc.add(SubmitVerificationCodeEvent(_textEditingController.text));
                     });
                   }
                 }),
@@ -124,20 +123,19 @@ class _PinPageState extends State<PinPage> {
             ),
             RichText(
               textAlign: TextAlign.center,
-              text: TextSpan(
-                  text: strings.didntYouGetTheMessage,
-                  style: AppTextStyle.black13,
-                  children: [
-                    TextSpan(
-                        text: strings.resend,
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            Navigator.pop(context);
-                          },
-                        style: AppTextStyle.boldBlue13)
-                  ]),
+              text: TextSpan(text: strings.didntYouGetTheMessage, style: AppTextStyle.black13, children: [
+                TextSpan(
+                    text: strings.resend,
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        Navigator.pop(context);
+                      },
+                    style: AppTextStyle.boldBlue13)
+              ]),
             ),
-            SizedBox(height: 70,)
+            SizedBox(
+              height: 70,
+            )
           ],
         ),
       ),
@@ -148,15 +146,13 @@ class _PinPageState extends State<PinPage> {
     setState(() => isLoading = state is LoadingState);
 
     if (state is SuccessState) {
-      Navigator.popUntil(
-          context, ModalRoute.withName(OrderDetailPage.ORDER_DETAIL_ROUTE));
+      Navigator.popUntil(context, ModalRoute.withName(OrderDetailPage.ORDER_DETAIL_ROUTE));
     }
 
     if (state is ErrorState) {
       setState(() => hasError = true);
       errorController.add(ErrorAnimationType.shake);
-      scaffoldKey.currentState.showSnackBar(SnackBar(
-          content: Text(state.message), duration: Duration(seconds: 3)));
+      scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(state.message), duration: Duration(seconds: 3)));
     }
   }
 }

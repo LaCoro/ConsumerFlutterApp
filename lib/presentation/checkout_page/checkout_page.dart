@@ -9,6 +9,7 @@ import 'package:LaCoro/core/ui_utils/custom_widgets/payment_method.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/primary_button.dart';
 import 'package:LaCoro/presentation/adresses/my_address_page.dart';
 import 'package:LaCoro/presentation/checkout_page/checkout_bloc.dart';
+import 'package:LaCoro/presentation/store_list/store_list_page.dart';
 import 'package:domain/entities/order_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,6 +32,10 @@ class CheckoutPage extends StatelessWidget {
       body: BlocBuilder(
           bloc: _bloc,
           builder: (context, state) {
+            if (state == SuccessState<OrderEntity>()) {
+              Navigator.pushAndRemoveUntil(context, "newRoute", ModalRoute.withName(StoreListPage.STORE_LIST_ROUTE));
+            }
+
             return Column(
               children: <Widget>[
                 Expanded(
