@@ -13,7 +13,7 @@ class OrderRepositoryImpl extends OrderRepository {
   Future<Result> submitOrder(OrderEntity orderEntity, UserEntity userEntity) async {
     try {
       final order = await _remoteDataSource.submitOrder(orderEntity, userEntity);
-      return Success(order);
+      return Success(orderEntity..id = order.objectId);
     } catch (e) {
       return Failure(e);
     }

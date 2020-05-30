@@ -68,7 +68,7 @@ class Preferences {
     return await _preferences.setString(LAST_ORDER, json.encode(OrderEntity.toJsonObject(order)));
   }
 
-  OrderEntity getLastOrder(OrderEntity order) {
+  OrderEntity getLastOrder() {
     final orderJson = _preferences.getString(LAST_ORDER);
     try {
       return OrderEntity.fromJsonMap(json.decode(orderJson));

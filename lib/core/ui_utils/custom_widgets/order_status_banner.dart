@@ -2,7 +2,7 @@ import 'package:LaCoro/core/localization/app_localizations.dart';
 import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class CurrentOrderStatusBanner extends StatelessWidget {
+class OrderStatusBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context);
@@ -15,8 +15,9 @@ class CurrentOrderStatusBanner extends StatelessWidget {
           height: 34,
           child: Row(
             children: <Widget>[
-              Text(strings.yourOrderIsInProgress
-              ,style: TextStyle(color: Colors.white, fontSize: 18 ),
+              Text(
+                strings.yourOrderIsInProgress,
+                style: TextStyle(color: Colors.white, fontSize: 18),
               ),
               Expanded(
                 child: Container(),

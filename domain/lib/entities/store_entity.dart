@@ -24,7 +24,7 @@ class StoreEntity {
   static StoreEntity fromJsonMap(Map<String, dynamic> json) {
     return StoreEntity()
       ..name = json['name']
-      ..searchTags = json['searchTags'].cast<int>()
+      ..searchTags = json['searchTags'].cast<String>()
       ..address = json['address']
       ..city = json['city']
       ..country = json['country']

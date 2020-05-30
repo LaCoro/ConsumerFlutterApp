@@ -2,8 +2,9 @@ import 'package:LaCoro/core/di/app_module.dart';
 import 'package:LaCoro/core/localization/app_localizations_delegate.dart';
 import 'package:LaCoro/presentation/adresses/addresses_page_new.dart';
 import 'package:LaCoro/presentation/adresses/my_address_page.dart';
-import 'package:LaCoro/presentation/checkout_page/checkout_page.dart';
+import 'package:LaCoro/presentation/checkout/checkout_page.dart';
 import 'package:LaCoro/presentation/order_detail/order_detail_page.dart';
+import 'package:LaCoro/presentation/order_status/order_status_page.dart';
 import 'package:LaCoro/presentation/register/pin_page.dart';
 import 'package:LaCoro/presentation/register/register_page.dart';
 import 'package:LaCoro/presentation/splash/splash.dart';
@@ -63,7 +64,6 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'LaCoro',
         theme: AppTheme.build(),
-        initialRoute: '/',
         onGenerateRoute: (settings) {
           Widget destinationRoute = SplashPage();
           switch (settings.name) {
@@ -76,12 +76,16 @@ class MyApp extends StatelessWidget {
             case CheckoutPage.CHECKOUT_ORDER_ROUTE:
               destinationRoute = CheckoutPage();
               break;
+            case OrderStatusPage.ORDER_STATUS_ROUTE:
+              destinationRoute = OrderStatusPage();
+              break;
             case MyAddressPage.MY_ADDRESS_ROUTE:
               destinationRoute = MyAddressPage();
               break;
           }
           return MaterialPageRoute(builder: (context) => destinationRoute, settings: settings);
         },
+        initialRoute: '/',
         routes: {
           '/': (BuildContext context) => SplashPage(),
           StoreListPage.STORE_LIST_ROUTE: (BuildContext context) => StoreListPage(),

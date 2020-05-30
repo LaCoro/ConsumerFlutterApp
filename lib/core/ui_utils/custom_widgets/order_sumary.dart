@@ -3,12 +3,12 @@ import 'package:LaCoro/core/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:LaCoro/core/extensions/number_extensions.dart';
 
-class OrderSumary extends StatelessWidget {
+class OrderSummary extends StatelessWidget {
   final double orderCost;
   final int deliveryCost;
   final String comments;
 
-  const OrderSumary({Key key, this.orderCost, this.deliveryCost = 0, this.comments = ''}) : super(key: key);
+  OrderSummary({this.orderCost, this.deliveryCost = 0, this.comments = ''});
 
   @override
   Widget build(BuildContext context) {

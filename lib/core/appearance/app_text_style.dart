@@ -7,7 +7,7 @@ class AppTextStyle {
   static TextStyle title = GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 28, color: Color(0xff383838)) ;//titulos
   static TextStyle appBar = GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 20, color: Color(0xff383838)) ;//Appbar
   static TextStyle section = GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 18, color: Color(0xff383838));//subsecciones
-
+  static TextStyle boldWhite16 = GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 16, color: Color(0xffffffff));//title store en ListStore
   static TextStyle boldBlack16 = GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 16, color: Color(0xff383838));//title store en ListStore
   static TextStyle w500Black16 = GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xff383838));//title popUp
   static TextStyle blue16 = GoogleFonts.roboto(fontWeight: FontWeight.normal, fontSize: 16, color: Color(0xFF3D9FE6)); //en buscador blue

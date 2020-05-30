@@ -7,7 +7,7 @@ import 'package:LaCoro/core/ui_utils/custom_widgets/primary_button.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/product_item.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/store_item_small.dart';
 import 'package:LaCoro/core/ui_utils/model/item_ui.dart';
-import 'package:LaCoro/presentation/checkout_page/checkout_page.dart';
+import 'package:LaCoro/presentation/checkout/checkout_page.dart';
 import 'package:LaCoro/presentation/order_detail/order_details_bloc.dart';
 import 'package:LaCoro/presentation/register/register_page.dart';
 import 'package:flutter/material.dart';

@@ -1,10 +1,11 @@
 import 'package:LaCoro/app_icons.dart';
+import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 import '../../appearance/app_colors.dart';
 
-class SuccessfulOrderIcon extends StatelessWidget {
+class SuccessfulOrderBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context);
@@ -16,12 +17,10 @@ class SuccessfulOrderIcon extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Spacer(),
             Icon(AppIcons.happy, size: 60, color: Colors.white),
-            Spacer(flex: 3),
-            Text(strings.successfulOrder, style: Theme.of(context).textTheme.headline2),
-            Spacer(),
+            Text(strings.successfulOrder, style: AppTextStyle.boldWhite16),
           ],
         ),
       ),
