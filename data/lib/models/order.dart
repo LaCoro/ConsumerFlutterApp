@@ -27,7 +27,7 @@ class Order extends ParseObject with OrderEntity implements ParseCloneable {
   static const String keyBuyerName = 'buyerName';
   static const String keyBuyerId = 'buyerId';
   static const String keyScheduledDeliveryDate = 'scheduledDeliveryDate';
-  static const String keyState = 'state';
+  static const String keyStatus = 'status';
   static const String keyCustomer = 'customer';
   static const String keyDeliveryBoy = 'deliveryBoy';
 
@@ -71,9 +71,9 @@ class Order extends ParseObject with OrderEntity implements ParseCloneable {
 
   set scheduledDeliveryDate(String scheduledDeliveryDate) => set<String>(keyScheduledDeliveryDate, scheduledDeliveryDate);
 
-  String get state => get<String>(keyState);
+  String get status => get<String>(keyStatus);
 
-  set state(String state) => set<String>(keyState, state);
+  set status(String status) => set<String>(keyStatus, status);
 
 
   // TODO move these methods to the  API class

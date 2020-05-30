@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:domain/entities/address_entity.dart';
 import 'package:domain/entities/location.dart';
+import 'package:domain/entities/order_entity.dart';
 import 'package:domain/entities/user_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,6 +13,7 @@ class Preferences {
   static const LAST_LONGITUDE = 'lastLongitude';
   static const SELECTED_CITY = 'selectedCity';
   static const SELECTED_ADDRESS = 'selectedAddress';
+  static const LAST_ORDER = 'lastOrder';
   static const PROFILE = 'profile';
 
   Future<Preferences> init() async {
@@ -47,7 +49,7 @@ class Preferences {
   }
 
   Future saveProfile(UserEntity user) async {
-    if(getAddress() != null) {
+    if (getAddress() != null) {
       user.address = getAddress().getFullAddress();
     }
     await _preferences.setString(PROFILE, json.encode(UserEntity.toJsonObject(user)));
@@ -57,6 +59,19 @@ class Preferences {
     final userJson = _preferences.getString(PROFILE);
     try {
       return UserEntity.fromJsonMap(json.decode(userJson));
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future saveLastOrder(OrderEntity order) async {
+    return await _preferences.setString(LAST_ORDER, json.encode(OrderEntity.toJsonObject(order)));
+  }
+
+  OrderEntity getLastOrder(OrderEntity order) {
+    final orderJson = _preferences.getString(LAST_ORDER);
+    try {
+      return OrderEntity.fromJsonMap(json.decode(orderJson));
     } catch (e) {
       return null;
     }
