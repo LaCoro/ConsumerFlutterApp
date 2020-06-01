@@ -12,5 +12,7 @@ class ItemUI {
       : name = item.name,
         description = item.description,
         price = item.price,
+        image = item.picture,
         itemEntity = item;
+
 }

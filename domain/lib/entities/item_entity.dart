@@ -7,5 +7,6 @@ abstract class ItemEntity {
   int price;
   ParseObject parent;
   int position;
+  String picture;
   Future<StoreEntity> store;
 }
