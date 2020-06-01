@@ -73,7 +73,7 @@ class _ProductItemState extends State<ProductItem> {
                             aspectRatio: 1,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(8.0),
-                              child: Image.network("https://www.liberaldictionary.com/wp-content/uploads/2018/11/pizza.jpg", fit: BoxFit.fill),
+                              child: Image.network(widget.itemUI.image, fit: BoxFit.fill),
                             ),
                           ),
                         ),
