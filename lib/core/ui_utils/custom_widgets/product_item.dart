@@ -1,9 +1,9 @@
-import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/core/appearance/app_text_style.dart';
-import 'package:LaCoro/core/ui_utils/custom_widgets/counter.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/discount_chip.dart';
 import 'package:LaCoro/core/ui_utils/model/item_ui.dart';
 import 'package:flutter/material.dart';
+
+import 'custom_counter.dart';
 
 class ProductItem extends StatefulWidget {
   final ItemUI itemUI;
@@ -84,15 +84,10 @@ class _ProductItemState extends State<ProductItem> {
                     onEnd: () => setState(() => animateQuantity = false),
                     child: AspectRatio(
                       aspectRatio: 6.0 / 2.5,
-                      child: Counter(
-                          quantity: quantity ?? 0,
-                          onQuantityChange: (value) {
-                            setState(() {
-                              quantity = value;
-                              animateQuantity = true;
-                            });
-                            onQuantityChange.call(value);
-                          }),
+                      child: CounterTouch(
+                        initialValue: quantity ?? 0,
+                        onChanged: onQuantityChange,
+                      ),
                     ),
                   ),
                 ],
