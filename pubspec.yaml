@@ -40,6 +40,7 @@ dependencies:
   shared_preferences: ^0.5.7
   lazy_load_scrollview: ^1.1.0
   uuid: 2.0.4
+  stepper_touch: ^0.0.1
 
   cupertino_icons: ^0.1.3
 

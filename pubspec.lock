@@ -677,6 +677,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.2+5"
+  stepper_touch:
+    dependency: "direct main"
+    description:
+      name: stepper_touch
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1"
   stream_channel:
     dependency: transitive
     description:
