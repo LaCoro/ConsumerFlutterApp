@@ -1,3 +1,4 @@
+import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
 import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -17,18 +18,12 @@ class OrderStatusBanner extends StatelessWidget {
             children: <Widget>[
               Text(
                 strings.yourOrderIsInProgress,
-                style: TextStyle(color: Colors.white, fontSize: 18),
+                style: TextStyle(color: Colors.white, fontSize: 16),
               ),
-              Expanded(
-                child: Container(),
-              ),
-              FlatButton(
-                onPressed: () {},
-                child: Center(
-                    child: Text(
-                  strings.seeOrder,
-                  style: Theme.of(context).textTheme.button,
-                )),
+              Spacer(),
+              Text(
+                strings.seeOrder,
+                style: AppTextStyle.boldWhite16,
               )
             ],
           ),

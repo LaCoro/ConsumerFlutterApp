@@ -1,7 +1,6 @@
 import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/preferences/preferences.dart';
 import 'package:domain/entities/order_entity.dart';
-import 'package:domain/result.dart';
 import 'package:domain/use_cases/order_use_cases.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,27 +16,11 @@ class OrderStatusBloc extends Bloc<BaseEvent, BaseState> {
   @override
   Stream<BaseState> mapEventToState(BaseEvent event) async* {
     try {
-      if (event is SubmitOrderEvent) {
-        yield LoadingState();
-        final result = await _useCases.submitOrder(event.orderEntity, _preferences.getProfile());
-        if (result is Success) {
-          await _preferences.saveLastOrder(result.data as OrderEntity);
-          yield SuccessState(data: result.data as OrderEntity);
-        } else {
-          yield ErrorState(message: "Error creating order");
-        }
-      }
+      // TODO implement logic here
     } catch (error) {
       yield ErrorState();
     }
   }
 
   OrderEntity getLastOrder() => _preferences.getLastOrder();
-}
-
-/// Events
-class SubmitOrderEvent extends BaseEvent {
-  final OrderEntity orderEntity;
-
-  SubmitOrderEvent(this.orderEntity);
 }

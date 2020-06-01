@@ -18,6 +18,7 @@ class Order extends ParseObject with OrderEntity implements ParseCloneable {
 
   static const String keyCode = 'code';
   static const String keyStore = 'store';
+  static const String keyTotalAmount = 'totalAmount';
   static const String keyDeliveryCost = 'deliveryCost';
   static const String keyDeliveryStartedAt = 'deliveryStartedAt';
   static const String keyDeliveryEndedAt = 'deliveryEndedAt';
@@ -38,6 +39,10 @@ class Order extends ParseObject with OrderEntity implements ParseCloneable {
   int get deliveryCost => get<int>(keyDeliveryCost);
 
   set deliveryCost(int deliveryCost) => set<int>(keyDeliveryCost, deliveryCost);
+
+  double get totalAmount => get<double>(keyTotalAmount);
+
+  set totalAmount(double totalAmount) => set<double>(keyTotalAmount, totalAmount);
 
   String get deliveryStartedAt => get<String>(keyDeliveryStartedAt);
 
@@ -74,7 +79,6 @@ class Order extends ParseObject with OrderEntity implements ParseCloneable {
   String get status => get<String>(keyStatus);
 
   set status(String status) => set<String>(keyStatus, status);
-
 
   // TODO move these methods to the  API class
   Future<User> getCustomer() async {

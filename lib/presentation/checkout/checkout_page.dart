@@ -53,8 +53,10 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 Expanded(
                   child: ListView(
                     children: <Widget>[
-                      CurrentAddress(_bloc.getUserAddress(),
-                          onEditPressed: () => Navigator.pushNamed(context, MyAddressPage.MY_ADDRESS_ROUTE, arguments: true)),
+                      CurrentAddress(_bloc.getUserAddress(), onEditPressed: () async {
+                        await Navigator.pushNamed(context, MyAddressPage.MY_ADDRESS_ROUTE, arguments: true);
+                        setState(() {});
+                      }),
                       Divider(endIndent: 24, indent: 24, thickness: 2),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),

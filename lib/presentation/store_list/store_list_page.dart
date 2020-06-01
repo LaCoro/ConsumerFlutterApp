@@ -2,11 +2,14 @@ import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
+import 'package:LaCoro/core/ui_utils/custom_widgets/order_status_banner.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/store_item.dart';
 import 'package:LaCoro/core/ui_utils/model/store_ui.dart';
 import 'package:LaCoro/presentation/adresses/my_address_page.dart';
+import 'package:LaCoro/presentation/order_status/order_status_page.dart';
 import 'package:LaCoro/presentation/store_details/store_details_page.dart';
 import 'package:LaCoro/presentation/store_list/store_list_bloc.dart';
+import 'package:domain/entities/order_entity.dart';
 import 'package:domain/use_cases/store_use_cases.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -60,13 +63,15 @@ class _StoreListPageState extends State<StoreListPage> {
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context);
     final currentAddress = _bloc.loadSavedAddress();
+    final lastOrder = _bloc.getLastOrder();
     return Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(
             elevation: 0,
             title: GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, MyAddressPage.MY_ADDRESS_ROUTE, arguments: true);
+              onTap: () async {
+                await Navigator.pushNamed(context, MyAddressPage.MY_ADDRESS_ROUTE, arguments: true);
+                setState(() {});
               },
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -97,6 +102,15 @@ class _StoreListPageState extends State<StoreListPage> {
             child: Stack(children: [
               Column(
                 children: <Widget>[
+                  lastOrder == null
+                      ? SizedBox()
+                      : InkWell(
+                          onTap: () async {
+                            await Navigator.pushNamed(context, OrderStatusPage.ORDER_STATUS_ROUTE, arguments: lastOrder);
+                            setState(() {});
+                          },
+                          child: OrderStatusBanner(),
+                        ),
                   Padding(
                     // todo sacar en un widget
                     padding: const EdgeInsets.all(16.0),
@@ -109,20 +123,21 @@ class _StoreListPageState extends State<StoreListPage> {
                           focusNode: _focusNode,
                           controller: _textFieldController,
                           decoration: InputDecoration(
-                            filled: true, //fillColor: Colors.red,
-                            prefixIcon: Icon(Icons.search,
-                                color: AppColors.greyMedium, size: 24),
-                            suffixIcon: _textFieldController.text.isNotEmpty ? IconButton(
-                              icon: Icon(Icons.cancel,
-                                  color: Colors.black, size: 26),
-                              onPressed: () {
-                                setState(() {
-                                  _textFieldController.clear();
-                                  _textFieldController.text = "";
-                                });
-                                _bloc.add(GetStoresEvent());
-                              },
-                            ) : SizedBox(),
+                            filled: true,
+                            //fillColor: Colors.red,
+                            prefixIcon: Icon(Icons.search, color: AppColors.greyMedium, size: 24),
+                            suffixIcon: _textFieldController.text.isNotEmpty
+                                ? IconButton(
+                                    icon: Icon(Icons.cancel, color: Colors.black, size: 26),
+                                    onPressed: () {
+                                      setState(() {
+                                        _textFieldController.clear();
+                                        _textFieldController.text = "";
+                                      });
+                                      _bloc.add(GetStoresEvent());
+                                    },
+                                  )
+                                : SizedBox(),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.all(Radius.circular(6)),
                               borderSide: BorderSide(
@@ -139,19 +154,19 @@ class _StoreListPageState extends State<StoreListPage> {
                           keyboardType: TextInputType.text,
                           onSubmitted: (value) {
                             _bloc.add(GetStoresEvent(searchQuery: value));
-                          }
-                      ),
+                          }),
                     ),
                   ),
                   Expanded(
                     child: LazyLoadScrollView(
                       onEndOfPage: () {
-                        if (_stores != null && _stores.length >= StoreUseCases.PAGE_SIZE) _bloc.add(LoadMoreStoresEvent(searchQuery: _textFieldController.text.toString()));
+                        if (_stores != null && _stores.length >= StoreUseCases.PAGE_SIZE)
+                          _bloc.add(LoadMoreStoresEvent(searchQuery: _textFieldController.text.toString()));
                       },
                       child: SmartRefresher(
                         controller: _refreshController,
                         enablePullDown: true,
-                        onRefresh: () => _bloc.add(GetStoresEvent(searchQuery:  _textFieldController.text.toString())),
+                        onRefresh: () => _bloc.add(GetStoresEvent(searchQuery: _textFieldController.text.toString())),
                         child: buildList(),
                       ),
                     ),
@@ -167,9 +182,10 @@ class _StoreListPageState extends State<StoreListPage> {
         separatorBuilder: (c, i) => SizedBox(height: 24.0),
         itemBuilder: (c, index) {
           return InkWell(
-              onTap: () {
+              onTap: () async {
                 if (_focusNode.hasFocus) _textFieldController.clear();
-                return Navigator.pushNamed(context, StoreDetailsPage.STORE_DETAILS_ROUTE, arguments: _stores[index]);
+                await Navigator.pushNamed(context, StoreDetailsPage.STORE_DETAILS_ROUTE, arguments: _stores[index]);
+                setState(() {});
               },
               child: Hero(tag: _stores[index].name, child: StoreItem(storeItem: _stores[index])));
         },

@@ -29,7 +29,7 @@ class OrderDetailsBloc extends Bloc<BaseEvent, BaseState> {
         yield OrderSummarySate(cartTotal: _getCartTotal(), deliveryCost: store?.deliveryCost ?? 0);
       } else if (event is UpdateProductEvent) {
         products.update(event.product, (value) => event.quantity, ifAbsent: () => 1);
-        yield OrderSummarySate(cartTotal: _getCartTotal(), deliveryCost: store.deliveryCost);
+        yield OrderSummarySate(cartTotal: _getCartTotal(), deliveryCost: store?.deliveryCost ?? 0);
       }
     } catch (error) {
       yield ErrorState();
@@ -58,6 +58,7 @@ class OrderDetailsBloc extends Bloc<BaseEvent, BaseState> {
       ..store = store.storeEntity
       ..deliveryCost = store.deliveryCost
       ..additionalRequests = comments
+      ..totalAmount = _getCartTotal() + store?.deliveryCost ?? 0
       ..products = products.map((key, value) => MapEntry(key.itemEntity, value));
   }
 }

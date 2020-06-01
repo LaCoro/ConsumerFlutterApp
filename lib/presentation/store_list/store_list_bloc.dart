@@ -3,6 +3,7 @@ import 'package:LaCoro/core/preferences/preferences.dart';
 import 'package:LaCoro/core/ui_utils/mappers/store_ui_mapper.dart';
 import 'package:LaCoro/core/ui_utils/model/store_ui.dart';
 import 'package:domain/entities/address_entity.dart';
+import 'package:domain/entities/order_entity.dart';
 import 'package:domain/entities/store_entity.dart';
 import 'package:domain/result.dart';
 import 'package:domain/use_cases/store_use_cases.dart';
@@ -49,6 +50,9 @@ class StoreListBloc extends Bloc<BaseEvent, BaseState> {
   }
 
   AddressEntity loadSavedAddress() => _preferences.getAddress();
+
+  OrderEntity getLastOrder() => _preferences.getLastOrder();
+
 }
 
 /// store list events

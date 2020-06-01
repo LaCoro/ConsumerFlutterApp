@@ -21,8 +21,11 @@ class CheckoutBloc extends Bloc<BaseEvent, BaseState> {
         yield LoadingState();
         final result = await _useCases.submitOrder(event.orderEntity, _preferences.getProfile());
         if (result is Success) {
-          await _preferences.saveLastOrder(event.orderEntity);
-          yield SuccessState(data: result.data as OrderEntity);
+          final placedOrder = (result.data as OrderEntity)
+            ..products = event.orderEntity.products
+            ..store = event.orderEntity.store;
+          await _preferences.saveLastOrder(placedOrder);
+          yield SuccessState(data: placedOrder);
         } else {
           yield ErrorState(message: "Error creating order");
         }

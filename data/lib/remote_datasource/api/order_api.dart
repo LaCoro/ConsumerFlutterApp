@@ -24,6 +24,7 @@ class OrderApi {
       ..buyerId = user.id
       ..buyerName = user.fullname
       ..additionalRequests = orderEntity.additionalRequests
+      ..totalAmount = orderEntity.totalAmount
       ..deliveryAddress = user.address
       ..deliveryCost = orderEntity.deliveryCost;
 
