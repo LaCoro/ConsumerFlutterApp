@@ -18,4 +18,9 @@ class ProfileApi {
       throw ServiceError();
     }
   }
+
+  Future<String> getCurrentUserId(String sessionToken) async {
+    final parseUser = await apiService.getCurrentUser(sessionToken);
+    return parseUser.objectId;
+  }
 }

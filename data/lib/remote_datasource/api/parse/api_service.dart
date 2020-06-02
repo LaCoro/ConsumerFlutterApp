@@ -19,4 +19,6 @@ abstract class ApiService {
   Future<ParseResponse> getAllCities();
 
   Future<ParseResponse> submitUserRegister(User user);
+
+  Future<ParseUser> getCurrentUser(String sessionToken);
 }

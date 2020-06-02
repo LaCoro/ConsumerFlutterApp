@@ -39,13 +39,13 @@ class SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     controller.dispose();
   }
 
-  Future<Timer> loadData() async {
-    return new Timer(Duration(seconds: 3), onDoneLoading);
+  void loadData() async {
+    Future.delayed(Duration(seconds: 3), onDoneLoading);
   }
 
   onDoneLoading() async {
     final Preferences pref = Injector.getInjector().get();
-    Navigator.popAndPushNamed(context, pref.getAddress() == null ? MyAddressPage.MY_ADDRESS_ROUTE : StoreListPage.STORE_LIST_ROUTE, arguments: false);
+    Navigator.popAndPushNamed(context, pref.getProfile()?.address == null ? MyAddressPage.MY_ADDRESS_ROUTE : StoreListPage.STORE_LIST_ROUTE, arguments: false);
   }
 
   @override

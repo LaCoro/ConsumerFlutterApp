@@ -76,8 +76,8 @@ class _CounterTouchState extends State<CounterTouch>
   Widget build(BuildContext context) {
     return FittedBox(
       child: Container(
-        width: widget.direction == Axis.horizontal ? 280.0 : 120.0,
-        height: widget.direction == Axis.horizontal ? 120.0 : 280.0,
+        width: widget.direction == Axis.horizontal ? 270.0 : 100.0,
+        height: widget.direction == Axis.horizontal ? 100.0 : 270.0,
         child: Material(
           type: MaterialType.canvas,
           clipBehavior: Clip.antiAlias,

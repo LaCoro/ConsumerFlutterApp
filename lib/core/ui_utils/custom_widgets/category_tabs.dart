@@ -33,16 +33,15 @@ class _CategoryTabsState extends State<CategoryTabs> {
           scrollDirection: Axis.horizontal,
           padding: EdgeInsets.only(
               right: MediaQuery.of(context).size.width -
-                  (widget.categories.last.length * 10)),
+                  (widget.categories.last.length * 12)),
           itemCount: widget.categories.length,
           itemBuilder: (c, index) {
             return AutoScrollTag(
               controller: _controller,
               index: index,
               key: ValueKey(index),
-              //todo add Divider horizontal para los Tags superiores
-              child: GestureDetector(
-                onTap: () {
+              child: FlatButton(
+                onPressed: () {
                   _controller.scrollToIndex(index,
                       duration: Duration(milliseconds: 500),
                       preferPosition: AutoScrollPosition.middle);
@@ -50,17 +49,12 @@ class _CategoryTabsState extends State<CategoryTabs> {
                   widget.onCategorySelected
                       ?.call(widget.categories[index], index);
                 },
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12.0),
-                  child: Center(
-                    child: Text(
-                      widget.categories[index],
-                      style: AppTextStyle.grey16.copyWith(
-                          color: widget.categories[index] == categorySelected
-                              ? theme.accentColor
-                              : theme.disabledColor),
-                    ),
-                  ),
+                child: Text(
+                  widget.categories[index],
+                  style: AppTextStyle.grey16.copyWith(
+                      color: widget.categories[index] == categorySelected
+                          ? theme.accentColor
+                          : theme.disabledColor),
                 ),
               ),
             );

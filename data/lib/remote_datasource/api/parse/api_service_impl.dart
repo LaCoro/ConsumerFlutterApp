@@ -70,7 +70,18 @@ class ApiServiceImpl extends ApiService {
     response = await userRegister.login();
 
     user.id = (response.result as ParseUser).objectId;
+    user.sessionToken = (response.result as ParseUser).sessionToken;
 
     return user.save();
+  }
+
+  @override
+  Future<ParseUser> getCurrentUser(String sessionToken) async {
+    var parseUser = await ParseUser.currentUser();
+
+    if (parseUser == null) {
+      parseUser = await ParseUser.getCurrentUserFromServer(sessionToken);
+    }
+    return parseUser;
   }
 }

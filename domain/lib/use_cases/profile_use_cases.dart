@@ -11,4 +11,8 @@ class ProfileUseCases {
   Future<Result> submitUserRegister(UserEntity userEntity) async {
     return _repository.submitUserRegister(userEntity);
   }
+
+  Future<Result> getValidSession(UserEntity userEntity) async {
+    return _repository.getValidSession(userEntity?.sessionToken ?? '');
+  }
 }

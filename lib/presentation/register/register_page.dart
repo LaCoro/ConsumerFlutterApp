@@ -15,8 +15,7 @@ class RegisterPage extends StatefulWidget {
   static const REGISTER_ROUTE = '/register';
 
   @override
-  _RegisterPageState createState() =>
-      _RegisterPageState(Injector.getInjector().get());
+  _RegisterPageState createState() => _RegisterPageState(Injector.getInjector().get());
 }
 
 class _RegisterPageState extends State<RegisterPage> {
@@ -56,8 +55,7 @@ class _RegisterPageState extends State<RegisterPage> {
     super.dispose();
   }
 
-  _fieldFocusChange(
-      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
+  _fieldFocusChange(BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
     currentFocus.unfocus();
     FocusScope.of(context).requestFocus(nextFocus);
   }
@@ -113,28 +111,18 @@ class _RegisterPageState extends State<RegisterPage> {
                           labelText: strings.name,
                           hintText: 'Enter Your Name',
                           labelStyle: GoogleFonts.roboto(
-                              textStyle: TextStyle(
-                                  color: _nameFocus.hasFocus
-                                      ? AppColors.accentColor
-                                      : Colors.black,
-                                  fontWeight: FontWeight.w300,
-                                  fontSize: 16)),
-                          enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: UnderlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: AppColors.accentColor)),
-                          errorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.red)),
+                              textStyle:
+                                  TextStyle(color: _nameFocus.hasFocus ? AppColors.accentColor : Colors.black, fontWeight: FontWeight.w300, fontSize: 16)),
+                          enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.accentColor)),
+                          errorBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
                         ),
                       ),
                       SizedBox(height: 15.0),
                       TextFormField(
                         controller: _emailController,
                         validator: (value) {
-                          return value.contains('@')
-                              ? null
-                              : strings.invalidEmail;
+                          return value.contains('@') ? null : strings.invalidEmail;
                         },
                         focusNode: _emailFocus,
                         onEditingComplete: () {
@@ -145,27 +133,16 @@ class _RegisterPageState extends State<RegisterPage> {
                         style: AppTextStyle.black16,
                         decoration: InputDecoration(
                           suffixText: strings.optionalField,
-                          suffixStyle: TextStyle(
-                              color: AppColors.greyMedium,
-                              fontWeight: FontWeight.normal,
-                              fontSize: 20),
+                          suffixStyle: TextStyle(color: AppColors.greyMedium, fontWeight: FontWeight.normal, fontSize: 20),
                           isDense: true,
                           labelText: strings.email,
                           hintText: 'Enter Your Email',
                           labelStyle: GoogleFonts.roboto(
-                              textStyle: TextStyle(
-                                  color: _emailFocus.hasFocus
-                                      ? AppColors.accentColor
-                                      : Colors.black,
-                                  fontWeight: FontWeight.w300,
-                                  fontSize: 16)),
-                          enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: UnderlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: AppColors.accentColor)),
-                          errorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.red)),
+                              textStyle:
+                                  TextStyle(color: _emailFocus.hasFocus ? AppColors.accentColor : Colors.black, fontWeight: FontWeight.w300, fontSize: 16)),
+                          enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.accentColor)),
+                          errorBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
                         ),
                       ),
                       SizedBox(height: 15.0),
@@ -193,19 +170,11 @@ class _RegisterPageState extends State<RegisterPage> {
                           labelText: strings.phone,
                           hintText: 'Enter Your Phone',
                           labelStyle: GoogleFonts.roboto(
-                              textStyle: TextStyle(
-                                  color: _phoneFocus.hasFocus
-                                      ? AppColors.accentColor
-                                      : Colors.black,
-                                  fontWeight: FontWeight.w300,
-                                  fontSize: 16)),
-                          enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: UnderlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: AppColors.accentColor)),
-                          errorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.red)),
+                              textStyle:
+                                  TextStyle(color: _phoneFocus.hasFocus ? AppColors.accentColor : Colors.black, fontWeight: FontWeight.w300, fontSize: 16)),
+                          enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.accentColor)),
+                          errorBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
                         ),
                       ),
                       PrimaryButton(
@@ -214,14 +183,16 @@ class _RegisterPageState extends State<RegisterPage> {
                           buttonText: strings.continu,
                           onPressed: () {
                             if (_registerFormKey.currentState.validate()) {
-                              _bloc.add(SubmitSaveProfileEvent(UserEntity()
-                                ..fullname = _nameController.value.text
-                                ..email = _emailController.value.text
-                                ..mobile = _phoneController.value.text));
+                              _bloc.add(SubmitSaveProfileEvent(
+                                fullname: _nameController.value.text,
+                                email: _emailController.value.text,
+                                mobile: _phoneController.value.text,
+                              ));
                             }
                           }),
-                      SizedBox(height: 70,),
-
+                      SizedBox(
+                        height: 70,
+                      ),
                       Spacer(
                         flex: 3,
                       ),

@@ -6,18 +6,20 @@ import 'package:LaCoro/core/ui_utils/model/store_ui.dart';
 import 'package:domain/entities/item_entity.dart';
 import 'package:domain/entities/order_entity.dart';
 import 'package:domain/result.dart';
+import 'package:domain/use_cases/profile_use_cases.dart';
 import 'package:domain/use_cases/store_use_cases.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OrderDetailsBloc extends Bloc<BaseEvent, BaseState> {
   final StoreUseCases _storeUseCases;
+  final ProfileUseCases _profileUseCases;
   final Preferences _preferences;
 
   StoreUI store;
 
   Map<ItemUI, int> products = Map();
 
-  OrderDetailsBloc(this._storeUseCases, this._preferences);
+  OrderDetailsBloc(this._storeUseCases, this._preferences, this._profileUseCases);
 
   @override
   BaseState get initialState => InitialState();
@@ -51,7 +53,10 @@ class OrderDetailsBloc extends Bloc<BaseEvent, BaseState> {
     return products.isEmpty ? 0 : products.entries.map((entry) => (entry.key.price * entry.value.toDouble())).reduce((a, b) => a + b);
   }
 
-  bool isUserValidated() => _preferences.getProfile()?.isValidated == true;
+  Future<bool> isUserValidated() async {
+    final result = await _profileUseCases.getValidSession(_preferences.getProfile());
+    return _preferences.getProfile()?.isValidated == true && (result is Success) && result.data == true;
+  }
 
   OrderEntity createOrder(String comments) {
     return OrderEntity()

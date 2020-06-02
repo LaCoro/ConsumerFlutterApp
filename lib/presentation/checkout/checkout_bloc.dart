@@ -20,8 +20,8 @@ class CheckoutBloc extends Bloc<BaseEvent, BaseState> {
       if (event is SubmitOrderEvent) {
         yield LoadingState();
         final result = await _useCases.submitOrder(event.orderEntity, _preferences.getProfile());
-        if (result is Success) {
-          final placedOrder = (result.data as OrderEntity)
+        if (result is Success<OrderEntity>) {
+          final placedOrder = result.data
             ..products = event.orderEntity.products
             ..store = event.orderEntity.store;
           await _preferences.saveLastOrder(placedOrder);
@@ -35,7 +35,7 @@ class CheckoutBloc extends Bloc<BaseEvent, BaseState> {
     }
   }
 
-  String getUserAddress() => _preferences.getAddress().getFullAddress();
+  String getUserAddress() => _preferences.getProfile()?.address;
 }
 
 /// Events

@@ -137,9 +137,9 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                     margin: const EdgeInsets.all(24.0),
                     onPressed: cartTotal == 0
                         ? null
-                        : () {
+                        : () async {
                             final order = _bloc.createOrder(_commentController.value.text);
-                            Navigator.pushNamed(context, _bloc.isUserValidated() ? CheckoutPage.CHECKOUT_ORDER_ROUTE : RegisterPage.REGISTER_ROUTE,
+                            Navigator.pushNamed(context, await _bloc.isUserValidated() ? CheckoutPage.CHECKOUT_ORDER_ROUTE : RegisterPage.REGISTER_ROUTE,
                                 arguments: order);
                           },
                     buttonText: strings.continu,

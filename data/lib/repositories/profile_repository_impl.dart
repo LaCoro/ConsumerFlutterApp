@@ -17,4 +17,14 @@ class ProfileRepositoryImpl extends ProfileRepository {
       return Failure(e);
     }
   }
+
+  @override
+  Future<Result> getValidSession(String sessionToken) async {
+    try {
+      final currentUserId = await _remoteDataSource.getCurrentUserId(sessionToken);
+      return Success(currentUserId != null);
+    } catch (e) {
+      return Failure(e);
+    }
+  }
 }

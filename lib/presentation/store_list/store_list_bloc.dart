@@ -28,7 +28,7 @@ class StoreListBloc extends Bloc<BaseEvent, BaseState> {
       if (event is GetStoresEvent) {
         yield LoadingState();
         _page = 0;
-        final result = await _getAllStores.fetchStores(_preferences.getAddress().cityEntity, searchQuery: event.searchQuery);
+        final result = await _getAllStores.fetchStores(_preferences.getProfile()?.addressEntity.cityEntity, searchQuery: event.searchQuery);
         if (result is Success<List<StoreEntity>>) {
           yield SuccessState(data: StoreUIMapper().processList(result.data));
         } else {
@@ -37,7 +37,7 @@ class StoreListBloc extends Bloc<BaseEvent, BaseState> {
       } else if (event is LoadMoreStoresEvent) {
         yield LoadingState();
         _page = _page + 1;
-        final result = await _getAllStores.fetchStores(_preferences.getAddress().cityEntity, page: _page, searchQuery: event.searchQuery);
+        final result = await _getAllStores.fetchStores(_preferences.getProfile()?.addressEntity.cityEntity, page: _page, searchQuery: event.searchQuery);
         if (result is Success<List<StoreEntity>>) {
           yield MoreStoresLoadedState(data: StoreUIMapper().processList(result.data));
         } else {
@@ -49,7 +49,7 @@ class StoreListBloc extends Bloc<BaseEvent, BaseState> {
     }
   }
 
-  AddressEntity loadSavedAddress() => _preferences.getAddress();
+  AddressEntity loadSavedAddress() => _preferences.getProfile()?.addressEntity;
 
   OrderEntity getLastOrder() => _preferences.getLastOrder();
 

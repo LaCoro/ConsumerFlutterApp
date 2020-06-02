@@ -19,9 +19,13 @@ class RegisterBloc extends Bloc<BaseEvent, BaseState> {
     try {
       if (event is SubmitSaveProfileEvent) {
         yield LoadingState();
-        final result = await _useCases.submitUserRegister(event.userEntity);
+        final userEntity = (_preferences.getProfile() ?? UserEntity())
+          ..fullname = event.fullname
+          ..email = event.email
+          ..mobile = event.mobile;
+        final result = await _useCases.submitUserRegister(userEntity);
         if (result is Success<String>) {
-          await _preferences.saveProfile(event.userEntity..id = result.data);
+          await _preferences.saveProfile(userEntity..id = result.data);
           yield SuccessState();
         } else {
           yield ErrorState(message: "Error registering user");
@@ -47,9 +51,11 @@ class RegisterBloc extends Bloc<BaseEvent, BaseState> {
 
 /// Events
 class SubmitSaveProfileEvent extends BaseEvent {
-  final UserEntity userEntity;
+  final String fullname;
+  final String email;
+  final String mobile;
 
-  SubmitSaveProfileEvent(this.userEntity);
+  SubmitSaveProfileEvent({this.fullname, this.email, this.mobile});
 }
 
 class SubmitVerificationCodeEvent extends BaseEvent {

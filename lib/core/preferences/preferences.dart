@@ -32,27 +32,8 @@ class Preferences {
     return Location(lat, lng);
   }
 
-  Future<bool> saveAddress(AddressEntity address) async {
-    if (getProfile() != null) {
-      await saveProfile(getProfile()..address = address.getFullAddress());
-    }
-    return await _preferences.setString(SELECTED_ADDRESS, json.encode(AddressEntity.toJsonObject(address)));
-  }
-
-  AddressEntity getAddress() {
-    final addressJson = _preferences.getString(SELECTED_ADDRESS);
-    try {
-      return AddressEntity.fromJsonMap(json.decode(addressJson));
-    } catch (e) {
-      return null;
-    }
-  }
-
-  Future saveProfile(UserEntity user) async {
-    if (getAddress() != null) {
-      user.address = getAddress().getFullAddress();
-    }
-    await _preferences.setString(PROFILE, json.encode(UserEntity.toJsonObject(user)));
+  Future<bool> saveProfile(UserEntity user) async {
+    return await _preferences.setString(PROFILE, json.encode(UserEntity.toJsonObject(user)));
   }
 
   UserEntity getProfile() {

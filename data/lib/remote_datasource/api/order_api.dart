@@ -16,7 +16,9 @@ class OrderApi {
   OrderApi(this.apiService);
 
   Future<Order> submitOrder(OrderEntity orderEntity, UserEntity user) async {
-    var parseUser = (await ParseUser.currentUser());
+    var parseUser = await apiService.getCurrentUser(user.sessionToken);
+
+    if (parseUser == null) throw SessionError();
 
     // Create order model
     final order = Order()
@@ -33,7 +35,7 @@ class OrderApi {
     final store = storeResponse.result as Store;
 
     order.set(Order.keyStore, store.toPointer());
-    order.set(Order.keyCustomer, parseUser);
+    order.set(Order.keyCustomer, parseUser.toPointer());
 
     ParseResponse response = await apiService.createOrder(order);
 
