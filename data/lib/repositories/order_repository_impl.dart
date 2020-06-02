@@ -10,6 +10,16 @@ class OrderRepositoryImpl extends OrderRepository {
   OrderRepositoryImpl(this._remoteDataSource);
 
   @override
+  Future<Result> getUserOrders(String userId, int page, int size) async {
+    try {
+      final orders = await _remoteDataSource.getUserOrders(userId, page, size);
+      return Success(orders);
+    } catch (e) {
+      return Failure(e);
+    }
+  }
+
+  @override
   Future<Result> submitOrder(OrderEntity orderEntity, UserEntity userEntity) async {
     try {
       final order = await _remoteDataSource.submitOrder(orderEntity, userEntity);

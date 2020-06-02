@@ -42,10 +42,7 @@ class StoreItem extends StatelessWidget {
                     SizedBox(height: 2),
                     Text(
                       storeItem.name,
-                      style: AppTextStyle.section.copyWith(
-                        height: 0.95,
-                        fontSize: 18,
-                      ),
+                      style: AppTextStyle.section,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),

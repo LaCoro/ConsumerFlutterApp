@@ -68,6 +68,14 @@ class _StoreListPageState extends State<StoreListPage> {
         backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(
             elevation: 0,
+            actions: <Widget>[
+              IconButton(
+                onPressed: () {
+
+                },
+                icon: Padding(padding: const EdgeInsets.all(8.0), child: Icon(Icons.history)),
+              ),
+            ],
             title: GestureDetector(
               onTap: () async {
                 await Navigator.pushNamed(context, MyAddressPage.MY_ADDRESS_ROUTE, arguments: true);

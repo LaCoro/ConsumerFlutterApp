@@ -3,6 +3,7 @@ import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/extensions/number_extensions.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
+import 'package:LaCoro/core/ui_utils/custom_widgets/order_card_info.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/stepper_bar.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/successful_order_banner.dart';
 import 'package:LaCoro/presentation/order_detail/order_detail_page.dart';
@@ -25,7 +26,10 @@ class OrderStatusPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.itemBackgroundColor,
-      appBar: AppBar(leading: InkWell(onTap: () => Navigator.pop(context), child: Icon(Icons.close)), elevation: 0),
+      appBar: AppBar(
+          title: Text("Order status", style: AppTextStyle.section),
+          leading: IconButton(onPressed: () => Navigator.pop(context), icon: Icon(Icons.close)),
+          elevation: 0),
       body: BlocBuilder(
           bloc: _bloc,
           builder: (context, state) {
@@ -39,7 +43,7 @@ class OrderStatusPage extends StatelessWidget {
                 SuccessfulOrderBanner(),
                 StepperBar(1, 3, order?.status),
                 Divider(thickness: 8),
-                buildOrderInfoCard(context, order),
+                OrderCardInfo(orderEntity: order),
                 Divider(thickness: 8),
                 SizedBox(height: 24.0),
                 Padding(
@@ -53,49 +57,6 @@ class OrderStatusPage extends StatelessWidget {
               ],
             );
           }),
-    );
-  }
-
-  Widget buildOrderInfoCard(BuildContext context, OrderEntity orderEntity) {
-    return Container(
-      margin: EdgeInsets.all(12.0),
-      height: 110,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          Container(
-            child: AspectRatio(
-              aspectRatio: 1,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
-                child: FadeInImage.assetNetwork(
-                  placeholder: 'assets/loading_resource.gif',
-                  image: orderEntity.store.logo,
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Text('Pago en efectivo', style: AppTextStyle.boldBlack16),
-                  Text(orderEntity.totalAmount?.currencyFormat() ?? '******', style: AppTextStyle.section),
-                ],
-              ),
-            ),
-          ),
-          FlatButton(
-              onPressed: () {
-                Navigator.pushNamed(context, OrderDetailPage.ORDER_DETAIL_ROUTE, arguments: orderEntity);
-              },
-              child: Text('Ver detalle', style: AppTextStyle.yellow16)),
-        ],
-      ),
     );
   }
 }

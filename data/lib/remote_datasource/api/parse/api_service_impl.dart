@@ -56,6 +56,16 @@ class ApiServiceImpl extends ApiService {
   }
 
   @override
+  Future<ParseResponse> getUserOrders(String userId, int page, int size) async {
+    final QueryBuilder query = QueryBuilder<Order>(Order())
+      ..orderByDescending(Order.keyCreatedAt)
+      ..setAmountToSkip(page * size)
+      ..setLimit(size)
+      ..whereEqualTo(Order.keyBuyerId, userId);
+    return await query.query();
+  }
+
+  @override
   Future<ParseResponse> submitUserRegister(User user) async {
     final pass = md5.convert(utf8.encode(user.mobile)).toString();
 

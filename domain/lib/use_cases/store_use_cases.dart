@@ -4,10 +4,10 @@ import 'package:domain/repositories/store_repository.dart';
 import '../result.dart';
 
 class StoreUseCases {
+  static const int PAGE_SIZE = 10;
+
   final StoreRepository _repository;
 
-  static const int PAGE_SIZE = 10;
-  
   StoreUseCases(this._repository);
 
   Future<Result> fetchStores(CityEntity city, {int page = 0, int size = PAGE_SIZE, String searchQuery}) async {
@@ -17,5 +17,4 @@ class StoreUseCases {
   Future<Result> getStoreItems(String storeId) async {
     return _repository.getStoreItems(storeId);
   }
-
 }

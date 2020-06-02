@@ -9,6 +9,7 @@ class OrderEntity {
   String code;
   int deliveryCost;
   double totalAmount;
+  DateTime createdAt;
   String deliveryStartedAt;
   String deliveryEndedAt;
   int cashPayment;
@@ -30,6 +31,7 @@ class OrderEntity {
     return OrderEntity()
       ..code = jsonFile['code']
       ..totalAmount = jsonFile['totalAmount']
+      ..createdAt =  DateTime.parse(jsonFile['createdAt'])
       ..store = jsonFile['store'] != null ? StoreEntity.fromJsonMap(json.decode(jsonFile['store'])) : null
       ..deliveryCost = jsonFile['deliveryCost']
       ..deliveryStartedAt = jsonFile['deliveryStartedAt']
@@ -50,6 +52,7 @@ class OrderEntity {
       data['store'] = json.encode(StoreEntity.toJsonObject(orderEntity.store));
     }
     data['code'] = orderEntity.code;
+    data['createdAt'] = orderEntity.createdAt.toIso8601String();
     data['totalAmount'] = orderEntity.totalAmount;
     data['deliveryCost'] = orderEntity.deliveryCost;
     data['deliveryStartedAt'] = orderEntity.deliveryStartedAt;

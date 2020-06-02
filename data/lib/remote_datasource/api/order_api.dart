@@ -15,6 +15,15 @@ class OrderApi {
 
   OrderApi(this.apiService);
 
+  Future<List<Order>> getUserOrders(String userId, int page, int size) async {
+    final response = await apiService.getUserOrders(userId, page, size);
+    if (response.success) {
+      return response.results.map((e) => e as Order).toList();
+    } else {
+      throw ServiceError();
+    }
+  }
+
   Future<Order> submitOrder(OrderEntity orderEntity, UserEntity user) async {
     var parseUser = await apiService.getCurrentUser(user.sessionToken);
 

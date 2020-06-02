@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:domain/entities/address_entity.dart';
 import 'package:domain/entities/location.dart';
 import 'package:domain/entities/order_entity.dart';
 import 'package:domain/entities/user_entity.dart';

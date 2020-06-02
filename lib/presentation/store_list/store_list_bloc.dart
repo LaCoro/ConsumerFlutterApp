@@ -10,14 +10,11 @@ import 'package:domain/use_cases/store_use_cases.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class StoreListBloc extends Bloc<BaseEvent, BaseState> {
-  final StoreUseCases _getAllStores;
+  final StoreUseCases _useCases;
   final Preferences _preferences;
-  final bool isLoading;
-  final List<StoreUI> stores;
-  final bool hasError;
   int _page = 0;
 
-  StoreListBloc(this._getAllStores, this._preferences, {this.isLoading, this.stores, this.hasError});
+  StoreListBloc(this._useCases, this._preferences);
 
   @override
   BaseState get initialState => InitialState();
@@ -28,7 +25,7 @@ class StoreListBloc extends Bloc<BaseEvent, BaseState> {
       if (event is GetStoresEvent) {
         yield LoadingState();
         _page = 0;
-        final result = await _getAllStores.fetchStores(_preferences.getProfile()?.addressEntity.cityEntity, searchQuery: event.searchQuery);
+        final result = await _useCases.fetchStores(_preferences.getProfile()?.addressEntity?.cityEntity, searchQuery: event.searchQuery);
         if (result is Success<List<StoreEntity>>) {
           yield SuccessState(data: StoreUIMapper().processList(result.data));
         } else {
@@ -37,7 +34,7 @@ class StoreListBloc extends Bloc<BaseEvent, BaseState> {
       } else if (event is LoadMoreStoresEvent) {
         yield LoadingState();
         _page = _page + 1;
-        final result = await _getAllStores.fetchStores(_preferences.getProfile()?.addressEntity.cityEntity, page: _page, searchQuery: event.searchQuery);
+        final result = await _useCases.fetchStores(_preferences.getProfile()?.addressEntity?.cityEntity, page: _page, searchQuery: event.searchQuery);
         if (result is Success<List<StoreEntity>>) {
           yield MoreStoresLoadedState(data: StoreUIMapper().processList(result.data));
         } else {
@@ -52,7 +49,6 @@ class StoreListBloc extends Bloc<BaseEvent, BaseState> {
   AddressEntity loadSavedAddress() => _preferences.getProfile()?.addressEntity;
 
   OrderEntity getLastOrder() => _preferences.getLastOrder();
-
 }
 
 /// store list events
