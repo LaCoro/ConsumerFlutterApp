@@ -60,7 +60,7 @@ class OrderDetailsBloc extends Bloc<BaseEvent, BaseState> {
 
   OrderEntity createOrder(String comments) {
     return OrderEntity()
-      ..store = store.storeEntity
+      ..storeEntity = store.storeEntity
       ..deliveryCost = store.deliveryCost
       ..additionalRequests = comments
       ..totalAmount = _getCartTotal() + store?.deliveryCost ?? 0

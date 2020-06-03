@@ -1,6 +1,7 @@
 import 'package:LaCoro/core/preferences/preferences.dart';
 import 'package:LaCoro/presentation/adresses/my_address_bloc.dart';
 import 'package:LaCoro/presentation/checkout/checkout_bloc.dart';
+import 'package:LaCoro/presentation/history_order_list/history_order_bloc.dart';
 import 'package:LaCoro/presentation/order_detail/order_details_bloc.dart';
 import 'package:LaCoro/presentation/order_status/order_status_bloc.dart';
 import 'package:LaCoro/presentation/register/register_bloc.dart';
@@ -59,6 +60,7 @@ class AppModule {
     injector.map<RegisterBloc>((injector) => RegisterBloc(injector.get(), injector.get()));
     injector.map<CheckoutBloc>((injector) => CheckoutBloc(injector.get(), injector.get()));
     injector.map<OrderStatusBloc>((injector) => OrderStatusBloc(injector.get(), injector.get()));
+    injector.map<HistoryOrderBloc>((injector) => HistoryOrderBloc(injector.get(), injector.get()));
     return injector;
   }
 

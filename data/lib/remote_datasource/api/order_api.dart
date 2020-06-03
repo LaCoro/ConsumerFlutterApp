@@ -18,7 +18,11 @@ class OrderApi {
   Future<List<Order>> getUserOrders(String userId, int page, int size) async {
     final response = await apiService.getUserOrders(userId, page, size);
     if (response.success) {
-      return response.results.map((e) => e as Order).toList();
+      final orders = response.results.map((e) => e as Order).toList();
+      for (var order in orders) {
+        order.storeEntity = (await apiService.getStore(order.store.objectId)).result as Store;
+      }
+      return orders;
     } else {
       throw ServiceError();
     }
@@ -39,7 +43,7 @@ class OrderApi {
       ..deliveryAddress = user.address
       ..deliveryCost = orderEntity.deliveryCost;
 
-    final storeResponse = await apiService.getStore(orderEntity.store.id);
+    final storeResponse = await apiService.getStore(orderEntity.storeEntity.id);
 
     final store = storeResponse.result as Store;
 

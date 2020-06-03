@@ -23,7 +23,7 @@ class CheckoutBloc extends Bloc<BaseEvent, BaseState> {
         if (result is Success<OrderEntity>) {
           final placedOrder = result.data
             ..products = event.orderEntity.products
-            ..store = event.orderEntity.store;
+            ..storeEntity = event.orderEntity.storeEntity;
           await _preferences.saveLastOrder(placedOrder);
           yield SuccessState(data: placedOrder);
         } else {

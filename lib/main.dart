@@ -3,6 +3,7 @@ import 'package:LaCoro/core/localization/app_localizations_delegate.dart';
 import 'package:LaCoro/presentation/adresses/addresses_page_new.dart';
 import 'package:LaCoro/presentation/adresses/my_address_page.dart';
 import 'package:LaCoro/presentation/checkout/checkout_page.dart';
+import 'package:LaCoro/presentation/history_order_list/history_order_page.dart';
 import 'package:LaCoro/presentation/order_detail/order_detail_page.dart';
 import 'package:LaCoro/presentation/order_status/order_status_page.dart';
 import 'package:LaCoro/presentation/register/pin_page.dart';
@@ -94,6 +95,7 @@ class MyApp extends StatelessWidget {
           SplashPage.SPLASH_PAGE_ROUTE: (BuildContext context) => SplashPage(),
           RegisterPage.REGISTER_ROUTE: (BuildContext context) => RegisterPage(),
           PinPage.PIN_REGISTER_ROUTE: (BuildContext context) => PinPage(),
+          HistoryOrderPage.HISTORY_ORDER_ROUTE: (BuildContext context) => HistoryOrderPage(),
           TestPage.TEST_PAGE_ROUTE: (BuildContext context) => TestPage()
         },
       ),

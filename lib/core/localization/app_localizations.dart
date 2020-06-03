@@ -56,6 +56,7 @@ class AppLocalizations {
       'additional_address_info': 'Floor / Office / Flat',
       'address': 'Address',
       'address_is_required': 'Please enter an address',
+      'history_orders': 'History Orders',
     },
     'es': {
       'total': 'Total',
@@ -103,6 +104,7 @@ class AppLocalizations {
       'additional_address_info': 'Piso / Offinica / Apto',
       'address': 'Dirección',
       'address_is_required': 'Por favor entre una direccion',
+      'history_orders': 'Historial de Ordenes',
     },
   };
 
@@ -195,4 +197,6 @@ class AppLocalizations {
   String get address => _localizedValues[locale.languageCode]['address'];
 
   String get addressIsRequired => _localizedValues[locale.languageCode]['address_is_required'];
+
+  String get historyOrders => _localizedValues[locale.languageCode]['history_orders'];
 }

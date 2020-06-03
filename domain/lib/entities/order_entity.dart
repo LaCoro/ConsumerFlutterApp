@@ -8,7 +8,7 @@ class OrderEntity {
   String id;
   String code;
   int deliveryCost;
-  double totalAmount;
+  int totalAmount;
   DateTime createdAt;
   String deliveryStartedAt;
   String deliveryEndedAt;
@@ -19,7 +19,7 @@ class OrderEntity {
   String buyerId;
   String scheduledDeliveryDate;
   String status;
-  StoreEntity store;
+  StoreEntity storeEntity;
   UserEntity customer;
   Map<ItemEntity, int> products;
 
@@ -32,7 +32,7 @@ class OrderEntity {
       ..code = jsonFile['code']
       ..totalAmount = jsonFile['totalAmount']
       ..createdAt =  DateTime.parse(jsonFile['createdAt'])
-      ..store = jsonFile['store'] != null ? StoreEntity.fromJsonMap(json.decode(jsonFile['store'])) : null
+      ..storeEntity = jsonFile['store'] != null ? StoreEntity.fromJsonMap(json.decode(jsonFile['store'])) : null
       ..deliveryCost = jsonFile['deliveryCost']
       ..deliveryStartedAt = jsonFile['deliveryStartedAt']
       ..deliveryEndedAt = jsonFile['deliveryEndedAt']
@@ -48,8 +48,8 @@ class OrderEntity {
 
   static Map<String, dynamic> toJsonObject(OrderEntity orderEntity) {
     final Map<String, dynamic> data = Map<String, dynamic>();
-    if (orderEntity.store != null) {
-      data['store'] = json.encode(StoreEntity.toJsonObject(orderEntity.store));
+    if (orderEntity.storeEntity != null) {
+      data['store'] = json.encode(StoreEntity.toJsonObject(orderEntity.storeEntity));
     }
     data['code'] = orderEntity.code;
     data['createdAt'] = orderEntity.createdAt.toIso8601String();

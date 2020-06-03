@@ -41,11 +41,11 @@ class Order extends ParseObject with OrderEntity implements ParseCloneable {
 
   set deliveryCost(int deliveryCost) => set<int>(keyDeliveryCost, deliveryCost);
 
-  double get totalAmount => get<double>(keyTotalAmount);
+  int get totalAmount => get<int>(keyTotalAmount);
 
   DateTime get createdAt => get<DateTime>(keyCreatedAt);
 
-  set totalAmount(double totalAmount) => set<double>(keyTotalAmount, totalAmount);
+  set totalAmount(int totalAmount) => set<int>(keyTotalAmount, totalAmount);
 
   String get deliveryStartedAt => get<String>(keyDeliveryStartedAt);
 
@@ -83,19 +83,5 @@ class Order extends ParseObject with OrderEntity implements ParseCloneable {
 
   set status(String status) => set<String>(keyStatus, status);
 
-  // TODO move these methods to the  API class
-  Future<User> getCustomer() async {
-    final response = await this.getObject(keyCustomer);
-    return response.result as User;
-  }
-
-  Future<User> getDeliveryBoy() async {
-    final response = await this.getObject(keyDeliveryBoy);
-    return response.result as User;
-  }
-
-  Future<StoreEntity> getStore() async {
-    final response = await this.getObject(keyStore);
-    return response.result as Store;
-  }
+  ParseObject get store => get<ParseObject>(keyStore);
 }
