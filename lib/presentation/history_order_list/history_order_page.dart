@@ -38,7 +38,7 @@ class _HistoryOrderPageState extends State<HistoryOrderPage> {
     final strings = AppLocalizations.of(context);
     return Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,
-        appBar: AppBar(elevation: 0, title: Text(strings.historyOrders, style: AppTextStyle.section)),
+        appBar: AppBar(elevation: 0, title: Text(strings.orderHistory, style: AppTextStyle.section)),
         body: BlocListener(
           bloc: _bloc,
           listener: handlePageStates,
