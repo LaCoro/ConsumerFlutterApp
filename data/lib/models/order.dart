@@ -33,6 +33,8 @@ class Order extends ParseObject with OrderEntity implements ParseCloneable {
   static const String keyDeliveryBoy = 'deliveryBoy';
   static const String keyCreatedAt = 'createdAt';
 
+  String get id => this.objectId;
+
   String get code => get<String>(keyCode);
 
   set code(String code) => set<String>(keyCode, code);

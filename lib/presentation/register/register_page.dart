@@ -44,14 +44,13 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   void dispose() {
+    _bloc.close();
     _nameFocus.dispose();
     _emailFocus.dispose();
     _phoneFocus.dispose();
-
     _nameController.dispose();
     _emailController.dispose();
     _phoneController.dispose();
-
     super.dispose();
   }
 

@@ -25,11 +25,7 @@ class StepperBar extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 24),
-            child: Text(
-              status,
-              style: AppTextStyle.section,
-              textAlign: TextAlign.left,
-            ),
+            child: Text(status ?? '', style: AppTextStyle.section, textAlign: TextAlign.left),
           )
         ],
       ),

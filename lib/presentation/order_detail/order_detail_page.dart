@@ -31,6 +31,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
 
   @override
   void dispose() {
+    _bloc.close();
     _commentController.dispose();
     super.dispose();
   }

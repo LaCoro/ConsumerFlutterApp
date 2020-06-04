@@ -1,22 +1,39 @@
 import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/bloc/base_bloc.dart';
-import 'package:LaCoro/core/extensions/number_extensions.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/order_card_info.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/stepper_bar.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/successful_order_banner.dart';
-import 'package:LaCoro/presentation/order_detail/order_detail_page.dart';
 import 'package:LaCoro/presentation/order_status/order_status_bloc.dart';
 import 'package:domain/entities/order_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 
-class OrderStatusPage extends StatelessWidget {
+class OrderStatusPage extends StatefulWidget {
   static const ORDER_STATUS_ROUTE = '/order_status';
 
-  final OrderStatusBloc _bloc = Injector.getInjector().get();
+  @override
+  _OrderStatusPageState createState() => _OrderStatusPageState(Injector.getInjector().get());
+}
+
+class _OrderStatusPageState extends State<OrderStatusPage> {
+  final OrderStatusBloc _bloc;
+
+  _OrderStatusPageState(this._bloc);
+
+  @override
+  void initState() {
+    _bloc.add(SubscribeOrderUpdatesEvent());
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _bloc.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,15 +50,16 @@ class OrderStatusPage extends StatelessWidget {
       body: BlocBuilder(
           bloc: _bloc,
           builder: (context, state) {
-            if (state is SuccessState<OrderEntity>) {
-//              Navigator.pushNamedAndRemoveUntil(context, ORDER_STATUS_ROUTE, ModalRoute.withName(StoreListPage.STORE_LIST_ROUTE), arguments: state.data);
+            String orderStatus;
+            if (state is SuccessState<String>) {
+              orderStatus = state.data;
             }
 
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 SuccessfulOrderBanner(),
-                StepperBar(1, 3, order?.status),
+                StepperBar(1, 3, orderStatus ?? order?.status),
                 Divider(thickness: 8),
                 OrderCardInfo(orderEntity: order),
                 Divider(thickness: 8),

@@ -34,6 +34,12 @@ class _OrderHistoryPageState extends State<OrderHistoryPage> {
   }
 
   @override
+  void dispose() {
+    _bloc.close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context);
     return Scaffold(

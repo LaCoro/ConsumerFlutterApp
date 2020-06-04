@@ -34,6 +34,7 @@ class _MyAddressPageState extends State<MyAddressPage> {
 
   @override
   void dispose() {
+    _bloc.close();
     _addressFocus.dispose();
     _additionalAddressFocus.dispose();
     _addressController.dispose();

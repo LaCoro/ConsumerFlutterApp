@@ -28,6 +28,12 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
   _StoreDetailsPageState(this._bloc);
 
   @override
+  void dispose() {
+    _bloc.close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final StoreUI store = ModalRoute.of(context).settings.arguments;
     final strings = AppLocalizations.of(context);

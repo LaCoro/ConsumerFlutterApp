@@ -34,6 +34,7 @@ class _PinPageState extends State<PinPage> {
 
   @override
   void dispose() {
+    _bloc.close();
     errorController.close();
     super.dispose();
   }

@@ -29,9 +29,10 @@ class OrderEntity {
 
   static OrderEntity fromJsonMap(Map<String, dynamic> jsonFile) {
     return OrderEntity()
+      ..id = jsonFile['id']
       ..code = jsonFile['code']
       ..totalAmount = jsonFile['totalAmount']
-      ..createdAt =  DateTime.parse(jsonFile['createdAt'])
+      ..createdAt = DateTime.parse(jsonFile['createdAt'])
       ..storeEntity = jsonFile['store'] != null ? StoreEntity.fromJsonMap(json.decode(jsonFile['store'])) : null
       ..deliveryCost = jsonFile['deliveryCost']
       ..deliveryStartedAt = jsonFile['deliveryStartedAt']
@@ -48,6 +49,7 @@ class OrderEntity {
 
   static Map<String, dynamic> toJsonObject(OrderEntity orderEntity) {
     final Map<String, dynamic> data = Map<String, dynamic>();
+    data['id'] = orderEntity.id;
     if (orderEntity.storeEntity != null) {
       data['store'] = json.encode(StoreEntity.toJsonObject(orderEntity.storeEntity));
     }

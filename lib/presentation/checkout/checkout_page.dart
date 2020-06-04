@@ -30,6 +30,12 @@ class _CheckoutPageState extends State<CheckoutPage> {
   bool isLoading = false;
 
   @override
+  void dispose() {
+    _bloc.close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context);
 

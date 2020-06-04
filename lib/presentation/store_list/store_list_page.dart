@@ -56,6 +56,7 @@ class _StoreListPageState extends State<StoreListPage> {
 
   @override
   void dispose() {
+    _bloc.close();
     _textFieldController.dispose();
     super.dispose();
   }
@@ -71,7 +72,8 @@ class _StoreListPageState extends State<StoreListPage> {
             elevation: 0,
             actions: <Widget>[
               IconButton(
-                onPressed: () async => Navigator.pushNamed(context, await _bloc.isUserValidated()  ?  OrderHistoryPage.ORDER_HISTORY_ROUTE : RegisterPage.REGISTER_ROUTE),
+                onPressed: () async =>
+                    Navigator.pushNamed(context, await _bloc.isUserValidated() ? OrderHistoryPage.ORDER_HISTORY_ROUTE : RegisterPage.REGISTER_ROUTE),
                 icon: Padding(padding: const EdgeInsets.all(8.0), child: Icon(Icons.history)),
               ),
             ],
