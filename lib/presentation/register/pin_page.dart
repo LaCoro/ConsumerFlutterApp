@@ -6,6 +6,7 @@ import 'package:LaCoro/core/localization/app_localizations.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/primary_button.dart';
 import 'package:LaCoro/presentation/order_detail/order_detail_page.dart';
 import 'package:LaCoro/presentation/register/register_bloc.dart';
+import 'package:LaCoro/presentation/store_list/store_list_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -146,7 +147,8 @@ class _PinPageState extends State<PinPage> {
     setState(() => isLoading = state is LoadingState);
 
     if (state is SuccessState) {
-      Navigator.popUntil(context, ModalRoute.withName(OrderDetailPage.ORDER_DETAIL_ROUTE));
+      Navigator.popUntil(
+          context, (route) => route.settings.name == OrderDetailPage.ORDER_DETAIL_ROUTE || route.settings.name == StoreListPage.STORE_LIST_ROUTE);
     }
 
     if (state is ErrorState) {

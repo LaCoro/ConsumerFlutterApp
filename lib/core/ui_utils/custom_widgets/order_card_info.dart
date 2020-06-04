@@ -13,8 +13,7 @@ class OrderCardInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-      elevation: 4.0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
       child: Container(
         margin: EdgeInsets.all(8.0),
         height: 96,
@@ -42,7 +41,7 @@ class OrderCardInfo extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     Text(orderEntity.storeEntity?.name ?? '', style: AppTextStyle.section, maxLines: 2, overflow: TextOverflow.ellipsis),
-                    Text(DateFormat('dd/MM/yyyy  -  HH:mm').format(orderEntity.createdAt?.toLocal())),
+                    Text(DateFormat('dd/MM/yyyy,  HH:mm').format(orderEntity.createdAt?.toLocal())),
                     Text('Pago en efectivo', style: AppTextStyle.boldBlack16),
                     Text(orderEntity.totalAmount?.currencyFormat() ?? '******', style: AppTextStyle.section),
                   ],

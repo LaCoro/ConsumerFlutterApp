@@ -1,5 +1,4 @@
 import 'package:data/remote_datasource/api/store_api.dart';
-import 'package:domain/entities/ciity_entity.dart';
 import 'package:domain/repositories/store_repository.dart';
 import 'package:domain/result.dart';
 

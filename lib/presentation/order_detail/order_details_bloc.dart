@@ -63,7 +63,7 @@ class OrderDetailsBloc extends Bloc<BaseEvent, BaseState> {
       ..storeEntity = store.storeEntity
       ..deliveryCost = store.deliveryCost
       ..additionalRequests = comments
-      ..totalAmount = _getCartTotal() + store?.deliveryCost ?? 0
+      ..totalAmount = _getCartTotal().toInt() + store?.deliveryCost ?? 0
       ..products = products.map((key, value) => MapEntry(key.itemEntity, value));
   }
 }

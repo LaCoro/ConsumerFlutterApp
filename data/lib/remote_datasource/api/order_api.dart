@@ -15,8 +15,8 @@ class OrderApi {
 
   OrderApi(this.apiService);
 
-  Future<List<Order>> getUserOrders(String userId, int page, int size) async {
-    final response = await apiService.getUserOrders(userId, page, size);
+  Future<List<Order>> getUserOrders(int page, int size) async {
+    final response = await apiService.getUserOrders(page, size);
     if (response.success) {
       final orders = response.results.map((e) => e as Order).toList();
       for (var order in orders) {
@@ -36,7 +36,6 @@ class OrderApi {
     // Create order model
     final order = Order()
       ..code = Uuid().v4()
-      ..buyerId = user.id
       ..buyerName = user.fullname
       ..additionalRequests = orderEntity.additionalRequests
       ..totalAmount = orderEntity.totalAmount

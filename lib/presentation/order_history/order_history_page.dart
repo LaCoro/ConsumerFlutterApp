@@ -2,7 +2,7 @@ import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/order_card_info.dart';
-import 'package:LaCoro/presentation/history_order_list/history_order_bloc.dart';
+import 'package:LaCoro/presentation/order_history/order_history_bloc.dart';
 import 'package:domain/entities/order_entity.dart';
 import 'package:domain/use_cases/order_use_cases.dart';
 import 'package:flutter/material.dart';
@@ -11,21 +11,21 @@ import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class HistoryOrderPage extends StatefulWidget {
-  static const HISTORY_ORDER_ROUTE = '/history_order';
+class OrderHistoryPage extends StatefulWidget {
+  static const ORDER_HISTORY_ROUTE = '/order_history';
 
   @override
-  _HistoryOrderPageState createState() => _HistoryOrderPageState(Injector.getInjector().get());
+  _OrderHistoryPageState createState() => _OrderHistoryPageState(Injector.getInjector().get());
 }
 
-class _HistoryOrderPageState extends State<HistoryOrderPage> {
-  final HistoryOrderBloc _bloc;
+class _OrderHistoryPageState extends State<OrderHistoryPage> {
+  final OrderHistoryBloc _bloc;
 
-  _HistoryOrderPageState(this._bloc);
+  _OrderHistoryPageState(this._bloc);
 
   RefreshController _refreshController = RefreshController();
   bool _loading = false;
-  List<OrderEntity> _orders;
+  List<OrderEntity> _orders = List();
 
   @override
   void initState() {
@@ -62,7 +62,7 @@ class _HistoryOrderPageState extends State<HistoryOrderPage> {
                 ),
               ],
             ),
-            Center(child: _loading ? CircularProgressIndicator() : null),
+            Center(child: _loading ? CircularProgressIndicator() : _orders.isEmpty ? Text("No tienes ordenes hasta el momento") : null),
           ]),
         ));
   }

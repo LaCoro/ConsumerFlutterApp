@@ -1,8 +1,8 @@
 import 'package:LaCoro/core/preferences/preferences.dart';
 import 'package:LaCoro/presentation/adresses/my_address_bloc.dart';
 import 'package:LaCoro/presentation/checkout/checkout_bloc.dart';
-import 'package:LaCoro/presentation/history_order_list/history_order_bloc.dart';
 import 'package:LaCoro/presentation/order_detail/order_details_bloc.dart';
+import 'package:LaCoro/presentation/order_history/order_history_bloc.dart';
 import 'package:LaCoro/presentation/order_status/order_status_bloc.dart';
 import 'package:LaCoro/presentation/register/register_bloc.dart';
 import 'package:LaCoro/presentation/store_details/store_details_bloc.dart';
@@ -25,15 +25,11 @@ import 'package:domain/use_cases/my_address_use_cases.dart';
 import 'package:domain/use_cases/order_use_cases.dart';
 import 'package:domain/use_cases/profile_use_cases.dart';
 import 'package:domain/use_cases/store_use_cases.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
-import 'package:parse_server_sdk/parse_server_sdk.dart';
 
 /// App module that defines the generic modules to be injected in the app
 class AppModule {
-  Future<Injector> initialise(Injector injector) async {
-    await _setCurrentEnvironment();
-
+  static Future<Injector> initialise(Injector injector) async {
     final preferences = await Preferences().init();
     injector.map<Preferences>((injector) => preferences, isSingleton: true);
     // Api
@@ -54,28 +50,13 @@ class AppModule {
     injector.map<OrderUseCases>((injector) => OrderUseCases(injector.get()));
     // BLoC
     injector.map<MyAddressBloc>((injector) => MyAddressBloc(injector.get(), injector.get()));
-    injector.map<StoreListBloc>((injector) => StoreListBloc(injector.get(), injector.get()));
+    injector.map<StoreListBloc>((injector) => StoreListBloc(injector.get(), injector.get(), injector.get()));
     injector.map<StoreDetailsBloc>((injector) => StoreDetailsBloc(injector.get()));
     injector.map<OrderDetailsBloc>((injector) => OrderDetailsBloc(injector.get(), injector.get(), injector.get()));
     injector.map<RegisterBloc>((injector) => RegisterBloc(injector.get(), injector.get()));
     injector.map<CheckoutBloc>((injector) => CheckoutBloc(injector.get(), injector.get()));
     injector.map<OrderStatusBloc>((injector) => OrderStatusBloc(injector.get(), injector.get()));
-    injector.map<HistoryOrderBloc>((injector) => HistoryOrderBloc(injector.get(), injector.get()));
+    injector.map<OrderHistoryBloc>((injector) => OrderHistoryBloc(injector.get(), injector.get()));
     return injector;
-  }
-
-  Future _setCurrentEnvironment() async {
-    const bool isProduction = bool.fromEnvironment('dart.vm.product');
-    await DotEnv().load('${isProduction ? "production" : "development"}.env');
-    final dotEnv = DotEnv();
-    // Initialize parse for consuming API service
-    await Parse().initialize(
-      dotEnv.env['PARSE_APPLICATION_ID'],
-      dotEnv.env['BASE_URL'],
-      clientKey: dotEnv.env['PARSE_CLIENT_ID'],
-      masterKey: dotEnv.env['PARSE_MASTER_KEY'], // Required for Back4App and others
-      autoSendSessionId: true, // Required for authentication and ACL
-      debug: true,
-    );
   }
 }

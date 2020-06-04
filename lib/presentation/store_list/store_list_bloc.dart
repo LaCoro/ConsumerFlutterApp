@@ -6,15 +6,17 @@ import 'package:domain/entities/address_entity.dart';
 import 'package:domain/entities/order_entity.dart';
 import 'package:domain/entities/store_entity.dart';
 import 'package:domain/result.dart';
+import 'package:domain/use_cases/profile_use_cases.dart';
 import 'package:domain/use_cases/store_use_cases.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class StoreListBloc extends Bloc<BaseEvent, BaseState> {
-  final StoreUseCases _useCases;
+  final StoreUseCases _storeUseCases;
+  final ProfileUseCases _profileUseCases;
   final Preferences _preferences;
   int _page = 0;
 
-  StoreListBloc(this._useCases, this._preferences);
+  StoreListBloc(this._storeUseCases, this._profileUseCases, this._preferences);
 
   @override
   BaseState get initialState => InitialState();
@@ -25,7 +27,7 @@ class StoreListBloc extends Bloc<BaseEvent, BaseState> {
       if (event is GetStoresEvent) {
         yield LoadingState();
         _page = 0;
-        final result = await _useCases.fetchStores(_preferences.getProfile()?.addressEntity?.cityEntity, searchQuery: event.searchQuery);
+        final result = await _storeUseCases.fetchStores(_preferences.getProfile()?.addressEntity?.cityEntity, searchQuery: event.searchQuery);
         if (result is Success<List<StoreEntity>>) {
           yield SuccessState(data: StoreUIMapper().processList(result.data));
         } else {
@@ -34,7 +36,7 @@ class StoreListBloc extends Bloc<BaseEvent, BaseState> {
       } else if (event is LoadMoreStoresEvent) {
         yield LoadingState();
         _page = _page + 1;
-        final result = await _useCases.fetchStores(_preferences.getProfile()?.addressEntity?.cityEntity, page: _page, searchQuery: event.searchQuery);
+        final result = await _storeUseCases.fetchStores(_preferences.getProfile()?.addressEntity?.cityEntity, page: _page, searchQuery: event.searchQuery);
         if (result is Success<List<StoreEntity>>) {
           yield MoreStoresLoadedState(data: StoreUIMapper().processList(result.data));
         } else {
@@ -49,6 +51,11 @@ class StoreListBloc extends Bloc<BaseEvent, BaseState> {
   AddressEntity loadSavedAddress() => _preferences.getProfile()?.addressEntity;
 
   OrderEntity getLastOrder() => _preferences.getLastOrder();
+
+  Future<bool> isUserValidated() async {
+    final result = await _profileUseCases.getValidSession(_preferences.getProfile());
+    return _preferences.getProfile()?.isValidated == true && (result is Success) && result.data == true;
+  }
 }
 
 /// store list events

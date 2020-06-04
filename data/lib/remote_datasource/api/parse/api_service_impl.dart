@@ -8,6 +8,8 @@ import 'package:data/models/order_detail.dart';
 import 'package:data/models/store.dart';
 import 'package:data/models/user.dart';
 import 'package:data/remote_datasource/api/parse/api_service.dart';
+import 'package:data/remote_datasource/errors/service_error.dart';
+import 'package:domain/entities/user_entity.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 
 ///Manager that defines all the API service requests.
@@ -36,7 +38,11 @@ class ApiServiceImpl extends ApiService {
   @override
   Future<ParseResponse> getStoreItems(String storeId) async {
     final store = await Store().getObject(storeId);
-    final QueryBuilder query = QueryBuilder<Item>(Item())..whereEqualTo(Item.keyStore, (store.result as Store).toPointer());
+    final QueryBuilder query = QueryBuilder<Item>(Item())
+      // TODO we need to handle this limit using pagination
+      ..setLimit(500)
+      ..whereEqualTo(Item.keyStore, (store.result as Store).toPointer());
+
     return await query.query();
   }
 
@@ -56,33 +62,39 @@ class ApiServiceImpl extends ApiService {
   }
 
   @override
-  Future<ParseResponse> getUserOrders(String userId, int page, int size) async {
+  Future<ParseResponse> getUserOrders(int page, int size) async {
+
+    final user =  await ParseUser.currentUser();
+
     final QueryBuilder query = QueryBuilder<Order>(Order())
       ..orderByDescending(Order.keyCreatedAt)
       ..setAmountToSkip(page * size)
       ..setLimit(size)
-      ..whereEqualTo(Order.keyBuyerId, userId);
+      ..whereEqualTo(Order.keyCustomer, user);
     return await query.query();
   }
 
   @override
-  Future<ParseResponse> submitUserRegister(User user) async {
+  Future<ParseResponse> submitUserRegister(UserEntity user) async {
     final pass = md5.convert(utf8.encode(user.mobile)).toString();
 
-    final userRegister = ParseUser.createUser(user.mobile, pass, user.email)
-      ..set(User.keyMobile, user.mobile)
-      ..set(User.keyPhone, user.mobile)
-      ..set(User.keyUsername, user.mobile)
-      ..set(User.keyFullname, user.fullname)
-      ..set(User.keyEmail, user.email);
+    final userRegister = ParseUser(user.mobile, pass, user.email);
 
     var response = await userRegister.signUp();
     response = await userRegister.login();
 
-    user.id = (response.result as ParseUser).objectId;
-    user.sessionToken = (response.result as ParseUser).sessionToken;
-
-    return user.save();
+    if (response.success) {
+      userRegister
+        ..set(User.keyMobile, user.mobile)
+        ..set(User.keyPhone, user.mobile)
+        ..set(User.keyUsername, user.mobile)
+        ..set(User.keyFullname, user.fullname)
+        ..set(User.keyEmail, user.email);
+      final updatedUser = await userRegister.update();
+      return updatedUser;
+    } else {
+      throw ServiceError();
+    }
   }
 
   @override
@@ -90,8 +102,9 @@ class ApiServiceImpl extends ApiService {
     var parseUser = await ParseUser.currentUser();
 
     if (parseUser == null) {
-      parseUser = await ParseUser.getCurrentUserFromServer(sessionToken);
+      parseUser = (await ParseUser.getCurrentUserFromServer(sessionToken)).result;
     }
-    return parseUser;
+
+    return parseUser as ParseUser;
   }
 }

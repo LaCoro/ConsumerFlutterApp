@@ -3,8 +3,8 @@ import 'package:LaCoro/core/localization/app_localizations_delegate.dart';
 import 'package:LaCoro/presentation/adresses/addresses_page_new.dart';
 import 'package:LaCoro/presentation/adresses/my_address_page.dart';
 import 'package:LaCoro/presentation/checkout/checkout_page.dart';
-import 'package:LaCoro/presentation/history_order_list/history_order_page.dart';
 import 'package:LaCoro/presentation/order_detail/order_detail_page.dart';
+import 'package:LaCoro/presentation/order_history/order_history_page.dart';
 import 'package:LaCoro/presentation/order_status/order_status_page.dart';
 import 'package:LaCoro/presentation/register/pin_page.dart';
 import 'package:LaCoro/presentation/register/register_page.dart';
@@ -18,13 +18,15 @@ import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 import 'core/appearance/app_theme.dart';
+import 'core/env/envirionment_configuration.dart';
 import 'presentation/adresses/select_address_map_page.dart';
 import 'presentation/store_list/store_list_page.dart';
 
 Future main() async {
+  // Init env configuration
+  await EnvironmentConfiguration.run();
   // Inject modules
-  await AppModule().initialise(Injector.getInjector());
-
+  await AppModule.initialise(Injector.getInjector());
   // start app
   runApp(MyApp());
 }
@@ -95,7 +97,7 @@ class MyApp extends StatelessWidget {
           SplashPage.SPLASH_PAGE_ROUTE: (BuildContext context) => SplashPage(),
           RegisterPage.REGISTER_ROUTE: (BuildContext context) => RegisterPage(),
           PinPage.PIN_REGISTER_ROUTE: (BuildContext context) => PinPage(),
-          HistoryOrderPage.HISTORY_ORDER_ROUTE: (BuildContext context) => HistoryOrderPage(),
+          OrderHistoryPage.ORDER_HISTORY_ROUTE: (BuildContext context) => OrderHistoryPage(),
           TestPage.TEST_PAGE_ROUTE: (BuildContext context) => TestPage()
         },
       ),

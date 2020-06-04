@@ -6,11 +6,11 @@ import 'package:LaCoro/core/ui_utils/custom_widgets/order_status_banner.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/store_item.dart';
 import 'package:LaCoro/core/ui_utils/model/store_ui.dart';
 import 'package:LaCoro/presentation/adresses/my_address_page.dart';
-import 'package:LaCoro/presentation/history_order_list/history_order_page.dart';
+import 'package:LaCoro/presentation/order_history/order_history_page.dart';
 import 'package:LaCoro/presentation/order_status/order_status_page.dart';
+import 'package:LaCoro/presentation/register/register_page.dart';
 import 'package:LaCoro/presentation/store_details/store_details_page.dart';
 import 'package:LaCoro/presentation/store_list/store_list_bloc.dart';
-import 'package:domain/entities/order_entity.dart';
 import 'package:domain/use_cases/store_use_cases.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -71,7 +71,7 @@ class _StoreListPageState extends State<StoreListPage> {
             elevation: 0,
             actions: <Widget>[
               IconButton(
-                onPressed: () => Navigator.pushNamed(context, HistoryOrderPage.HISTORY_ORDER_ROUTE),
+                onPressed: () async => Navigator.pushNamed(context, await _bloc.isUserValidated()  ?  OrderHistoryPage.ORDER_HISTORY_ROUTE : RegisterPage.REGISTER_ROUTE),
                 icon: Padding(padding: const EdgeInsets.all(8.0), child: Icon(Icons.history)),
               ),
             ],

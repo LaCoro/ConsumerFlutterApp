@@ -3,6 +3,7 @@ import 'package:LaCoro/core/preferences/preferences.dart';
 import 'package:domain/entities/user_entity.dart';
 import 'package:domain/result.dart';
 import 'package:domain/use_cases/profile_use_cases.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RegisterBloc extends Bloc<BaseEvent, BaseState> {

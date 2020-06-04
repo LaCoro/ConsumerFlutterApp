@@ -5,11 +5,11 @@ import 'package:domain/result.dart';
 import 'package:domain/use_cases/order_use_cases.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HistoryOrderBloc extends Bloc<BaseEvent, BaseState> {
+class OrderHistoryBloc extends Bloc<BaseEvent, BaseState> {
   final OrderUseCases _useCases;
   final Preferences _preferences;
 
-  HistoryOrderBloc(this._useCases, this._preferences);
+  OrderHistoryBloc(this._useCases, this._preferences);
 
   int _page = 0;
 
@@ -22,7 +22,7 @@ class HistoryOrderBloc extends Bloc<BaseEvent, BaseState> {
       if (event is GetOrdersEvent) {
         yield LoadingState();
         _page = 0;
-        final result = await _useCases.getUserOrders(_preferences.getProfile()?.id, _page);
+        final result = await _useCases.getUserOrders(_page);
         if (result is Success<List<OrderEntity>>) {
           yield SuccessState(data: result.data);
         } else {
@@ -31,7 +31,7 @@ class HistoryOrderBloc extends Bloc<BaseEvent, BaseState> {
       } else if (event is LoadMoreOrdersEvent) {
         yield LoadingState();
         _page = _page + 1;
-        final result = await _useCases.getUserOrders(_preferences.getProfile()?.id, _page);
+        final result = await _useCases.getUserOrders(_page);
         if (result is Success<List<OrderEntity>>) {
           yield MoreOrdersLoadedState(data: result.data);
         } else {

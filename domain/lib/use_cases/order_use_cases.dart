@@ -15,7 +15,7 @@ class OrderUseCases {
     return _repository.submitOrder(orderEntity, userEntity);
   }
 
-  Future<Result> getUserOrders(String userId, int page, {int size = PAGE_SIZE}) async {
-    return _repository.getUserOrders(userId, page, size);
+  Future<Result> getUserOrders(int page, {int size = PAGE_SIZE}) async {
+    return _repository.getUserOrders(page, size);
   }
 }
