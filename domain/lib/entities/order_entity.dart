@@ -4,6 +4,8 @@ import 'package:domain/entities/item_entity.dart';
 import 'package:domain/entities/store_entity.dart';
 import 'package:domain/entities/user_entity.dart';
 
+import 'order_status.dart';
+
 class OrderEntity {
   String id;
   String code;
@@ -18,7 +20,7 @@ class OrderEntity {
   String buyerName;
   String buyerId;
   String scheduledDeliveryDate;
-  String status;
+  OrderStatus orderStatus;
   StoreEntity storeEntity;
   UserEntity customer;
   Map<ItemEntity, int> products;
@@ -44,7 +46,7 @@ class OrderEntity {
       ..buyerName = jsonFile['buyerName']
       ..buyerId = jsonFile['buyerId']
       ..scheduledDeliveryDate = jsonFile['scheduledDeliveryDate']
-      ..status = jsonFile['status'];
+      ..orderStatus = OrderStatus.findOrderStatus(jsonFile['status']);
   }
 
   static Map<String, dynamic> toJsonObject(OrderEntity orderEntity) {
@@ -68,7 +70,7 @@ class OrderEntity {
     data['buyerName'] = orderEntity.buyerName;
     data['buyerId'] = orderEntity.buyerId;
     data['scheduledDeliveryDate'] = orderEntity.scheduledDeliveryDate;
-    data['status'] = orderEntity.status;
+    data['status'] = orderEntity.orderStatus.toString();
     return data;
   }
 }

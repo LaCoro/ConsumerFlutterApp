@@ -59,7 +59,7 @@ class _OrderStatusPageState extends State<OrderStatusPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 SuccessfulOrderBanner(),
-                StepperBar(1, 3, orderStatus ?? order?.status),
+                StepperBar(1, 3, orderStatus ?? order?.orderStatus?.toString()),
                 Divider(thickness: 8),
                 OrderCardInfo(orderEntity: order),
                 Divider(thickness: 8),

@@ -1,9 +1,7 @@
 import 'dart:core';
 
-import 'package:data/models/store.dart';
-import 'package:data/models/user.dart';
 import 'package:domain/entities/order_entity.dart';
-import 'package:domain/entities/store_entity.dart';
+import 'package:domain/entities/order_status.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 
 class Order extends ParseObject with OrderEntity implements ParseCloneable {
@@ -81,9 +79,7 @@ class Order extends ParseObject with OrderEntity implements ParseCloneable {
 
   set scheduledDeliveryDate(String scheduledDeliveryDate) => set<String>(keyScheduledDeliveryDate, scheduledDeliveryDate);
 
-  String get status => get<String>(keyStatus);
-
-  set status(String status) => set<String>(keyStatus, status);
+  OrderStatus get orderStatus => OrderStatus.findOrderStatus(get<String>(keyStatus));
 
   ParseObject get store => get<ParseObject>(keyStore);
 }
