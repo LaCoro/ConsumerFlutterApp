@@ -82,7 +82,7 @@ class _CounterTouchState extends State<CounterTouch>
           type: MaterialType.canvas,
           clipBehavior: Clip.antiAlias,
           borderRadius: BorderRadius.circular(60.0),
-          color: AppColors.accentColor.withOpacity(0.2),
+//          color: AppColors.accentColor.withOpacity(0.2),
           child: Stack(
             alignment: Alignment.center,
             children: <Widget>[

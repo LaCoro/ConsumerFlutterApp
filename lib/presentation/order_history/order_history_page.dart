@@ -1,9 +1,11 @@
 import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
+import 'package:LaCoro/core/pubnub/pub_nub_manager.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/order_card_info.dart';
 import 'package:LaCoro/presentation/order_history/order_history_bloc.dart';
 import 'package:domain/entities/order_entity.dart';
+import 'package:domain/entities/order_status.dart';
 import 'package:domain/use_cases/order_use_cases.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -79,6 +81,10 @@ class _OrderHistoryPageState extends State<OrderHistoryPage> {
         itemBuilder: (c, index) {
           return InkWell(
               onTap: () async {
+                //todo remove this
+                PubNubManager.publishMessage('store_${_orders[index].storeEntity.id}', OrderStatus.ORDER_IN_PROGRESS.value);
+                ///////////////
+
 //                await Navigator.pushNamed(context, OrderDetailPage.ORDER_DETAIL_ROUTE, arguments: _orders[index]);
 //                setState(() {});
               },

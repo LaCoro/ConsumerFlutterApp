@@ -23,6 +23,7 @@ class StoreEntity {
 
   static StoreEntity fromJsonMap(Map<String, dynamic> json) {
     return StoreEntity()
+      ..id = json['id']
       ..name = json['name']
       ..searchTags = json['searchTags'].cast<String>()
       ..address = json['address']
@@ -42,6 +43,7 @@ class StoreEntity {
 
   static Map<String, dynamic> toJsonObject(StoreEntity storeEntity) {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = storeEntity.id;
     data['name'] = storeEntity.name;
     data['searchTags'] = storeEntity.searchTags;
     data['address'] = storeEntity.address;

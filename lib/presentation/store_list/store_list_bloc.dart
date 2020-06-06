@@ -1,20 +1,26 @@
 import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/preferences/preferences.dart';
+import 'package:LaCoro/core/pubnub/pub_nub_manager.dart';
 import 'package:LaCoro/core/ui_utils/mappers/store_ui_mapper.dart';
 import 'package:LaCoro/core/ui_utils/model/store_ui.dart';
+import 'package:LaCoro/presentation/order_status/order_status_page.dart';
 import 'package:domain/entities/address_entity.dart';
 import 'package:domain/entities/order_entity.dart';
+import 'package:domain/entities/order_status.dart';
 import 'package:domain/entities/store_entity.dart';
 import 'package:domain/result.dart';
 import 'package:domain/use_cases/profile_use_cases.dart';
 import 'package:domain/use_cases/store_use_cases.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_simple_dependency_injection/injector.dart';
+import 'package:pubnub/pubnub.dart';
 
 class StoreListBloc extends Bloc<BaseEvent, BaseState> {
   final StoreUseCases _storeUseCases;
   final ProfileUseCases _profileUseCases;
   final Preferences _preferences;
   int _page = 0;
+  Subscription subscription;
 
   StoreListBloc(this._storeUseCases, this._profileUseCases, this._preferences);
 
@@ -22,9 +28,25 @@ class StoreListBloc extends Bloc<BaseEvent, BaseState> {
   BaseState get initialState => InitialState();
 
   @override
+  Future<void> close() {
+    subscription?.dispose();
+    return super.close();
+  }
+
+  @override
   Stream<BaseState> mapEventToState(BaseEvent event) async* {
     try {
-      if (event is GetStoresEvent) {
+      if (event is ValidateLasOrderEvent) {
+        OrderEntity lastOrder = _preferences.getLastOrder();
+        if (lastOrder != null && lastOrder.orderStatus.index < OrderStatus.ORDER_COMPLETED.index) {
+          yield SuccessState(data: lastOrder);
+          String storeChannelId = 'store_${lastOrder.storeEntity.id}';
+          subscription = await PubNubManager.initSubscription(storeChannelId);
+          yield* subscription.messages.map((event) {
+            return SuccessState(data: lastOrder..orderStatus = OrderStatus.findOrderStatus(event.payload.toString()));
+          });
+        }
+      } else if (event is GetStoresEvent) {
         yield LoadingState();
         _page = 0;
         final result = await _storeUseCases.fetchStores(_preferences.getProfile()?.addressEntity?.cityEntity, searchQuery: event.searchQuery);
@@ -50,8 +72,6 @@ class StoreListBloc extends Bloc<BaseEvent, BaseState> {
 
   AddressEntity loadSavedAddress() => _preferences.getProfile()?.addressEntity;
 
-  OrderEntity getLastOrder() => _preferences.getLastOrder();
-
   Future<bool> isUserValidated() async {
     final result = await _profileUseCases.getValidSession(_preferences.getProfile());
     return _preferences.getProfile()?.isValidated == true && (result is Success) && result.data == true;
@@ -70,6 +90,8 @@ class LoadMoreStoresEvent extends BaseEvent {
 
   LoadMoreStoresEvent({this.searchQuery});
 }
+
+class ValidateLasOrderEvent extends BaseEvent {}
 
 /// states
 class MoreStoresLoadedState extends BaseState {

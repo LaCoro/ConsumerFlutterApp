@@ -57,6 +57,10 @@ class AppLocalizations {
       'address': 'Address',
       'address_is_required': 'Please enter an address',
       'order_history': 'Order History',
+      'ORDER_PLACED': 'Order created',
+      'ORDER_IN_PROGRESS': 'Order in progress',
+      'ORDER_COMPLETED': 'Order completed',
+      'ORDER_CANCELED': 'Order canceled',
     },
     'es': {
       'total': 'Total',
@@ -105,8 +109,14 @@ class AppLocalizations {
       'address': 'Dirección',
       'address_is_required': 'Por favor entre una direccion',
       'order_history': 'Historial de Ordenes',
+      'ORDER_PLACED': 'Orden creada',
+      'ORDER_IN_PROGRESS': 'Orden en curso',
+      'ORDER_COMPLETED': 'Orden finalizada',
+      'ORDER_CANCELED': 'Orden cancelada',
     },
   };
+
+  String getText(String value) => _localizedValues[locale.languageCode][value] ?? '';
 
   String get debitCard => _localizedValues[locale.languageCode]['debit_card'];
 

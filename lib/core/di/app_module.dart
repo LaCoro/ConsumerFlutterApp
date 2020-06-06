@@ -30,6 +30,7 @@ import 'package:flutter_simple_dependency_injection/injector.dart';
 /// App module that defines the generic modules to be injected in the app
 class AppModule {
   static Future<Injector> initialise(Injector injector) async {
+    // core
     final preferences = await Preferences().init();
     injector.map<Preferences>((injector) => preferences, isSingleton: true);
     // Api
@@ -43,7 +44,7 @@ class AppModule {
     injector.map<CityRepository>((injector) => CityRepositoryImpl(injector.get()));
     injector.map<ProfileRepository>((injector) => ProfileRepositoryImpl(injector.get()));
     injector.map<OrderRepository>((injector) => OrderRepositoryImpl(injector.get()));
-    // Use case
+    // Use cases
     injector.map<MyAddressUseCases>((injector) => MyAddressUseCases(injector.get()));
     injector.map<StoreUseCases>((injector) => StoreUseCases(injector.get()));
     injector.map<ProfileUseCases>((injector) => ProfileUseCases(injector.get()));

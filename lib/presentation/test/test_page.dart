@@ -15,7 +15,7 @@ class TestPage extends StatelessWidget {
           child: RaisedButton(
             child: Text('Enviar'),
             onPressed: () {
-              initPubNub();
+              initPubNub('');
             },
           ),
         ),
@@ -23,7 +23,7 @@ class TestPage extends StatelessWidget {
     );
   }
 
-  Future initPubNub() async {
+  Future initPubNub(String orderId) async {
     final pubnub = PubNub(
       defaultKeyset: Keyset(
         subscribeKey: DotEnv().env['PUBNUB_SUBSCRIBE_KEY'],
@@ -31,7 +31,6 @@ class TestPage extends StatelessWidget {
       ),
     );
 
-    String orderId = 'gZeiUz0PMA';
     String channel = 'ch_$orderId';
     await pubnub.publish(channel, {'message': DateFormat('HH:mm:ss').format(DateTime.now().toLocal())});
   }
