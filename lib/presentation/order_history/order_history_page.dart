@@ -82,7 +82,7 @@ class _OrderHistoryPageState extends State<OrderHistoryPage> {
           return InkWell(
               onTap: () async {
                 //todo remove this
-                PubNubManager.publishMessage('store_${_orders[index].storeEntity.id}', OrderStatus.ORDER_IN_PROGRESS.value);
+                PubNubManager.publishMessage('store_${_orders[index].storeEntity.id}', OrderEntity.toJsonObject(_orders[index]..orderStatus = OrderStatus.ORDER_IN_PROGRESS));
                 ///////////////
 
 //                await Navigator.pushNamed(context, OrderDetailPage.ORDER_DETAIL_ROUTE, arguments: _orders[index]);

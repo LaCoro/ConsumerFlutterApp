@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/preferences/preferences.dart';
 import 'package:LaCoro/core/pubnub/pub_nub_manager.dart';
@@ -34,7 +36,12 @@ class OrderStatusBloc extends Bloc<BaseEvent, BaseState> {
           String storeChannelId = 'store_${lastOrder.storeEntity.id}';
           subscription = await PubNubManager.initSubscription(storeChannelId);
           yield* subscription.messages.map((event) {
-            return SuccessState(data: OrderStatus.findOrderStatus(event.payload.toString()));
+            OrderEntity orderEntity = OrderEntity.fromJsonMap(json.decode(event.payload.toString()));
+            if (orderEntity.id == lastOrder.id) {
+              return SuccessState(data: orderEntity.orderStatus);
+            } else {
+              return null;
+            }
           });
         }
       }

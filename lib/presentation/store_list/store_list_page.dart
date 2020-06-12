@@ -46,7 +46,7 @@ class _StoreListPageState extends State<StoreListPage> {
       //TODO no funciona el desenfoque del textLabel al regresar a la lista
     });
     _bloc.add(GetStoresEvent(searchQuery: _textFieldController.text.toString()));
-    _bloc.add(ValidateLasOrderEvent());
+    _bloc.add(ValidateLastOrderEvent());
 
     _wasEmpty = _textFieldController.text.isEmpty;
     _textFieldController.addListener(() {
@@ -81,8 +81,8 @@ class _StoreListPageState extends State<StoreListPage> {
           ],
           title: GestureDetector(
             onTap: () async {
-              await Navigator.pushNamed(context, MyAddressPage.MY_ADDRESS_ROUTE, arguments: true);
-              setState(() {});
+              await Navigator.pushNamed(context, MyAddressPage.MY_ADDRESS_ROUTE, arguments: [true, true]);
+              _bloc.add(GetStoresEvent(searchQuery: _textFieldController.text.toString()));
             },
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,

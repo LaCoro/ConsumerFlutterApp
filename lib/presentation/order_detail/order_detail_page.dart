@@ -62,92 +62,94 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
               deliveryCost = state.deliveryCost;
             }
 
-            return SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
-                    child: StoreItemSmall(_bloc.store),
-                  ),
-                  Divider(thickness: 10, height: 24),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
-                    child: buildItemList(_bloc.products),
-                  ),
-                  Divider(thickness: 10, height: 50),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(strings.order, style: AppTextStyle.black16),
-                        Text(cartTotal?.currencyFormat() ?? '', style: AppTextStyle.black16),
-                      ],
+            return Column(children: [
+              Expanded(
+                child: ListView(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
+                      child: StoreItemSmall(_bloc.store),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 12.0, left: 24.0, right: 24.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(strings.delivery, style: AppTextStyle.black16),
-                        Text(deliveryCost?.currencyFormat() ?? '', style: AppTextStyle.black16),
-                      ],
+                    Divider(thickness: 10, height: 24),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+                      child: buildItemList(_bloc.products),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(strings.total, style: AppTextStyle.section),
-                        Text((cartTotal + deliveryCost)?.currencyFormat() ?? '', style: AppTextStyle.section),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 40.0, left: 24.0, right: 24.0),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        strings.comments,
-                        style: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 16, color: AppColors.boldTextColor),
+                    Divider(thickness: 10, height: 50),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(strings.order, style: AppTextStyle.black16),
+                          Text(cartTotal?.currencyFormat() ?? '', style: AppTextStyle.black16),
+                        ],
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 12.0, left: 24.0, right: 24.0),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: TextFormField(
-                        controller: _commentController,
-                        keyboardType: TextInputType.multiline,
-                        textInputAction: TextInputAction.next,
-                        style: AppTextStyle.black16,
-                        decoration: InputDecoration(
-                          isDense: true,
-                          hintStyle: TextStyle(color: AppColors.greyMedium, fontWeight: FontWeight.w300, fontSize: 16),
-                          hintText: strings.comments,
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: AppColors.greyMedium)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: AppColors.accentColor)),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 12.0, left: 24.0, right: 24.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(strings.delivery, style: AppTextStyle.black16),
+                          Text(deliveryCost?.currencyFormat() ?? '', style: AppTextStyle.black16),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(strings.total, style: AppTextStyle.section),
+                          Text((cartTotal + deliveryCost)?.currencyFormat() ?? '', style: AppTextStyle.section),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 40.0, left: 24.0, right: 24.0),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          strings.comments,
+                          style: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 16, color: AppColors.boldTextColor),
                         ),
                       ),
                     ),
-                  ),
-                  PrimaryButton(
-                    margin: const EdgeInsets.all(24.0),
-                    onPressed: cartTotal == 0
-                        ? null
-                        : () async {
-                            final order = _bloc.createOrder(_commentController.value.text);
-                            Navigator.pushNamed(context, await _bloc.isUserValidated() ? CheckoutPage.CHECKOUT_ORDER_ROUTE : RegisterPage.REGISTER_ROUTE,
-                                arguments: order);
-                          },
-                    buttonText: strings.continu,
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.only(top: 12.0, left: 24.0, right: 24.0),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: TextFormField(
+                          controller: _commentController,
+                          keyboardType: TextInputType.multiline,
+                          textInputAction: TextInputAction.next,
+                          style: AppTextStyle.black16,
+                          decoration: InputDecoration(
+                            isDense: true,
+                            hintStyle: TextStyle(color: AppColors.greyMedium, fontWeight: FontWeight.w300, fontSize: 16),
+                            hintText: strings.comments,
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: AppColors.greyMedium)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: AppColors.accentColor)),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            );
+              PrimaryButton(
+                margin: const EdgeInsets.all(24.0),
+                onPressed: cartTotal == 0
+                    ? null
+                    : () async {
+                        final order = _bloc.createOrder(_commentController.value.text);
+                        Navigator.pushNamed(context, await _bloc.isUserValidated() ? CheckoutPage.CHECKOUT_ORDER_ROUTE : RegisterPage.REGISTER_ROUTE,
+                            arguments: order);
+                      },
+                buttonText: strings.continu,
+              ),
+            ]);
           }),
     );
   }

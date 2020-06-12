@@ -36,7 +36,7 @@ class StoreListBloc extends Bloc<BaseEvent, BaseState> {
   @override
   Stream<BaseState> mapEventToState(BaseEvent event) async* {
     try {
-      if (event is ValidateLasOrderEvent) {
+      if (event is ValidateLastOrderEvent) {
         OrderEntity lastOrder = _preferences.getLastOrder();
         if (lastOrder != null && lastOrder.orderStatus.index < OrderStatus.ORDER_COMPLETED.index) {
           yield SuccessState(data: lastOrder);
@@ -91,7 +91,7 @@ class LoadMoreStoresEvent extends BaseEvent {
   LoadMoreStoresEvent({this.searchQuery});
 }
 
-class ValidateLasOrderEvent extends BaseEvent {}
+class ValidateLastOrderEvent extends BaseEvent {}
 
 /// states
 class MoreStoresLoadedState extends BaseState {

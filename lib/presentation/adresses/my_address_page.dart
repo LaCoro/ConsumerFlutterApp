@@ -60,6 +60,8 @@ class _MyAddressPageState extends State<MyAddressPage> {
 
   @override
   Widget build(BuildContext context) {
+    bool shouldGoBack = (ModalRoute.of(context).settings.arguments as List)?.elementAt(0) ?? false;
+    bool allowCityModification = (ModalRoute.of(context).settings.arguments as List)?.elementAt(1) ?? true;
     final strings = AppLocalizations.of(context);
     return Scaffold(
         appBar: AppBar(elevation: 0),
@@ -72,7 +74,6 @@ class _MyAddressPageState extends State<MyAddressPage> {
             }
 
             if (state is SuccessState<UserEntity>) {
-              bool shouldGoBack = ModalRoute.of(context).settings.arguments ?? false;
               if (shouldGoBack) {
                 Navigator.pop(context);
               } else {
@@ -94,17 +95,19 @@ class _MyAddressPageState extends State<MyAddressPage> {
                         Text(strings.myAddressTitle, style: AppTextStyle.title),
                         SizedBox(height: 40.0),
                         GestureDetector(
-                            onTap: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-                                      title: Text("Elige tu ciudad", style: AppTextStyle.section),
-                                      content: citiesDialog(),
-                                    );
-                                  });
-                            },
+                            onTap: allowCityModification == false
+                                ? null
+                                : () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+                                            title: Text("Elige tu ciudad", style: AppTextStyle.section),
+                                            content: citiesDialog(),
+                                          );
+                                        });
+                                  },
                             child: Container(
                               height: 50.0,
                               decoration: BoxDecoration(
