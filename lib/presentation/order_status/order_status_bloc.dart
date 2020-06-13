@@ -36,7 +36,7 @@ class OrderStatusBloc extends Bloc<BaseEvent, BaseState> {
           String storeChannelId = 'store_${lastOrder.storeEntity.id}';
           subscription = await PubNubManager.initSubscription(storeChannelId);
           yield* subscription.messages.map((event) {
-            OrderEntity orderEntity = OrderEntity.fromJsonMap(json.decode(event.payload.toString()));
+            OrderEntity orderEntity = OrderEntity.fromJsonMap(event.payload);
             if (orderEntity.id == lastOrder.id) {
               return SuccessState(data: orderEntity.orderStatus);
             } else {

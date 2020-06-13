@@ -153,6 +153,7 @@ class _MyAddressPageState extends State<MyAddressPage> {
                         TextFormField(
                           controller: _additionalAddressController,
                           focusNode: _additionalAddressFocus,
+                          onChanged: (value) => setState(() => _addressEntity.additionalAddress = value),
                           onEditingComplete: () => _additionalAddressFocus.unfocus(),
                           textInputAction: TextInputAction.done,
                           style: AppTextStyle.black16,

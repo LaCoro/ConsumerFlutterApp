@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/bloc/base_bloc.dart';
@@ -28,6 +30,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
   final CheckoutBloc _bloc = Injector.getInjector().get();
 
   bool isLoading = false;
+  int deliveryTime = Random().nextInt(60 - 35) + 35;
 
   @override
   void dispose() {
@@ -69,7 +72,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         child: Row(
                           children: <Widget>[
                             Expanded(child: Text(strings.estimatedDelivery, style: AppTextStyle.grey16)),
-                            Text("30 min", style: AppTextStyle.grey16)
+                            Text("$deliveryTime min", style: AppTextStyle.grey16)
                           ],
                         ),
                       ),

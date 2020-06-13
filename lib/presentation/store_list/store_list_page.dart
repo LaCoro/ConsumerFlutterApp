@@ -12,6 +12,11 @@ import 'package:LaCoro/presentation/register/register_page.dart';
 import 'package:LaCoro/presentation/store_details/store_details_page.dart';
 import 'package:LaCoro/presentation/store_list/store_list_bloc.dart';
 import 'package:domain/entities/order_entity.dart';
+import 'package:domain/entities/order_status.dart';
+import 'package:domain/entities/order_status.dart';
+import 'package:domain/entities/order_status.dart';
+import 'package:domain/entities/order_status.dart';
+import 'package:domain/entities/order_status.dart';
 import 'package:domain/use_cases/store_use_cases.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -74,14 +79,17 @@ class _StoreListPageState extends State<StoreListPage> {
           elevation: 0,
           actions: <Widget>[
             IconButton(
-              onPressed: () async =>
-                  Navigator.pushNamed(context, await _bloc.isUserValidated() ? OrderHistoryPage.ORDER_HISTORY_ROUTE : RegisterPage.REGISTER_ROUTE),
+              onPressed: () async {
+                await Navigator.pushNamed(context, await _bloc.isUserValidated() ? OrderHistoryPage.ORDER_HISTORY_ROUTE : RegisterPage.REGISTER_ROUTE);
+                _bloc.add(ValidateLastOrderEvent());
+              },
               icon: Padding(padding: const EdgeInsets.all(8.0), child: Icon(Icons.history)),
             ),
           ],
           title: GestureDetector(
             onTap: () async {
               await Navigator.pushNamed(context, MyAddressPage.MY_ADDRESS_ROUTE, arguments: [true, true]);
+              _bloc.add(ValidateLastOrderEvent());
               _bloc.add(GetStoresEvent(searchQuery: _textFieldController.text.toString()));
             },
             child: Row(
@@ -108,7 +116,12 @@ class _StoreListPageState extends State<StoreListPage> {
 
           if (state is MoreStoresLoadedState) setState(() => _stores.addAll(state.data));
 
-          if (state is SuccessState<OrderEntity>) setState(() => lastOrder = state.data);
+          if (state is SuccessState<OrderEntity>)
+            setState(() {
+              if (state.data.orderStatus.value == OrderStatus.ORDER_PLACED.value || state.data.orderStatus.value == OrderStatus.ORDER_IN_PROGRESS.value) {
+                lastOrder = state.data;
+              }
+            });
 
           //if (state is ErrorState)// TODO show error banner
         },
@@ -122,7 +135,7 @@ class _StoreListPageState extends State<StoreListPage> {
                     : InkWell(
                         onTap: () async {
                           await Navigator.pushNamed(context, OrderStatusPage.ORDER_STATUS_ROUTE, arguments: lastOrder);
-                          setState(() {});
+                          _bloc.add(ValidateLastOrderEvent());
                         },
                         child: OrderStatusBanner(),
                       ),
@@ -174,17 +187,27 @@ class _StoreListPageState extends State<StoreListPage> {
                 ),
               ),
               Expanded(
-                child: LazyLoadScrollView(
-                  onEndOfPage: () {
-                    if (_stores != null && _stores.length >= StoreUseCases.PAGE_SIZE)
-                      _bloc.add(LoadMoreStoresEvent(searchQuery: _textFieldController.text.toString()));
-                  },
-                  child: SmartRefresher(
-                    controller: _refreshController,
-                    enablePullDown: true,
-                    onRefresh: () => _bloc.add(GetStoresEvent(searchQuery: _textFieldController.text.toString())),
-                    child: buildList(),
-                  ),
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: _textFieldController.text.isEmpty ? SizedBox() : Text('Results by ${_textFieldController.text}'),
+                    ),
+                    Expanded(
+                      child: LazyLoadScrollView(
+                        onEndOfPage: () {
+                          if (_stores != null && _stores.length >= StoreUseCases.PAGE_SIZE)
+                            _bloc.add(LoadMoreStoresEvent(searchQuery: _textFieldController.text.toString()));
+                        },
+                        child: SmartRefresher(
+                          controller: _refreshController,
+                          enablePullDown: true,
+                          onRefresh: () => _bloc.add(GetStoresEvent(searchQuery: _textFieldController.text.toString())),
+                          child: buildList(),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -203,7 +226,7 @@ class _StoreListPageState extends State<StoreListPage> {
               onTap: () async {
                 if (_focusNode.hasFocus) _textFieldController.clear();
                 await Navigator.pushNamed(context, StoreDetailsPage.STORE_DETAILS_ROUTE, arguments: _stores[index]);
-                setState(() {});
+                _bloc.add(ValidateLastOrderEvent());
               },
               child: Hero(tag: _stores[index].name, child: StoreItem(storeItem: _stores[index])));
         },

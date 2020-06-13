@@ -35,7 +35,7 @@ class CheckoutBloc extends Bloc<BaseEvent, BaseState> {
     }
   }
 
-  String getUserAddress() => _preferences.getProfile()?.address;
+  String getUserAddress() => _preferences.getProfile()?.addressEntity?.getFullAddress();
 }
 
 /// Events
