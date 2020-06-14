@@ -1,4 +1,5 @@
 import 'package:LaCoro/core/appearance/app_text_style.dart';
+import 'package:LaCoro/core/ui_utils/custom_widgets/2_custom_counter.dart';
 import 'package:LaCoro/core/ui_utils/model/item_ui.dart';
 import 'package:flutter/material.dart';
 
@@ -70,7 +71,10 @@ class _ProductItemState extends State<ProductItem> {
                       child: AnimatedSwitcher(
                         duration: Duration(milliseconds: 300),
                         child: counterVisible
-                            ? CounterTouch(initialValue: quantity ?? 0, onChanged: onQuantityChange)
+
+
+//                            ? CounterTouch(initialValue: quantity ?? 0, onChanged: onQuantityChange)
+                            ? CounterTouch2()
                             : ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
                                 child: widget.itemUI.image == null ? Icon(Icons.fastfood, color: Colors.black12,) : Image.network(widget.itemUI.image, fit: BoxFit.fill),

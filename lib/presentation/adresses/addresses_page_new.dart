@@ -1,6 +1,6 @@
 import 'package:LaCoro/core/appearance/app_colors.dart';
-import 'package:LaCoro/presentation/adresses/select_address_map_page.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
+import 'package:LaCoro/presentation/adresses/select_address_map_page.dart';
 import 'package:flutter/material.dart';
 
 class AddressesPage extends StatelessWidget {
@@ -28,7 +28,8 @@ class AddressesPage extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(24.0, 10.0, 24.0, 10.0),
         child: Column(
           children: <Widget>[
-            Text(strings.addOrChooseAnAddress, style: Theme.of(context).textTheme.headline1),
+            Text(strings.addOrChooseAnAddress,
+                style: Theme.of(context).textTheme.headline1),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20.0),
               child: Material(
@@ -42,8 +43,10 @@ class AddressesPage extends StatelessWidget {
                       decoration: InputDecoration(
                         hintText: strings.searchYourAddress,
                         hintStyle: Theme.of(context).textTheme.caption,
-                        prefixIcon: Icon(Icons.search, color: AppColors.greyMedium, size: 24),
-                        suffixIcon: Icon(Icons.cancel, color: Colors.black, size: 24),
+                        prefixIcon: Icon(Icons.search,
+                            color: AppColors.greyMedium, size: 24),
+                        suffixIcon:
+                            Icon(Icons.cancel, color: Colors.black, size: 24),
                         border: OutlineInputBorder(),
                         focusedBorder: InputBorder.none,
                         enabledBorder: InputBorder.none,
@@ -62,7 +65,8 @@ class AddressesPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 15.0),
               child: GestureDetector(
-                onTap: () => Navigator.pushNamed(context, SelectAddressMapPage.SELECT_ADDRESS_MAP_ROUTE),
+                onTap: () => Navigator.pushNamed(
+                    context, SelectAddressMapPage.SELECT_ADDRESS_MAP_ROUTE),
                 child: Row(
                   children: <Widget>[
                     Icon(Icons.place, color: Colors.black, size: 24),
@@ -74,7 +78,10 @@ class AddressesPage extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      child: Align(alignment: Alignment.centerRight, child: Icon(Icons.chevron_right, color: Colors.black, size: 24)),
+                      child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Icon(Icons.chevron_right,
+                              color: Colors.black, size: 24)),
                     ),
                   ],
                 ),
@@ -86,7 +93,10 @@ class AddressesPage extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 15.0),
-              child: Align(alignment: Alignment.centerLeft, child: Text(strings.myAddresses, style: Theme.of(context).textTheme.headline5)),
+              child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(strings.myAddresses,
+                      style: Theme.of(context).textTheme.headline5)),
             ),
             Expanded(
               child: ListView.builder(
@@ -94,8 +104,10 @@ class AddressesPage extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return ListTile(
                     onTap: () {},
-                    trailing: Icon(Icons.check_circle, color: AppColors.accentColor, size: 24),
-                    title: Text('${addresses[index]}', style: Theme.of(context).textTheme.bodyText1),
+                    trailing: Icon(Icons.check_circle,
+                        color: AppColors.accentColor, size: 24),
+                    title: Text('${addresses[index]}',
+                        style: Theme.of(context).textTheme.bodyText1),
                   );
                 },
               ),
