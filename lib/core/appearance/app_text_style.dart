@@ -1,9 +1,10 @@
 import 'dart:ui';
+import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+// TODO use [AppColors] class
 class AppTextStyle {
-
   static TextStyle title = GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 28, color: Color(0xff383838)) ;//titulos
   static TextStyle appBar = GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 20, color: Color(0xff383838)) ;//Appbar
   static TextStyle section = GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 18, color: Color(0xff383838));//subsecciones
@@ -11,6 +12,7 @@ class AppTextStyle {
   static TextStyle boldWhite16 = GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 16, color: Color(0xffffffff));//title store en ListStore
   static TextStyle boldBlack16 = GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 16, color: Color(0xff383838));//title store en ListStore
   static TextStyle w500Black16 = GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xff383838));//title popUp
+  static TextStyle accent18 = GoogleFonts.roboto(fontWeight: FontWeight.normal, fontSize: 18, color: AppColors.accentColor);
   static TextStyle blue16 = GoogleFonts.roboto(fontWeight: FontWeight.normal, fontSize: 16, color: Color(0xFF3D9FE6)); //en buscador blue
   static TextStyle black16 = GoogleFonts.roboto(fontWeight: FontWeight.normal, fontSize: 16, color: Color(0xff383838));//direcciones y resultados busqueda
   static TextStyle grey16 = GoogleFonts.roboto(fontWeight: FontWeight.normal, fontSize: 16, color: Color(0xff868686));//#resultados y sug busqueda
