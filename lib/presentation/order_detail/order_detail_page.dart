@@ -165,6 +165,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                   itemUI: element,
                   onQuantityChange: (value) => _bloc.add(UpdateProductEvent(element, value)),
                   quantity: items[element],
+                  quantityVisible: true,
                   divider: false,
                 ),
               );

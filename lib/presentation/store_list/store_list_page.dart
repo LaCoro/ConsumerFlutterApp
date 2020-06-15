@@ -13,10 +13,6 @@ import 'package:LaCoro/presentation/store_details/store_details_page.dart';
 import 'package:LaCoro/presentation/store_list/store_list_bloc.dart';
 import 'package:domain/entities/order_entity.dart';
 import 'package:domain/entities/order_status.dart';
-import 'package:domain/entities/order_status.dart';
-import 'package:domain/entities/order_status.dart';
-import 'package:domain/entities/order_status.dart';
-import 'package:domain/entities/order_status.dart';
 import 'package:domain/use_cases/store_use_cases.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -64,7 +60,7 @@ class _StoreListPageState extends State<StoreListPage> {
 
   @override
   void dispose() {
-    _bloc.close();
+    _focusNode.dispose();
     _textFieldController.dispose();
     super.dispose();
   }
@@ -89,8 +85,9 @@ class _StoreListPageState extends State<StoreListPage> {
           title: GestureDetector(
             onTap: () async {
               await Navigator.pushNamed(context, MyAddressPage.MY_ADDRESS_ROUTE, arguments: [true, true]);
-              _bloc.add(ValidateLastOrderEvent());
-              _bloc.add(GetStoresEvent(searchQuery: _textFieldController.text.toString()));
+              Future.delayed(Duration(seconds: 1), () {
+                _bloc.add(GetStoresEvent(searchQuery: _textFieldController.text.toString()));
+              });
             },
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -220,16 +217,17 @@ class _StoreListPageState extends State<StoreListPage> {
 
   Widget buildList() {
     return ListView.separated(
-        separatorBuilder: (c, i) => SizedBox(height: 24.0),
-        itemBuilder: (c, index) {
-          return InkWell(
-              onTap: () async {
-                if (_focusNode.hasFocus) _textFieldController.clear();
-                await Navigator.pushNamed(context, StoreDetailsPage.STORE_DETAILS_ROUTE, arguments: _stores[index]);
-                _bloc.add(ValidateLastOrderEvent());
-              },
-              child: Hero(tag: _stores[index].name, child: StoreItem(storeItem: _stores[index])));
-        },
-        itemCount: _stores?.length ?? 0);
+      separatorBuilder: (c, i) => SizedBox(height: 24.0),
+      itemCount: _stores?.length ?? 0,
+      itemBuilder: (c, index) {
+        return InkWell(
+            onTap: () async {
+              if (_focusNode.hasFocus) _textFieldController.clear();
+              await Navigator.pushNamed(context, StoreDetailsPage.STORE_DETAILS_ROUTE, arguments: _stores[index]);
+              _bloc.add(ValidateLastOrderEvent());
+            },
+            child: Hero(tag: _stores[index].name, child: StoreItem(storeItem: _stores[index])));
+      },
+    );
   }
 }
