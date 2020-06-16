@@ -37,6 +37,7 @@ class _StoreListPageState extends State<StoreListPage> {
 
   OrderEntity lastOrder;
   List<StoreUI> _stores;
+  String _searchQuery;
   bool _loading = false;
   bool _wasEmpty;
 
@@ -60,6 +61,7 @@ class _StoreListPageState extends State<StoreListPage> {
 
   @override
   void dispose() {
+    _bloc.close();
     _focusNode.dispose();
     _textFieldController.dispose();
     super.dispose();
@@ -85,9 +87,8 @@ class _StoreListPageState extends State<StoreListPage> {
           title: GestureDetector(
             onTap: () async {
               await Navigator.pushNamed(context, MyAddressPage.MY_ADDRESS_ROUTE, arguments: [true, true]);
-              Future.delayed(Duration(seconds: 1), () {
-                _bloc.add(GetStoresEvent(searchQuery: _textFieldController.text.toString()));
-              });
+              _bloc.add(GetStoresEvent(searchQuery: _textFieldController.text.toString()));
+              _bloc.add(ValidateLastOrderEvent());
             },
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -104,23 +105,8 @@ class _StoreListPageState extends State<StoreListPage> {
       body: BlocListener(
         bloc: _bloc,
         listener: (context, state) {
-          setState(() => _loading = false);
           _refreshController.refreshCompleted();
-
-          if (state is LoadingState) setState(() => _loading = true);
-
-          if (state is SuccessState<List<StoreUI>>) setState(() => _stores = state.data);
-
-          if (state is MoreStoresLoadedState) setState(() => _stores.addAll(state.data));
-
-          if (state is SuccessState<OrderEntity>)
-            setState(() {
-              if (state.data.orderStatus.value == OrderStatus.ORDER_PLACED.value || state.data.orderStatus.value == OrderStatus.ORDER_IN_PROGRESS.value) {
-                lastOrder = state.data;
-              }
-            });
-
-          //if (state is ErrorState)// TODO show error banner
+          setState(() => handleCurrentState(state));
         },
         child: Stack(children: [
           Column(
@@ -148,6 +134,7 @@ class _StoreListPageState extends State<StoreListPage> {
                   child: TextField(
                       focusNode: _focusNode,
                       controller: _textFieldController,
+                      onEditingComplete: () => setState(() => _searchQuery = _textFieldController.text.trim()),
                       decoration: InputDecoration(
                         filled: true,
                         //fillColor: Colors.red,
@@ -157,6 +144,7 @@ class _StoreListPageState extends State<StoreListPage> {
                                 icon: Icon(Icons.cancel, color: Colors.black, size: 26),
                                 onPressed: () {
                                   setState(() {
+                                    _searchQuery = null;
                                     _textFieldController.clear();
                                     _textFieldController.text = "";
                                   });
@@ -188,7 +176,7 @@ class _StoreListPageState extends State<StoreListPage> {
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: _textFieldController.text.isEmpty ? SizedBox() : Text('Results by ${_textFieldController.text}'),
+                      child: _searchQuery == null || _searchQuery.isEmpty ? SizedBox() : Text('Search for $_searchQuery'),
                     ),
                     Expanded(
                       child: LazyLoadScrollView(
@@ -215,19 +203,48 @@ class _StoreListPageState extends State<StoreListPage> {
     );
   }
 
+  void handleCurrentState(state) {
+    _loading = false;
+    if (state is LoadingState) {
+      _loading = true;
+    } else if (state is SuccessState<List<StoreUI>>) {
+      _stores = state.data;
+    } else if (state is MoreStoresLoadedState) {
+      _stores.addAll(state.data);
+    } else if (state is SuccessState<OrderEntity>) {
+      setLastOrderInfo(state.data);
+    }
+    //if (state is ErrorState)// TODO show error banner
+  }
+
   Widget buildList() {
     return ListView.separated(
       separatorBuilder: (c, i) => SizedBox(height: 24.0),
       itemCount: _stores?.length ?? 0,
       itemBuilder: (c, index) {
         return InkWell(
-            onTap: () async {
-              if (_focusNode.hasFocus) _textFieldController.clear();
-              await Navigator.pushNamed(context, StoreDetailsPage.STORE_DETAILS_ROUTE, arguments: _stores[index]);
-              _bloc.add(ValidateLastOrderEvent());
-            },
-            child: Hero(tag: _stores[index].name, child: StoreItem(storeItem: _stores[index])));
+          child: Hero(tag: _stores[index].name, child: StoreItem(storeItem: _stores[index])),
+          onTap: () async {
+            if (_focusNode.hasFocus) _textFieldController.clear();
+            await Navigator.pushNamed(context, StoreDetailsPage.STORE_DETAILS_ROUTE, arguments: _stores[index]);
+            _bloc.add(ValidateLastOrderEvent());
+          },
+        );
       },
     );
+  }
+
+  void setLastOrderInfo(OrderEntity order) {
+    if (order.orderStatus.value == OrderStatus.ORDER_PLACED.value || order.orderStatus.value == OrderStatus.ORDER_IN_PROGRESS.value) {
+      lastOrder = order;
+      _bloc.subscribeOrderUpdates(lastOrder, (order) {
+        setState(() {
+          lastOrder = order;
+        });
+      });
+    } else {
+      _bloc.disposeOrderUpdates();
+      lastOrder = null;
+    }
   }
 }

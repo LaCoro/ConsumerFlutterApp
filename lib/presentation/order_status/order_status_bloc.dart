@@ -1,11 +1,9 @@
-import 'dart:convert';
-
 import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/preferences/preferences.dart';
 import 'package:LaCoro/core/pubnub/pub_nub_manager.dart';
 import 'package:domain/entities/order_entity.dart';
-import 'package:domain/entities/order_status.dart';
 import 'package:domain/use_cases/order_use_cases.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pubnub/pubnub.dart';
 
@@ -29,26 +27,26 @@ class OrderStatusBloc extends Bloc<BaseEvent, BaseState> {
   @override
   Stream<BaseState> mapEventToState(BaseEvent event) async* {
     try {
-      if (event is SubscribeOrderUpdatesEvent) {
-        OrderEntity lastOrder = _preferences.getLastOrder();
-        if (lastOrder != null && lastOrder.orderStatus.index < OrderStatus.ORDER_COMPLETED.index) {
-          yield SuccessState(data: lastOrder);
-          String storeChannelId = 'store_${lastOrder.storeEntity.id}';
-          subscription = await PubNubManager.initSubscription(storeChannelId);
-          yield* subscription.messages.map((event) {
-            OrderEntity orderEntity = OrderEntity.fromJsonMap(event.payload);
-            if (orderEntity.id == lastOrder.id) {
-              return SuccessState(data: orderEntity.orderStatus);
-            } else {
-              return null;
-            }
-          });
-        }
-      }
+      // TODO implement
     } catch (error) {
       yield ErrorState();
     }
   }
-}
 
-class SubscribeOrderUpdatesEvent extends BaseEvent {}
+  Future subscribeOrderUpdates(OrderEntity order, ValueChanged<OrderEntity> onOrderUpdated) async {
+    String storeChannelId = 'store_${order.storeEntity.id}';
+    subscription?.dispose();
+    subscription = await PubNubManager.initSubscription(storeChannelId);
+    subscription.messages.listen((event) {
+      try {
+        onOrderUpdated.call(OrderEntity.fromJsonMap(event.payload));
+      } catch (e) {
+        print(e.toString());
+      }
+    });
+  }
+
+  void disposeOrderUpdates() {
+    subscription?.dispose();
+  }
+}

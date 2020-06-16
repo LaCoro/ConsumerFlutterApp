@@ -8,6 +8,8 @@ import 'package:LaCoro/core/ui_utils/custom_widgets/successful_order_banner.dart
 import 'package:LaCoro/presentation/order_status/order_status_bloc.dart';
 import 'package:domain/entities/order_entity.dart';
 import 'package:domain/entities/order_status.dart';
+import 'package:domain/entities/order_status.dart';
+import 'package:domain/entities/order_status.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
@@ -27,12 +29,6 @@ class _OrderStatusPageState extends State<OrderStatusPage> {
   OrderEntity order;
 
   @override
-  void initState() {
-    _bloc.add(SubscribeOrderUpdatesEvent());
-    super.initState();
-  }
-
-  @override
   void dispose() {
     _bloc.close();
     super.dispose();
@@ -41,7 +37,12 @@ class _OrderStatusPageState extends State<OrderStatusPage> {
   @override
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context);
-
+    order = ModalRoute.of(context).settings.arguments;
+    if (order != null && (order.orderStatus.value == OrderStatus.ORDER_PLACED.value || order.orderStatus.value == OrderStatus.ORDER_IN_PROGRESS.value)) {
+      _bloc.subscribeOrderUpdates(order, (value) {
+        setState(() => order = value);
+      });
+    }
     return Scaffold(
       backgroundColor: AppColors.itemBackgroundColor,
       appBar: AppBar(
@@ -51,14 +52,7 @@ class _OrderStatusPageState extends State<OrderStatusPage> {
       body: BlocListener(
         bloc: _bloc,
         condition: (p, c) => true,
-        listener: (BuildContext context, state) {
-          if (state is SuccessState<OrderEntity>) {
-            setState(() => order = state.data);
-          }
-          if (state is SuccessState<OrderStatus>) {
-            setState(() => order.orderStatus = state.data);
-          }
-        },
+        listener: (BuildContext context, state) {},
         child: AnimatedSwitcher(
           duration: Duration(milliseconds: 500),
           child: order == null

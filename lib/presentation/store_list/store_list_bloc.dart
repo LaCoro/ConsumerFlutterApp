@@ -11,6 +11,7 @@ import 'package:domain/entities/store_entity.dart';
 import 'package:domain/result.dart';
 import 'package:domain/use_cases/profile_use_cases.dart';
 import 'package:domain/use_cases/store_use_cases.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:pubnub/pubnub.dart';
@@ -29,7 +30,7 @@ class StoreListBloc extends Bloc<BaseEvent, BaseState> {
 
   @override
   Future<void> close() {
-    subscription?.dispose();
+    disposeOrderUpdates();
     return super.close();
   }
 
@@ -40,11 +41,6 @@ class StoreListBloc extends Bloc<BaseEvent, BaseState> {
         OrderEntity lastOrder = _preferences.getLastOrder();
         if (lastOrder != null && lastOrder.orderStatus.index < OrderStatus.ORDER_COMPLETED.index) {
           yield SuccessState(data: lastOrder);
-          String storeChannelId = 'store_${lastOrder.storeEntity.id}';
-          subscription = await PubNubManager.initSubscription(storeChannelId);
-          yield* subscription.messages.map((event) {
-            return SuccessState(data: lastOrder..orderStatus = OrderStatus.findOrderStatus(event.payload.toString()));
-          });
         }
       } else if (event is GetStoresEvent) {
         yield LoadingState();
@@ -75,6 +71,23 @@ class StoreListBloc extends Bloc<BaseEvent, BaseState> {
   Future<bool> isUserValidated() async {
     final result = await _profileUseCases.getValidSession(_preferences.getProfile());
     return _preferences.getProfile()?.isValidated == true && (result is Success) && result.data == true;
+  }
+
+  Future subscribeOrderUpdates(OrderEntity order, ValueChanged<OrderEntity> onOrderUpdated) async {
+    String storeChannelId = 'store_${order.storeEntity.id}';
+    subscription?.dispose();
+    subscription = await PubNubManager.initSubscription(storeChannelId);
+    subscription.messages.listen((event) {
+      try {
+        onOrderUpdated.call(OrderEntity.fromJsonMap(event.payload));
+      } catch (e) {
+        print(e.toString());
+      }
+    });
+  }
+
+  void disposeOrderUpdates() {
+    subscription?.dispose();
   }
 }
 
