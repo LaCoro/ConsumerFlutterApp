@@ -72,10 +72,10 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                     ),
                     Divider(thickness: 10, height: 24),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+                      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
                       child: buildItemList(_bloc.products),
                     ),
-                    Divider(thickness: 10, height: 50),
+                    Divider(thickness: 10, height: 24),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
                       child: Row(
@@ -160,7 +160,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
         : Column(
             children: items.keys.map((element) {
               return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: ProductItem(
                   itemUI: element,
                   onQuantityChange: (value) => _bloc.add(UpdateProductEvent(element, value)),

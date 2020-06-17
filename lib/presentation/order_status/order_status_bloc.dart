@@ -8,10 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pubnub/pubnub.dart';
 
 class OrderStatusBloc extends Bloc<BaseEvent, BaseState> {
-  final Preferences _preferences;
-  final OrderUseCases _useCases;
 
-  OrderStatusBloc(this._preferences, this._useCases);
+  OrderStatusBloc();
 
   Subscription subscription;
 

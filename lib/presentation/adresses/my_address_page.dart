@@ -63,7 +63,7 @@ class _MyAddressPageState extends State<MyAddressPage> {
     bool allowCityModification = (ModalRoute.of(context).settings.arguments as List)?.elementAt(1) ?? true;
     final strings = AppLocalizations.of(context);
     return Scaffold(
-        appBar: AppBar(elevation: 0),
+        appBar: AppBar(elevation: 0, title: Text(strings.myAddress, style: AppTextStyle.section.copyWith(color: Colors.black))),
         backgroundColor: Theme.of(context).backgroundColor,
         body: BlocListener(
           bloc: _bloc,
@@ -84,100 +84,93 @@ class _MyAddressPageState extends State<MyAddressPage> {
               ? Center(child: CircularProgressIndicator())
               : Container(
                   margin: EdgeInsets.symmetric(horizontal: 24),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Spacer(
-                          flex: 1,
-                        ),
-                        Text(strings.myAddressTitle, style: AppTextStyle.title),
-                        SizedBox(height: 40.0),
-                        GestureDetector(
-                            onTap: allowCityModification == false
-                                ? null
-                                : () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-                                            title: Text("Elige tu ciudad", style: AppTextStyle.section),
-                                            content: citiesDialog(),
-                                          );
-                                        });
-                                  },
-                            child: Container(
-                              height: 50.0,
-                              decoration: BoxDecoration(
-                                border: Border(
-                                  bottom: BorderSide(
-                                    color: Colors.black,
-                                    width: 1.0,
-                                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Spacer(flex: 1),
+                      Text(strings.myAddressTitle, style: AppTextStyle.title),
+                      allowCityModification == false
+                          ? SizedBox(height: 50.0)
+                          : GestureDetector(
+                              onTap: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+                                        title: Text("Elige tu ciudad", style: AppTextStyle.section),
+                                        content: citiesDialog(),
+                                      );
+                                    });
+                              },
+                              child: Container(
+                                height: 40.0,
+                                margin: EdgeInsets.only(top: 50),
+                                decoration: BoxDecoration(
+                                  border: Border(bottom: BorderSide(color: Colors.black, width: 1.0)),
                                 ),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Text(_addressEntity?.cityEntity?.name == null ? strings.city : _addressEntity?.cityEntity?.name, style: AppTextStyle.black16),
-                                  Icon(Icons.keyboard_arrow_down, color: Colors.black, size: 24)
-                                ],
-                              ),
-                            )),
-                        SizedBox(height: 35.0),
-                        TextFormField(
-                          controller: _addressController,
-                          focusNode: _addressFocus,
-                          onChanged: (value) {
-                            setState(() => _addressEntity.address = value);
-                            if (value.isEmpty) {
-                              return strings.addressIsRequired;
-                            }
-                            return null;
-                          },
-                          onEditingComplete: () => _fieldFocusChange(context, _addressFocus, _additionalAddressFocus),
-                          textInputAction: TextInputAction.next,
-                          style: AppTextStyle.black16,
-                          decoration: InputDecoration(
-                            isDense: true,
-                            labelText: strings.address,
-                            labelStyle: AppTextStyle.black16.copyWith(color: _addressFocus.hasFocus ? AppColors.accentColor : Colors.black),
-                            enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.accentColor)),
-                            errorBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
-                          ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Text(_addressEntity?.cityEntity?.name == null ? strings.city : _addressEntity?.cityEntity?.name,
+                                        style: AppTextStyle.black16),
+                                    Icon(Icons.keyboard_arrow_down, color: Colors.black, size: 24)
+                                  ],
+                                ),
+                              )),
+                      SizedBox(height: 35.0),
+                      TextFormField(
+                        controller: _addressController,
+                        focusNode: _addressFocus,
+                        onChanged: (value) {
+                          setState(() => _addressEntity.address = value);
+                          if (value.isEmpty) {
+                            return strings.addressIsRequired;
+                          }
+                          return null;
+                        },
+                        onEditingComplete: () => _fieldFocusChange(context, _addressFocus, _additionalAddressFocus),
+                        textInputAction: TextInputAction.next,
+                        style: AppTextStyle.black16,
+                        decoration: InputDecoration(
+                          isDense: true,
+                          labelText: strings.address,
+                          labelStyle: AppTextStyle.black16.copyWith(color: _addressFocus.hasFocus ? AppColors.accentColor : Colors.black),
+                          enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.accentColor)),
+                          errorBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
                         ),
-                        SizedBox(height: 35.0),
-                        TextFormField(
-                          controller: _additionalAddressController,
-                          focusNode: _additionalAddressFocus,
-                          onChanged: (value) => setState(() => _addressEntity.additionalAddress = value),
-                          onEditingComplete: () => _additionalAddressFocus.unfocus(),
-                          textInputAction: TextInputAction.done,
-                          style: AppTextStyle.black16,
-                          decoration: InputDecoration(
-                            suffixText: strings.optionalField,
-                            suffixStyle: AppTextStyle.grey16,
-                            isDense: true,
-                            labelText: strings.additionalAddressInfo,
-                            labelStyle: AppTextStyle.black16.copyWith(color: _additionalAddressFocus.hasFocus ? AppColors.accentColor : Colors.black),
-                            enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.accentColor)),
-                            errorBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
-                          ),
+                      ),
+                      SizedBox(height: 35.0),
+                      TextFormField(
+                        controller: _additionalAddressController,
+                        focusNode: _additionalAddressFocus,
+                        onChanged: (value) => setState(() => _addressEntity.additionalAddress = value),
+                        onEditingComplete: () => _additionalAddressFocus.unfocus(),
+                        textInputAction: TextInputAction.done,
+                        style: AppTextStyle.black16,
+                        decoration: InputDecoration(
+                          suffixText: strings.optionalField,
+                          suffixStyle: AppTextStyle.grey16,
+                          isDense: true,
+                          labelText: strings.additionalAddressInfo,
+                          labelStyle: AppTextStyle.black16.copyWith(color: _additionalAddressFocus.hasFocus ? AppColors.accentColor : Colors.black),
+                          enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.accentColor)),
+                          errorBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
                         ),
-                        PrimaryButton(
-                            margin: const EdgeInsets.symmetric(vertical: 36.0),
-                            buttonText: strings.continu,
-                            onPressed: _addressEntity?.cityEntity == null || _addressEntity.address?.isEmpty != false
-                                ? null
-                                : () => _bloc.add(SubmitAddressSelected(_addressEntity))),
-                        Spacer(
-                          flex: 3,
-                        ),
-                      ],
-                    ),
+                      ),
+                      PrimaryButton(
+                          margin: const EdgeInsets.symmetric(vertical: 36.0),
+                          buttonText: strings.continu,
+                          onPressed: _addressEntity?.cityEntity == null || _addressEntity.address?.isEmpty != false
+                              ? null
+                              : () => _bloc.add(SubmitAddressSelected(_addressEntity))),
+                      Spacer(
+                        flex: 3,
+                      ),
+                    ],
                   ),
                 ),
         ));

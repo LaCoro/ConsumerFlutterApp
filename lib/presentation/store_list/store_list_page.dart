@@ -219,7 +219,7 @@ class _StoreListPageState extends State<StoreListPage> {
 
   Widget buildList() {
     return ListView.separated(
-      separatorBuilder: (c, i) => SizedBox(height: 24.0),
+      separatorBuilder: (c, i) => SizedBox(height: 16.0),
       itemCount: _stores?.length ?? 0,
       itemBuilder: (c, index) {
         return InkWell(
