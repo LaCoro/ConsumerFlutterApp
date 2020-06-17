@@ -6,6 +6,7 @@ import 'package:LaCoro/core/ui_utils/custom_widgets/order_status_banner.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/store_item.dart';
 import 'package:LaCoro/core/ui_utils/model/store_ui.dart';
 import 'package:LaCoro/presentation/adresses/my_address_page.dart';
+import 'package:LaCoro/presentation/drawer/drawer_menu.dart';
 import 'package:LaCoro/presentation/order_history/order_history_page.dart';
 import 'package:LaCoro/presentation/order_status/order_status_page.dart';
 import 'package:LaCoro/presentation/register/register_page.dart';
@@ -73,6 +74,7 @@ class _StoreListPageState extends State<StoreListPage> {
     final currentAddress = _bloc.loadSavedAddress();
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
+      drawer: DrawerMenu(),
       appBar: AppBar(
           elevation: 0,
           actions: <Widget>[

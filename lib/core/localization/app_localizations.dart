@@ -61,6 +61,9 @@ class AppLocalizations {
       'ORDER_IN_PROGRESS': 'Order in progress',
       'ORDER_COMPLETED': 'Order completed',
       'ORDER_CANCELED': 'Order canceled',
+      'edit_profile': 'Edit profile',
+      'about_us': 'About us',
+      'log_out': 'Log out'
     },
     'es': {
       'total': 'Total',
@@ -107,12 +110,15 @@ class AppLocalizations {
       'city': 'Ciudad',
       'additional_address_info': 'Piso / Offinica / Apto',
       'address': 'Dirección',
-      'address_is_required': 'Por favor entre una direccion',
+      'address_is_required': 'Por favor entre una dirección',
       'order_history': 'Historial de Ordenes',
       'ORDER_PLACED': 'Orden creada',
       'ORDER_IN_PROGRESS': 'Orden en curso',
       'ORDER_COMPLETED': 'Orden finalizada',
       'ORDER_CANCELED': 'Orden cancelada',
+      'edit_profile': 'Editar perfil',
+      'about_us': 'Acerca de nosotros',
+      'log_out': 'Cerrar sesión'
     },
   };
 
@@ -209,4 +215,10 @@ class AppLocalizations {
   String get addressIsRequired => _localizedValues[locale.languageCode]['address_is_required'];
 
   String get orderHistory => _localizedValues[locale.languageCode]['order_history'];
+
+  String get editProfile => _localizedValues[locale.languageCode]['edit_profile'];
+
+  String get aboutUs => _localizedValues[locale.languageCode]['about_us'];
+
+  String get logOut => _localizedValues[locale.languageCode]['log_out'];
 }
