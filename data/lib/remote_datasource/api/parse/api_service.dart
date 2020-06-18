@@ -23,4 +23,7 @@ abstract class ApiService {
   Future<ParseResponse> submitUserRegister(UserEntity user);
 
   Future<ParseUser> getCurrentUser(String sessionToken);
+
+  Future<ParseResponse> getOrderById(String id);
+
 }

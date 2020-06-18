@@ -107,4 +107,9 @@ class ApiServiceImpl extends ApiService {
 
     return parseUser as ParseUser;
   }
+
+  @override
+  Future<ParseResponse> getOrderById(String id) async {
+    return await Order().getObject(id);
+  }
 }

@@ -18,4 +18,8 @@ class OrderUseCases {
   Future<Result> getUserOrders(int page, {int size = PAGE_SIZE}) async {
     return _repository.getUserOrders(page, size);
   }
+
+  Future<Result> getOrderById(String id) async {
+    return _repository.getOrderById(id);
+  }
 }

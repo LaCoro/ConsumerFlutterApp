@@ -51,12 +51,12 @@ class AppModule {
     injector.map<OrderUseCases>((injector) => OrderUseCases(injector.get()));
     // BLoC
     injector.map<MyAddressBloc>((injector) => MyAddressBloc(injector.get(), injector.get()));
-    injector.map<StoreListBloc>((injector) => StoreListBloc(injector.get(), injector.get(), injector.get()));
+    injector.map<StoreListBloc>((injector) => StoreListBloc(injector.get(), injector.get(), injector.get(), injector.get()));
     injector.map<StoreDetailsBloc>((injector) => StoreDetailsBloc(injector.get()));
     injector.map<OrderDetailsBloc>((injector) => OrderDetailsBloc(injector.get(), injector.get(), injector.get()));
     injector.map<RegisterBloc>((injector) => RegisterBloc(injector.get(), injector.get()));
     injector.map<CheckoutBloc>((injector) => CheckoutBloc(injector.get(), injector.get()));
-    injector.map<OrderStatusBloc>((injector) => OrderStatusBloc());
+    injector.map<OrderStatusBloc>((injector) => OrderStatusBloc(injector.get(), injector.get()));
     injector.map<OrderHistoryBloc>((injector) => OrderHistoryBloc(injector.get(), injector.get()));
     return injector;
   }

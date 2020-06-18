@@ -66,4 +66,15 @@ class OrderApi {
 
     return response.result as Order;
   }
+
+  Future<Order> getOrderById(String id) async {
+    ParseResponse response = await apiService.getOrderById(id);
+    if (response.success && response.count > 0) {
+      Order order = response.result as Order;
+      order.storeEntity = (await apiService.getStore(order.store.objectId)).result as Store;
+      return order;
+    } else {
+      throw ServiceError();
+    }
+  }
 }

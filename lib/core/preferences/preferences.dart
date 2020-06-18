@@ -32,7 +32,11 @@ class Preferences {
   }
 
   Future<bool> saveProfile(UserEntity user) async {
-    return await _preferences.setString(PROFILE, json.encode(UserEntity.toJsonObject(user)));
+    if(user == null) {
+      return await _preferences.setString(PROFILE, null);
+    } else {
+      return await _preferences.setString(PROFILE, json.encode(UserEntity.toJsonObject(user)));
+    }
   }
 
   UserEntity getProfile() {
@@ -45,7 +49,11 @@ class Preferences {
   }
 
   Future saveLastOrder(OrderEntity order) async {
-    return await _preferences.setString(LAST_ORDER, json.encode(OrderEntity.toJsonObject(order)));
+    if(order == null) {
+      return await _preferences.setString(LAST_ORDER, null);
+    } else {
+      return await _preferences.setString(LAST_ORDER, json.encode(OrderEntity.toJsonObject(order)));
+    }
   }
 
   OrderEntity getLastOrder() {

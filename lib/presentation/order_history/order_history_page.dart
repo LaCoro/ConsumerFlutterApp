@@ -3,6 +3,7 @@ import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
 import 'package:LaCoro/core/pubnub/pub_nub_manager.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/order_card_info.dart';
+import 'package:LaCoro/presentation/order_detail/order_detail_page.dart';
 import 'package:LaCoro/presentation/order_history/order_history_bloc.dart';
 import 'package:domain/entities/order_entity.dart';
 import 'package:domain/entities/order_status.dart';
@@ -81,13 +82,8 @@ class _OrderHistoryPageState extends State<OrderHistoryPage> {
         itemBuilder: (c, index) {
           return InkWell(
               onTap: () async {
-                //todo remove this
-                _orders[index].orderStatus = OrderStatus.ORDER_IN_PROGRESS;
-                PubNubManager.publishMessage('store_${_orders[index].storeEntity.id}', OrderEntity.toJsonObject(_orders[index]));
-                ///////////////
-
-//                await Navigator.pushNamed(context, OrderDetailPage.ORDER_DETAIL_ROUTE, arguments: _orders[index]);
-//                setState(() {});
+                await Navigator.pushNamed(context, OrderDetailPage.ORDER_DETAIL_ROUTE, arguments: _orders[index]);
+                setState(() {});
               },
               child: OrderCardInfo(orderEntity: _orders[index]));
         },

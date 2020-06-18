@@ -1,29 +1,32 @@
+import 'dart:convert';
+
 import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/preferences/preferences.dart';
 import 'package:LaCoro/core/pubnub/pub_nub_manager.dart';
 import 'package:LaCoro/core/ui_utils/mappers/store_ui_mapper.dart';
 import 'package:LaCoro/core/ui_utils/model/store_ui.dart';
-import 'package:LaCoro/presentation/order_status/order_status_page.dart';
 import 'package:domain/entities/address_entity.dart';
 import 'package:domain/entities/order_entity.dart';
 import 'package:domain/entities/order_status.dart';
 import 'package:domain/entities/store_entity.dart';
 import 'package:domain/result.dart';
+import 'package:domain/use_cases/order_use_cases.dart';
 import 'package:domain/use_cases/profile_use_cases.dart';
 import 'package:domain/use_cases/store_use_cases.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:pubnub/pubnub.dart';
 
 class StoreListBloc extends Bloc<BaseEvent, BaseState> {
   final StoreUseCases _storeUseCases;
   final ProfileUseCases _profileUseCases;
+  final OrderUseCases _orderUseCases;
+
   final Preferences _preferences;
   int _page = 0;
   Subscription subscription;
 
-  StoreListBloc(this._storeUseCases, this._profileUseCases, this._preferences);
+  StoreListBloc(this._storeUseCases, this._profileUseCases, this._preferences, this._orderUseCases);
 
   @override
   BaseState get initialState => InitialState();
@@ -37,10 +40,21 @@ class StoreListBloc extends Bloc<BaseEvent, BaseState> {
   @override
   Stream<BaseState> mapEventToState(BaseEvent event) async* {
     try {
-      if (event is ValidateLastOrderEvent) {
+      if (event is LoadLastOrderEvent) {
         OrderEntity lastOrder = _preferences.getLastOrder();
-        if (lastOrder != null && lastOrder.orderStatus.index < OrderStatus.ORDER_COMPLETED.index) {
-          yield SuccessState(data: lastOrder);
+        if (lastOrder != null) {
+          yield LoadingState();
+          final result = await _orderUseCases.getOrderById(lastOrder.id);
+          if (result is Success<OrderEntity>) {
+            if (result.data.orderStatus.index < OrderStatus.ORDER_COMPLETED.index) {
+              yield SuccessState(data: result.data);
+            } else {
+              _preferences.saveLastOrder(null);
+              yield SuccessState<OrderEntity>(data:  null);
+            }
+          } else {
+            yield SuccessState<OrderEntity>(data: null);
+          }
         }
       } else if (event is GetStoresEvent) {
         yield LoadingState();
@@ -79,7 +93,9 @@ class StoreListBloc extends Bloc<BaseEvent, BaseState> {
     subscription = await PubNubManager.initSubscription(storeChannelId);
     subscription.messages.listen((event) {
       try {
-        onOrderUpdated.call(OrderEntity.fromJsonMap(event.payload));
+        OrderEntity order = OrderEntity.fromJsonMap(json.decode(event.payload));
+        _preferences.saveLastOrder(order);
+        onOrderUpdated.call(order);
       } catch (e) {
         print(e.toString());
       }
@@ -104,7 +120,7 @@ class LoadMoreStoresEvent extends BaseEvent {
   LoadMoreStoresEvent({this.searchQuery});
 }
 
-class ValidateLastOrderEvent extends BaseEvent {}
+class LoadLastOrderEvent extends BaseEvent {}
 
 /// states
 class MoreStoresLoadedState extends BaseState {
