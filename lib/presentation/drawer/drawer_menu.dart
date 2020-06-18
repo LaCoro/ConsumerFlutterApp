@@ -8,6 +8,11 @@ import 'package:flutter/material.dart';
 class DrawerMenu extends StatelessWidget{
 
   String userName;
+  final Function onHistoryPressed;
+  final Function onEditPressed;
+  final Function onSettingsPressed;
+
+  DrawerMenu({this.userName, this.onHistoryPressed, this.onEditPressed, this.onSettingsPressed}){}
 
   @override
   Widget build(BuildContext context) {
@@ -15,49 +20,38 @@ class DrawerMenu extends StatelessWidget{
 
     return Drawer(
       elevation: 20,
-          child: ListView(
+          child: Column(
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(top:30.0),
+                padding: const EdgeInsets.only(top:100.0),
                 child: CircleAvatar(
                   backgroundColor: AppColors.accentColor,
                   radius: 70.0,
-                  child: Text("A", style: TextStyle(fontSize: 60.0)),
+                  child: Text(userName?.substring(0, 1) ?? 'LC', style: TextStyle(fontSize: 60.0)),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 30.0),
                 child: ListTile(
-                  leading: Icon(Icons.edit, color: AppColors.greyMedium),
-                  title: Text('Editar Perfil', style: AppTextStyle.black16.copyWith(fontSize: 18),),
-                  onTap: () {
-                    // Update the state of the app.
-                  },
+                  leading: Icon(Icons.history, color: AppColors.greyMedium),
+                  title: Text(strings.history, style: AppTextStyle.black16.copyWith(fontSize: 18),),
+                  onTap: onHistoryPressed,
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: ListTile(
-                  leading: Icon(Icons.info, color: AppColors.greyMedium),
-                  title: Text('Acerca de nosotros', style: AppTextStyle.black16.copyWith(fontSize: 18),),
-                  onTap: () {
-                    // Update the state of the app.
-                  },
+                  leading: Icon(Icons.edit, color: AppColors.greyMedium),
+                  title: Text(strings.editProfile, style: AppTextStyle.black16.copyWith(fontSize: 18),),
+                  onTap: onEditPressed,
                 ),
               ),
-              Expanded(
-                child: Align(
-                  alignment: FractionalOffset.bottomCenter,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 10.0),
-                    child: ListTile(
-                      leading: Icon(Icons.power_settings_new, color: AppColors.greyMedium),
-                      title: Text('Cerrar sesión', style: AppTextStyle.black16.copyWith(fontSize: 18),),
-                      onTap: () {
-                        // Update the state of the app.
-                      },
-                    ),
-                  ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: ListTile(
+                  leading: Icon(Icons.settings, color: AppColors.greyMedium),
+                  title: Text(strings.settings, style: AppTextStyle.black16.copyWith(fontSize: 18),),
+                  onTap: onSettingsPressed,
                 ),
               ),
             ],

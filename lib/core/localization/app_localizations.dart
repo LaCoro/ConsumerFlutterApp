@@ -63,7 +63,9 @@ class AppLocalizations {
       'ORDER_CANCELED': 'Order canceled',
       'edit_profile': 'Edit profile',
       'about_us': 'About us',
-      'log_out': 'Log out'
+      'log_out': 'Log out',
+      'history': 'History',
+      'settings': 'Settings',
     },
     'es': {
       'total': 'Total',
@@ -118,7 +120,9 @@ class AppLocalizations {
       'ORDER_CANCELED': 'Orden cancelada',
       'edit_profile': 'Editar perfil',
       'about_us': 'Acerca de nosotros',
-      'log_out': 'Cerrar sesión'
+      'log_out': 'Cerrar sesión',
+      'history': 'Histórico',
+      'settings': 'Configuración'
     },
   };
 
@@ -221,4 +225,9 @@ class AppLocalizations {
   String get aboutUs => _localizedValues[locale.languageCode]['about_us'];
 
   String get logOut => _localizedValues[locale.languageCode]['log_out'];
+
+  String get history => _localizedValues[locale.languageCode]['history'];
+
+  String get settings => _localizedValues[locale.languageCode]['settings'];
+
 }
