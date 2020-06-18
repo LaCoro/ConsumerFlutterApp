@@ -30,9 +30,19 @@ class OrderRepositoryImpl extends OrderRepository {
   }
 
   @override
-  Future<Result> getOrderById(String id) async {
+  Future<Result> getOrderById(String orderId) async {
     try {
-      final order = await _remoteDataSource.getOrderById(id);
+      final order = await _remoteDataSource.getOrderById(orderId);
+      return Success(order);
+    } catch (e) {
+      return Failure(e);
+    }
+  }
+
+  @override
+  Future<Result> getOrderProducts(String orderId) async {
+    try {
+      final order = await _remoteDataSource.getOrderProducts(orderId);
       return Success(order);
     } catch (e) {
       return Failure(e);

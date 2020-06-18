@@ -6,6 +6,7 @@ import 'package:LaCoro/presentation/checkout/checkout_page.dart';
 import 'package:LaCoro/presentation/order_detail/order_detail_page.dart';
 import 'package:LaCoro/presentation/order_history/order_history_page.dart';
 import 'package:LaCoro/presentation/order_status/order_status_page.dart';
+import 'package:LaCoro/presentation/past_order_detail/past_order_detail_page.dart';
 import 'package:LaCoro/presentation/register/pin_page.dart';
 import 'package:LaCoro/presentation/register/register_page.dart';
 import 'package:LaCoro/presentation/splash/splash.dart';
@@ -83,6 +84,9 @@ class MyApp extends StatelessWidget {
               break;
             case MyAddressPage.MY_ADDRESS_ROUTE:
               destinationRoute = MyAddressPage();
+              break;
+            case PastOrderDetailPage.PAST_ORDER_DETAIL_ROUTE:
+              destinationRoute = PastOrderDetailPage();
               break;
           }
           return MaterialPageRoute(builder: (context) => destinationRoute, settings: settings);

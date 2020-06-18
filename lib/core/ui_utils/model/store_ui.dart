@@ -9,13 +9,13 @@ class StoreUI {
 
   String placeHolderAsset;
   String discountPercentage;
-  int deliveryCost;
 
   String name;
   String openAt;
   String closeAt;
   bool active;
   String logo;
+  int deliveryCost;
   StoreEntity storeEntity;
 
   StoreUI.fromEntity(StoreEntity store)
@@ -23,6 +23,7 @@ class StoreUI {
         storeEntity = store,
         name = store.name,
         logo = store.logo,
+        deliveryCost = store.deliveryCost,
         openAt = store.openAt,
         closeAt = store.closeAt;
 

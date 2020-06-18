@@ -19,7 +19,11 @@ class OrderUseCases {
     return _repository.getUserOrders(page, size);
   }
 
-  Future<Result> getOrderById(String id) async {
-    return _repository.getOrderById(id);
+  Future<Result> getOrderById(String orderId) async {
+    return _repository.getOrderById(orderId);
+  }
+
+  Future<Result> getOrderProducts(String orderId) async {
+    return _repository.getOrderProducts(orderId);
   }
 }

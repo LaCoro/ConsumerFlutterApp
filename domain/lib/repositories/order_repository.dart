@@ -7,5 +7,7 @@ abstract class OrderRepository {
 
   Future<Result> getUserOrders(int page, int size);
 
-  Future<Result> getOrderById(String id);
-}
+  Future<Result> getOrderById(String orderId);
+
+  Future<Result> getOrderProducts(String orderId);
+  }

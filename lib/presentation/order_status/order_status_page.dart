@@ -6,6 +6,7 @@ import 'package:LaCoro/core/ui_utils/custom_widgets/order_card_info.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/stepper_bar.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/successful_order_banner.dart';
 import 'package:LaCoro/presentation/order_status/order_status_bloc.dart';
+import 'package:LaCoro/presentation/past_order_detail/past_order_detail_page.dart';
 import 'package:domain/entities/order_entity.dart';
 import 'package:domain/entities/order_status.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +66,9 @@ class _OrderStatusPageState extends State<OrderStatusPage> {
                     SuccessfulOrderBanner(),
                     StepperBar(currentOrder.orderStatus.index + 1, 3, strings.getText(currentOrder.orderStatus.value)),
                     Divider(thickness: 8, height: 8),
-                    OrderCardInfo(orderEntity: currentOrder),
+                    InkWell(
+                        onTap: () => Navigator.pushNamed(context, PastOrderDetailPage.PAST_ORDER_DETAIL_ROUTE, arguments: currentOrder),
+                        child: OrderCardInfo(orderEntity: currentOrder)),
                     Divider(thickness: 8, height: 8),
                     SizedBox(height: 24.0),
                     Padding(

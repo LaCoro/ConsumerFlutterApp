@@ -26,4 +26,6 @@ class OrderDetail extends ParseObject with OrderDetailEntity implements ParseClo
 
   set notes(String notes) => set<String>(keyNotes, notes);
 
+  ParseObject get product => get<ParseObject>(keyProduct);
+
 }

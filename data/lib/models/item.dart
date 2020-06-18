@@ -12,7 +12,7 @@ class Item extends ParseObject with ItemEntity implements ParseCloneable {
   clone(Map map) => Item.clone()..fromJson(map);
 
   static const String _keyTableName = 'Item';
-
+  static const String keyObjectId = 'objectId';
   static const String keyName = 'name';
   static const String keyDescription = 'description';
   static const String keyPrice = 'price';
