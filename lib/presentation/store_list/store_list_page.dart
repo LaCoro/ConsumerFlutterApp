@@ -6,6 +6,7 @@ import 'package:LaCoro/core/ui_utils/custom_widgets/order_status_banner.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/store_item.dart';
 import 'package:LaCoro/core/ui_utils/model/store_ui.dart';
 import 'package:LaCoro/presentation/adresses/my_address_page.dart';
+import 'package:LaCoro/presentation/drawer/drawer_menu.dart';
 import 'package:LaCoro/presentation/order_history/order_history_page.dart';
 import 'package:LaCoro/presentation/order_status/order_status_page.dart';
 import 'package:LaCoro/presentation/register/register_page.dart';
@@ -75,15 +76,14 @@ class _StoreListPageState extends State<StoreListPage> {
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
           elevation: 0,
-          actions: <Widget>[
-            IconButton(
-              onPressed: () async {
-                await Navigator.pushNamed(context, await _bloc.isUserValidated() ? OrderHistoryPage.ORDER_HISTORY_ROUTE : RegisterPage.REGISTER_ROUTE);
-                _bloc.add(LoadLastOrderEvent());
-              },
-              icon: Padding(padding: const EdgeInsets.all(8.0), child: Icon(Icons.history)),
-            ),
-          ],
+      drawer: DrawerMenu(
+        onHistoryPressed: () async {
+          await Navigator.pushNamed(context, await _bloc.isUserValidated() ? OrderHistoryPage.ORDER_HISTORY_ROUTE : RegisterPage.REGISTER_ROUTE);
+          _bloc.add(LoadLastOrderEvent());
+        },
+      ),
+      appBar: AppBar(
+          elevation: 0,
           title: GestureDetector(
             onTap: () async {
               await Navigator.pushNamed(context, MyAddressPage.MY_ADDRESS_ROUTE, arguments: [true, true]);
