@@ -74,8 +74,6 @@ class _StoreListPageState extends State<StoreListPage> {
     final currentAddress = _bloc.loadSavedAddress();
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      appBar: AppBar(
-          elevation: 0,
       drawer: DrawerMenu(
         onHistoryPressed: () async {
           await Navigator.pushNamed(context, await _bloc.isUserValidated() ? OrderHistoryPage.ORDER_HISTORY_ROUTE : RegisterPage.REGISTER_ROUTE);
