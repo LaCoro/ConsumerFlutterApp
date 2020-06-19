@@ -35,6 +35,7 @@ class AppLocalizations {
       'add_or_choose_an_address': 'Add or choose and address',
       'search_your_address': 'Search you address',
       'use_my_location': 'Use my current location',
+      'my_address': 'My address',
       'my_addresses': 'My addresses',
       'successful_order': 'Successful order',
       'delivery_address': 'Delivery address',
@@ -105,6 +106,7 @@ class AppLocalizations {
       'add_or_choose_an_address': 'Agrega o escoge una dirección',
       'search_your_address': 'Buscar tu dirección',
       'use_my_location': 'Usar mi ubicación actual',
+      'my_address': 'Mi dirección',
       'my_addresses': 'Mis direcciones',
       'your_order': 'Tu pedido',
       'comments': 'Comentarios',
@@ -183,6 +185,8 @@ class AppLocalizations {
   String get searchYourAddress => _localizedValues[locale.languageCode]['search_your_address'];
 
   String get useMyLocation => _localizedValues[locale.languageCode]['use_my_location'];
+
+  String get myAddress => _localizedValues[locale.languageCode]['my_address'];
 
   String get myAddresses => _localizedValues[locale.languageCode]['my_addresses'];
 

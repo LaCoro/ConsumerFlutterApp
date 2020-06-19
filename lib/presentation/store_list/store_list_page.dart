@@ -49,7 +49,7 @@ class _StoreListPageState extends State<StoreListPage> {
       //TODO no funciona el desenfoque del textLabel al regresar a la lista
     });
     _bloc.add(GetStoresEvent(searchQuery: _textFieldController.text.toString()));
-    _bloc.add(ValidateLastOrderEvent());
+    _bloc.add(LoadLastOrderEvent());
 
     _wasEmpty = _textFieldController.text.isEmpty;
     _textFieldController.addListener(() {
@@ -74,10 +74,12 @@ class _StoreListPageState extends State<StoreListPage> {
     final currentAddress = _bloc.loadSavedAddress();
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
+      appBar: AppBar(
+          elevation: 0,
       drawer: DrawerMenu(
         onHistoryPressed: () async {
           await Navigator.pushNamed(context, await _bloc.isUserValidated() ? OrderHistoryPage.ORDER_HISTORY_ROUTE : RegisterPage.REGISTER_ROUTE);
-          _bloc.add(ValidateLastOrderEvent());
+          _bloc.add(LoadLastOrderEvent());
         },
       ),
       appBar: AppBar(
@@ -86,7 +88,7 @@ class _StoreListPageState extends State<StoreListPage> {
             onTap: () async {
               await Navigator.pushNamed(context, MyAddressPage.MY_ADDRESS_ROUTE, arguments: [true, true]);
               _bloc.add(GetStoresEvent(searchQuery: _textFieldController.text.toString()));
-              _bloc.add(ValidateLastOrderEvent());
+              _bloc.add(LoadLastOrderEvent());
             },
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -104,7 +106,7 @@ class _StoreListPageState extends State<StoreListPage> {
         bloc: _bloc,
         listener: (context, state) {
           _refreshController.refreshCompleted();
-          setState(() => handleCurrentState(state));
+          handleCurrentState(state);
         },
         child: Stack(children: [
           Column(
@@ -115,8 +117,8 @@ class _StoreListPageState extends State<StoreListPage> {
                     ? SizedBox(height: 8)
                     : InkWell(
                         onTap: () async {
-                          await Navigator.pushNamed(context, OrderStatusPage.ORDER_STATUS_ROUTE, arguments: lastOrder);
-                          _bloc.add(ValidateLastOrderEvent());
+                          await Navigator.pushNamed(context, OrderStatusPage.ORDER_STATUS_ROUTE);
+                          _bloc.add(LoadLastOrderEvent());
                         },
                         child: OrderStatusBanner(),
                       ),
@@ -202,13 +204,14 @@ class _StoreListPageState extends State<StoreListPage> {
   }
 
   void handleCurrentState(state) {
-    _loading = false;
+    setState(() => _loading = false);
+
     if (state is LoadingState) {
-      _loading = true;
+      setState(() => _loading = true);
     } else if (state is SuccessState<List<StoreUI>>) {
-      _stores = state.data;
+      setState(() => _stores = state.data);
     } else if (state is MoreStoresLoadedState) {
-      _stores.addAll(state.data);
+      setState(() => _stores.addAll(state.data));
     } else if (state is SuccessState<OrderEntity>) {
       setLastOrderInfo(state.data);
     }
@@ -217,7 +220,7 @@ class _StoreListPageState extends State<StoreListPage> {
 
   Widget buildList() {
     return ListView.separated(
-      separatorBuilder: (c, i) => SizedBox(height: 24.0),
+      separatorBuilder: (c, i) => SizedBox(height: 16.0),
       itemCount: _stores?.length ?? 0,
       itemBuilder: (c, index) {
         return InkWell(
@@ -225,7 +228,7 @@ class _StoreListPageState extends State<StoreListPage> {
           onTap: () async {
             if (_focusNode.hasFocus) _textFieldController.clear();
             await Navigator.pushNamed(context, StoreDetailsPage.STORE_DETAILS_ROUTE, arguments: _stores[index]);
-            _bloc.add(ValidateLastOrderEvent());
+            _bloc.add(LoadLastOrderEvent());
           },
         );
       },
@@ -233,16 +236,16 @@ class _StoreListPageState extends State<StoreListPage> {
   }
 
   void setLastOrderInfo(OrderEntity order) {
-    if (order.orderStatus.value == OrderStatus.ORDER_PLACED.value || order.orderStatus.value == OrderStatus.ORDER_IN_PROGRESS.value) {
-      lastOrder = order;
-      _bloc.subscribeOrderUpdates(lastOrder, (order) {
+    if (order != null && (order.orderStatus.value == OrderStatus.ORDER_PLACED.value || order.orderStatus.value == OrderStatus.ORDER_IN_PROGRESS.value)) {
+      setState(() => lastOrder = order);
+      _bloc.subscribeOrderUpdates(order, (order) {
         setState(() {
           lastOrder = order;
         });
       });
     } else {
       _bloc.disposeOrderUpdates();
-      lastOrder = null;
+      setState(() => lastOrder = null);
     }
   }
 }

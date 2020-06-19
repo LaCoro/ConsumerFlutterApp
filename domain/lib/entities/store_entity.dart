@@ -25,14 +25,14 @@ class StoreEntity {
     return StoreEntity()
       ..id = json['id']
       ..name = json['name']
-      ..searchTags = json['searchTags'].cast<String>()
+      ..searchTags = json['searchTags']?.cast<String>()
       ..address = json['address']
       ..city = json['city']
       ..country = json['country']
       ..mobile = json['mobile']
       ..openAt = json['openAt']
       ..closeAt = json['closeAt']
-      ..daysOpen = json['daysOpen'].cast<int>()
+      ..daysOpen = json['daysOpen']?.cast<int>()
       ..logo = json['logo']
       ..hasDeliveryService = json['hasDeliveryService']
       ..active = json['active']

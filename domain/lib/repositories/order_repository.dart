@@ -6,4 +6,8 @@ abstract class OrderRepository {
   Future<Result> submitOrder(OrderEntity orderEntity, UserEntity userEntity);
 
   Future<Result> getUserOrders(int page, int size);
-}
+
+  Future<Result> getOrderById(String orderId);
+
+  Future<Result> getOrderProducts(String orderId);
+  }

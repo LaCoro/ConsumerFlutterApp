@@ -1,3 +1,4 @@
+import 'package:data/models/item.dart';
 import 'package:data/models/order.dart';
 import 'package:data/models/order_detail.dart';
 import 'package:data/models/user.dart';
@@ -23,4 +24,9 @@ abstract class ApiService {
   Future<ParseResponse> submitUserRegister(UserEntity user);
 
   Future<ParseUser> getCurrentUser(String sessionToken);
+
+  Future<ParseResponse> getOrderById(String orderId);
+
+  Future<Map<Item, int>> getOrderItems(String orderId);
+
 }

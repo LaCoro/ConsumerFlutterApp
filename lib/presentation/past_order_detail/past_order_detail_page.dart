@@ -5,34 +5,36 @@ import 'package:LaCoro/core/extensions/number_extensions.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/primary_button.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/product_item.dart';
+import 'package:LaCoro/core/ui_utils/custom_widgets/product_item_info.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/store_item_small.dart';
 import 'package:LaCoro/core/ui_utils/model/item_ui.dart';
+import 'package:LaCoro/core/ui_utils/model/store_ui.dart';
 import 'package:LaCoro/presentation/checkout/checkout_page.dart';
 import 'package:LaCoro/presentation/order_detail/order_details_bloc.dart';
+import 'package:LaCoro/presentation/past_order_detail/past_order_details_bloc.dart';
 import 'package:LaCoro/presentation/register/register_page.dart';
+import 'package:domain/entities/order_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
-class OrderDetailPage extends StatefulWidget {
-  static const ORDER_DETAIL_ROUTE = '/order_detail_route';
+class PastOrderDetailPage extends StatefulWidget {
+  static const PAST_ORDER_DETAIL_ROUTE = '/past_order_detail_route';
 
   @override
-  State<StatefulWidget> createState() => _OrderDetailPageState(Injector.getInjector().get());
+  State<StatefulWidget> createState() => _PastOrderDetailPageState(Injector.getInjector().get());
 }
 
-class _OrderDetailPageState extends State<OrderDetailPage> {
-  final OrderDetailsBloc _bloc;
+class _PastOrderDetailPageState extends State<PastOrderDetailPage> {
+  final PastOrderDetailsBloc _bloc;
 
-  _OrderDetailPageState(this._bloc);
-
-  final _commentController = TextEditingController();
+  _PastOrderDetailPageState(this._bloc);
 
   @override
   void dispose() {
     _bloc.close();
-    _commentController.dispose();
     super.dispose();
   }
 
@@ -40,26 +42,22 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context);
 
-    _bloc.store = (ModalRoute.of(context).settings.arguments as List).elementAt(0);
-    _bloc.products = (ModalRoute.of(context).settings.arguments as List).elementAt(1);
+    OrderEntity order = ModalRoute.of(context).settings.arguments;
 
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      appBar: AppBar(
-        elevation: 0,
-        title: Text(strings.yourOrder, style: AppTextStyle.section.copyWith(color: Colors.black)),
-      ),
+      appBar: AppBar(elevation: 0, title: Text(strings.yourOrder, style: AppTextStyle.appBar)),
       body: BlocBuilder(
           bloc: _bloc,
           builder: (context, state) {
-            double cartTotal = 0;
-            int deliveryCost = 0;
+            Map<ItemUI, int> products;
 
-            if (state is InitialState) _bloc.add(GetOrderSummaryEvent());
+            if (state is InitialState) {
+              _bloc.add(GetOrderProductList(order.id));
+            }
 
-            if (state is OrderSummarySate) {
-              cartTotal = state.cartTotal;
-              deliveryCost = state.deliveryCost;
+            if (state is SuccessState<Map<ItemUI, int>>) {
+              products = state.data;
             }
 
             return Column(children: [
@@ -68,12 +66,17 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
-                      child: StoreItemSmall(_bloc.store),
+                      child: StoreItemSmall(StoreUI.fromEntity(order.storeEntity)),
                     ),
                     Divider(thickness: 10, height: 24),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
-                      child: buildItemList(_bloc.products),
+                      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
+                      child: Text(DateFormat('dd/MM/yyyy  -  HH:mm').format(order.createdAt), style: AppTextStyle.black16),
+                    ),
+                    Divider(thickness: 10, height: 24),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+                      child: buildItemList(products),
                     ),
                     Divider(thickness: 10, height: 24),
                     Padding(
@@ -82,7 +85,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text(strings.order, style: AppTextStyle.black16),
-                          Text(cartTotal?.currencyFormat() ?? '', style: AppTextStyle.black16),
+                          Text((order.totalAmount - order.deliveryCost).currencyFormat() ?? '', style: AppTextStyle.black16),
                         ],
                       ),
                     ),
@@ -92,7 +95,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text(strings.delivery, style: AppTextStyle.black16),
-                          Text(deliveryCost?.currencyFormat() ?? '', style: AppTextStyle.black16),
+                          Text(order.deliveryCost?.currencyFormat() ?? '', style: AppTextStyle.black16),
                         ],
                       ),
                     ),
@@ -102,53 +105,20 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text(strings.total, style: AppTextStyle.section),
-                          Text((cartTotal + deliveryCost)?.currencyFormat() ?? '', style: AppTextStyle.section),
+                          Text(order.totalAmount?.currencyFormat() ?? '', style: AppTextStyle.section),
                         ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 40.0, left: 24.0, right: 24.0),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          strings.comments,
-                          style: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 16, color: AppColors.boldTextColor),
-                        ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 12.0, left: 24.0, right: 24.0),
                       child: Align(
                         alignment: Alignment.centerLeft,
-                        child: TextFormField(
-                          controller: _commentController,
-                          keyboardType: TextInputType.multiline,
-                          textInputAction: TextInputAction.next,
-                          style: AppTextStyle.black16,
-                          decoration: InputDecoration(
-                            isDense: true,
-                            hintStyle: TextStyle(color: AppColors.greyMedium, fontWeight: FontWeight.w300, fontSize: 16),
-                            hintText: strings.comments,
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: AppColors.greyMedium)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: AppColors.accentColor)),
-                          ),
-                        ),
+                        child: Text(order.additionalRequests),
                       ),
                     ),
                   ],
                 ),
-              ),
-              PrimaryButton(
-                margin: const EdgeInsets.all(24.0),
-                onPressed: cartTotal == 0
-                    ? null
-                    : () async {
-                        final order = _bloc.createOrder(_commentController.value.text);
-                        Navigator.pushNamed(context, await _bloc.isUserValidated() ? CheckoutPage.CHECKOUT_ORDER_ROUTE : RegisterPage.REGISTER_ROUTE,
-                            arguments: order);
-                      },
-                buttonText: strings.continu,
-              ),
+              )
             ]);
           }),
     );
@@ -161,13 +131,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
             children: items.keys.map((element) {
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: ProductItem(
-                  itemUI: element,
-                  onQuantityChange: (value) => _bloc.add(UpdateProductEvent(element, value)),
-                  quantity: items[element],
-                  quantityVisible: true,
-                  divider: false,
-                ),
+                child: ProductItemInfo(itemUI: element, quantity: items[element]),
               );
             }).toList(),
           );

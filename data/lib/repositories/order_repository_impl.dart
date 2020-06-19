@@ -28,4 +28,24 @@ class OrderRepositoryImpl extends OrderRepository {
       return Failure(e);
     }
   }
+
+  @override
+  Future<Result> getOrderById(String orderId) async {
+    try {
+      final order = await _remoteDataSource.getOrderById(orderId);
+      return Success(order);
+    } catch (e) {
+      return Failure(e);
+    }
+  }
+
+  @override
+  Future<Result> getOrderProducts(String orderId) async {
+    try {
+      final order = await _remoteDataSource.getOrderProducts(orderId);
+      return Success(order);
+    } catch (e) {
+      return Failure(e);
+    }
+  }
 }

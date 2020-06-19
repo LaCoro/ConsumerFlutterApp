@@ -20,6 +20,6 @@ class OrderStatus {
   toString() => '$value';
 
   static OrderStatus findOrderStatus(String status) {
-    return values.firstWhere((element) => element.toString() == status);
+    return values.firstWhere((element) => element.toString() == status, orElse: () => ORDER_PLACED);
   }
 }

@@ -6,9 +6,8 @@ import 'package:LaCoro/core/ui_utils/custom_widgets/order_card_info.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/stepper_bar.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/successful_order_banner.dart';
 import 'package:LaCoro/presentation/order_status/order_status_bloc.dart';
+import 'package:LaCoro/presentation/past_order_detail/past_order_detail_page.dart';
 import 'package:domain/entities/order_entity.dart';
-import 'package:domain/entities/order_status.dart';
-import 'package:domain/entities/order_status.dart';
 import 'package:domain/entities/order_status.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,7 +25,13 @@ class _OrderStatusPageState extends State<OrderStatusPage> {
 
   _OrderStatusPageState(this._bloc);
 
-  OrderEntity order;
+  OrderEntity currentOrder;
+
+  @override
+  void initState() {
+    _bloc.add(LoadLastOrderEvent());
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -37,12 +42,6 @@ class _OrderStatusPageState extends State<OrderStatusPage> {
   @override
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context);
-    order = ModalRoute.of(context).settings.arguments;
-    if (order != null && (order.orderStatus.value == OrderStatus.ORDER_PLACED.value || order.orderStatus.value == OrderStatus.ORDER_IN_PROGRESS.value)) {
-      _bloc.subscribeOrderUpdates(order, (value) {
-        setState(() => order = value);
-      });
-    }
     return Scaffold(
       backgroundColor: AppColors.itemBackgroundColor,
       appBar: AppBar(
@@ -52,18 +51,24 @@ class _OrderStatusPageState extends State<OrderStatusPage> {
       body: BlocListener(
         bloc: _bloc,
         condition: (p, c) => true,
-        listener: (BuildContext context, state) {},
+        listener: (BuildContext context, state) {
+          if (state is SuccessState<OrderEntity>) {
+            setLastOrderInfo(state.data);
+          }
+        },
         child: AnimatedSwitcher(
           duration: Duration(milliseconds: 500),
-          child: order == null
-              ? CircularProgressIndicator()
+          child: currentOrder == null
+              ? Center(child: CircularProgressIndicator())
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     SuccessfulOrderBanner(),
-                    StepperBar(order.orderStatus.index + 1, 3, strings.getText(order.orderStatus.value)),
+                    StepperBar(currentOrder.orderStatus.index + 1, 3, strings.getText(currentOrder.orderStatus.value)),
                     Divider(thickness: 8, height: 8),
-                    OrderCardInfo(orderEntity: order),
+                    InkWell(
+                        onTap: () => Navigator.pushNamed(context, PastOrderDetailPage.PAST_ORDER_DETAIL_ROUTE, arguments: currentOrder),
+                        child: OrderCardInfo(orderEntity: currentOrder)),
                     Divider(thickness: 8, height: 8),
                     SizedBox(height: 24.0),
                     Padding(
@@ -72,12 +77,25 @@ class _OrderStatusPageState extends State<OrderStatusPage> {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(24.0),
-                      child: Text(order.deliveryAddress ?? '', style: AppTextStyle.boldBlack16),
+                      child: Text(currentOrder.deliveryAddress ?? '', style: AppTextStyle.boldBlack16),
                     ),
                   ],
                 ),
         ),
       ),
     );
+  }
+
+  void setLastOrderInfo(OrderEntity order) {
+    if (order != null && (order.orderStatus.value == OrderStatus.ORDER_PLACED.value || order.orderStatus.value == OrderStatus.ORDER_IN_PROGRESS.value)) {
+      setState(() => currentOrder = order);
+      _bloc.subscribeOrderUpdates(order, (order) {
+        OrderEntity updatedOrder = OrderEntity.fromOrder(currentOrder..orderStatus = order.orderStatus);
+        setState(() => currentOrder = updatedOrder);
+      });
+    } else {
+      _bloc.disposeOrderUpdates();
+      setState(() => currentOrder = null);
+    }
   }
 }

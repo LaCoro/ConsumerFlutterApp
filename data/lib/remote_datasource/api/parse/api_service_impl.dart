@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:crypto/crypto.dart';
 import 'package:data/models/city.dart';
@@ -63,8 +64,7 @@ class ApiServiceImpl extends ApiService {
 
   @override
   Future<ParseResponse> getUserOrders(int page, int size) async {
-
-    final user =  await ParseUser.currentUser();
+    final user = await ParseUser.currentUser();
 
     final QueryBuilder query = QueryBuilder<Order>(Order())
       ..orderByDescending(Order.keyCreatedAt)
@@ -106,5 +106,31 @@ class ApiServiceImpl extends ApiService {
     }
 
     return parseUser as ParseUser;
+  }
+
+  @override
+  Future<ParseResponse> getOrderById(String orderId) async {
+    return await Order().getObject(orderId);
+  }
+
+  @override
+  Future<Map<Item, int>> getOrderItems(String orderId) async {
+    QueryBuilder query = QueryBuilder<ParseObject>(OrderDetail())..whereEqualTo(OrderDetail.keyOrder, (Order()..objectId = orderId).toPointer());
+
+    ParseResponse response = await query.query();
+
+    if (response.success && response.count > 0) {
+      List<OrderDetail> orderDetails = response.results.cast<OrderDetail>();
+      Map<Item, int> orderItems = Map();
+
+      for (OrderDetail orderDetail in orderDetails) {
+        Item item = (await Item().getObject(orderDetail.product.objectId)).result as Item;
+        orderItems.putIfAbsent(item, () => orderDetail.quantity);
+      }
+      return orderItems;
+
+    } else {
+      throw UnimplementedError();
+    }
   }
 }

@@ -9,7 +9,7 @@ class StepperBar extends StatelessWidget {
   final int maxStep;
   final String status;
 
-  const StepperBar(this.currentStep, this.maxStep, this.status);
+  StepperBar(this.currentStep, this.maxStep, this.status);
 
   @override
   Widget build(BuildContext context) {

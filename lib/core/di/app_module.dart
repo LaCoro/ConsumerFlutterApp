@@ -4,6 +4,7 @@ import 'package:LaCoro/presentation/checkout/checkout_bloc.dart';
 import 'package:LaCoro/presentation/order_detail/order_details_bloc.dart';
 import 'package:LaCoro/presentation/order_history/order_history_bloc.dart';
 import 'package:LaCoro/presentation/order_status/order_status_bloc.dart';
+import 'package:LaCoro/presentation/past_order_detail/past_order_details_bloc.dart';
 import 'package:LaCoro/presentation/register/register_bloc.dart';
 import 'package:LaCoro/presentation/store_details/store_details_bloc.dart';
 import 'package:LaCoro/presentation/store_list/store_list_bloc.dart';
@@ -51,13 +52,14 @@ class AppModule {
     injector.map<OrderUseCases>((injector) => OrderUseCases(injector.get()));
     // BLoC
     injector.map<MyAddressBloc>((injector) => MyAddressBloc(injector.get(), injector.get()));
-    injector.map<StoreListBloc>((injector) => StoreListBloc(injector.get(), injector.get(), injector.get()));
+    injector.map<StoreListBloc>((injector) => StoreListBloc(injector.get(), injector.get(), injector.get(), injector.get()));
     injector.map<StoreDetailsBloc>((injector) => StoreDetailsBloc(injector.get()));
     injector.map<OrderDetailsBloc>((injector) => OrderDetailsBloc(injector.get(), injector.get(), injector.get()));
     injector.map<RegisterBloc>((injector) => RegisterBloc(injector.get(), injector.get()));
     injector.map<CheckoutBloc>((injector) => CheckoutBloc(injector.get(), injector.get()));
     injector.map<OrderStatusBloc>((injector) => OrderStatusBloc(injector.get(), injector.get()));
     injector.map<OrderHistoryBloc>((injector) => OrderHistoryBloc(injector.get(), injector.get()));
+    injector.map<PastOrderDetailsBloc>((injector) => PastOrderDetailsBloc(injector.get()));
     return injector;
   }
 }

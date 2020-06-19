@@ -35,7 +35,7 @@ class CurrentAddress extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 12.0, right: 30),
                     child: Text(
                       address,
-                      maxLines: 2,
+                      maxLines: 3,
                       textAlign: TextAlign.left,
                       overflow: TextOverflow.ellipsis,
                       style: AppTextStyle.black16,

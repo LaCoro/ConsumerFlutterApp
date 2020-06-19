@@ -53,8 +53,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
               setState(() => isLoading = state is LoadingState);
 
               if (state is SuccessState<OrderEntity>) {
-                Navigator.pushNamedAndRemoveUntil(context, OrderStatusPage.ORDER_STATUS_ROUTE, ModalRoute.withName(StoreListPage.STORE_LIST_ROUTE),
-                    arguments: state.data);
+                Navigator.pushNamedAndRemoveUntil(context, OrderStatusPage.ORDER_STATUS_ROUTE, ModalRoute.withName(StoreListPage.STORE_LIST_ROUTE));
               }
             },
             child: Column(
