@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "781838696530",
+    "firebase_url": "https://lacoro-80c3a.firebaseio.com",
+    "project_id": "lacoro-80c3a",
+    "storage_bucket": "lacoro-80c3a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781838696530:android:0dd8716db79d79bf721f8b",
+        "android_client_info": {
+          "package_name": "co.lacoro.consumer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781838696530-7l1a080d4hv8hh61jkbgh2ckf9cdigd0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "co.lacoro.consumer",
+            "certificate_hash": "9a1a22decb9eb540c301bc3a3293d66ce095331c"
+          }
+        },
+        {
+          "client_id": "781838696530-bbqul6s28ko0uf6cejrm1b425u45s051.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDnT9Qu9lBk4jkaIbqeBw8X2afQKv5WPk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781838696530-bbqul6s28ko0uf6cejrm1b425u45s051.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

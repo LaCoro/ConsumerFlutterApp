@@ -64,7 +64,7 @@ class _RegisterPageState extends State<RegisterPage> {
     final strings = AppLocalizations.of(context);
     return BlocListener(
       bloc: _bloc,
-      listener: (context, state) {
+      listener: (context, BaseState state) {
         setState(() => isLoading = state is LoadingState);
 
         if (state is SuccessState) {
@@ -182,11 +182,13 @@ class _RegisterPageState extends State<RegisterPage> {
                           buttonText: strings.continu,
                           onPressed: () {
                             if (_registerFormKey.currentState.validate()) {
-                              _bloc.add(SubmitSaveProfileEvent(
-                                fullname: _nameController.value.text,
-                                email: _emailController.value.text,
-                                mobile: _phoneController.value.text,
-                              ));
+                              _bloc.add(
+                                SubmitSaveProfileEvent(
+                                  fullname: _nameController.value.text,
+                                  email: _emailController.value.text,
+                                  mobile: _phoneController.value.text,
+                                ),
+                              );
                             }
                           }),
                       SizedBox(

@@ -1,6 +1,6 @@
 {
-    "name": "consumer",
-    "short_name": "consumer",
+    "name": "La Coro",
+    "short_name": "La Coro",
     "start_url": ".",
     "display": "minimal-ui",
     "background_color": "#0175C2",
