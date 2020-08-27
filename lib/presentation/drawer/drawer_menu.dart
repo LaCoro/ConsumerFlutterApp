@@ -49,8 +49,8 @@ class DrawerMenu extends StatelessWidget{
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: ListTile(
-                  leading: Icon(Icons.settings, color: AppColors.greyMedium),
-                  title: Text(strings.settings, style: AppTextStyle.black16.copyWith(fontSize: 18),),
+                  leading: Icon(Icons.info_outline, color: AppColors.greyMedium),
+                  title: Text(strings.info, style: AppTextStyle.black16.copyWith(fontSize: 18),),
                   onTap: onSettingsPressed,
                 ),
               ),
@@ -58,5 +58,4 @@ class DrawerMenu extends StatelessWidget{
           ),
         );
   }
-
 }

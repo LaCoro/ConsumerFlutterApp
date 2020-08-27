@@ -67,6 +67,7 @@ class AppLocalizations {
       'log_out': 'Log out',
       'history': 'History',
       'settings': 'Settings',
+      'info': 'Info',
     },
     'es': {
       'total': 'Total',
@@ -124,7 +125,8 @@ class AppLocalizations {
       'about_us': 'Acerca de nosotros',
       'log_out': 'Cerrar sesión',
       'history': 'Histórico',
-      'settings': 'Configuración'
+      'settings': 'Configuración',
+      'info': 'Información',
     },
   };
 
@@ -233,5 +235,7 @@ class AppLocalizations {
   String get history => _localizedValues[locale.languageCode]['history'];
 
   String get settings => _localizedValues[locale.languageCode]['settings'];
+
+  String get info => _localizedValues[locale.languageCode]['info'];
 
 }

@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class RegisterPage extends StatefulWidget {
   static const REGISTER_ROUTE = '/register';
@@ -79,16 +80,12 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(24.0, 10.0, 24.0, 10.0),
                 child: SafeArea(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  child: ListView(
                     children: <Widget>[
-                      Spacer(
-                        flex: 1,
-                      ),
+                      SizedBox(height: 12),
                       Text(strings.createAccount, style: AppTextStyle.title),
-                      SizedBox(height: 20.0),
+                      SizedBox(height: 70),
                       TextFormField(
-//                            cursorColor: AppColors.accentColor,
                         controller: _nameController,
                         validator: (value) {
                           if (value.isEmpty) {
@@ -117,7 +114,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           errorBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
                         ),
                       ),
-                      SizedBox(height: 15.0),
+                      SizedBox(height: 12),
                       TextFormField(
                         controller: _emailController,
                         validator: (value) {
@@ -144,27 +141,15 @@ class _RegisterPageState extends State<RegisterPage> {
                           errorBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
                         ),
                       ),
-                      SizedBox(height: 15.0),
-                      TextFormField(
-                        controller: _phoneController,
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return strings.phoneRequired;
-                          }
-                          if (value.length < 10) {
-                            return strings.invalidPhone;
-                          }
-                          return null;
-                        },
+                      SizedBox(height: 12),
+                      InternationalPhoneNumberInput(
+                        textFieldController: _phoneController,
+                        countries: ['CO'],
                         focusNode: _phoneFocus,
-                        onEditingComplete: () {
-                          _phoneFocus.unfocus();
-                        },
-                        maxLength: 10,
-                        keyboardType: TextInputType.phone,
-                        textInputAction: TextInputAction.done,
-                        style: AppTextStyle.black16,
-                        decoration: InputDecoration(
+                        onSubmit: () => _phoneFocus.unfocus(),
+                        keyboardAction: TextInputAction.done,
+                        textStyle: AppTextStyle.black16,
+                        inputDecoration: InputDecoration(
                           isDense: true,
                           labelText: strings.phone,
                           hintText: 'Enter Your Phone',
@@ -176,6 +161,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           errorBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
                         ),
                       ),
+                      SizedBox(height: 60),
                       PrimaryButton(
                           margin: const EdgeInsets.symmetric(vertical: 24.0),
                           isLoading: isLoading,
@@ -191,12 +177,6 @@ class _RegisterPageState extends State<RegisterPage> {
                               );
                             }
                           }),
-                      SizedBox(
-                        height: 70,
-                      ),
-                      Spacer(
-                        flex: 3,
-                      ),
                     ],
                   ),
                 ),
