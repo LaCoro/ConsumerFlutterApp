@@ -13,5 +13,6 @@ This project uses the concept of [Clean Architecture](https://blog.cleancoder.co
 ![Image](https://github.com/LaCoro/ConsumerFlutterApp/blob/master/screens/lacoro_consumer_arch.png?raw=true)
 
 ---
-### Data flow & Dependency rule
-<img src="https://miro.medium.com/max/1400/1*jH0iI7-MSQYgLUrqTUm6mg.png" width="600" height="400" />
+## Try it out!
+<a href='https://play.google.com/store/apps/details?id=co.lacoro.consumer&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
+
