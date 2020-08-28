@@ -18,22 +18,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-
 import 'core/appearance/app_theme.dart';
 import 'core/env/envirionment_configuration.dart';
 import 'presentation/adresses/select_address_map_page.dart';
 import 'presentation/store_list/store_list_page.dart';
 
 Future main() async {
-  // Init env configuration
-  await EnvironmentConfiguration.run();
-  // Inject modules
-  await AppModule.initialise(Injector.getInjector());
+  WidgetsFlutterBinding.ensureInitialized(); //all widgets are rendered here
+  await EnvironmentConfiguration.run(); // Init env configuration
+  await AppModule.initialise(Injector.getInjector()); // Inject modules
+  await Firebase.initializeApp(); // Init Firebase
 
-  // Init Firebase
-  await Firebase.initializeApp();
-
-  // start app
   runApp(MyApp());
 }
 
