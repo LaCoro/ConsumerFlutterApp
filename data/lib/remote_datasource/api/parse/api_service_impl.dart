@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:crypto/crypto.dart';
 import 'package:data/models/city.dart';
@@ -76,23 +75,28 @@ class ApiServiceImpl extends ApiService {
 
   @override
   Future<ParseResponse> submitUserRegister(UserEntity user) async {
-    final pass = md5.convert(utf8.encode(user.mobile)).toString();
+    try {
+      final pass = md5.convert(utf8.encode(user.mobile)).toString();
 
-    final userRegister = ParseUser(user.mobile, pass, user.email);
+      final userRegister = ParseUser(user.mobile, pass, user.email);
 
-    var response = await userRegister.signUp();
-    response = await userRegister.login();
+      var response = await userRegister.signUp();
 
-    if (response.success) {
-      userRegister
-        ..set(User.keyMobile, user.mobile)
-        ..set(User.keyPhone, user.mobile)
-        ..set(User.keyUsername, user.mobile)
-        ..set(User.keyFullname, user.fullname)
-        ..set(User.keyEmail, user.email);
-      final updatedUser = await userRegister.update();
-      return updatedUser;
-    } else {
+      response = await userRegister.login();
+
+      if (response.success) {
+        userRegister
+          ..set(User.keyMobile, user.mobile)
+          ..set(User.keyPhone, user.mobile)
+          ..set(User.keyUsername, user.mobile)
+          ..set(User.keyFullname, user.fullname)
+          ..set(User.keyEmail, user.email);
+        final updatedUser = await userRegister.update();
+        return updatedUser;
+      } else {
+        throw ServiceError();
+      }
+    } catch (e) {
       throw ServiceError();
     }
   }
@@ -128,7 +132,6 @@ class ApiServiceImpl extends ApiService {
         orderItems.putIfAbsent(item, () => orderDetail.quantity);
       }
       return orderItems;
-
     } else {
       throw UnimplementedError();
     }

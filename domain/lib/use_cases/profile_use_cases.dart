@@ -8,16 +8,12 @@ class ProfileUseCases {
 
   ProfileUseCases(this._repository);
 
-  Future<Result> submitUserRegister(UserEntity userEntity) async {
-    return _repository.submitUserRegister(userEntity);
-  }
-
   Future<Result> getValidSession(UserEntity userEntity) async {
     return _repository.getValidSession(userEntity?.sessionToken ?? '');
   }
 
-  Future<Result> authenticateUser(String smsCode) {
-    return _repository.authenticateUser(smsCode);
+  Future<Result> authenticateUser(String smsCode, UserEntity userEntity) {
+    return _repository.authenticateUser(smsCode, userEntity);
   }
 
   Future requestSMSCode(String mobile) {

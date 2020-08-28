@@ -29,6 +29,7 @@ class StoreListPage extends StatefulWidget {
 }
 
 class _StoreListPageState extends State<StoreListPage> {
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final RefreshController _refreshController = RefreshController();
   final StoreListBloc _bloc;
   FocusNode _focusNode;
@@ -73,6 +74,7 @@ class _StoreListPageState extends State<StoreListPage> {
     final strings = AppLocalizations.of(context);
     final currentAddress = _bloc.loadSavedAddress();
     return Scaffold(
+      key: scaffoldKey,
       backgroundColor: Theme.of(context).backgroundColor,
       drawer: DrawerMenu(
         onHistoryPressed: () async {
@@ -91,7 +93,8 @@ class _StoreListPageState extends State<StoreListPage> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Text('${currentAddress.address}, ${currentAddress.cityEntity.name}', style: AppTextStyle.section.copyWith(color: Colors.black)),
+                Text('${currentAddress.address}, ${currentAddress.cityEntity.name}',
+                    style: AppTextStyle.section.copyWith(color: Theme.of(context).accentColor)),
                 Icon(
                   Icons.keyboard_arrow_down,
                   size: 36,
@@ -121,60 +124,65 @@ class _StoreListPageState extends State<StoreListPage> {
                         child: OrderStatusBanner(),
                       ),
               ),
-              Padding(
-                // todo sacar en un widget
-                padding: const EdgeInsets.all(16.0),
-                child: Material(
-                  borderRadius: BorderRadius.all(Radius.circular(6.0)),
-                  shadowColor: AppColors.greyMedium,
-                  elevation: 2,
-                  color: Colors.white,
-                  child: TextField(
-                      focusNode: _focusNode,
-                      controller: _textFieldController,
-                      onEditingComplete: () => setState(() => _searchQuery = _textFieldController.text.trim()),
-                      decoration: InputDecoration(
-                        filled: true,
-                        //fillColor: Colors.red,
-                        prefixIcon: Icon(Icons.search, color: AppColors.greyMedium, size: 24),
-                        suffixIcon: _textFieldController.text.isNotEmpty
-                            ? IconButton(
-                                icon: Icon(Icons.cancel, color: Colors.black, size: 26),
-                                onPressed: () {
-                                  setState(() {
-                                    _searchQuery = null;
-                                    _textFieldController.clear();
-                                    _textFieldController.text = "";
-                                  });
-                                  _bloc.add(GetStoresEvent());
-                                },
-                              )
-                            : SizedBox(),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(6)),
-                          borderSide: BorderSide(
-                            width: 2,
-                            color: Theme.of(context).accentColor,
-                          ),
-                        ),
-                        hintText: strings.searchYourAddress,
-                        hintStyle: AppTextStyle.grey16,
-                        enabledBorder: InputBorder.none,
-                        errorBorder: InputBorder.none,
-                        disabledBorder: InputBorder.none,
-                      ),
-                      keyboardType: TextInputType.text,
-                      onSubmitted: (value) {
-                        _bloc.add(GetStoresEvent(searchQuery: value));
-                      }),
-                ),
-              ),
               Expanded(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: _searchQuery == null || _searchQuery.isEmpty ? SizedBox() : Text('Search for $_searchQuery'),
+                    Wrap(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Material(
+                            borderRadius: BorderRadius.all(Radius.circular(6.0)),
+                            shadowColor: AppColors.greyMedium,
+                            elevation: 2,
+                            color: Colors.white,
+                            child: TextField(
+                                focusNode: _focusNode,
+                                controller: _textFieldController,
+                                onEditingComplete: () => setState(() => _searchQuery = _textFieldController.text.trim()),
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  //fillColor: Colors.red,
+                                  prefixIcon: Icon(Icons.search, color: AppColors.greyMedium, size: 24),
+                                  suffixIcon: _textFieldController.text.isNotEmpty
+                                      ? IconButton(
+                                          icon: Icon(Icons.cancel, color: Colors.black, size: 26),
+                                          onPressed: () {
+                                            setState(() {
+                                              _searchQuery = null;
+                                              _textFieldController.clear();
+                                              _textFieldController.text = "";
+                                            });
+                                            _bloc.add(GetStoresEvent());
+                                          },
+                                        )
+                                      : SizedBox(),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(6)),
+                                    borderSide: BorderSide(
+                                      width: 2,
+                                      color: Theme.of(context).accentColor,
+                                    ),
+                                  ),
+                                  hintText: strings.searchYourAddress,
+                                  hintStyle: AppTextStyle.grey16,
+                                  enabledBorder: InputBorder.none,
+                                  errorBorder: InputBorder.none,
+                                  disabledBorder: InputBorder.none,
+                                ),
+                                keyboardType: TextInputType.text,
+                                onSubmitted: (value) {
+                                  _bloc.add(GetStoresEvent(searchQuery: value));
+                                }),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: _searchQuery == null || _searchQuery.isEmpty ? SizedBox() : Center(child: Text('Search for $_searchQuery')),
+                        ),
+                      ],
                     ),
                     Expanded(
                       child: LazyLoadScrollView(
@@ -212,8 +220,9 @@ class _StoreListPageState extends State<StoreListPage> {
       setState(() => _stores.addAll(state.data));
     } else if (state is SuccessState<OrderEntity>) {
       setLastOrderInfo(state.data);
+    } else if (state is ErrorState) {
+      scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(state.message), duration: Duration(seconds: 3)));
     }
-    //if (state is ErrorState)// TODO show error banner
   }
 
   Widget buildList() {

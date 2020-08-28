@@ -45,7 +45,6 @@ class _PinPageState extends State<PinPage> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context);
@@ -123,7 +122,7 @@ class _PinPageState extends State<PinPage> {
                   } else {
                     setState(() {
                       hasError = false;
-                      _bloc.add(AuthenticateUserWithSmsEvent(_textEditingController.text));
+                      _bloc.add(AuthenticateUserWithSmsEvent(_textEditingController.text, _bloc.getProfileInfo()));
                     });
                   }
                 }),

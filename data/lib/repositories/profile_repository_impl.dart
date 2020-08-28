@@ -12,16 +12,6 @@ class ProfileRepositoryImpl extends ProfileRepository {
   ProfileRepositoryImpl(this._remoteDataSource);
 
   @override
-  Future<Result> submitUserRegister(UserEntity userEntity) async {
-    try {
-      final userId = await _remoteDataSource.submitUserRegister(userEntity);
-      return Success(userId);
-    } catch (e) {
-      return Failure(exception: e);
-    }
-  }
-
-  @override
   Future<Result> getValidSession(String sessionToken) async {
     try {
       final currentUserId = await _remoteDataSource.getCurrentUserId(sessionToken);
@@ -32,19 +22,22 @@ class ProfileRepositoryImpl extends ProfileRepository {
   }
 
   @override
-  Future<Result> authenticateUser(String smsCode) async {
+  Future<Result> authenticateUser(String smsCode, UserEntity userEntity) async {
     if (userPhoneVerified) return Success(true);
 
-    FirebaseAuth _auth = FirebaseAuth.instance;
+    try {
+      FirebaseAuth _auth = FirebaseAuth.instance;
+      AuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: smsCode);
 
-    AuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: smsCode);
-
-    final result = await _auth.signInWithCredential(credential);
-
-    if (result.user != null) {
-      return Success(true);
+      final result = await _auth.signInWithCredential(credential);
+      if (result.user != null) {
+        final userId = await _remoteDataSource.submitUserRegister(userEntity);
+        return Success(userId);
+      }
+      return Failure(exception: Exception("Wrong code"));
+    } catch (e) {
+      return Failure(exception: e);
     }
-    return Failure();
   }
 
   @override

@@ -54,6 +54,12 @@ dev_dependencies:
     sdk: flutter
 
   build_runner: ^1.8.1
+  flutter_launcher_icons: "^0.7.3"
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon/icon.png"
 
 
 # The following section is specific to Flutter.
@@ -78,9 +84,9 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-     - family: AppIcons
-       fonts:
-         - asset: assets/AppIcons.ttf
+    - family: AppIcons
+      fonts:
+        - asset: assets/AppIcons.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

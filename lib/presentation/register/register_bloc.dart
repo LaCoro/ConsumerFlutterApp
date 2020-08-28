@@ -23,9 +23,8 @@ class RegisterBloc extends Bloc<BaseEvent, BaseState> {
           ..fullname = event.fullName
           ..email = event.email
           ..mobile = event.mobile;
-        final result = await _useCases.submitUserRegister(userEntity);
-        if (result is Success<String>) {
-          await _preferences.saveProfile(userEntity..id = result.data);
+        final result = await _preferences.saveProfile(userEntity);
+        if (result) {
           yield SuccessState();
         } else {
           yield ErrorState(message: "Error registering user");
@@ -34,12 +33,14 @@ class RegisterBloc extends Bloc<BaseEvent, BaseState> {
         await _useCases.requestSMSCode(event.mobile);
       } else if (event is AuthenticateUserWithSmsEvent) {
         yield LoadingState();
-        final result = await _useCases.authenticateUser(event.smsCode);
+        final result = await _useCases.authenticateUser(event.smsCode, event.userEntity);
         if (result is Success) {
           await _preferences.saveProfile(_preferences.getProfile()..isValidated = true);
           yield SuccessState();
+        } else if (result is Failure) {
+          yield ErrorState(message: result.exception.toString());
         } else {
-          yield ErrorState(message: "Wrong code");
+          yield ErrorState();
         }
       }
     } catch (error) {
@@ -67,6 +68,7 @@ class SubmitRequestVerificationCodeEvent extends BaseEvent {
 
 class AuthenticateUserWithSmsEvent extends BaseEvent {
   final String smsCode;
+  final UserEntity userEntity;
 
-  AuthenticateUserWithSmsEvent(this.smsCode);
+  AuthenticateUserWithSmsEvent(this.smsCode, this.userEntity);
 }

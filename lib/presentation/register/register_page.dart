@@ -24,6 +24,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   _RegisterPageState(this._bloc);
 
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final _registerFormKey = GlobalKey<FormState>();
   final _nameFocus = FocusNode();
   final _emailFocus = FocusNode();
@@ -72,8 +73,12 @@ class _RegisterPageState extends State<RegisterPage> {
         if (state is SuccessState) {
           Navigator.pushNamed(context, PinPage.PIN_REGISTER_ROUTE);
         }
+        if (state is ErrorState) {
+          scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(state.message), duration: Duration(seconds: 3)));
+        }
       },
       child: Scaffold(
+        key: scaffoldKey,
         appBar: AppBar(elevation: 0),
         body: Material(
           child: Form(
