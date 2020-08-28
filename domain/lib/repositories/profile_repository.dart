@@ -3,5 +3,10 @@ import 'package:domain/result.dart';
 
 abstract class ProfileRepository {
   Future<Result> submitUserRegister(UserEntity userEntity);
+
   Future<Result> getValidSession(String sessionToken);
-  }
+
+  Future<Result> authenticateUser(String smsCode);
+
+  Future requestSMSCode(String mobile);
+}

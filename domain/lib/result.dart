@@ -15,7 +15,7 @@ class Success<T> extends Equatable implements Result {
 class Failure extends Equatable implements Result {
   final Exception exception;
 
-  Failure(this.exception);
+  Failure({this.exception});
 
   @override
   List<Object> get props => [exception];

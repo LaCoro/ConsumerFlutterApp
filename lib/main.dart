@@ -13,6 +13,7 @@ import 'package:LaCoro/presentation/splash/splash.dart';
 import 'package:LaCoro/presentation/store_details/store_details_page.dart';
 import 'package:LaCoro/presentation/test/styles_test_page.dart';
 import 'package:LaCoro/presentation/test/test_page.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
@@ -28,6 +29,10 @@ Future main() async {
   await EnvironmentConfiguration.run();
   // Inject modules
   await AppModule.initialise(Injector.getInjector());
+
+  // Init Firebase
+  await Firebase.initializeApp();
+
   // start app
   runApp(MyApp());
 }

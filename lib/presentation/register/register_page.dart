@@ -30,15 +30,16 @@ class _RegisterPageState extends State<RegisterPage> {
   final _phoneFocus = FocusNode();
 
   bool isLoading = false;
+  String _phoneNumber;
   TextEditingController _nameController, _emailController, _phoneController;
 
   @override
   void initState() {
     final profile = _bloc.getProfileInfo();
     setState(() {
+      _phoneController = TextEditingController();
       _nameController = TextEditingController(text: profile?.fullname);
       _emailController = TextEditingController(text: profile?.email);
-      _phoneController = TextEditingController(text: profile?.mobile);
     });
     super.initState();
   }
@@ -145,6 +146,9 @@ class _RegisterPageState extends State<RegisterPage> {
                       InternationalPhoneNumberInput(
                         textFieldController: _phoneController,
                         countries: ['CO'],
+                        onInputChanged: (value) {
+                          _phoneNumber = value.phoneNumber;
+                        },
                         focusNode: _phoneFocus,
                         onSubmit: () => _phoneFocus.unfocus(),
                         keyboardAction: TextInputAction.done,
@@ -170,9 +174,9 @@ class _RegisterPageState extends State<RegisterPage> {
                             if (_registerFormKey.currentState.validate()) {
                               _bloc.add(
                                 SubmitSaveProfileEvent(
-                                  fullname: _nameController.value.text,
+                                  fullName: _nameController.value.text,
                                   email: _emailController.value.text,
-                                  mobile: _phoneController.value.text,
+                                  mobile: _phoneNumber,
                                 ),
                               );
                             }

@@ -15,7 +15,7 @@ class OrderRepositoryImpl extends OrderRepository {
       final orders = await _remoteDataSource.getUserOrders(page, size);
       return Success(orders);
     } catch (e) {
-      return Failure(e);
+      return Failure(exception: e);
     }
   }
 
@@ -25,7 +25,7 @@ class OrderRepositoryImpl extends OrderRepository {
       final order = await _remoteDataSource.submitOrder(orderEntity, userEntity);
       return Success(order);
     } catch (e) {
-      return Failure(e);
+      return Failure(exception: e);
     }
   }
 
@@ -35,7 +35,7 @@ class OrderRepositoryImpl extends OrderRepository {
       final order = await _remoteDataSource.getOrderById(orderId);
       return Success(order);
     } catch (e) {
-      return Failure(e);
+      return Failure(exception: e);
     }
   }
 
@@ -45,7 +45,7 @@ class OrderRepositoryImpl extends OrderRepository {
       final order = await _remoteDataSource.getOrderProducts(orderId);
       return Success(order);
     } catch (e) {
-      return Failure(e);
+      return Failure(exception: e);
     }
   }
 }

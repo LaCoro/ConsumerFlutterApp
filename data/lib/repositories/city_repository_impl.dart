@@ -13,7 +13,7 @@ class CityRepositoryImpl extends CityRepository {
       final cities = await _remoteDataSource.getAllCities();
       return Success(cities);
     } catch (e) {
-      return Failure(e);
+      return Failure(exception: e);
     }
   }
 }

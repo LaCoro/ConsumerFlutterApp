@@ -40,6 +40,13 @@ class _PinPageState extends State<PinPage> {
   }
 
   @override
+  void initState() {
+    _bloc.add(SubmitRequestVerificationCodeEvent(_bloc.getProfileInfo().mobile));
+    super.initState();
+  }
+
+
+  @override
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context);
 
@@ -72,13 +79,13 @@ class _PinPageState extends State<PinPage> {
               height: 12,
             ),
             Text(
-              _bloc.getProfileInfo().mobile,
+              _bloc.getProfileInfo()?.mobile ?? '',
               style: AppTextStyle.w500Black16,
             ),
             Padding(
                 padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
                 child: PinCodeTextField(
-                  length: 5,
+                  length: 6,
                   obsecureText: false,
                   animationType: AnimationType.fade,
                   shape: PinCodeFieldShape.box,
@@ -108,7 +115,7 @@ class _PinPageState extends State<PinPage> {
                 isLoading: isLoading,
                 buttonText: strings.continu,
                 onPressed: () {
-                  if (_textEditingController.text.length != 5) {
+                  if (_textEditingController.text.length != 6) {
                     errorController.add(ErrorAnimationType.shake); // Triggering error shake animation
                     setState(() {
                       hasError = true;
@@ -116,13 +123,11 @@ class _PinPageState extends State<PinPage> {
                   } else {
                     setState(() {
                       hasError = false;
-                      _bloc.add(SubmitVerificationCodeEvent(_textEditingController.text));
+                      _bloc.add(AuthenticateUserWithSmsEvent(_textEditingController.text));
                     });
                   }
                 }),
-            Spacer(
-              flex: 3,
-            ),
+            Spacer(flex: 3),
             RichText(
               textAlign: TextAlign.center,
               text: TextSpan(text: strings.didntYouGetTheMessage, style: AppTextStyle.black13, children: [
@@ -130,7 +135,7 @@ class _PinPageState extends State<PinPage> {
                     text: strings.resend,
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
-                        Navigator.pop(context);
+                        _bloc.add(SubmitRequestVerificationCodeEvent(_bloc.getProfileInfo().mobile));
                       },
                     style: AppTextStyle.boldBlue13)
               ]),

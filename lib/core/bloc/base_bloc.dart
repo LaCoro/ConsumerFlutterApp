@@ -28,7 +28,7 @@ class SuccessState<T> extends BaseState {
 class ErrorState extends BaseState {
   final String message;
 
-  ErrorState({this.message}) : super([message]);
+  ErrorState({this.message = "Something went wrong. Please try again later."}) : super([message]);
 }
 
 /// Base class represent the events in the BLoC pattern

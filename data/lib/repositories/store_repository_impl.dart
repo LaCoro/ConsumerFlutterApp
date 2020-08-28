@@ -13,7 +13,7 @@ class StoreRepositoryImpl extends StoreRepository {
       final stores = await _remoteDataSource.fetchStores(cityId, page, size, searchQuery: searchQuery);
       return Success(stores);
     } catch (e) {
-      return Failure(e);
+      return Failure(exception: e);
     }
   }
 
@@ -23,7 +23,7 @@ class StoreRepositoryImpl extends StoreRepository {
       final storeItems = await _remoteDataSource.getStoreItems(storeId);
       return Success(storeItems);
     } catch (e) {
-      return Failure(e);
+      return Failure(exception: e);
     }
   }
 }

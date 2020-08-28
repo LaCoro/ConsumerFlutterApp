@@ -15,4 +15,12 @@ class ProfileUseCases {
   Future<Result> getValidSession(UserEntity userEntity) async {
     return _repository.getValidSession(userEntity?.sessionToken ?? '');
   }
+
+  Future<Result> authenticateUser(String smsCode) {
+    return _repository.authenticateUser(smsCode);
+  }
+
+  Future requestSMSCode(String mobile) {
+    return _repository.requestSMSCode(mobile);
+  }
 }
