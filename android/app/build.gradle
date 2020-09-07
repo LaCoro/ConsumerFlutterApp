@@ -27,7 +27,7 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
-def googleMapsApiKey =  localProperties.getProperty('google_maps.apiKey')
+def googleMapsApiKey = localProperties.getProperty('google_maps.apiKey')
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'

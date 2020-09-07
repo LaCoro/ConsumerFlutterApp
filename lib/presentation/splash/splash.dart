@@ -23,20 +23,22 @@ class SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    Future.delayed(Duration(seconds: 1), () => loadData());
 
-    controller = AnimationController(
-      duration: Duration(milliseconds: 1000),
-      vsync: this,
-    );
+    // controller = AnimationController(
+    //   duration: Duration(milliseconds: 1000),
+    //   vsync: this,
+    // );
+    //
+    // animation = Tween(begin: 0.5, end: 1.5).animate(controller)..addListener(() => loadData());
+    // controller.forward();
 
-    animation = Tween(begin: 0.5, end: 1.5).animate(controller)..addListener(() => loadData());
-    controller.forward();
   }
 
   @override
   void dispose() {
     super.dispose();
-    controller.dispose();
+    // controller.dispose();
   }
 
   void loadData() async {
@@ -45,27 +47,22 @@ class SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
   onDoneLoading() async {
     final Preferences pref = Injector.getInjector().get();
-    Navigator.popAndPushNamed(context, pref.getProfile()?.address == null ? MyAddressPage.MY_ADDRESS_ROUTE : StoreListPage.STORE_LIST_ROUTE);
+    Navigator.popAndPushNamed(context, pref
+        .getProfile()
+        ?.address == null ? MyAddressPage.MY_ADDRESS_ROUTE : StoreListPage.STORE_LIST_ROUTE);
   }
 
   @override
   Widget build(BuildContext context) {
-    return FadeTransition(
-      opacity: animation,
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: RadialGradient(
-            colors: [AppColors.accentColor, AppColors.accentColor.withOpacity(0.9)],
-          ),
-          color: AppColors.accentColor,
-          image: DecorationImage(image: AssetImage('assets/app_logo.png'), fit: BoxFit.scaleDown),
-        ),
-        /*child: Center(
-          child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(AppColors.yellowAction),
-          ),
-        ),*/
-      ),
+    return Scaffold(
+      body: Container(
+          decoration: BoxDecoration(
+            gradient: RadialGradient(
+              colors: [AppColors.accentColor, AppColors.accentColor.withOpacity(0.9)],
+            ),
+            color: AppColors.accentColor,
+            image: DecorationImage(image: AssetImage('assets/app_logo.png'), fit: BoxFit.scaleDown),
+          )),
     );
   }
 }
