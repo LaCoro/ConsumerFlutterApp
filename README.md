@@ -13,9 +13,17 @@ This project uses the concept of [Clean Architecture](https://blog.cleancoder.co
 
 ![Image](https://github.com/LaCoro/ConsumerFlutterApp/blob/master/screens/lacoro_consumer_arch.png?raw=true)
 
+## How to configure the backend
 
-## Screenshots 
-![Image](https://github.com/LaCoro/ConsumerFlutterApp/blob/master/screens/lacoro_consumer_screenshots.png?raw=true)
+LaCoro uses [back4app](https://www.back4app.com/) as backend as service. You need to have a back4app account or create a new one to configure your instance of the LaCoro backend. Then, you need to go to our [LaCoro public DB](https://www.back4app.com/database/admin7/lacoro) and clone that into your back4app account.
+
+After that, you will be able to get the keys to establishing a connection for the Consumer App and Admin App with your brand new backend.
+
+## Setting up your dot.env file
+LaCoro uses [flutter_dotenv](https://pub.dev/packages/flutter_dotenv) package in order to set the envrionment variables.
+Once you get the back4app credentials you need to add a `development.env` file.
+
+Follow the strucutre defined in `mock-development.env`
 
 ## How to contribute ❤️
 * Fork this repository
@@ -25,11 +33,8 @@ This project uses the concept of [Clean Architecture](https://blog.cleancoder.co
 * Wait for comments or changes requested
 * Wait for get merged your PR
  
-## How to configure the backend
-
-LaCoro uses [back4app](https://www.back4app.com/) as backend as service. You need to have a back4app account or create a new one to configure your instance of the LaCoro backend. Then, you need to go to the LaCoro public [DB](https://www.back4app.com/database/admin7/lacoro) and clone that into your back4app account.
-
-After that, you will be able to get the keys to establishing a connection for the Consumer App and Admin App with your brand new backend.
+## Screenshots 
+![Image](https://github.com/LaCoro/ConsumerFlutterApp/blob/master/screens/lacoro_consumer_screenshots.png?raw=true)
 
 ---
 ## Try it out!
