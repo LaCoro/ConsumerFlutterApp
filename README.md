@@ -39,14 +39,8 @@ Follow the strucutre defined in [`mock-development.env`](https://github.com/LaCo
 ## Screenshots 
 ![Image](https://github.com/LaCoro/ConsumerFlutterApp/blob/master/screens/lacoro_consumer_screenshots.png?raw=true)
 
----
 ## Try it out!
-<a href='https://play.google.com/store/apps/details?id=co.lacoro.consumer'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
-
-## License
-[MIT](https://github.com/LaCoro/ConsumerFlutterApp/blob/develop/LICENSE)
-
-
+<a href='https://play.google.com/store/apps/details?id=co.lacoro.consumer'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width="100px;"/></a>
 
 ## Contributors ✨
 
