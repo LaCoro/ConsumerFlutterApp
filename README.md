@@ -25,7 +25,16 @@ This project uses the concept of [Clean Architecture](https://blog.cleancoder.co
 * Wait for comments or changes requested
 * Wait for get merged your PR
  
+## How to configure the backend
+
+LaCoro uses [back4app](https://www.back4app.com/) as backend as service. You need to have a back4app account or create a new one to configure your instance of the LaCoro backend. Then, you need to go to the LaCoro public [DB](https://www.back4app.com/database/admin7/lacoro) and clone that into your back4app account.
+
+After that, you will be able to get the keys to establishing a connection for the Consumer App and Admin App with your brand new backend.
+
 ---
 ## Try it out!
 <a href='https://play.google.com/store/apps/details?id=co.lacoro.consumer'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
+
+
+
 
