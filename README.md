@@ -1,6 +1,6 @@
 # LaCoro Q-commerce app
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 This app is an open source quick commerce app in flutter. 
@@ -59,6 +59,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/WaAlvis"><img src="https://avatars3.githubusercontent.com/u/41210700?v=4" width="100px;" alt=""/><br /><sub><b>William Alvis P</b></sub></a><br /><a href="https://github.com/LaCoro/ConsumerFlutterApp/commits?author=WaAlvis" title="Code">💻</a> <a href="#content-WaAlvis" title="Content">🖋</a> <a href="https://github.com/LaCoro/ConsumerFlutterApp/issues?q=author%3AWaAlvis" title="Bug reports">🐛</a></td>
     <td align="center"><a href="https://www.linkedin.com/in/llanox"><img src="https://avatars0.githubusercontent.com/u/282575?v=4" width="100px;" alt=""/><br /><sub><b>Juan Gabriel Gutierrez</b></sub></a><br /><a href="#business-llanox" title="Business development">💼</a> <a href="https://github.com/LaCoro/ConsumerFlutterApp/commits?author=llanox" title="Code">💻</a> <a href="#infra-llanox" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
     <td align="center"><a href="https://github.com/anamarin09041995"><img src="https://avatars0.githubusercontent.com/u/19240157?v=4" width="100px;" alt=""/><br /><sub><b>Ana Marin</b></sub></a><br /><a href="#design-anamarin09041995" title="Design">🎨</a> <a href="#example-anamarin09041995" title="Examples">💡</a> <a href="#maintenance-anamarin09041995" title="Maintenance">🚧</a></td>
+    <td align="center"><a href="https://www.linkedin.com/in/diego-alvis-palencia-7823a5130/"><img src="https://avatars2.githubusercontent.com/u/6097526?v=4" width="100px;" alt=""/><br /><sub><b>Diego Alvis</b></sub></a><br /><a href="#projectManagement-diegoalvis" title="Project Management">📆</a> <a href="https://github.com/LaCoro/ConsumerFlutterApp/pulls?q=is%3Apr+reviewed-by%3Adiegoalvis" title="Reviewed Pull Requests">👀</a></td>
   </tr>
 </table>
 
