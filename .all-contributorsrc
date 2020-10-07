@@ -37,6 +37,16 @@
         "example",
         "maintenance"
       ]
+    },
+    {
+      "login": "diegoalvis",
+      "name": "Diego Alvis",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/6097526?v=4",
+      "profile": "https://www.linkedin.com/in/diego-alvis-palencia-7823a5130/",
+      "contributions": [
+        "projectManagement",
+        "review"
+      ]
     }
   ],
   "contributorsPerLine": 7,
