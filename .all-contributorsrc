@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "llanox",
+      "name": "Juan Gabriel Gutierrez",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/282575?v=4",
+      "profile": "https://www.linkedin.com/in/llanox",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "ConsumerFlutterApp",
+  "projectOwner": "LaCoro",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
