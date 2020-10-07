@@ -1,0 +1,26 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "WaAlvis",
+      "name": "William Alvis P",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/41210700?v=4",
+      "profile": "https://github.com/WaAlvis",
+      "contributions": [
+        "code",
+        "content",
+        "bug"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "ConsumerFlutterApp",
+  "projectOwner": "LaCoro",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
