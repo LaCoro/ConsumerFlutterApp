@@ -2,8 +2,6 @@
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
-<a href='https://play.google.com/store/apps/details?id=co.lacoro.consumer'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width="200px;"/></a>
-
 
 This app is an open source quick commerce app in flutter. 
 Feel free to go to the issues list and comment on them to get assigned.
@@ -25,10 +23,10 @@ LaCoro uses [back4app](https://www.back4app.com/) as backend as service. You nee
 After that, you will be able to get the keys to establishing a connection for the Consumer App and Admin App with your brand new backend.
 
 ## Setting up your dot.env file
-LaCoro uses [flutter_dotenv](https://pub.dev/packages/flutter_dotenv) package in order to set the envrionment variables.
+LaCoro uses [flutter_dotenv](https://pub.dev/packages/flutter_dotenv) package in order to set the environment variables.
 Once you get the back4app credentials you need to add a `development.env` file.
 
-Follow the strucutre defined in [`mock-development.env`](https://github.com/LaCoro/ConsumerFlutterApp/blob/develop/mock-development.env)
+Follow the structure defined in [`mock-development.env`](https://github.com/LaCoro/ConsumerFlutterApp/blob/develop/mock-development.env)
 
 ## How to contribute ❤️
 * Fork this repository
@@ -40,6 +38,9 @@ Follow the strucutre defined in [`mock-development.env`](https://github.com/LaCo
  
 ## Screenshots 
 ![Image](https://github.com/LaCoro/ConsumerFlutterApp/blob/master/screens/lacoro_consumer_screenshots.png?raw=true)
+
+## Try it out!
+<a href='https://play.google.com/store/apps/details?id=co.lacoro.consumer'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width="250px;"/></a>
 
 ## Contributors ✨
 
