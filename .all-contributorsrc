@@ -26,6 +26,17 @@
         "code",
         "infra"
       ]
+    },
+    {
+      "login": "anamarin09041995",
+      "name": "Ana Marin",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/19240157?v=4",
+      "profile": "https://github.com/anamarin09041995",
+      "contributions": [
+        "design",
+        "example",
+        "maintenance"
+      ]
     }
   ],
   "contributorsPerLine": 7,
