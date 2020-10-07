@@ -1,4 +1,7 @@
 # LaCoro Q-commerce app
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 This app is an open source quick commerce app in flutter. 
 Feel free to go to the issues list and comment on them to get assigned.
@@ -43,3 +46,22 @@ Follow the strucutre defined in [`mock-development.env`](https://github.com/LaCo
 
 
 
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://www.linkedin.com/in/llanox"><img src="https://avatars0.githubusercontent.com/u/282575?v=4" width="100px;" alt=""/><br /><sub><b>Juan Gabriel Gutierrez</b></sub></a><br /><a href="https://github.com/LaCoro/ConsumerFlutterApp/commits?author=llanox" title="Code">💻</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
