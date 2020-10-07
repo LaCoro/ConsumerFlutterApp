@@ -23,7 +23,7 @@ After that, you will be able to get the keys to establishing a connection for th
 LaCoro uses [flutter_dotenv](https://pub.dev/packages/flutter_dotenv) package in order to set the envrionment variables.
 Once you get the back4app credentials you need to add a `development.env` file.
 
-Follow the strucutre defined in `mock-development.env`
+Follow the strucutre defined in [`mock-development.env`](https://github.com/LaCoro/ConsumerFlutterApp/blob/develop/mock-development.env)
 
 ## How to contribute ❤️
 * Fork this repository
