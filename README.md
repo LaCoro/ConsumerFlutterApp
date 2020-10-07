@@ -1,6 +1,6 @@
 # LaCoro Q-commerce app
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 This app is an open source quick commerce app in flutter. 
@@ -57,6 +57,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://github.com/WaAlvis"><img src="https://avatars3.githubusercontent.com/u/41210700?v=4" width="100px;" alt=""/><br /><sub><b>William Alvis P</b></sub></a><br /><a href="https://github.com/LaCoro/ConsumerFlutterApp/commits?author=WaAlvis" title="Code">💻</a> <a href="#content-WaAlvis" title="Content">🖋</a> <a href="https://github.com/LaCoro/ConsumerFlutterApp/issues?q=author%3AWaAlvis" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/anamarin09041995"><img src="https://avatars0.githubusercontent.com/u/19240157?v=4" width="100px;" alt=""/><br /><sub><b>Ana Marin</b></sub></a><br /><a href="#design-anamarin09041995" title="Design">🎨</a> <a href="#example-anamarin09041995" title="Examples">💡</a> <a href="#maintenance-anamarin09041995" title="Maintenance">🚧</a></td>
   </tr>
 </table>
 
