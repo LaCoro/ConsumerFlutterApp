@@ -32,7 +32,6 @@ class SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     //
     // animation = Tween(begin: 0.5, end: 1.5).animate(controller)..addListener(() => loadData());
     // controller.forward();
-
   }
 
   @override
@@ -47,22 +46,21 @@ class SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
   onDoneLoading() async {
     final Preferences pref = Injector.getInjector().get();
-    Navigator.popAndPushNamed(context, pref
-        .getProfile()
-        ?.address == null ? MyAddressPage.MY_ADDRESS_ROUTE : StoreListPage.STORE_LIST_ROUTE);
+    Navigator.popAndPushNamed(context, pref.getProfile()?.address == null ? MyAddressPage.MY_ADDRESS_ROUTE : StoreListPage.STORE_LIST_ROUTE);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          decoration: BoxDecoration(
-            gradient: RadialGradient(
-              colors: [AppColors.accentColor, AppColors.accentColor.withOpacity(0.9)],
-            ),
-            color: AppColors.accentColor,
-            image: DecorationImage(image: AssetImage('assets/app_logo.png'), fit: BoxFit.scaleDown),
-          )),
+        decoration: BoxDecoration(
+          color: AppColors.accentColor,
+          image: DecorationImage(
+            image: AssetImage('assets/app_logo.png'),
+            fit: BoxFit.scaleDown,
+          ),
+        ),
+      ),
     );
   }
 }
