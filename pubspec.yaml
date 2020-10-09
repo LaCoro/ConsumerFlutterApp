@@ -71,7 +71,7 @@ flutter:
     - assets/loading_resource.gif
     - assets/app_logo.png
     - development.env
-    - production.env
+#    - production.env
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
