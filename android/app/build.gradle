@@ -27,7 +27,7 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
-def googleMapsApiKey = localProperties.getProperty('google_maps.apiKey')
+def googleMapsApiKey = localProperties.getProperty('google_maps_apiKey')
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
@@ -53,7 +53,7 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
 
-        manifestPlaceholders = [googleMapsApiKey: googleMapsApiKey]
+        manifestPlaceholders = [googleMapsApiKey: googleMapsApiKey ?: google_maps_apiKey]
     }
 
     signingConfigs {
