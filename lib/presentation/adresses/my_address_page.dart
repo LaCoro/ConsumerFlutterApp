@@ -80,7 +80,7 @@ class _MyAddressPageState extends State<MyAddressPage> {
               }
             }
           },
-          child: cityList?.isNotEmpty != true
+          child: cityList == null || cityList?.isNotEmpty != true
               ? Center(child: CircularProgressIndicator())
               : Container(
                   margin: EdgeInsets.symmetric(horizontal: 24),
