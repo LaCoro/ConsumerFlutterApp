@@ -99,7 +99,7 @@ class _MyAddressPageState extends State<MyAddressPage> {
                                     builder: (BuildContext context) {
                                       return AlertDialog(
                                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-                                        title: Text("Elige tu ciudad", style: AppTextStyle.section),
+                                        title: Text(strings.selectYourCity, style: AppTextStyle.section),
                                         content: citiesDialog(),
                                       );
                                     });
