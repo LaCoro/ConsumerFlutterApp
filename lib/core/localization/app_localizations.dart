@@ -5,6 +5,7 @@ class AppLocalizations {
 
   final Locale locale;
 
+
   static AppLocalizations of(BuildContext context) {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
@@ -19,7 +20,7 @@ class AppLocalizations {
       'verifying': 'Verifying ...',
       'continue': 'Continue',
       'confirm': 'Confirm',
-      'didn\'t_you_get_the_message': 'Didn\'t you get the message?',
+      'did_not_you_get_the_message': 'Didn\'t you get the message?',
       'resend': ' RESEND',
       'Your_order_is_in_progress': 'Your order is in progress',
       'create_account': 'Create your account to complete the order',
@@ -68,6 +69,7 @@ class AppLocalizations {
       'history': 'History',
       'settings': 'Settings',
       'info': 'Info',
+      'select_your_city': 'Select your city',
     },
     'es': {
       'total': 'Total',
@@ -91,7 +93,7 @@ class AppLocalizations {
       'verifying': 'Verificando ...',
       'continue': 'Continuar',
       'confirm': 'Confirmar',
-      'didn\'t_you_get_the_message': 'No resiviste el mensaje? ',
+      'did_not_you_get_the_message': 'No resiviste el mensaje? ',
       'resend': ' REENVIAR',
       'Your_order_is_in_progress': 'Tu pedido está en curso',
       'create_account': 'Crea tu cuenta para completar el pedido',
@@ -127,6 +129,7 @@ class AppLocalizations {
       'history': 'Histórico',
       'settings': 'Configuración',
       'info': 'Información',
+      'select_your_city': 'Escoge tu ciudad',
     },
   };
 
@@ -206,7 +209,9 @@ class AppLocalizations {
 
   String get confirm => _localizedValues[locale.languageCode]['confirm'];
 
-  String get didntYouGetTheMessage => _localizedValues[locale.languageCode]['didn\'t_you_get_the_message'];
+  String get didntYouGetTheMessage => _localizedValues[locale.languageCode]['did_not_you_get_the_message'];
+  
+  String get selectYourCity => _localizedValues[locale.languageCode]['select_your_city'];
 
   String get resend => _localizedValues[locale.languageCode]['resend'];
 
