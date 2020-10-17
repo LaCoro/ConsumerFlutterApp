@@ -64,6 +64,7 @@ class _MyAddressPageState extends State<MyAddressPage> {
     final strings = AppLocalizations.of(context);
     return Scaffold(
         appBar: AppBar(elevation: 0, title: Text(strings.myAddress, style: AppTextStyle.section.copyWith(color: Colors.black))),
+        resizeToAvoidBottomPadding: false,
         backgroundColor: Theme.of(context).backgroundColor,
         body: BlocListener(
           bloc: _bloc,
@@ -130,6 +131,7 @@ class _MyAddressPageState extends State<MyAddressPage> {
                           }
                           return null;
                         },
+                        keyboardType: TextInputType.text,
                         onEditingComplete: () => _fieldFocusChange(context, _addressFocus, _additionalAddressFocus),
                         textInputAction: TextInputAction.next,
                         style: AppTextStyle.black16,
