@@ -18,7 +18,7 @@ This project uses the concept of [Clean Architecture](https://blog.cleancoder.co
 
 ## How to configure the backend
 
-LaCoro uses [back4app](https://www.back4app.com/) as backend as service. You need to have a back4app account or create a new one to configure your instance of the LaCoro backend. Then, you need to go to [LaCoro Issues](https://github.com/LaCoro/ConsumerFlutterApp/issues) and request transfer a clone of the Back4App app into your back4app account. For the request you need to share the email that you're using with your Back4App account. It should take some hours to be done.
+LaCoro uses [back4app](https://www.back4app.com/) as backend as service. You need to have a back4app account or create a new one to configure your instance of the LaCoro backend. Then, you need to go to [LaCoro Issues](https://github.com/LaCoro/ConsumerFlutterApp/issues) and create an issue requesting transfer a clone of the Back4App app into your back4app account. For the request you need to share the email that you're using with your Back4App account. It should take some hours to be done.
 
 After that, you will be able to get the keys to establishing a connection for the Consumer App and Admin App with your brand new backend.
 
