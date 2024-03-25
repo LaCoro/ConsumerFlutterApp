@@ -4,22 +4,22 @@ version: 0.0.1
 author: Diego Alvis
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ^2.12.0
 
 dependencies:
   flutter:
     sdk: flutter
 
-  equatable: ^1.1.0
-  parse_server_sdk: ^1.0.28
-  json_serializable: ^3.3.0
-  json_annotation: ^3.0.1
+  equatable: ^2.0.5
+  parse_server_sdk: ^6.3.0
+  json_serializable: ^6.7.1
+  json_annotation: ^4.8.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  build_runner: ^1.8.1
+  build_runner: ^2.4.8
 
 
 
