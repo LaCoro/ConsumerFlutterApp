@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/discount_chip.dart';
@@ -6,10 +5,10 @@ import 'package:LaCoro/core/ui_utils/model/store_ui.dart';
 import 'package:flutter/material.dart';
 
 class StoreItem extends StatelessWidget {
-  String placeHolderAsset;
+  String? placeHolderAsset;
   StoreUI storeItem;
 
-  StoreItem({Key key, this.storeItem, this.placeHolderAsset}) : super(key: key);
+  StoreItem({Key? key, required this.storeItem, this.placeHolderAsset}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

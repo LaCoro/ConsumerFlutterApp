@@ -1,8 +1,7 @@
-// @dart=2.9
 import 'package:domain/entities/item_entity.dart';
 
 class ItemUI {
-  int id;
+  late int id;
   String name;
   String description;
   int price;

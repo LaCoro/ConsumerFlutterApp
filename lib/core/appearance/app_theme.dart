@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -35,7 +34,7 @@ class AppTheme {
   /// Wrap a widget to be affected for this theme
   ///
   /// Usage: AppTheme.darkTheme(child: Column(...))
-  static Theme darkTheme({Widget child}) => Theme(
+  static Theme darkTheme({required Widget child}) => Theme(
         // TODO
         data: build().copyWith(),
         child: child,

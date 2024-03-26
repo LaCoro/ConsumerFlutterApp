@@ -8,7 +8,7 @@ class User extends ParseObject with UserEntity implements ParseCloneable {
   User.clone() : this();
 
   @override
-  clone(Map map) => User.clone()..fromJson(map);
+  clone(Map<String, dynamic> map) => User.clone()..fromJson(map);
 
   static const String _keyTableName = 'User';
 

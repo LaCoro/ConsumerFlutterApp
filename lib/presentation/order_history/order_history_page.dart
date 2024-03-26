@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
@@ -98,7 +97,7 @@ class _OrderHistoryPageState extends State<OrderHistoryPage> {
     }
 
     if (state is SuccessState<List<OrderEntity>>) {
-      setState(() => _orders = state.data);
+      setState(() => _orders = state.data!);
     }
 
     if (state is MoreOrdersLoadedState) {

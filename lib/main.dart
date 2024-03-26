@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'package:LaCoro/core/di/app_module.dart';
 import 'package:LaCoro/core/localization/app_localizations_delegate.dart';
 import 'package:LaCoro/presentation/adresses/addresses_page_new.dart';
@@ -40,12 +39,12 @@ class MyApp extends StatelessWidget {
       onTap: () {
         FocusScopeNode currentFocus = FocusScope.of(context);
         if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
-          currentFocus.focusedChild.unfocus();
+          currentFocus.focusedChild?.unfocus();
         }
       },
       child: MaterialApp(
         builder: (context, child) => ResponsiveBreakpoints.builder(
-          child: child,
+          child: child!,
           breakpoints: [
             const Breakpoint(start: 0, end: 480, name: MOBILE),
             const Breakpoint(start: 481, end: 800, name: TABLET),

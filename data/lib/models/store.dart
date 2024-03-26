@@ -8,7 +8,7 @@ class Store extends ParseObject with StoreEntity implements ParseCloneable {
   Store.clone() : this();
 
   @override
-  clone(Map map) => Store.clone()..fromJson(map);
+  clone(Map<String, dynamic> map) => Store.clone()..fromJson(map);
 
   static const String _keyTableName = 'Store';
 

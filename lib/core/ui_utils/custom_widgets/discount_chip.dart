@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'package:flutter/material.dart';
 
 import '../../appearance/app_colors.dart';
@@ -7,7 +6,7 @@ class DiscountChip extends StatelessWidget{
 
   String discountPercentage = "";
 
-  DiscountChip({Key key, this.discountPercentage}) : super(key: key);
+  DiscountChip({Key? key, required this.discountPercentage}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

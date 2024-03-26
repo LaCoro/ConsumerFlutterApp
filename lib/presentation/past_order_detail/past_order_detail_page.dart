@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/bloc/base_bloc.dart';
@@ -43,7 +42,7 @@ class _PastOrderDetailPageState extends State<PastOrderDetailPage> {
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context);
 
-    OrderEntity order = ModalRoute.of(context).settings.arguments;
+    final OrderEntity order = ModalRoute.of(context)!.settings.arguments as OrderEntity;
 
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
@@ -51,7 +50,7 @@ class _PastOrderDetailPageState extends State<PastOrderDetailPage> {
       body: BlocBuilder(
           bloc: _bloc,
           builder: (context, state) {
-            Map<ItemUI, int> products;
+            Map<ItemUI, int>? products;
 
             if (state is InitialState) {
               _bloc.add(GetOrderProductList(order.id));
@@ -125,7 +124,7 @@ class _PastOrderDetailPageState extends State<PastOrderDetailPage> {
     );
   }
 
-  Widget buildItemList(Map<ItemUI, int> items) {
+  Widget buildItemList(Map<ItemUI, int>? items) {
     return items == null
         ? Center(child: CircularProgressIndicator())
         : Column(

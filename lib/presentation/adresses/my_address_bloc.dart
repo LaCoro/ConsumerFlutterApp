@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/preferences/preferences.dart';
 import 'package:domain/entities/address_entity.dart';

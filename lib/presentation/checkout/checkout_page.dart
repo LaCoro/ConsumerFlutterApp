@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'dart:math';
 
 import 'package:LaCoro/core/appearance/app_colors.dart';
@@ -43,7 +42,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context);
 
-    final OrderEntity order = ModalRoute.of(context).settings.arguments;
+    final OrderEntity order = ModalRoute.of(context)!.settings.arguments as OrderEntity;
 
     return Scaffold(
         backgroundColor: AppColors.itemBackgroundColor,

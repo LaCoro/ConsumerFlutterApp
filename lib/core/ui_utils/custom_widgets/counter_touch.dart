@@ -14,7 +14,7 @@ class CounterTouch extends StatelessWidget {
   /// called whenever the value of the stepper changed
   final ValueChanged<int> onChanged;
 
-  const CounterTouch({Key key, this.initialValue, this.onChanged}) : super(key: key);
+  const CounterTouch({Key? key, this.initialValue, this.onChanged}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class NumberCounter extends StatelessWidget {
 final Function() onTap;
   final String text;
 
-  const NumberCounter({Key key, this.onTap, this.text}) : super(key: key);
+  const NumberCounter({Key? key, this.onTap, this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

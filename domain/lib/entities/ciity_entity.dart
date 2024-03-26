@@ -1,13 +1,11 @@
-// @dart=2.9
-
 /// Class that represents the generic info for a city
 class CityEntity {
-  String id;
-  String name;
-  String countryCode;
-  String cityCode;
-  String stateCode;
-  int deliveryCost;
+  String? id;
+  String? name;
+  String? countryCode;
+  String? cityCode;
+  String? stateCode;
+  int? deliveryCost;
 
   static CityEntity fromJsonMap(Map<String, dynamic> json) {
     return CityEntity()
