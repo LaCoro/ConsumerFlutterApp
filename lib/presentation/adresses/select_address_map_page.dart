@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'dart:async';
 
 import 'package:LaCoro/core/localization/app_localizations.dart';
@@ -21,7 +22,7 @@ class _SelectAddressMapPageState extends State<SelectAddressMapPage> {
 
   // TODO  Move this inside the bloc
   CameraPosition initialPos() {
-    final Preferences pref = Injector.getInjector().get();
+    final Preferences pref = Injector().get();
     final location = pref.getLocation();
     return location != null ? CameraPosition(target: LatLng(location.latitude, location.latitude)) : null;
   }
@@ -33,9 +34,9 @@ class _SelectAddressMapPageState extends State<SelectAddressMapPage> {
   }
 
   Future<void> loadCurrentLocation() async {
-    await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high).then((value) async {
+    await GeolocatorPlatform.instance.getCurrentPosition(locationSettings: LocationSettings(accuracy: LocationAccuracy.medium)).then((value) async {
       // TODO move this inside the bloc
-      final Preferences pref = Injector.getInjector().get();
+      final Preferences pref = Injector().get();
       pref.saveLocation(Location(value.latitude, value.longitude));
       final GoogleMapController controller = await _controller.future;
       controller.animateCamera(
@@ -90,7 +91,7 @@ class _SelectAddressMapPageState extends State<SelectAddressMapPage> {
                     _controller.complete(controller);
                   },
                 ),
-                Center(child: Icon(Icons.person_pin_circle, color: Theme.of(context).accentColor, size: 56)),
+                Center(child: Icon(Icons.person_pin_circle, color: Theme.of(context).indicatorColor, size: 56)),
               ]),
             ),
           ],

@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
@@ -7,9 +8,9 @@ import 'package:package_info/package_info.dart';
 
 class DrawerMenu extends StatelessWidget {
   String userName;
-  final Function onHistoryPressed;
-  final Function onEditPressed;
-  final Function onSettingsPressed;
+final Function() onHistoryPressed;
+final Function() onEditPressed;
+final Function() onSettingsPressed;
 
   DrawerMenu({this.userName, this.onHistoryPressed, this.onEditPressed, this.onSettingsPressed}) {}
 
@@ -24,7 +25,7 @@ class DrawerMenu extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 100.0),
             child: CircleAvatar(
-              backgroundColor: AppColors.accentColor,
+              backgroundColor: AppColors.indicatorColor,
               radius: 70.0,
               child: Text(userName?.substring(0, 1) ?? 'LC', style: TextStyle(fontSize: 60.0)),
             ),

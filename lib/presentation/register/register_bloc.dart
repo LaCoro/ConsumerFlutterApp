@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/preferences/preferences.dart';
 import 'package:domain/entities/user_entity.dart';
@@ -9,7 +10,7 @@ class RegisterBloc extends Bloc<BaseEvent, BaseState> {
   final ProfileUseCases _useCases;
   final Preferences _preferences;
 
-  RegisterBloc(this._useCases, this._preferences);
+  RegisterBloc(this._useCases, this._preferences): super(InitialState());
 
   @override
   BaseState get initialState => InitialState();

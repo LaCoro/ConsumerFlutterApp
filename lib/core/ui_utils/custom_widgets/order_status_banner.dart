@@ -9,7 +9,7 @@ class OrderStatusBanner extends StatelessWidget {
     final strings = AppLocalizations.of(context);
 
     return Container(
-      color: AppColors.accentColor,
+      color: AppColors.indicatorColor,
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 24),
         child: Container(

@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/ui_utils/mappers/item_ui_mapper.dart';
 import 'package:domain/entities/item_entity.dart';
@@ -8,10 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class PastOrderDetailsBloc extends Bloc<BaseEvent, BaseState> {
   final OrderUseCases _orderUseCases;
 
-  PastOrderDetailsBloc(this._orderUseCases);
-
-  @override
-  BaseState get initialState => InitialState();
+  PastOrderDetailsBloc(this._orderUseCases): super(InitialState());
 
   @override
   Stream<BaseState> mapEventToState(BaseEvent event) async* {

@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/bloc/base_bloc.dart';
@@ -24,7 +25,7 @@ class PastOrderDetailPage extends StatefulWidget {
   static const PAST_ORDER_DETAIL_ROUTE = '/past_order_detail_route';
 
   @override
-  State<StatefulWidget> createState() => _PastOrderDetailPageState(Injector.getInjector().get());
+  State<StatefulWidget> createState() => _PastOrderDetailPageState(Injector().get());
 }
 
 class _PastOrderDetailPageState extends State<PastOrderDetailPage> {

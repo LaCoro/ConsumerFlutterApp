@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'dart:math';
 
 import 'package:LaCoro/core/appearance/app_colors.dart';
@@ -27,7 +28,7 @@ class CheckoutPage extends StatefulWidget {
 }
 
 class _CheckoutPageState extends State<CheckoutPage> {
-  final CheckoutBloc _bloc = Injector.getInjector().get();
+  final CheckoutBloc _bloc = Injector().get();
 
   bool isLoading = false;
   int deliveryTime = Random().nextInt(60 - 35) + 35;

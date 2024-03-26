@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class CounterTouch extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: containerHeight,
-      decoration: BoxDecoration(border: Border.all(color: AppColors.accentColor, width: 2), borderRadius: BorderRadius.circular(12)),
+      decoration: BoxDecoration(border: Border.all(color: AppColors.indicatorColor, width: 2), borderRadius: BorderRadius.circular(12)),
       child: Wrap(
         direction: Axis.vertical,
         children: <Widget>[
@@ -39,7 +40,7 @@ class CounterTouch extends StatelessWidget {
 }
 
 class NumberCounter extends StatelessWidget {
-  final Function onTap;
+final Function() onTap;
   final String text;
 
   const NumberCounter({Key key, this.onTap, this.text}) : super(key: key);
@@ -61,7 +62,7 @@ class SideButton extends StatelessWidget {
   SideButton({@required this.icon, this.onTap});
 
   final IconData icon;
-  final Function onTap;
+final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +74,7 @@ class SideButton extends StatelessWidget {
           width: sideButtonWidth,
           child: Icon(
             icon,
-            color: onTap == null ? AppColors.greyMedium : AppColors.accentColor,
+            color: onTap == null ? AppColors.greyMedium : AppColors.indicatorColor,
           ),
         ));
   }

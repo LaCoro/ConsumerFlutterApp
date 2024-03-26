@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/bloc/base_bloc.dart';
@@ -25,7 +26,7 @@ class StoreListPage extends StatefulWidget {
   static const STORE_LIST_ROUTE = '/store_list';
 
   @override
-  _StoreListPageState createState() => _StoreListPageState((Injector.getInjector().get()));
+  _StoreListPageState createState() => _StoreListPageState((Injector().get()));
 }
 
 class _StoreListPageState extends State<StoreListPage> {
@@ -94,11 +95,11 @@ class _StoreListPageState extends State<StoreListPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text('${currentAddress.address}, ${currentAddress.cityEntity.name}',
-                    style: AppTextStyle.section.copyWith(color: Theme.of(context).accentColor)),
+                    style: AppTextStyle.section.copyWith(color: Theme.of(context).indicatorColor)),
                 Icon(
                   Icons.keyboard_arrow_down,
                   size: 36,
-                  color: Theme.of(context).accentColor,
+                  color: Theme.of(context).indicatorColor,
                 )
               ],
             ),
@@ -163,7 +164,7 @@ class _StoreListPageState extends State<StoreListPage> {
                                     borderRadius: BorderRadius.all(Radius.circular(6)),
                                     borderSide: BorderSide(
                                       width: 2,
-                                      color: Theme.of(context).accentColor,
+                                      color: Theme.of(context).indicatorColor,
                                     ),
                                   ),
                                   hintText: strings.searchYourAddress,
@@ -221,7 +222,7 @@ class _StoreListPageState extends State<StoreListPage> {
     } else if (state is SuccessState<OrderEntity>) {
       setLastOrderInfo(state.data);
     } else if (state is ErrorState) {
-      scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(state.message), duration: Duration(seconds: 3)));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message), duration: Duration(seconds: 3)));
     }
   }
 

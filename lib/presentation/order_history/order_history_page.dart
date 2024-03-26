@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
@@ -16,7 +17,7 @@ class OrderHistoryPage extends StatefulWidget {
   static const ORDER_HISTORY_ROUTE = '/order_history';
 
   @override
-  _OrderHistoryPageState createState() => _OrderHistoryPageState(Injector.getInjector().get());
+  _OrderHistoryPageState createState() => _OrderHistoryPageState(Injector().get());
 }
 
 class _OrderHistoryPageState extends State<OrderHistoryPage> {
@@ -26,7 +27,7 @@ class _OrderHistoryPageState extends State<OrderHistoryPage> {
 
   RefreshController _refreshController = RefreshController();
   bool _loading = false;
-  List<OrderEntity> _orders = List();
+  List<OrderEntity> _orders = List.empty();
 
   @override
   void initState() {

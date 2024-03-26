@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'dart:async';
 
 import 'package:LaCoro/core/appearance/app_text_style.dart';
@@ -17,7 +18,7 @@ class PinPage extends StatefulWidget {
   static const PIN_REGISTER_ROUTE = '/pin_register';
 
   @override
-  _PinPageState createState() => _PinPageState(Injector.getInjector().get());
+  _PinPageState createState() => _PinPageState(Injector().get());
 }
 
 class _PinPageState extends State<PinPage> {
@@ -85,16 +86,19 @@ class _PinPageState extends State<PinPage> {
                 padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
                 child: PinCodeTextField(
                   length: 6,
-                  obsecureText: false,
+                  obscureText: false,
                   animationType: AnimationType.fade,
-                  shape: PinCodeFieldShape.box,
+                  pinTheme: PinTheme(
+                    shape: PinCodeFieldShape.box,
+                    borderRadius: BorderRadius.circular(5),
+                    fieldHeight: 60,
+                    fieldWidth: 60,
+                    inactiveColor: Theme.of(context).disabledColor,
+                    activeColor: Theme.of(context).disabledColor,
+                    activeFillColor: Colors.white,
+                  ),
                   animationDuration: Duration(milliseconds: 300),
-                  borderRadius: BorderRadius.circular(5),
-                  fieldHeight: 60,
-                  fieldWidth: 60,
                   backgroundColor: Theme.of(context).backgroundColor,
-                  inactiveColor: Theme.of(context).disabledColor,
-                  activeColor: Theme.of(context).disabledColor,
                   errorAnimationController: errorController,
                   controller: _textEditingController,
                   onCompleted: (v) {
@@ -159,7 +163,7 @@ class _PinPageState extends State<PinPage> {
     if (state is ErrorState) {
       setState(() => hasError = true);
       errorController.add(ErrorAnimationType.shake);
-      scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(state.message), duration: Duration(seconds: 3)));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message), duration: Duration(seconds: 3)));
     }
   }
 }

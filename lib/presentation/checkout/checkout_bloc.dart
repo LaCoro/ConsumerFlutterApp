@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/preferences/preferences.dart';
 import 'package:domain/entities/order_entity.dart';
@@ -9,10 +10,7 @@ class CheckoutBloc extends Bloc<BaseEvent, BaseState> {
   final Preferences _preferences;
   final OrderUseCases _useCases;
 
-  CheckoutBloc(this._preferences, this._useCases);
-
-  @override
-  BaseState get initialState => InitialState();
+  CheckoutBloc(this._preferences, this._useCases): super(InitialState());
 
   @override
   Stream<BaseState> mapEventToState(BaseEvent event) async* {

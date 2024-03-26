@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'dart:convert';
 
 import 'package:LaCoro/core/bloc/base_bloc.dart';
@@ -16,12 +17,9 @@ class OrderStatusBloc extends Bloc<BaseEvent, BaseState> {
   final Preferences _preferences;
   final OrderUseCases _orderUseCases;
 
-  OrderStatusBloc(this._preferences, this._orderUseCases);
+  OrderStatusBloc(this._preferences, this._orderUseCases): super(InitialState());
 
   Subscription subscription;
-
-  @override
-  BaseState get initialState => InitialState();
 
   @override
   Future<void> close() {

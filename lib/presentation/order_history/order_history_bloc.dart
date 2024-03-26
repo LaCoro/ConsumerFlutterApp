@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/preferences/preferences.dart';
 import 'package:domain/entities/order_entity.dart';
@@ -9,12 +10,9 @@ class OrderHistoryBloc extends Bloc<BaseEvent, BaseState> {
   final OrderUseCases _useCases;
   final Preferences _preferences;
 
-  OrderHistoryBloc(this._useCases, this._preferences);
+  OrderHistoryBloc(this._useCases, this._preferences): super(InitialState());
 
   int _page = 0;
-
-  @override
-  BaseState get initialState => InitialState();
 
   @override
   Stream<BaseState> mapEventToState(BaseEvent event) async* {

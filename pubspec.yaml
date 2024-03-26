@@ -29,7 +29,7 @@ dependencies:
   pull_to_refresh: ^1.4.5
   flutter_dotenv: ^5.1.0
   flutter_simple_dependency_injection: ^2.0.0
-  flutter_bloc: ^8.1.5
+  flutter_bloc: ^7.1.0
   google_fonts: ^3.0.1
   pin_code_fields: ^8.0.1
   scroll_to_index: ^3.0.1
@@ -38,7 +38,6 @@ dependencies:
   shared_preferences: ^2.2.2
   lazy_load_scrollview: ^1.1.0
   uuid: ^3.0.7
-#  stepper_touch: ^0.0.1
   pubnub: ^4.3.2
   intl_phone_number_input: ^0.7.4
   package_info: ^2.0.2

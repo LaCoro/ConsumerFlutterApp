@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,7 @@ class _CategoryTabsState extends State<CategoryTabs> {
               controller: _controller,
               index: index,
               key: ValueKey(index),
-              child: FlatButton(
+              child: TextButton(
                 onPressed: () {
                   _controller.scrollToIndex(index,
                       duration: Duration(milliseconds: 500),
@@ -53,7 +54,7 @@ class _CategoryTabsState extends State<CategoryTabs> {
                   widget.categories[index],
                   style: AppTextStyle.grey16.copyWith(
                       color: widget.categories[index] == categorySelected
-                          ? theme.accentColor
+                          ? theme.indicatorColor
                           : theme.disabledColor),
                 ),
               ),

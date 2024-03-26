@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:LaCoro/app_icons.dart';
 import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/core/appearance/app_text_style.dart';
@@ -7,7 +8,7 @@ import 'package:flutter/material.dart';
 
 class PaymentMethod extends StatelessWidget {
   final PaymentType pay;
-  final Function onChangePressed;
+final Function() onChangePressed;
 
   PaymentMethod(this.pay, {this.onChangePressed});
 

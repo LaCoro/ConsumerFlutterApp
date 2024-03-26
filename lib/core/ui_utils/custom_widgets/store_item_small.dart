@@ -10,7 +10,7 @@ class StoreItemSmall extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final deliveryCostColor = _storeUI.isDeliveryFree ? AppColors.accentColor : AppColors.boldTextColor;
+    final deliveryCostColor = _storeUI.isDeliveryFree ? AppColors.indicatorColor : AppColors.boldTextColor;
 
     final deliveryServiceMsg = _storeUI.isDeliveryFree ? "gratis" : "\$${_storeUI.deliveryCost}";
 

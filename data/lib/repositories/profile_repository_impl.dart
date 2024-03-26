@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:data/remote_datasource/api/profile_api.dart';
 import 'package:domain/entities/user_entity.dart';
 import 'package:domain/repositories/profile_repository.dart';

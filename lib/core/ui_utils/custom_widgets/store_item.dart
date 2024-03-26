@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/discount_chip.dart';
@@ -54,7 +55,7 @@ class StoreItem extends StatelessWidget {
                         Text("${storeItem.openAt} - ${storeItem.closeAt}", style: AppTextStyle.black14),
                         SizedBox(width: 30.0),
                         Text("Envio ${storeItem.isDeliveryFree ? 'gratis' : '\$${storeItem.deliveryCost}'}",
-                            style: AppTextStyle.black14.copyWith(color: storeItem.isDeliveryFree ? AppColors.accentColor : AppColors.boldTextColor)),
+                            style: AppTextStyle.black14.copyWith(color: storeItem.isDeliveryFree ? AppColors.indicatorColor : AppColors.boldTextColor)),
                       ],
                     ),
                     buildPromoWidget(),

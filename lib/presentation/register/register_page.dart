@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/bloc/base_bloc.dart';
@@ -16,7 +17,7 @@ class RegisterPage extends StatefulWidget {
   static const REGISTER_ROUTE = '/register';
 
   @override
-  _RegisterPageState createState() => _RegisterPageState(Injector.getInjector().get());
+  _RegisterPageState createState() => _RegisterPageState(Injector().get());
 }
 
 class _RegisterPageState extends State<RegisterPage> {
@@ -74,7 +75,7 @@ class _RegisterPageState extends State<RegisterPage> {
           Navigator.pushNamed(context, PinPage.PIN_REGISTER_ROUTE);
         }
         if (state is ErrorState) {
-          scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(state.message), duration: Duration(seconds: 3)));
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message), duration: Duration(seconds: 3)));
         }
       },
       child: Scaffold(
@@ -114,9 +115,9 @@ class _RegisterPageState extends State<RegisterPage> {
                           hintText: 'Enter Your Name',
                           labelStyle: GoogleFonts.roboto(
                               textStyle:
-                                  TextStyle(color: _nameFocus.hasFocus ? AppColors.accentColor : Colors.black, fontWeight: FontWeight.w300, fontSize: 16)),
+                                  TextStyle(color: _nameFocus.hasFocus ? AppColors.indicatorColor : Colors.black, fontWeight: FontWeight.w300, fontSize: 16)),
                           enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.accentColor)),
+                          focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.indicatorColor)),
                           errorBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
                         ),
                       ),
@@ -141,9 +142,9 @@ class _RegisterPageState extends State<RegisterPage> {
                           hintText: 'Enter Your Email',
                           labelStyle: GoogleFonts.roboto(
                               textStyle:
-                                  TextStyle(color: _emailFocus.hasFocus ? AppColors.accentColor : Colors.black, fontWeight: FontWeight.w300, fontSize: 16)),
+                                  TextStyle(color: _emailFocus.hasFocus ? AppColors.indicatorColor : Colors.black, fontWeight: FontWeight.w300, fontSize: 16)),
                           enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.accentColor)),
+                          focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.indicatorColor)),
                           errorBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
                         ),
                       ),
@@ -164,9 +165,9 @@ class _RegisterPageState extends State<RegisterPage> {
                           hintText: 'Enter Your Phone',
                           labelStyle: GoogleFonts.roboto(
                               textStyle:
-                                  TextStyle(color: _phoneFocus.hasFocus ? AppColors.accentColor : Colors.black, fontWeight: FontWeight.w300, fontSize: 16)),
+                                  TextStyle(color: _phoneFocus.hasFocus ? AppColors.indicatorColor : Colors.black, fontWeight: FontWeight.w300, fontSize: 16)),
                           enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.accentColor)),
+                          focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.indicatorColor)),
                           errorBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
                         ),
                       ),

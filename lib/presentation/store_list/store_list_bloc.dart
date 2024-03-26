@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'dart:convert';
 
 import 'package:LaCoro/core/bloc/base_bloc.dart';
@@ -26,10 +27,7 @@ class StoreListBloc extends Bloc<BaseEvent, BaseState> {
   int _page = 0;
   Subscription subscription;
 
-  StoreListBloc(this._storeUseCases, this._profileUseCases, this._preferences, this._orderUseCases);
-
-  @override
-  BaseState get initialState => InitialState();
+  StoreListBloc(this._storeUseCases, this._profileUseCases, this._preferences, this._orderUseCases): super(InitialState());
 
   @override
   Future<void> close() {

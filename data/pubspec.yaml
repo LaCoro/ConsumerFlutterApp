@@ -1,7 +1,9 @@
 name: data
 description: A Flutter package to handle the data layer of the LaCoro app.
 version: 0.0.1
-author: Diego Alvis
+authors:
+  - Diego Alvis
+  - Gabriel Gutierrez
 
 environment:
   sdk: ^2.12.0

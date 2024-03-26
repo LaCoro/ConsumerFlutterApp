@@ -16,7 +16,6 @@ String getPaymentName(BuildContext context, PaymentType paymentType) {
     case PaymentType.debit:
       return strings.debitCard;
   }
-  return "";
 }
 
 

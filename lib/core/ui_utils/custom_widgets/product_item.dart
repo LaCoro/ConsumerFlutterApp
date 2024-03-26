@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/ui_utils/custom_widgets/counter_touch.dart';
 import 'package:LaCoro/core/ui_utils/model/item_ui.dart';

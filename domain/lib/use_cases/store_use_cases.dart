@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:domain/entities/ciity_entity.dart';
 import 'package:domain/repositories/store_repository.dart';
 

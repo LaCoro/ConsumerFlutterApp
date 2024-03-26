@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:LaCoro/core/di/app_module.dart';
 import 'package:LaCoro/core/localization/app_localizations_delegate.dart';
 import 'package:LaCoro/presentation/adresses/addresses_page_new.dart';
@@ -26,7 +27,7 @@ import 'presentation/store_list/store_list_page.dart';
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized(); //all widgets are rendered here
   await EnvironmentConfiguration.run(); // Init env configuration
-  await AppModule.initialise(Injector.getInjector()); // Inject modules
+  await AppModule.initialise(Injector()); // Inject modules
   await Firebase.initializeApp(); // Init Firebase
 
   runApp(MyApp());
@@ -43,16 +44,13 @@ class MyApp extends StatelessWidget {
         }
       },
       child: MaterialApp(
-        builder: (context, widget) => ResponsiveWrapper.builder(
-          BouncingScrollWrapper.builder(context, widget),
-          maxWidth: 1200,
-          minWidth: 450,
-          defaultScale: true,
+        builder: (context, child) => ResponsiveBreakpoints.builder(
+          child: child,
           breakpoints: [
-            ResponsiveBreakpoint.resize(480, name: MOBILE),
-            ResponsiveBreakpoint.resize(800, name: TABLET),
-//            ResponsiveBreakpoint.resize(1000, name: DESKTOP),
-//            ResponsiveBreakpoint.autoScale(2460, name: '4K'),
+            const Breakpoint(start: 0, end: 480, name: MOBILE),
+            const Breakpoint(start: 481, end: 800, name: TABLET),
+            // const Breakpoint(start: 801, end: 1920, name: DESKTOP),
+            // const Breakpoint(start: 1921, end: double.infinity, name: '4K'),
           ],
         ),
         localizationsDelegates: [

@@ -1,4 +1,4 @@
-import 'package:data/models/item.dart';
+// @dart=2.9
 import 'package:domain/entities/store_entity.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 

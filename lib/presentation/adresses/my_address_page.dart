@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/bloc/base_bloc.dart';
@@ -17,7 +18,7 @@ class MyAddressPage extends StatefulWidget {
   static const MY_ADDRESS_ROUTE = '/city_selection';
 
   @override
-  _MyAddressPageState createState() => _MyAddressPageState(Injector.getInjector().get());
+  _MyAddressPageState createState() => _MyAddressPageState(Injector().get());
 }
 
 class _MyAddressPageState extends State<MyAddressPage> {
@@ -64,7 +65,7 @@ class _MyAddressPageState extends State<MyAddressPage> {
     final strings = AppLocalizations.of(context);
     return Scaffold(
         appBar: AppBar(elevation: 0, title: Text(strings.myAddress, style: AppTextStyle.section.copyWith(color: Colors.black))),
-        resizeToAvoidBottomPadding: false,
+        resizeToAvoidBottomInset: false,
         backgroundColor: Theme.of(context).backgroundColor,
         body: BlocListener(
           bloc: _bloc,
@@ -138,9 +139,9 @@ class _MyAddressPageState extends State<MyAddressPage> {
                         decoration: InputDecoration(
                           isDense: true,
                           labelText: strings.address,
-                          labelStyle: AppTextStyle.black16.copyWith(color: _addressFocus.hasFocus ? AppColors.accentColor : Colors.black),
+                          labelStyle: AppTextStyle.black16.copyWith(color: _addressFocus.hasFocus ? AppColors.indicatorColor : Colors.black),
                           enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.accentColor)),
+                          focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.indicatorColor)),
                           errorBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
                         ),
                       ),
@@ -157,9 +158,9 @@ class _MyAddressPageState extends State<MyAddressPage> {
                           suffixStyle: AppTextStyle.grey16,
                           isDense: true,
                           labelText: strings.additionalAddressInfo,
-                          labelStyle: AppTextStyle.black16.copyWith(color: _additionalAddressFocus.hasFocus ? AppColors.accentColor : Colors.black),
+                          labelStyle: AppTextStyle.black16.copyWith(color: _additionalAddressFocus.hasFocus ? AppColors.indicatorColor : Colors.black),
                           enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.accentColor)),
+                          focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.indicatorColor)),
                           errorBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
                         ),
                       ),
@@ -196,7 +197,7 @@ class _MyAddressPageState extends State<MyAddressPage> {
                   height: 40,
                   child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
                     Text(cityList[index].name, style: AppTextStyle.black16),
-                    _addressEntity?.cityEntity?.name == cityList[index].name ? Icon(Icons.check_circle, color: AppColors.accentColor, size: 22) : SizedBox()
+                    _addressEntity?.cityEntity?.name == cityList[index].name ? Icon(Icons.check_circle, color: AppColors.indicatorColor, size: 22) : SizedBox()
                   ]),
                 ),
               );

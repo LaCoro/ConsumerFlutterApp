@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:equatable/equatable.dart';
 
 /// Base class represent the states in the BLoC pattern

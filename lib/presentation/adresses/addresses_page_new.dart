@@ -105,7 +105,7 @@ class AddressesPage extends StatelessWidget {
                   return ListTile(
                     onTap: () {},
                     trailing: Icon(Icons.check_circle,
-                        color: AppColors.accentColor, size: 24),
+                        color: AppColors.indicatorColor, size: 24),
                     title: Text('${addresses[index]}',
                         style: Theme.of(context).textTheme.bodyText1),
                   );
