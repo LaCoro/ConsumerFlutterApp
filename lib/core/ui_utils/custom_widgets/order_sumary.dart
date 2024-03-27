@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,7 @@ class OrderSummary extends StatelessWidget {
   final int deliveryCost;
   final String comments;
 
-  OrderSummary({this.orderCost, this.deliveryCost = 0, this.comments = ''});
+  OrderSummary({required this.orderCost, this.deliveryCost = 0, this.comments = ''});
 
   @override
   Widget build(BuildContext context) {

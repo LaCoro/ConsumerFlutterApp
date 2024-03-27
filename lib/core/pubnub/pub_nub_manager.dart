@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:pubnub/pubnub.dart';
 
@@ -10,7 +9,7 @@ abstract class PubNubManager {
   /// get instance fo pubnub for current environment
   static PubNub _pubNub = PubNub(
     defaultKeyset: Keyset(
-      subscribeKey: DotEnv().env[PUBNUB_SUBSCRIBE_KEY],
+      subscribeKey: DotEnv().env[PUBNUB_SUBSCRIBE_KEY]!,
       publishKey: DotEnv().env[PUBNUB_PUBLISH_KEY],
     ),
   );

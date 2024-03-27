@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:flutter/material.dart';
@@ -6,13 +5,13 @@ import 'package:scroll_to_index/scroll_to_index.dart';
 
 class CategoryTabs extends StatefulWidget {
   final List<String> categories;
-  final Function(String, int) onCategorySelected;
+  final Function(String, int)? onCategorySelected;
 
-  CategoryTabs({this.categories, this.onCategorySelected});
+  CategoryTabs({required this.categories, this.onCategorySelected});
 
   @override
   _CategoryTabsState createState() =>
-      _CategoryTabsState(categorySelected: categories?.first);
+      _CategoryTabsState(categorySelected: categories.first);
 }
 
 class _CategoryTabsState extends State<CategoryTabs> {
@@ -20,11 +19,11 @@ class _CategoryTabsState extends State<CategoryTabs> {
 
   String categorySelected;
 
-  _CategoryTabsState({this.categorySelected});
+  _CategoryTabsState({required this.categorySelected});
 
   @override
   Widget build(BuildContext context) {
-    if (widget.categories?.isNotEmpty != true) return SizedBox();
+    if (widget.categories.isNotEmpty != true) return SizedBox();
 
     final theme = Theme.of(context);
     return Container(

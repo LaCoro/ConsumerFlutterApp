@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:flutter/material.dart';
@@ -12,9 +11,9 @@ class CounterTouch extends StatelessWidget {
   final int initialValue;
 
   /// called whenever the value of the stepper changed
-  final ValueChanged<int> onChanged;
+  final Function(int)? onChanged;
 
-  const CounterTouch({Key? key, this.initialValue, this.onChanged}) : super(key: key);
+  const CounterTouch({Key? key, required this.initialValue, this.onChanged}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +24,12 @@ class CounterTouch extends StatelessWidget {
         direction: Axis.vertical,
         children: <Widget>[
           SideButton(
-            onTap: initialValue < 1 ? () {} : () => onChanged(initialValue - 1),
+            onTap: initialValue < 1 ? () {} : () => onChanged?.call(initialValue - 1),
             icon: Icons.remove,
           ),
           NumberCounter(text: initialValue.toString()),
           SideButton(
-            onTap: initialValue >= 999 ? () {} : () => onChanged(initialValue + 1),
+            onTap: initialValue >= 999 ? () {} : () => onChanged?.call(initialValue + 1),
             icon: Icons.add,
           ),
         ],
@@ -40,10 +39,10 @@ class CounterTouch extends StatelessWidget {
 }
 
 class NumberCounter extends StatelessWidget {
-final Function() onTap;
+  final Function()? onTap;
   final String text;
 
-  const NumberCounter({Key? key, this.onTap, this.text}) : super(key: key);
+  const NumberCounter({Key? key, required this.text, this.onTap, }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -59,10 +58,10 @@ final Function() onTap;
 }
 
 class SideButton extends StatelessWidget {
-  SideButton({@required this.icon, this.onTap});
+  SideButton({required this.icon, this.onTap});
 
   final IconData icon;
-final Function() onTap;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {

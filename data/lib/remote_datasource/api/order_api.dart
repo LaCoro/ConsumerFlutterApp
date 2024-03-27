@@ -1,10 +1,10 @@
-// @dart=2.9
 import 'package:data/models/item.dart';
 import 'package:data/models/order.dart';
 import 'package:data/models/order_detail.dart';
 import 'package:data/models/store.dart';
 import 'package:data/remote_datasource/api/parse/api_service.dart';
 import 'package:data/remote_datasource/errors/service_error.dart';
+import 'package:domain/entities/item_entity.dart';
 import 'package:domain/entities/order_entity.dart';
 import 'package:domain/entities/user_entity.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
@@ -19,9 +19,9 @@ class OrderApi {
   Future<List<Order>> getUserOrders(int page, int size) async {
     final response = await apiService.getUserOrders(page, size);
     if (response.success) {
-      final orders = response.results.map((e) => e as Order).toList();
+      final orders = response.results?.map((e) => e as Order).toList() ?? List.empty();
       for (var order in orders) {
-        order.storeEntity = (await apiService.getStore(order.store.objectId)).result as Store;
+        order.storeEntity = (await apiService.getStore(order.store.objectId!)).result as Store;
       }
       return orders;
     } else {
@@ -31,8 +31,6 @@ class OrderApi {
 
   Future<Order> submitOrder(OrderEntity orderEntity, UserEntity user) async {
     var parseUser = await apiService.getCurrentUser(user.sessionToken);
-
-    if (parseUser == null) throw SessionError();
 
     // Create order model
     final order = Order()
@@ -54,7 +52,8 @@ class OrderApi {
 
     if (response.success == false) throw ServiceError();
 
-    for (Item product in orderEntity.products.keys) {
+    for (ItemEntity entity in orderEntity.products.keys) {
+      final product = entity as Item;
       final orderDetail = OrderDetail()
         ..set(OrderDetail.keyQuantity, orderEntity.products[product])
         ..set(OrderDetail.keyProduct, product.toPointer())
@@ -72,7 +71,7 @@ class OrderApi {
     ParseResponse response = await apiService.getOrderById(orderId);
     if (response.success && response.count > 0) {
       Order order = response.result as Order;
-      order.storeEntity = (await apiService.getStore(order.store.objectId)).result as Store;
+      order.storeEntity = (await apiService.getStore(order.store.objectId!)).result as Store;
       return order;
     } else {
       throw ServiceError();
