@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'dart:async';
 
 import 'package:LaCoro/core/appearance/app_colors.dart';
@@ -45,7 +46,7 @@ class SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   }
 
   onDoneLoading() async {
-    final Preferences pref = Injector.getInjector().get();
+    final Preferences pref = Injector().get();
     Navigator.popAndPushNamed(context, pref.getProfile()?.address == null ? MyAddressPage.MY_ADDRESS_ROUTE : StoreListPage.STORE_LIST_ROUTE);
   }
 
@@ -54,7 +55,7 @@ class SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          color: AppColors.accentColor,
+          color: AppColors.indicatorColor,
           image: DecorationImage(
             image: AssetImage('assets/app_logo.png'),
             fit: BoxFit.scaleDown,

@@ -27,7 +27,7 @@ class CheckoutPage extends StatefulWidget {
 }
 
 class _CheckoutPageState extends State<CheckoutPage> {
-  final CheckoutBloc _bloc = Injector.getInjector().get();
+  final CheckoutBloc _bloc = Injector().get();
 
   bool isLoading = false;
   int deliveryTime = Random().nextInt(60 - 35) + 35;
@@ -42,7 +42,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context);
 
-    final OrderEntity order = ModalRoute.of(context).settings.arguments;
+    final OrderEntity order = ModalRoute.of(context)!.settings.arguments as OrderEntity;
 
     return Scaffold(
         backgroundColor: AppColors.itemBackgroundColor,

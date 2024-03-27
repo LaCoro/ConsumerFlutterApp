@@ -12,7 +12,7 @@ abstract class UIModelMapper<T, J> {
 class StoreUIMapper extends UIModelMapper<StoreUI, StoreEntity> {
   @override
   List<StoreUI> processList(List<StoreEntity> items) {
-    List<StoreUI> storesUI = List();
+    List<StoreUI> storesUI = List.empty();
     items.forEach((store) {
       storesUI.add(processSingleElement(store));
     });

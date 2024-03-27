@@ -7,8 +7,8 @@ class City extends ParseObject with CityEntity implements ParseCloneable {
   City.clone() : this();
 
   @override
-  clone(Map map) => City.clone()..fromJson(map);
-
+  clone(Map<String, dynamic> map) => City.clone()..fromJson(map);
+  
   static const String _keyTableName = 'CityConfiguration';
 
   static const String keyCountryCode = 'country_code';
@@ -17,15 +17,15 @@ class City extends ParseObject with CityEntity implements ParseCloneable {
   static const String keyStateCode = 'state_code';
   static const String keyDeliveryCost = 'delivery_cost';
 
-  String get id => this.objectId;
+  String? get id => this.objectId;
 
-  String get name => get<String>(keyName);
+  String? get name => get<String>(keyName);
 
-  String get countryCode => get<String>(keyCountryCode);
+  String? get countryCode => get<String>(keyCountryCode);
 
-  String get cityCode => get<String>(keyCityCode);
+  String? get cityCode => get<String>(keyCityCode);
 
-  String get stateCode => get<String>(keyStateCode);
+  String? get stateCode => get<String>(keyStateCode);
 
-  int get deliveryCost => get<int>(keyDeliveryCost);
+  int? get deliveryCost => get<int>(keyDeliveryCost);
 }

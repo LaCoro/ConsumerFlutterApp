@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 class OrderCardInfo extends StatelessWidget {
   final OrderEntity orderEntity;
 
-  const OrderCardInfo({Key key, this.orderEntity}) : super(key: key);
+  const OrderCardInfo({Key? key, required this.orderEntity}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class OrderCardInfo extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.0),
                   child: FadeInImage.assetNetwork(
                     placeholder: 'assets/loading_resource.gif',
-                    image: orderEntity?.storeEntity?.logo ?? '',
+                    image: orderEntity.storeEntity?.logo ?? '',
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -41,7 +41,8 @@ class OrderCardInfo extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     Text(orderEntity.storeEntity?.name ?? '', style: AppTextStyle.section, maxLines: 2, overflow: TextOverflow.ellipsis),
-                    Text(DateFormat('dd/MM/yyyy,  HH:mm').format(orderEntity.createdAt?.toLocal())),
+                    Text(DateFormat('dd/MM/yyyy,  HH:mm').format(orderEntity.createdAt?.toLocal() ?? DateTime.now())),
+                    // TODO use localizations
                     Text('Pago en efectivo', style: AppTextStyle.boldBlack16),
                     Text(orderEntity.totalAmount?.currencyFormat() ?? '******', style: AppTextStyle.section),
                   ],

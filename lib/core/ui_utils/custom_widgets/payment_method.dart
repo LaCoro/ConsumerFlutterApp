@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 class PaymentMethod extends StatelessWidget {
   final PaymentType pay;
-  final Function onChangePressed;
+ final Function()? onChangePressed;
 
   PaymentMethod(this.pay, {this.onChangePressed});
 

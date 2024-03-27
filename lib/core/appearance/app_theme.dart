@@ -8,14 +8,14 @@ class AppTheme {
       primaryColor: Color(0xffffffff),
       primaryColorDark: Color(0xffffffff),
       primaryColorLight: Color(0xffffffff),
-      accentColor: Color(0xFF3D9FE6),
+      indicatorColor: Color(0xFF3D9FE6),
       backgroundColor: Color(0xffffffff),
       disabledColor: AppColors.greyMedium,
       dividerColor: AppColors.divider,
       brightness: Brightness.light,
       fontFamily: GoogleFonts.roboto().fontFamily,
       primaryIconTheme: IconThemeData(size: 24),
-      accentIconTheme: IconThemeData(size: 28),
+      iconTheme: IconThemeData(size: 28),
       textTheme: TextTheme(
         headline1: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 16, color: Color(0xff383838)),//title store en ListStore
         headline2: GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xff383838)),//title popUp
@@ -34,7 +34,7 @@ class AppTheme {
   /// Wrap a widget to be affected for this theme
   ///
   /// Usage: AppTheme.darkTheme(child: Column(...))
-  static Theme darkTheme({Widget child}) => Theme(
+  static Theme darkTheme({required Widget child}) => Theme(
         // TODO
         data: build().copyWith(),
         child: child,

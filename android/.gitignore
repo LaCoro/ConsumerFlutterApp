@@ -6,3 +6,5 @@ gradle-wrapper.jar
 /local.properties
 GeneratedPluginRegistrant.java
 /key.properties
+/*.jks
+/info_keys.txt

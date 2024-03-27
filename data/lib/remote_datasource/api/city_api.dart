@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:data/models/city.dart';
 import 'package:data/remote_datasource/api/parse/api_service.dart';
 import 'package:data/remote_datasource/errors/service_error.dart';

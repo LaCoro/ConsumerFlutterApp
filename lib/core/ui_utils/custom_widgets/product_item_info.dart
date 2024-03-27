@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 
 class ProductItemInfo extends StatefulWidget {
   final ItemUI itemUI;
-  final int quantity;
+  final int? quantity;
 
-  ProductItemInfo({Key key, @required this.itemUI, this.quantity});
+  ProductItemInfo({Key? key, required this.itemUI, this.quantity}): super(key: key);
 
   @override
   _ProductItemInfoState createState() => _ProductItemInfoState();

@@ -24,7 +24,7 @@ class PastOrderDetailPage extends StatefulWidget {
   static const PAST_ORDER_DETAIL_ROUTE = '/past_order_detail_route';
 
   @override
-  State<StatefulWidget> createState() => _PastOrderDetailPageState(Injector.getInjector().get());
+  State<StatefulWidget> createState() => _PastOrderDetailPageState(Injector().get());
 }
 
 class _PastOrderDetailPageState extends State<PastOrderDetailPage> {
@@ -42,7 +42,7 @@ class _PastOrderDetailPageState extends State<PastOrderDetailPage> {
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context);
 
-    OrderEntity order = ModalRoute.of(context).settings.arguments;
+    final OrderEntity order = ModalRoute.of(context)!.settings.arguments as OrderEntity;
 
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
@@ -50,7 +50,7 @@ class _PastOrderDetailPageState extends State<PastOrderDetailPage> {
       body: BlocBuilder(
           bloc: _bloc,
           builder: (context, state) {
-            Map<ItemUI, int> products;
+            Map<ItemUI, int>? products;
 
             if (state is InitialState) {
               _bloc.add(GetOrderProductList(order.id));
@@ -124,7 +124,7 @@ class _PastOrderDetailPageState extends State<PastOrderDetailPage> {
     );
   }
 
-  Widget buildItemList(Map<ItemUI, int> items) {
+  Widget buildItemList(Map<ItemUI, int>? items) {
     return items == null
         ? Center(child: CircularProgressIndicator())
         : Column(

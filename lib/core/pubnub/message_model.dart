@@ -1,5 +1,5 @@
 
 class MessageModel {
-  String title;
-  String body;
+  String title = "";
+  String body = "";
 }

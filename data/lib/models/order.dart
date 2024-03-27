@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'dart:core';
 
 import 'package:domain/entities/order_entity.dart';
@@ -10,7 +11,7 @@ class Order extends ParseObject with OrderEntity implements ParseCloneable {
   Order.clone() : this();
 
   @override
-  clone(Map map) => Order.clone()..fromJson(map);
+  clone(Map<String, dynamic> map) => Order.clone()..fromJson(map);
 
   static const String _keyTableName = 'Order';
 

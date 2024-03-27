@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/bloc/base_bloc.dart';
@@ -19,7 +20,7 @@ class OrderDetailPage extends StatefulWidget {
   static const ORDER_DETAIL_ROUTE = '/order_detail_route';
 
   @override
-  State<StatefulWidget> createState() => _OrderDetailPageState(Injector.getInjector().get());
+  State<StatefulWidget> createState() => _OrderDetailPageState(Injector().get());
 }
 
 class _OrderDetailPageState extends State<OrderDetailPage> {
@@ -130,7 +131,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                             hintStyle: TextStyle(color: AppColors.greyMedium, fontWeight: FontWeight.w300, fontSize: 16),
                             hintText: strings.comments,
                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: AppColors.greyMedium)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: AppColors.accentColor)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: AppColors.indicatorColor)),
                           ),
                         ),
                       ),

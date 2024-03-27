@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class CurrentAddress extends StatelessWidget {
   final String address;
-  final Function onEditPressed;
+  final Function()? onEditPressed;
 
   CurrentAddress(this.address, {this.onEditPressed});
 

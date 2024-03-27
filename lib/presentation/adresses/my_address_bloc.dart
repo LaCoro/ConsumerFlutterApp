@@ -11,10 +11,7 @@ class MyAddressBloc extends Bloc<BaseEvent, BaseState> {
   final MyAddressUseCases _cityUseCases;
   final Preferences _preferences;
 
-  MyAddressBloc(this._cityUseCases, this._preferences);
-
-  @override
-  BaseState get initialState => InitialState();
+  MyAddressBloc(this._cityUseCases, this._preferences): super(InitialState());
 
   @override
   Stream<BaseState> mapEventToState(BaseEvent event) async* {

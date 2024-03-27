@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:domain/entities/ciity_entity.dart';
 
 /// Class that represents the generic info for an address

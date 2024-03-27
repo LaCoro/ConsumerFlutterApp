@@ -13,7 +13,7 @@ class SuccessfulOrderBanner extends StatelessWidget {
     return Container(
       height: 160,
       alignment: Alignment.center,
-      color: AppColors.accentColor,
+      color: AppColors.indicatorColor,
       child: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(

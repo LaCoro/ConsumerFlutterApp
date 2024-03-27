@@ -8,7 +8,7 @@ class OrderSummary extends StatelessWidget {
   final int deliveryCost;
   final String comments;
 
-  OrderSummary({this.orderCost, this.deliveryCost = 0, this.comments = ''});
+  OrderSummary({required this.orderCost, this.deliveryCost = 0, this.comments = ''});
 
   @override
   Widget build(BuildContext context) {

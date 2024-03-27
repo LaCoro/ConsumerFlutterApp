@@ -10,7 +10,7 @@ class ProductItem extends StatefulWidget {
   final bool quantityVisible;
   final bool divider;
 
-  ProductItem({Key key, @required this.itemUI, this.onQuantityChange, this.quantity, this.divider, this.quantityVisible});
+  ProductItem({Key? key, required this.itemUI, required this.onQuantityChange, required this.quantity, required this.divider, required this.quantityVisible});
 
   @override
   _ProductItemState createState() => _ProductItemState(onQuantityChange, quantity ?? 0, divider ?? false, quantityVisible ?? false);

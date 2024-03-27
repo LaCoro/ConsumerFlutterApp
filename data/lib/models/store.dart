@@ -1,4 +1,3 @@
-import 'package:data/models/item.dart';
 import 'package:domain/entities/store_entity.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 
@@ -8,7 +7,7 @@ class Store extends ParseObject with StoreEntity implements ParseCloneable {
   Store.clone() : this();
 
   @override
-  clone(Map map) => Store.clone()..fromJson(map);
+  clone(Map<String, dynamic> map) => Store.clone()..fromJson(map);
 
   static const String _keyTableName = 'Store';
 
@@ -29,66 +28,50 @@ class Store extends ParseObject with StoreEntity implements ParseCloneable {
   static const String keyPosition = 'Position';
   static const String keyItems = 'items';
 
-  String get id => this.objectId;
+  String? get id => this.objectId;
 
-  String get name => get<String>(keyName);
+  String? get name => get<String>(keyName);
+  // set name(String name) => set<String>(keyName, name);
 
-  set name(String name) => set<String>(keyName, name);
+  List<String> get searchTags => List<String>.from(get<List<dynamic>>(keySearchTags) as List<String>);
+  // set searchTags(List<String> searchTags) => set<List<String>>(keySearchTags, searchTags);
 
-  List<String> get searchTags => List<String>.from(get<List<dynamic>>(keySearchTags));
+  String? get address => get<String>(keyAddress);
+  // set address(String address) => set<String>(keyAddress, address);
 
-  set searchTags(List<String> searchTags) => set<List<String>>(keySearchTags, searchTags);
+  String? get city => get<String>(keyCity);
+  // set city(String city) => set<String>(keyCity, city);
 
-  String get address => get<String>(keyAddress);
+  String? get country => get<String>(keyCountry);
+  // set country(String country) => set<String>(keyCountry, country);
 
-  set address(String address) => set<String>(keyAddress, address);
+  String? get mobile => get<String>(keyMobile);
+  // set mobile(String mobile) => set<String>(keyMobile, mobile);
 
-  String get city => get<String>(keyCity);
+  String? get openAt => get<String>(keyOpenAt);
+  // set openAt(String openAt) => set<String>(keyOpenAt, openAt);
 
-  set city(String city) => set<String>(keyCity, city);
+  String? get closeAt => get<String>(keyCloseAt);
+  // set closeAt(String closeAt) => set<String>(keyCloseAt, closeAt);
 
-  String get country => get<String>(keyCountry);
+  String? get logo => get<String>(keyLogo);
+  // set logo(String logo) => set<String>(keyLogo, logo);
 
-  set country(String country) => set<String>(keyCountry, country);
+  String? get state => get<String>(keyState);
+  // set state(String state) => set<String>(keyState, state);
 
-  String get mobile => get<String>(keyMobile);
+  List<int>? get daysOpen => List<int>.from(get<List<dynamic>>(keyDaysOpen) as List<int>);
+  // set daysOpen(List<int> daysOpen) => set<List<int>>(keyDaysOpen, daysOpen);
 
-  set mobile(String mobile) => set<String>(keyMobile, mobile);
+  bool? get hasDeliveryService => get<bool>(keyHasDeliveryService);
+  // set hasDeliveryService(bool hasDeliveryService) => set<bool>(keyHasDeliveryService, hasDeliveryService);
 
-  String get openAt => get<String>(keyOpenAt);
+  bool? get active => get<bool>(keyActive);
+  // set active(bool active) => set<bool>(keyActive, active);
 
-  set openAt(String openAt) => set<String>(keyOpenAt, openAt);
+  int? get deliveryCost => get<int>(keyDeliveryCost);
+  // set deliveryCost(int deliveryCost) => set<int>(keyDeliveryCost, deliveryCost);
 
-  String get closeAt => get<String>(keyCloseAt);
-
-  set closeAt(String closeAt) => set<String>(keyCloseAt, closeAt);
-
-  String get logo => get<String>(keyLogo);
-
-  set logo(String logo) => set<String>(keyLogo, logo);
-
-  String get state => get<String>(keyState);
-
-  set state(String state) => set<String>(keyState, state);
-
-  List<int> get daysOpen => List<int>.from(get<List<dynamic>>(keyDaysOpen));
-
-  set daysOpen(List<int> daysOpen) => set<List<int>>(keyDaysOpen, daysOpen);
-
-  bool get hasDeliveryService => get<bool>(keyHasDeliveryService);
-
-  set hasDeliveryService(bool hasDeliveryService) => set<bool>(keyHasDeliveryService, hasDeliveryService);
-
-  bool get active => get<bool>(keyActive);
-
-  set active(bool active) => set<bool>(keyActive, active);
-
-  int get deliveryCost => get<int>(keyDeliveryCost);
-
-  set deliveryCost(int deliveryCost) => set<int>(keyDeliveryCost, deliveryCost);
-
-  int get position => get<int>(keyPosition);
-
-  set position(int position) => set<int>(keyPosition, position);
-
+  int? get position => get<int>(keyPosition);
+  // set position(int position) => set<int>(keyPosition, position);
 }

@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:LaCoro/core/bloc/base_bloc.dart';
 import 'package:LaCoro/core/preferences/preferences.dart';
 import 'package:LaCoro/core/ui_utils/mappers/item_ui_mapper.dart';
@@ -19,10 +20,7 @@ class OrderDetailsBloc extends Bloc<BaseEvent, BaseState> {
 
   Map<ItemUI, int> products = Map();
 
-  OrderDetailsBloc(this._storeUseCases, this._preferences, this._profileUseCases);
-
-  @override
-  BaseState get initialState => InitialState();
+  OrderDetailsBloc(this._storeUseCases, this._preferences, this._profileUseCases): super(InitialState());
 
   @override
   Stream<BaseState> mapEventToState(BaseEvent event) async* {

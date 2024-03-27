@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
@@ -12,7 +13,7 @@ class TestPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Center(
-          child: RaisedButton(
+          child: ElevatedButton(
             child: Text('Enviar'),
             onPressed: () {
               initPubNub('');

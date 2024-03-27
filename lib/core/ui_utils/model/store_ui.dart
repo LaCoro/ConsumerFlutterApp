@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:domain/entities/store_entity.dart';
 
 class StoreUI {

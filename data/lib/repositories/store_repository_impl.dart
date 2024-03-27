@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:data/remote_datasource/api/store_api.dart';
 import 'package:domain/repositories/store_repository.dart';
 import 'package:domain/result.dart';

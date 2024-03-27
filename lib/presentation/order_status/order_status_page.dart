@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:LaCoro/core/appearance/app_colors.dart';
 import 'package:LaCoro/core/appearance/app_text_style.dart';
 import 'package:LaCoro/core/bloc/base_bloc.dart';
@@ -17,7 +18,7 @@ class OrderStatusPage extends StatefulWidget {
   static const ORDER_STATUS_ROUTE = '/order_status';
 
   @override
-  _OrderStatusPageState createState() => _OrderStatusPageState(Injector.getInjector().get());
+  _OrderStatusPageState createState() => _OrderStatusPageState(Injector().get());
 }
 
 class _OrderStatusPageState extends State<OrderStatusPage> {
@@ -50,7 +51,7 @@ class _OrderStatusPageState extends State<OrderStatusPage> {
           elevation: 0),
       body: BlocListener(
         bloc: _bloc,
-        condition: (p, c) => true,
+        listenWhen: (p, c) => true,
         listener: (BuildContext context, state) {
           if (state is SuccessState<OrderEntity>) {
             setLastOrderInfo(state.data);

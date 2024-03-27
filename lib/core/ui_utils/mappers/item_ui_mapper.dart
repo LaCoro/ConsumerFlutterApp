@@ -6,7 +6,7 @@ import 'dart:developer' as developer;
 class ItemUIMapper extends UIModelMapper<ItemUI, ItemEntity> {
   @override
   List<ItemUI> processList(List<ItemEntity> items) {
-    List<ItemUI> itemsUI = List();
+    List<ItemUI> itemsUI = List.empty();
     items.forEach((item) {
       itemsUI.add(processSingleElement(item));
     });

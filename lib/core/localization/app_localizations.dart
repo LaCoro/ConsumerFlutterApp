@@ -7,7 +7,7 @@ class AppLocalizations {
 
 
   static AppLocalizations of(BuildContext context) {
-    return Localizations.of<AppLocalizations>(context, AppLocalizations);
+    return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
   }
 
   static Map<String, Map<String, String>> _localizedValues = {
@@ -133,114 +133,114 @@ class AppLocalizations {
     },
   };
 
-  String getText(String value) => _localizedValues[locale.languageCode][value] ?? '';
+  String getText(String value) => _localizedValues[locale.languageCode]![value] ?? '';
 
-  String get debitCard => _localizedValues[locale.languageCode]['debit_card'];
+  String get debitCard => _localizedValues[locale.languageCode]!['debit_card']!;
 
-  String get creditCard => _localizedValues[locale.languageCode]['credit_card'];
+  String get creditCard => _localizedValues[locale.languageCode]!['credit_card']!;
 
-  String get change => _localizedValues[locale.languageCode]['change'];
+  String get change => _localizedValues[locale.languageCode]!['change']!;
 
-  String get cash => _localizedValues[locale.languageCode]['cash'];
+  String get cash => _localizedValues[locale.languageCode]!['cash']!;
 
-  String get paymentMethod => _localizedValues[locale.languageCode]['payment_method'];
+  String get paymentMethod => _localizedValues[locale.languageCode]!['payment_method']!;
 
-  String get total => _localizedValues[locale.languageCode]['total'];
+  String get total => _localizedValues[locale.languageCode]!['total']!;
 
-  String get delivery => _localizedValues[locale.languageCode]['delivery'];
+  String get delivery => _localizedValues[locale.languageCode]!['delivery']!;
 
-  String get order => _localizedValues[locale.languageCode]['order'];
+  String get order => _localizedValues[locale.languageCode]!['order']!;
 
-  String get summary => _localizedValues[locale.languageCode]['summary'];
+  String get summary => _localizedValues[locale.languageCode]!['summary']!;
 
-  String get estimatedDelivery => _localizedValues[locale.languageCode]['estimated_delivery'];
+  String get estimatedDelivery => _localizedValues[locale.languageCode]!['estimated_delivery']!;
 
-  String get edit => _localizedValues[locale.languageCode]['edit'];
+  String get edit => _localizedValues[locale.languageCode]!['edit']!;
 
-  String get deliveryAddress => _localizedValues[locale.languageCode]['delivery_address'];
+  String get deliveryAddress => _localizedValues[locale.languageCode]!['delivery_address']!;
 
-  String get successfulOrder => _localizedValues[locale.languageCode]['successful_order'];
+  String get successfulOrder => _localizedValues[locale.languageCode]!['successful_order']!;
 
-  String get seeOrder => _localizedValues[locale.languageCode]['see_order'];
+  String get seeOrder => _localizedValues[locale.languageCode]!['see_order']!;
 
-  String get yourOrderIsInProgress => _localizedValues[locale.languageCode]['Your_order_is_in_progress'];
+  String get yourOrderIsInProgress => _localizedValues[locale.languageCode]!['Your_order_is_in_progress']!;
 
-  String get createAccount => _localizedValues[locale.languageCode]['create_account'];
+  String get createAccount => _localizedValues[locale.languageCode]!['create_account']!;
 
-  String get nameRequired => _localizedValues[locale.languageCode]['name_required'];
+  String get nameRequired => _localizedValues[locale.languageCode]!['name_required']!;
 
-  String get name => _localizedValues[locale.languageCode]['name'];
+  String get name => _localizedValues[locale.languageCode]!['name']!;
 
-  String get invalidEmail => _localizedValues[locale.languageCode]['invalid_email'];
+  String get invalidEmail => _localizedValues[locale.languageCode]!['invalid_email']!;
 
-  String get optionalField => _localizedValues[locale.languageCode]['optional_field'];
+  String get optionalField => _localizedValues[locale.languageCode]!['optional_field']!;
 
-  String get email => _localizedValues[locale.languageCode]['email'];
+  String get email => _localizedValues[locale.languageCode]!['email']!;
 
-  String get phoneRequired => _localizedValues[locale.languageCode]['phone_required'];
+  String get phoneRequired => _localizedValues[locale.languageCode]!['phone_required']!;
 
-  String get phone => _localizedValues[locale.languageCode]['phone'];
+  String get phone => _localizedValues[locale.languageCode]!['phone']!;
 
-  String get createAccountAction => _localizedValues[locale.languageCode]['create_account_action'];
+  String get createAccountAction => _localizedValues[locale.languageCode]!['create_account_action']!;
 
-  String get invalidPhone => _localizedValues[locale.languageCode]['invalid_phone'];
+  String get invalidPhone => _localizedValues[locale.languageCode]!['invalid_phone']!;
 
-  String get addOrChooseAnAddress => _localizedValues[locale.languageCode]['add_or_choose_an_address'];
+  String get addOrChooseAnAddress => _localizedValues[locale.languageCode]!['add_or_choose_an_address']!;
 
-  String get searchYourAddress => _localizedValues[locale.languageCode]['search_your_address'];
+  String get searchYourAddress => _localizedValues[locale.languageCode]!['search_your_address']!;
 
-  String get useMyLocation => _localizedValues[locale.languageCode]['use_my_location'];
+  String get useMyLocation => _localizedValues[locale.languageCode]!['use_my_location']!;
 
-  String get myAddress => _localizedValues[locale.languageCode]['my_address'];
+  String get myAddress => _localizedValues[locale.languageCode]!['my_address']!;
 
-  String get myAddresses => _localizedValues[locale.languageCode]['my_addresses'];
+  String get myAddresses => _localizedValues[locale.languageCode]!['my_addresses']!;
 
-  String get authorizationCode => _localizedValues[locale.languageCode]['authorization_code'];
+  String get authorizationCode => _localizedValues[locale.languageCode]!['authorization_code']!;
 
-  String get enterTheCodeSentToTheCellPhone => _localizedValues[locale.languageCode]['enter_the_code_sent_to_the_cell_phone'];
+  String get enterTheCodeSentToTheCellPhone => _localizedValues[locale.languageCode]!['enter_the_code_sent_to_the_cell_phone']!;
 
-  String get processing => _localizedValues[locale.languageCode]['processing'];
+  String get processing => _localizedValues[locale.languageCode]!['processing']!;
 
-  String get wrongCode => _localizedValues[locale.languageCode]['wrong_code'];
+  String get wrongCode => _localizedValues[locale.languageCode]!['wrong_code']!;
 
-  String get verifying => _localizedValues[locale.languageCode]['verifying'];
+  String get verifying => _localizedValues[locale.languageCode]!['verifying']!;
 
-  String get continu => _localizedValues[locale.languageCode]['continue'];
+  String get continu => _localizedValues[locale.languageCode]!['continue']!;
 
-  String get confirm => _localizedValues[locale.languageCode]['confirm'];
+  String get confirm => _localizedValues[locale.languageCode]!['confirm']!;
 
-  String get didntYouGetTheMessage => _localizedValues[locale.languageCode]['did_not_you_get_the_message'];
+  String get didntYouGetTheMessage => _localizedValues[locale.languageCode]!['did_not_you_get_the_message']!;
   
-  String get selectYourCity => _localizedValues[locale.languageCode]['select_your_city'];
+  String get selectYourCity => _localizedValues[locale.languageCode]!['select_your_city']!;
 
-  String get resend => _localizedValues[locale.languageCode]['resend'];
+  String get resend => _localizedValues[locale.languageCode]!['resend']!;
 
-  String get yourOrder => _localizedValues[locale.languageCode]['your_order'];
+  String get yourOrder => _localizedValues[locale.languageCode]!['your_order']!;
 
-  String get comments => _localizedValues[locale.languageCode]['comments'];
+  String get comments => _localizedValues[locale.languageCode]!['comments']!;
 
-  String get myAddressTitle => _localizedValues[locale.languageCode]['my_address_title'];
+  String get myAddressTitle => _localizedValues[locale.languageCode]!['my_address_title']!;
 
-  String get city => _localizedValues[locale.languageCode]['city'];
+  String get city => _localizedValues[locale.languageCode]!['city']!;
 
-  String get additionalAddressInfo => _localizedValues[locale.languageCode]['additional_address_info'];
+  String get additionalAddressInfo => _localizedValues[locale.languageCode]!['additional_address_info']!;
 
-  String get address => _localizedValues[locale.languageCode]['address'];
+  String get address => _localizedValues[locale.languageCode]!['address']!;
 
-  String get addressIsRequired => _localizedValues[locale.languageCode]['address_is_required'];
+  String get addressIsRequired => _localizedValues[locale.languageCode]!['address_is_required']!;
 
-  String get orderHistory => _localizedValues[locale.languageCode]['order_history'];
+  String get orderHistory => _localizedValues[locale.languageCode]!['order_history']!;
 
-  String get editProfile => _localizedValues[locale.languageCode]['edit_profile'];
+  String get editProfile => _localizedValues[locale.languageCode]!['edit_profile']!;
 
-  String get aboutUs => _localizedValues[locale.languageCode]['about_us'];
+  String get aboutUs => _localizedValues[locale.languageCode]!['about_us']!;
 
-  String get logOut => _localizedValues[locale.languageCode]['log_out'];
+  String get logOut => _localizedValues[locale.languageCode]!['log_out']!;
 
-  String get history => _localizedValues[locale.languageCode]['history'];
+  String get history => _localizedValues[locale.languageCode]!['history']!;
 
-  String get settings => _localizedValues[locale.languageCode]['settings'];
+  String get settings => _localizedValues[locale.languageCode]!['settings']!;
 
-  String get info => _localizedValues[locale.languageCode]['info'];
+  String get info => _localizedValues[locale.languageCode]!['info']!;
 
 }

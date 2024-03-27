@@ -1,10 +1,12 @@
 name: data
 description: A Flutter package to handle the data layer of the LaCoro app.
 version: 0.0.1
-author: Diego Alvis
+authors:
+  - Diego Alvis
+  - Gabriel Gutierrez
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ^2.12.0
 
 dependencies:
   flutter:
@@ -13,13 +15,9 @@ dependencies:
   domain:
     path: ../domain
 
-  parse_server_sdk: ^1.0.28
-  crypto: ^2.1.4
-  firebase_core: ^0.5.0
-  firebase_auth: ^0.18.0+1
-  json_serializable: ^3.3.0
-  json_annotation: ^3.0.1
-
+  crypto: ^3.0.3
+  firebase_core: ^2.27.1
+  firebase_auth: ^4.17.9
 
 dev_dependencies:
   flutter_test:

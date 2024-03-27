@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:data/models/store.dart';
 import 'package:domain/entities/item_entity.dart';
 import 'package:domain/entities/store_entity.dart';
@@ -9,7 +10,7 @@ class Item extends ParseObject with ItemEntity implements ParseCloneable {
   Item.clone() : this();
 
   @override
-  clone(Map map) => Item.clone()..fromJson(map);
+  clone(Map<String, dynamic> map) => Item.clone()..fromJson(map);
 
   static const String _keyTableName = 'Item';
   static const String keyObjectId = 'objectId';

@@ -1,4 +1,4 @@
-import 'package:domain/entities/store_entity.dart';
+// @dart=2.9
 import 'package:domain/entities/user_entity.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 
@@ -8,7 +8,7 @@ class User extends ParseObject with UserEntity implements ParseCloneable {
   User.clone() : this();
 
   @override
-  clone(Map map) => User.clone()..fromJson(map);
+  clone(Map<String, dynamic> map) => User.clone()..fromJson(map);
 
   static const String _keyTableName = 'User';
 

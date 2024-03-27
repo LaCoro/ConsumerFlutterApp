@@ -5,13 +5,13 @@ import 'package:scroll_to_index/scroll_to_index.dart';
 
 class CategoryTabs extends StatefulWidget {
   final List<String> categories;
-  final Function(String, int) onCategorySelected;
+  final Function(String, int)? onCategorySelected;
 
-  CategoryTabs({this.categories, this.onCategorySelected});
+  CategoryTabs({required this.categories, this.onCategorySelected});
 
   @override
   _CategoryTabsState createState() =>
-      _CategoryTabsState(categorySelected: categories?.first);
+      _CategoryTabsState(categorySelected: categories.first);
 }
 
 class _CategoryTabsState extends State<CategoryTabs> {
@@ -19,11 +19,11 @@ class _CategoryTabsState extends State<CategoryTabs> {
 
   String categorySelected;
 
-  _CategoryTabsState({this.categorySelected});
+  _CategoryTabsState({required this.categorySelected});
 
   @override
   Widget build(BuildContext context) {
-    if (widget.categories?.isNotEmpty != true) return SizedBox();
+    if (widget.categories.isNotEmpty != true) return SizedBox();
 
     final theme = Theme.of(context);
     return Container(
@@ -40,7 +40,7 @@ class _CategoryTabsState extends State<CategoryTabs> {
               controller: _controller,
               index: index,
               key: ValueKey(index),
-              child: FlatButton(
+              child: TextButton(
                 onPressed: () {
                   _controller.scrollToIndex(index,
                       duration: Duration(milliseconds: 500),
@@ -53,7 +53,7 @@ class _CategoryTabsState extends State<CategoryTabs> {
                   widget.categories[index],
                   style: AppTextStyle.grey16.copyWith(
                       color: widget.categories[index] == categorySelected
-                          ? theme.accentColor
+                          ? theme.indicatorColor
                           : theme.disabledColor),
                 ),
               ),

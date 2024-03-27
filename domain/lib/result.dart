@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:equatable/equatable.dart';
 
 /// A generic class to handle the result for each transaction.

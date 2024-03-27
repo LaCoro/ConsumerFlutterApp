@@ -11,25 +11,25 @@ class CounterTouch extends StatelessWidget {
   final int initialValue;
 
   /// called whenever the value of the stepper changed
-  final ValueChanged<int> onChanged;
+  final Function(int)? onChanged;
 
-  const CounterTouch({Key key, this.initialValue, this.onChanged}) : super(key: key);
+  const CounterTouch({Key? key, required this.initialValue, this.onChanged}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: containerHeight,
-      decoration: BoxDecoration(border: Border.all(color: AppColors.accentColor, width: 2), borderRadius: BorderRadius.circular(12)),
+      decoration: BoxDecoration(border: Border.all(color: AppColors.indicatorColor, width: 2), borderRadius: BorderRadius.circular(12)),
       child: Wrap(
         direction: Axis.vertical,
         children: <Widget>[
           SideButton(
-            onTap: initialValue < 1 ? () {} : () => onChanged(initialValue - 1),
+            onTap: initialValue < 1 ? () {} : () => onChanged?.call(initialValue - 1),
             icon: Icons.remove,
           ),
           NumberCounter(text: initialValue.toString()),
           SideButton(
-            onTap: initialValue >= 999 ? () {} : () => onChanged(initialValue + 1),
+            onTap: initialValue >= 999 ? () {} : () => onChanged?.call(initialValue + 1),
             icon: Icons.add,
           ),
         ],
@@ -39,10 +39,10 @@ class CounterTouch extends StatelessWidget {
 }
 
 class NumberCounter extends StatelessWidget {
-  final Function onTap;
+  final Function()? onTap;
   final String text;
 
-  const NumberCounter({Key key, this.onTap, this.text}) : super(key: key);
+  const NumberCounter({Key? key, required this.text, this.onTap, }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -58,10 +58,10 @@ class NumberCounter extends StatelessWidget {
 }
 
 class SideButton extends StatelessWidget {
-  SideButton({@required this.icon, this.onTap});
+  SideButton({required this.icon, this.onTap});
 
   final IconData icon;
-  final Function onTap;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +73,7 @@ class SideButton extends StatelessWidget {
           width: sideButtonWidth,
           child: Icon(
             icon,
-            color: onTap == null ? AppColors.greyMedium : AppColors.accentColor,
+            color: onTap == null ? AppColors.greyMedium : AppColors.indicatorColor,
           ),
         ));
   }

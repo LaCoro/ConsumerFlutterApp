@@ -16,7 +16,7 @@ class CartTotalBottom extends StatelessWidget {
     return AnimatedContainer(
       height: 50,
       duration: Duration(milliseconds: 300),
-      color: quantity == 0 ? Theme.of(context).disabledColor : Theme.of(context).accentColor,
+      color: quantity == 0 ? Theme.of(context).disabledColor : Theme.of(context).indicatorColor,
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 8.0),
         child: Row(
@@ -32,7 +32,7 @@ class CartTotalBottom extends StatelessWidget {
                   child: Center(
                       child: Text((quantity < 10) ? quantity.toString() : "+9",
                           textAlign: TextAlign.center,
-                          style: AppTextStyle.boldBlack16.copyWith(color: quantity == 0 ? Theme.of(context).disabledColor : Theme.of(context).accentColor)))),
+                          style: AppTextStyle.boldBlack16.copyWith(color: quantity == 0 ? Theme.of(context).disabledColor : Theme.of(context).indicatorColor)))),
             ),
             Expanded(
               flex: 2,

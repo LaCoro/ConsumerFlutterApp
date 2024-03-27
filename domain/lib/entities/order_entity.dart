@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:domain/entities/item_entity.dart';
 import 'package:domain/entities/store_entity.dart';
 import 'package:domain/entities/user_entity.dart';

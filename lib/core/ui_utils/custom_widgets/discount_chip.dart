@@ -6,7 +6,7 @@ class DiscountChip extends StatelessWidget{
 
   String discountPercentage = "";
 
-  DiscountChip({Key key, this.discountPercentage}) : super(key: key);
+  DiscountChip({Key? key, required this.discountPercentage}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

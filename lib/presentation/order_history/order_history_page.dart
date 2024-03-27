@@ -16,7 +16,7 @@ class OrderHistoryPage extends StatefulWidget {
   static const ORDER_HISTORY_ROUTE = '/order_history';
 
   @override
-  _OrderHistoryPageState createState() => _OrderHistoryPageState(Injector.getInjector().get());
+  _OrderHistoryPageState createState() => _OrderHistoryPageState(Injector().get());
 }
 
 class _OrderHistoryPageState extends State<OrderHistoryPage> {
@@ -26,7 +26,7 @@ class _OrderHistoryPageState extends State<OrderHistoryPage> {
 
   RefreshController _refreshController = RefreshController();
   bool _loading = false;
-  List<OrderEntity> _orders = List();
+  List<OrderEntity> _orders = List.empty();
 
   @override
   void initState() {
@@ -97,7 +97,7 @@ class _OrderHistoryPageState extends State<OrderHistoryPage> {
     }
 
     if (state is SuccessState<List<OrderEntity>>) {
-      setState(() => _orders = state.data);
+      setState(() => _orders = state.data!);
     }
 
     if (state is MoreOrdersLoadedState) {
